@@ -92,6 +92,7 @@ backtracking.
 :link: Introduccion
 :link-type: doc
 :class-header: bg-light
+:class-body: text-start
 
 **Unidad 1 🤝: Generalidades**
 ^^^
@@ -100,13 +101,13 @@ backtracking.
 * Pilas
 * Colas
 * Resolución de problemas aplicados
-
 :::
 
 :::{grid-item-card}
 :link: Tema_1_2_Sentencias_libs_text_list_dict_inputs_Condicionales_10_08_2023
 :link-type: doc
 :class-header: bg-light
+:class-body: text-start
 
 **Unidad 2 🐍: Técnicas fundamentales de programación**
 ^^^
@@ -123,7 +124,7 @@ backtracking.
 :link: Tema_1_3_Estruct_repetitivas_funciones_10_08_2023
 :link-type: doc
 :class-header: bg-light
-
+:class-body: text-start
 
 **Unidad 3 🌀: Algoritmos de búsqueda y ordenamiento**
 ^^^
@@ -136,15 +137,9 @@ backtracking.
 * Resolución de problemas
 :::
 
-:::{grid-item-card}
-:link: Tema_2_Numpy_Matplotlib_10_08_2023
-:link-type: doc
-:class-header: bg-light
-
+::::
 
 ---
-
-## Información del curso
 
 La forma de evaluar este curso es mediante las actividades en clase, talleres y parciales. 
 
