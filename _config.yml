@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Técnicas de Programación 2026 - 02
-author: Johan Piña
+author: Santiago Barrero
 logo: _static/images/logo.jpeg
 
 # Force re-execution of notebooks on each build.
@@ -28,3 +28,8 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+
+sphinx:
+  config:
+    html_css_files:
+      - custom.css

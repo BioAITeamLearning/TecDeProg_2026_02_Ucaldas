@@ -72,18 +72,13 @@ title: Bienvenida al curso
 
 ---
 
-### Proyecto de repositorio de algoritmos éticos
-
-
-<a href="https://www.algoritmospublicos.cl/">
-    <img src="_static/images/globlabAlgoEticos.png" alt="RepoAlgoritmosEticos">
-</a>
-
----
 
 ## Objetivos del curso:
 
-Introducir a los estudiantes en el uso del lenguaje de programación Python para el manejo de datos relacionados al ámbito de las ciencias sociales y las políticas públicas. Al terminar este curso, el estudiante será capaz de resolver problemas por medio de algoritmos y lógica computacional, importar datos desde distintas fuentes, manipular y transformar información, hacer análisis descriptivos, visualizar campos de interés, y exportar resultados.
+Capacitar a los estudiantes en técnicas de programación que les permitan resolver problemas
+computacionales de manera eficiente, mediante la adquisición efectiva, procesamiento y gestión de
+datos, el diseño de algoritmos robustos utilizando métodos como la fuerza bruta, recursión y
+backtracking.
 
 ---
 
@@ -98,10 +93,14 @@ Introducir a los estudiantes en el uso del lenguaje de programación Python para
 :link-type: doc
 :class-header: bg-light
 
-**Unidad 1 🤝**
+**Unidad 1 🤝: Generalidades**
 ^^^
+* Introducción a python
+* Técnicas de adquisición de datos
+* Pilas
+* Colas
+* Resolución de problemas aplicados
 
-Introducción al python, tipos de datos y sintaxis
 :::
 
 :::{grid-item-card}
@@ -109,10 +108,15 @@ Introducción al python, tipos de datos y sintaxis
 :link-type: doc
 :class-header: bg-light
 
-**Unidad 2 🐍**
+**Unidad 2 🐍: Técnicas fundamentales de programación**
 ^^^
-
-Sentencias, librerías, cadenas de texto, estructuras de datos, I/O y condicionales
+* Fuerza bruta
+* Recursión
+  * De pila
+  * De cola
+  * Cruzada
+* Backtracking
+* Resolución de problemas
 :::
 
 :::{grid-item-card}
@@ -120,9 +124,16 @@ Sentencias, librerías, cadenas de texto, estructuras de datos, I/O y condiciona
 :link-type: doc
 :class-header: bg-light
 
-**Unidad 3 🌀**
+
+**Unidad 3 🌀: Algoritmos de búsqueda y ordenamiento**
 ^^^
-Estructuras repetitivas/iterativas y funciones
+* Búsqueda lineal
+* Búsqueda binaria
+* Ordenamiento burbuja
+* Ordenamiento selección
+* Ordenamiento inserción
+* Ordenamiento por mezcla
+* Resolución de problemas
 :::
 
 :::{grid-item-card}
@@ -130,30 +141,12 @@ Estructuras repetitivas/iterativas y funciones
 :link-type: doc
 :class-header: bg-light
 
-**Unidad 4 🚀**
-^^^
-
-Manejo de arreglos con Numpy y manejo de gráficos con Matplotlib
-:::
-
-:::{grid-item-card}
-:link: Tema_3_Pandas_10_08_2023
-:link-type: doc
-:class-header: bg-light
-
-**Unidad 5 🐼**
-^^^
-
-Manejo de archivos con Pandas y Gestión de archivos
-:::
-
-::::
 
 ---
 
 ## Información del curso
 
-La forma de evaluar este curso es mediante las Tareas y talleres propuestas durante las clases
+La forma de evaluar este curso es mediante las actividades en clase, talleres y parciales. 
 
 ---
 
@@ -223,6 +216,10 @@ Estas son algunas de las referencias usadas para este curso, vuelve pronto para 
 
 * Clases magistrales para conceptualización del tema.
 * Actividades y Talleres
+* Parcial 1 (30%)
+* Parcial 2 (35%)
+* Parcial 3 (35%)
+
 
 ---
 
