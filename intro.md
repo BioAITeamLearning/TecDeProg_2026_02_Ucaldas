@@ -38,18 +38,9 @@ title: Bienvenida al curso
 ---
 
 ::::{grid} 2
-:reverse:
+:gutter: 2
 
 :::{grid-item}
-:columns: 4
-:class: sd-m-auto
-
-
-
-:::
-
-:::{grid-item}
-:columns: 8
 :class: sd-fs-7
 
 **Mg. Johan Sebastián Piña Duran**
@@ -65,6 +56,17 @@ title: Bienvenida al curso
 [![](https://img.shields.io/github/stars/executablebooks/jupyter-book?style=social)](https://github.com/BioAITeamLearning)
 [<img src="https://w7.pngwing.com/pngs/784/212/png-transparent-google-scholar-hd-logo-thumbnail.png" width="20" height="20">](https://scholar.google.es/citations?hl=es&user=XLIIhSQAAAAJ)
 ```
+
+:::
+
+:::{grid-item}
+:class: sd-fs-7
+
+**Esp. Santiago Barrero Tabares**
+
+* Ingeniero Electrónico -  Universidad Autónoma de Manizales
+* Ingeniero Biomédico - Universidad Autónoma de Manizales
+* Especialista en Inteligencia Artificial y Analítica de Datos - Universidad de Caldas
 
 :::
 
