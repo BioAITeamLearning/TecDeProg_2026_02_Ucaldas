@@ -1,7 +1,7 @@
 ---
 title: Unidad 1
 ---
-# Introducción a Python
+# Unidad 1 
 
 ## Colaboratory – Jupyter Notebook
 
@@ -19,7 +19,7 @@ title: Unidad 1
 :columns: 4
 :class: sd-m-auto
 
-<img src="https://infosecjupyterbook.com/_static/logo.png" width="300" height="200" />
+<img src="https://infosecjupyterbook.com/_static/colablogo.png" width="300" height="200" />
 :::
 ::::
 

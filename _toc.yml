@@ -7,6 +7,7 @@ chapters:
 - file: Unidad1
   sections:
     - file: "Introduccion"
+    - file: "ListasTuplasDiccionarios"
 - file: "OperacionesCondicionales"
 - file: "OperacionesListasTuplas"
 - file: "EstructurasRepetitivas"

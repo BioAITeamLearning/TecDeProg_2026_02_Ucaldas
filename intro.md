@@ -98,8 +98,8 @@ backtracking.
 ^^^
 * Introducción a python
 * Técnicas de adquisición de datos
-* Pilas
-* Colas
+* Listas, Tuplas, Diccionarios
+* Pilas, Colas
 * Resolución de problemas aplicados
 :::
 
