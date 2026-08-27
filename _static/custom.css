@@ -1,0 +1,15 @@
+/* Los headers de las cards usan bg-light (fondo claro fijo) sin importar el
+   tema del sitio. En modo oscuro el texto hereda un color claro por defecto,
+   lo que deja texto claro sobre fondo claro y se ve casi invisible.
+   Forzamos texto oscuro dentro de cualquier header con bg-light. */
+.sd-card-header.bg-light,
+.sd-card-header.sd-bg-light,
+.card-header.bg-light {
+  color: #212529 !important;
+}
+
+.sd-card-header.bg-light *,
+.sd-card-header.sd-bg-light *,
+.card-header.bg-light * {
+  color: #212529 !important;
+}

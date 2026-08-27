@@ -1,7 +1,7 @@
 ---
 title: Unidad 1
 ---
-# Introducción a Python
+# Unidad 1 
 
 ## Colaboratory – Jupyter Notebook
 
@@ -11,7 +11,7 @@ title: Unidad 1
 :columns: 4
 :class: sd-m-auto
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Google_Colaboratory_SVG_Logo.svg/1200px-Google_Colaboratory_SVG_Logo.svg.png" width="300" height="200" />
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCC8LD3HPwCRWqN6jMHMGv34Ky48zPzSCOK0o6ZtBbwQ&s" width="300" height="200" />
 :::
 
 
@@ -19,7 +19,7 @@ title: Unidad 1
 :columns: 4
 :class: sd-m-auto
 
-<img src="https://infosecjupyterbook.com/_static/logo.png" width="300" height="200" />
+<img src="https://images.seeklogo.com/logo-png/35/1/jupyter-logo-png_seeklogo-354673.png" width="300" height="200" />
 :::
 ::::
 

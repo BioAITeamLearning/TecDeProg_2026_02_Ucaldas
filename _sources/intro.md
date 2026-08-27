@@ -3,24 +3,10 @@ title: Bienvenida al curso
 ---
 # Bienvenida al curso
 
-## El equipo!! 🦾🧠
+## El equipo!! 🦾
 
 ::::{grid}
-:gutter: 3
-
-:::{grid-item-card} Ph.D. Reinel Tabares
-:class-body: text-center
-:class-header: bg-light text-center
-
-```{image} _static/images/rts.png
-:height: 100
-:class: rounded
-```
-^^^
-```{only} html
-[<img src="https://seeklogo.com/images/G/gmail-new-2020-logo-32DBE11BB4-seeklogo.com.png" width="25" height="20">](mailto:reinel.tabares@ucaldas.edu.co)
-```
-:::
+:gutter: 2
 
 :::{grid-item-card} Johan 🍍
 :class-body: text-center
@@ -35,16 +21,16 @@ title: Bienvenida al curso
 ```
 :::
 
-:::{grid-item-card} Brayan Arteaga
+:::{grid-item-card} Santiago Barrero Tabares
 :class-body: text-center
 :class-header: bg-light text-center
-```{image} _static/images/hba.png
+```{image} _static/images/sbt.png
 :height: 100
 :class: rounded
 ```
 ^^^
 ```{only} html
-[<img src="https://seeklogo.com/images/G/gmail-new-2020-logo-32DBE11BB4-seeklogo.com.png" width="25" height="20">](mailto:harold.arteagaa@autonoma.edu.co)
+[<img src="https://seeklogo.com/images/G/gmail-new-2020-logo-32DBE11BB4-seeklogo.com.png" width="25" height="20">](mailto:santiagobt1999@gmail.com)
 ```
 :::
 ::::
@@ -52,36 +38,35 @@ title: Bienvenida al curso
 ---
 
 ::::{grid} 2
-:reverse:
+:gutter: 2
 
 :::{grid-item}
-:columns: 4
-:class: sd-m-auto
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Logo_Universidad_Adolfo_Ib%C3%A1%C3%B1ez.JPG" />
-
-:::
-
-:::{grid-item}
-:columns: 8
 :class: sd-fs-7
 
-**Ph. D. Reinel Tabares Soto**
+**Mg. Johan Sebastián Piña Duran**
 
-* Ingeniero Electrónico -  Universidad Nacional de Colombia
-* Ingeniero de Sistemas - Universidad de Caldas
-* Magister en Automatización Industrial - Universidad Nacional de Colombia
+* Ingeniero Electrónico -  Universidad Autónoma de Manizales
+* Ingeniero Biomédico - Universidad Autónoma de Manizales
+* Magister en Bioinformática y Biología Computacional - Universidad Autónoma de Manizales
 * Especialista en Deep Learning - DeepLearning.AI
-* Doctor en Ingeniería - Universidad Autónoma de Manizales
 
 % The SVG rendering breaks latex builds for the GitHub badge, so only include in HTML
 
 ```{only} html
 [![](https://img.shields.io/github/stars/executablebooks/jupyter-book?style=social)](https://github.com/BioAITeamLearning)
-[<img src="https://w7.pngwing.com/pngs/784/212/png-transparent-google-scholar-hd-logo-thumbnail.png" width="20" height="20">](https://scholar.google.es/citations?user=_8F9RPQAAAAJ&hl=es)
-[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/2048px-ORCID_iD.svg.png" width="20" height="20">](https://orcid.org/0000-0002-4978-5211)
-[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ResearchGate_icon_SVG.svg/1200px-ResearchGate_icon_SVG.svg.png" width="20" height="20">](https://www.researchgate.net/profile/Reinel-Tabares-Soto)
+[<img src="https://w7.pngwing.com/pngs/784/212/png-transparent-google-scholar-hd-logo-thumbnail.png" width="20" height="20">](https://scholar.google.es/citations?hl=es&user=XLIIhSQAAAAJ)
 ```
+
+:::
+
+:::{grid-item}
+:class: sd-fs-7
+
+**Esp. Santiago Barrero Tabares**
+
+* Ingeniero Electrónico -  Universidad Autónoma de Manizales
+* Ingeniero Biomédico - Universidad Autónoma de Manizales
+* Especialista en Inteligencia Artificial y Analítica de Datos - Universidad de Caldas
 
 :::
 
@@ -89,18 +74,13 @@ title: Bienvenida al curso
 
 ---
 
-### Proyecto de repositorio de algoritmos éticos
-
-
-<a href="https://www.algoritmospublicos.cl/">
-    <img src="_static/images/globlabAlgoEticos.png" alt="RepoAlgoritmosEticos">
-</a>
-
----
 
 ## Objetivos del curso:
 
-Introducir a los estudiantes en el uso del lenguaje de programación Python para el manejo de datos relacionados al ámbito de las ciencias sociales y las políticas públicas. Al terminar este curso, el estudiante será capaz de resolver problemas por medio de algoritmos y lógica computacional, importar datos desde distintas fuentes, manipular y transformar información, hacer análisis descriptivos, visualizar campos de interés, y exportar resultados.
+Capacitar a los estudiantes en técnicas de programación que les permitan resolver problemas
+computacionales de manera eficiente, mediante la adquisición efectiva, procesamiento y gestión de
+datos, el diseño de algoritmos robustos utilizando métodos como la fuerza bruta, recursión y
+backtracking.
 
 ---
 
@@ -114,63 +94,56 @@ Introducir a los estudiantes en el uso del lenguaje de programación Python para
 :link: Introduccion
 :link-type: doc
 :class-header: bg-light
+:class-body: text-start
 
-**Unidad 1 🤝**
+**Unidad 1 🤝: Generalidades**
 ^^^
-
-Introducción al python, tipos de datos y sintaxis
+* Introducción a python
+* Técnicas de adquisición de datos
+* Listas, Tuplas, Diccionarios
+* Pilas, Colas
+* Resolución de problemas aplicados
 :::
 
 :::{grid-item-card}
 :link: Tema_1_2_Sentencias_libs_text_list_dict_inputs_Condicionales_10_08_2023
 :link-type: doc
 :class-header: bg-light
+:class-body: text-start
 
-**Unidad 2 🐍**
+**Unidad 2 🐍: Técnicas fundamentales de programación**
 ^^^
-
-Sentencias, librerías, cadenas de texto, estructuras de datos, I/O y condicionales
+* Fuerza bruta
+* Recursión
+  * De pila
+  * De cola
+  * Cruzada
+* Backtracking
+* Resolución de problemas
 :::
 
 :::{grid-item-card}
 :link: Tema_1_3_Estruct_repetitivas_funciones_10_08_2023
 :link-type: doc
 :class-header: bg-light
+:class-body: text-start
 
-**Unidad 3 🌀**
+**Unidad 3 🌀: Algoritmos de búsqueda y ordenamiento**
 ^^^
-Estructuras repetitivas/iterativas y funciones
-:::
-
-:::{grid-item-card}
-:link: Tema_2_Numpy_Matplotlib_10_08_2023
-:link-type: doc
-:class-header: bg-light
-
-**Unidad 4 🚀**
-^^^
-
-Manejo de arreglos con Numpy y manejo de gráficos con Matplotlib
-:::
-
-:::{grid-item-card}
-:link: Tema_3_Pandas_10_08_2023
-:link-type: doc
-:class-header: bg-light
-
-**Unidad 5 🐼**
-^^^
-
-Manejo de archivos con Pandas y Gestión de archivos
+* Búsqueda lineal
+* Búsqueda binaria
+* Ordenamiento burbuja
+* Ordenamiento selección
+* Ordenamiento inserción
+* Ordenamiento por mezcla
+* Resolución de problemas
 :::
 
 ::::
 
 ---
 
-## Información del curso
-
-La forma de evaluar este curso es mediante las Tareas y talleres propuestas durante las clases
+La forma de evaluar este curso es mediante las actividades en clase, talleres y parciales. 
 
 ---
 
@@ -240,6 +213,10 @@ Estas son algunas de las referencias usadas para este curso, vuelve pronto para 
 
 * Clases magistrales para conceptualización del tema.
 * Actividades y Talleres
+* Parcial 1 (30%)
+* Parcial 2 (35%)
+* Parcial 3 (35%)
+
 
 ---
 
