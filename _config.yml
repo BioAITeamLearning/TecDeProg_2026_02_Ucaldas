@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Técnicas de Programación 2026 - 02
-author: Santiago Barrero
+author: Johan Piña
 logo: _static/images/logo.jpeg
 
 # Force re-execution of notebooks on each build.
@@ -16,9 +16,7 @@ latex:
     targetname: book.tex
 
 launch_buttons:
-  binderhub_url: "https://mybinder.org"
   colab_url: https://colab.research.google.com
-  thebe: true
 
 # Information about where the book exists on the web
 repository:
