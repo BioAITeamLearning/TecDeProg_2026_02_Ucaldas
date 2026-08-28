@@ -54,7 +54,7 @@ title: Bienvenida al curso
 
 ```{only} html
 [![](https://img.shields.io/github/stars/executablebooks/jupyter-book?style=social)](https://github.com/BioAITeamLearning)
-[<img src="https://w7.pngwing.com/pngs/784/212/png-transparent-google-scholar-hd-logo-thumbnail.png" width="20" height="20">](https://scholar.google.es/citations?hl=es&user=XLIIhSQAAAAJ)
+[<img src="https://w7.pngwing.com/pngs/784/212/png-transparent-google-scholar-hd-logo-thumbnail.png" width="20" height="20">](https://scholar.google.com/citations?user=XLIIhSQAAAAJ&hl=es)
 ```
 
 :::
