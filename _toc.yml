@@ -20,3 +20,6 @@ chapters:
     - file: "Recursividad"
       sections:
         - file: "Recursividad_Notebook"
+    - file: "Backtracking"
+      sections:
+        - file: "Backtracking_Notebook"
