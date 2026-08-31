@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-- file: Unidad1 
+- file: Unidad1
   sections:
     - file: "Introduccion"
     - file: "ListasTuplasDiccionarios"
@@ -17,3 +17,6 @@ chapters:
 - file: Unidad2
   sections:
     - file: "FuerzaBruta"
+    - file: "Recursividad"
+      sections:
+        - file: "Recursividad_Notebook"
