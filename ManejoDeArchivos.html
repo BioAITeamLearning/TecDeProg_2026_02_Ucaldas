@@ -1,0 +1,1480 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python &#8212; Técnicas de Programación 2026 - 02</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e8cf666a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ManejoDeArchivos';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Taller y Evaluación — Unidad 1" href="ResolucionProblemas.html" />
+    <link rel="prev" title="Pilas y Colas en Python — Notebook Avanzado" href="Pilas_y_Colas_Avanzadas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="Técnicas de Programación 2026 - 02 - Home"/>
+    <img src="_static/logo.jpeg" class="logo__image only-dark pst-js-only" alt="Técnicas de Programación 2026 - 02 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenida al curso
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad1.html">Unidad 1</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Introduccion.html">Introducción a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ListasTuplasDiccionarios.html">Listas, Tuplas, Diccionarios</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="PilasyColas.html">Pilas y Colas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pila.html">Pilas (Stack) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cola.html">Colas (Queue) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="FuerzaBruta.html">Fuerza Bruta y Complejidad Computacional</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas/blob/main/ManejoDeArchivos.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas/issues/new?title=Issue%20on%20page%20%2FManejoDeArchivos.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ManejoDeArchivos.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Índice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-base-y-buenas-practicas-de-i-o">1. Conceptos base y buenas prácticas de I/O</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miniproyecto-etl-de-logs">21. Mini‑proyecto: ETL de logs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos-finales">22. Recursos finales</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="manejo-de-archivos-lectura-escritura-de-archivos-y-operaciones-con-cadenas-en-python">
+<h1>Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python<a class="headerlink" href="#manejo-de-archivos-lectura-escritura-de-archivos-y-operaciones-con-cadenas-en-python" title="Link to this heading">#</a></h1>
+<section id="indice">
+<h2>Índice<a class="headerlink" href="#indice" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Conceptos base y buenas prácticas de I/O</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">open()</span></code>: modos, buffering, newline, encoding, errores</p></li>
+<li><p>Texto vs binario: <code class="docutils literal notranslate"><span class="pre">str</span></code> y <code class="docutils literal notranslate"><span class="pre">bytes</span></code>, conversiones y errores</p></li>
+<li><p>Iteración eficiente sobre archivos grandes (memory‑safe)</p></li>
+<li><p>Escritura segura y atómica (patrones con <code class="docutils literal notranslate"><span class="pre">tempfile</span></code>)</p></li>
+<li><p>Rutas modernas con <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> (vs <code class="docutils literal notranslate"><span class="pre">os</span></code>), globbing y utilidades</p></li>
+<li><p>Streams en memoria con <code class="docutils literal notranslate"><span class="pre">io.StringIO</span></code> y <code class="docutils literal notranslate"><span class="pre">io.BytesIO</span></code></p></li>
+<li><p>Archivos comprimidos: <code class="docutils literal notranslate"><span class="pre">gzip</span></code>, <code class="docutils literal notranslate"><span class="pre">bz2</span></code>, <code class="docutils literal notranslate"><span class="pre">lzma</span></code></p></li>
+<li><p>CSV y TSV con <code class="docutils literal notranslate"><span class="pre">csv</span></code> (DictReader/Writer)</p></li>
+<li><p>JSON: lectura, escritura y pretty printing</p></li>
+<li><p>Serialización binaria con <code class="docutils literal notranslate"><span class="pre">pickle</span></code> (y advertencias)</p></li>
+<li><p>Descarga/lectura de múltiples archivos con patrones (globs)</p></li>
+<li><p>Manejo robusto de excepciones y registro (logging básico)</p></li>
+<li><p>Cadenas: repaso intensivo de API (<code class="docutils literal notranslate"><span class="pre">split</span></code>, <code class="docutils literal notranslate"><span class="pre">join</span></code>, <code class="docutils literal notranslate"><span class="pre">partition</span></code>, etc.)</p></li>
+<li><p>F‑strings, <code class="docutils literal notranslate"><span class="pre">str.format</span></code>, <code class="docutils literal notranslate"><span class="pre">Template</span></code></p></li>
+<li><p>Búsqueda y reemplazo con <code class="docutils literal notranslate"><span class="pre">re</span></code> (regex) + grupos y backrefs</p></li>
+<li><p>Limpieza y normalización de texto (<code class="docutils literal notranslate"><span class="pre">unicodedata</span></code>, <code class="docutils literal notranslate"><span class="pre">casefold</span></code>)</p></li>
+<li><p>Mapas de traducción y tablas (<code class="docutils literal notranslate"><span class="pre">str.translate</span></code>, <code class="docutils literal notranslate"><span class="pre">maketrans</span></code>)</p></li>
+<li><p>Envoltura y truncado de texto (<code class="docutils literal notranslate"><span class="pre">textwrap</span></code>)</p></li>
+<li><p>Rendimiento: <code class="docutils literal notranslate"><span class="pre">join</span></code> vs concatenación, <code class="docutils literal notranslate"><span class="pre">io</span></code> buffered, slicing</p></li>
+<li><p>Mini‑proyecto: ETL de logs (mezcla de I/O + cadenas + regex)</p></li>
+<li><p>Recursos finales</p></li>
+</ol>
+</section>
+<section id="conceptos-base-y-buenas-practicas-de-i-o">
+<h2>1. Conceptos base y buenas prácticas de I/O<a class="headerlink" href="#conceptos-base-y-buenas-practicas-de-i-o" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Usa <strong>context managers</strong> (<code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open(...)</span> <span class="pre">as</span> <span class="pre">f:</span></code>) para cerrar archivos automáticamente.</p></li>
+<li><p>Preferir <strong><code class="docutils literal notranslate"><span class="pre">pathlib.Path</span></code></strong> para rutas: facilita portabilidad y operaciones comunes.</p></li>
+<li><p>Define <strong><code class="docutils literal notranslate"><span class="pre">encoding='utf-8'</span></code></strong> explícitamente al leer/escribir texto.</p></li>
+<li><p>Controla <strong>buffering</strong> y <strong>newline</strong> según el caso (rendimiento y consistencia).</p></li>
+<li><p>Para archivos grandes: <strong>iterar por líneas</strong> o <strong>en bloques</strong> (chunks).</p></li>
+<li><p>Para escritura robusta: <strong>escrituras atómicas</strong> con <code class="docutils literal notranslate"><span class="pre">tempfile</span></code> + <code class="docutils literal notranslate"><span class="pre">Path.replace()</span></code>.</p></li>
+<li><p>Validar entradas/salidas y capturar <strong>excepciones</strong> (<code class="docutils literal notranslate"><span class="pre">try/except</span></code>) con mensajes claros.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. open(): modos, buffering, newline, encoding, errores</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'ejemplo_texto.txt'</span><span class="p">)</span>
+
+<span class="c1"># Escritura en texto con opciones explícitas</span>
+<span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="c1"># newline='' evita traducciones de fin de línea en algunos entornos</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Línea 1 </span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Línea 2 con acento: café</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="c1"># Lectura con manejo de errores de codificación</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'strict'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">contenido</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Contenido leído:</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">contenido</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Error de decodificación:'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="c1"># Apertura en modo append (agrega al final)</span>
+<span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Línea 3 (append)</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'--- Después de append ---'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contenido leído:
+ Línea 1 
+Línea 2 con acento: café
+
+--- Después de append ---
+Línea 1 
+Línea 2 con acento: café
+Línea 3 (append)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Texto vs binario: str y bytes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">pb</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'ejemplo_binario.bin'</span><span class="p">)</span>
+
+<span class="c1"># Escribir bytes (binario)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>  <span class="c1"># cuatro bytes</span>
+<span class="k">with</span> <span class="n">pb</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Leer bytes y mostrar su representación</span>
+<span class="k">with</span> <span class="n">pb</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Bytes leídos:'</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">' -&gt; lista:'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+<span class="c1"># Convertir entre str y bytes con encode/decode</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s2">"Hola ß café"</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'strict'</span><span class="p">)</span>   <span class="c1"># str -&gt; bytes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'UTF-8 bytes:'</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'De vuelta a str:'</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bytes leídos: b'\x00\x01\x02\xff'  -&gt; lista: [0, 1, 2, 255]
+UTF-8 bytes: b'Hola \xc3\x9f caf\xc3\xa9'
+De vuelta a str: Hola ß café
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 4. Iteración eficiente sobre archivos grandes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'grande.txt'</span><span class="p">)</span>
+
+<span class="c1"># Generar un archivo realmente "grande" (100k líneas) de forma reproducible (seed fija)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">nombres</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Ana'</span><span class="p">,</span> <span class="s1">'Luis'</span><span class="p">,</span> <span class="s1">'Sebastian'</span><span class="p">,</span> <span class="s1">'Felipe'</span><span class="p">,</span> <span class="s1">'Santiago'</span><span class="p">,</span> <span class="s1">'Pablo'</span><span class="p">,</span> <span class="s1">'Maria'</span><span class="p">,</span> <span class="s1">'Carlos'</span><span class="p">,</span> <span class="s1">'Elena'</span><span class="p">,</span> <span class="s1">'Zoe'</span><span class="p">]</span>
+<span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100_000</span><span class="p">):</span>
+        <span class="n">nombre</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">nombres</span><span class="p">)</span>
+        <span class="n">nota</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">nota</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>  <span class="c1"># formato simple: id,nombre,nota</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Archivo generado:'</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)),</span> <span class="s1">'líneas'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archivo generado: grande.txt - 100000 líneas
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iterar el archivo sin cargarlo completo en memoria y mostrar las primeras líneas parseadas</span>
+<span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">id_</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">nota</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'id=</span><span class="si">{</span><span class="n">id_</span><span class="si">}</span><span class="s1"> nombre=</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s1"> nota=</span><span class="si">{</span><span class="n">nota</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id=0 nombre=Luis nota=1
+id=1 nombre=Santiago nota=2
+id=2 nombre=Felipe nota=2
+id=3 nombre=Luis nota=5
+id=4 nombre=Luis nota=5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Iteración línea por línea (streaming, memoria O(1) por línea)</span>
+<span class="c1"># no uses f.readlines() en archivos de cientos de miles de líneas: eso carga todo en RAM de una vez.</span>
+<span class="n">suma</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">cont</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">_id</span><span class="p">,</span> <span class="n">_nombre</span><span class="p">,</span> <span class="n">nota</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+        <span class="n">suma</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nota</span><span class="p">)</span>
+        <span class="n">cont</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Promedio de notas:'</span><span class="p">,</span> <span class="n">suma</span> <span class="o">/</span> <span class="n">cont</span><span class="p">,</span> <span class="s1">'  (sobre'</span><span class="p">,</span> <span class="n">cont</span><span class="p">,</span> <span class="s1">'registros)'</span><span class="p">)</span>
+
+<span class="c1"># Lectura por bloques (chunks) si se requiere control fino del buffering</span>
+<span class="n">suma2</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1_000_000</span><span class="p">)</span>  <span class="c1"># ~1MB</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">suma2</span> <span class="o">+=</span> <span class="n">chunk</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Número de líneas (aprox):'</span><span class="p">,</span> <span class="n">suma2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Promedio de notas: 3.00051   (sobre 100000 registros)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Número de líneas (aprox): 100000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 5. Escritura segura y 'atómica' con tempfile + replace</span>
+<span class="c1"># Útil para evitar archivos corruptos si el proceso se interrumpe durante la escritura.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">dest</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'salida_segura.txt'</span><span class="p">)</span>
+<span class="n">contenido</span> <span class="o">=</span> <span class="s1">'Resultado crítico</span><span class="se">\n</span><span class="s1">Línea final</span><span class="se">\n</span><span class="s1">'</span>
+
+<span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">dest</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span> <span class="k">as</span> <span class="n">tmp</span><span class="p">:</span>
+    <span class="n">tmp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">contenido</span><span class="p">)</span>
+    <span class="n">temp_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># Reemplaza de manera atómica (en el mismo disco)</span>
+<span class="n">temp_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Escritura atómica completada en:'</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dest</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Escritura atómica completada en: salida_segura.txt
+Resultado crítico
+Línea final
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 6. Rutas con pathlib: crear, listar, filtrar, mover/copiar</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'demo_pathlib'</span><span class="p">)</span>
+<span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s1">'subdir'</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Crear archivos de ejemplo</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">'archivo_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.txt'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="sa">f</span><span class="s1">'contenido_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+<span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="s1">'subdir'</span> <span class="o">/</span> <span class="s1">'data.csv'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="s1">'id,valor</span><span class="se">\n</span><span class="s1">1,100</span><span class="se">\n</span><span class="s1">2,200</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+
+<span class="c1"># Listar .txt</span>
+<span class="n">txts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'*.txt'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'TXT:'</span><span class="p">,</span> <span class="n">txts</span><span class="p">)</span>
+
+<span class="c1"># Buscar recursivamente CSV</span>
+<span class="n">csvs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s1">'*.csv'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'CSV recursivos:'</span><span class="p">,</span> <span class="n">csvs</span><span class="p">)</span>
+
+<span class="c1"># Mover/copy</span>
+<span class="n">dest_dir</span> <span class="o">=</span> <span class="n">base</span> <span class="o">/</span> <span class="s1">'backup'</span>
+<span class="n">dest_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">txts</span><span class="p">:</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dest_dir</span> <span class="o">/</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># copia preservando metadatos</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Copiados a'</span><span class="p">,</span> <span class="n">dest_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TXT: [PosixPath('demo_pathlib/archivo_1.txt'), PosixPath('demo_pathlib/archivo_2.txt'), PosixPath('demo_pathlib/archivo_0.txt')]
+CSV recursivos: [PosixPath('demo_pathlib/subdir/data.csv')]
+Copiados a demo_pathlib/backup
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 7. Streams en memoria con io.StringIO / io.BytesIO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span><span class="p">,</span> <span class="n">BytesIO</span>
+
+<span class="c1"># StringIO: se comporta como archivo de texto en RAM</span>
+<span class="n">buf</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+<span class="n">buf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Linea A</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="n">buf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'Linea B</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="n">buf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'StringIO -&gt;'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+<span class="c1"># BytesIO: como archivo binario en RAM</span>
+<span class="n">bbuf</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+<span class="n">bbuf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">'</span><span class="se">\x00\x01\x02</span><span class="s1">'</span><span class="p">)</span>
+<span class="n">bbuf</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'BytesIO -&gt;'</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">bbuf</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>StringIO -&gt;
+Linea A
+Linea B
+
+BytesIO -&gt; [0, 1, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 8. Archivos comprimidos: gzip, bz2, lzma</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gzip</span><span class="o">,</span><span class="w"> </span><span class="nn">bz2</span><span class="o">,</span><span class="w"> </span><span class="nn">lzma</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">texto</span> <span class="o">=</span> <span class="s1">'Hola compresión!</span><span class="se">\n</span><span class="s1">'</span> <span class="o">*</span> <span class="mi">1000</span>
+
+<span class="c1"># gzip</span>
+<span class="n">gz_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'ejemplo.txt.gz'</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">gz_path</span><span class="p">,</span> <span class="s1">'wt'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">gz_path</span><span class="p">,</span> <span class="s1">'rt'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'GZIP primeras 2 líneas:'</span><span class="p">,</span> <span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="nb">next</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()])</span>
+
+<span class="c1"># bz2</span>
+<span class="n">bz2_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'ejemplo.txt.bz2'</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">bz2</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">bz2_path</span><span class="p">,</span> <span class="s1">'wt'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
+
+<span class="c1"># lzma/xz</span>
+<span class="n">xz_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'ejemplo.txt.xz'</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">lzma</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">xz_path</span><span class="p">,</span> <span class="s1">'wt'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Creado gzip/bz2/xz en:'</span><span class="p">,</span> <span class="n">gz_path</span><span class="p">,</span> <span class="n">bz2_path</span><span class="p">,</span> <span class="n">xz_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GZIP primeras 2 líneas: ['Hola compresión!', 'Hola compresión!']
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Creado gzip/bz2/xz en: ejemplo.txt.gz ejemplo.txt.bz2 ejemplo.txt.xz
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 9. CSV y TSV con csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">csv_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'ejemplo.csv'</span><span class="p">)</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'nombre'</span><span class="p">:</span> <span class="s1">'Ana'</span><span class="p">,</span> <span class="s1">'nota'</span><span class="p">:</span> <span class="mf">4.5</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'nombre'</span><span class="p">:</span> <span class="s1">'Luis'</span><span class="p">,</span> <span class="s1">'nota'</span><span class="p">:</span> <span class="mf">3.8</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'nombre'</span><span class="p">:</span> <span class="s1">'Zoe'</span><span class="p">,</span> <span class="s1">'nota'</span><span class="p">:</span> <span class="mf">4.9</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># Escritura con DictWriter</span>
+<span class="k">with</span> <span class="n">csv_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">'nombre'</span><span class="p">,</span> <span class="s1">'nota'</span><span class="p">])</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'CSV escrito en:'</span><span class="p">,</span> <span class="n">csv_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CSV escrito en: ejemplo.csv
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lectura con DictReader (csv siempre entrega strings: hay que castear los tipos que necesites)</span>
+<span class="k">with</span> <span class="n">csv_path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">datos</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">'id'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]),</span> <span class="s1">'nombre'</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">],</span> <span class="s1">'nota'</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'nota'</span><span class="p">])}</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Leído desde CSV:'</span><span class="p">,</span> <span class="n">datos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Leído desde CSV: [{'id': 1, 'nombre': 'Ana', 'nota': 4.5}, {'id': 2, 'nombre': 'Luis', 'nota': 3.8}, {'id': 3, 'nombre': 'Zoe', 'nota': 4.9}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Búsqueda por id ya con los tipos correctos (sin necesitar input())</span>
+<span class="n">id_buscado</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">encontrado</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">datos</span> <span class="k">if</span> <span class="n">d</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">==</span> <span class="n">id_buscado</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">encontrado</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"id=</span><span class="si">{</span><span class="n">encontrado</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2"> -&gt; nombre=</span><span class="si">{</span><span class="n">encontrado</span><span class="p">[</span><span class="s1">'nombre'</span><span class="p">]</span><span class="si">}</span><span class="s2">, nota=</span><span class="si">{</span><span class="n">encontrado</span><span class="p">[</span><span class="s1">'nota'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'id no encontrado:'</span><span class="p">,</span> <span class="n">id_buscado</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id=2 -&gt; nombre=Luis, nota=3.8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 10. JSON: lectura/escritura/pretty</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">jpath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'ejemplo.json'</span><span class="p">)</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'curso'</span><span class="p">:</span> <span class="s1">'I/O Avanzado'</span><span class="p">,</span>
+    <span class="s1">'alumnos'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Ana'</span><span class="p">,</span> <span class="s1">'Luis'</span><span class="p">,</span> <span class="s1">'Zoé'</span><span class="p">],</span>
+    <span class="s1">'config'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'encoding'</span><span class="p">:</span> <span class="s1">'utf-8'</span><span class="p">,</span> <span class="s1">'newline'</span><span class="p">:</span> <span class="s1">''</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">with</span> <span class="n">jpath</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Cargar</span>
+<span class="k">with</span> <span class="n">jpath</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'r'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">cargado</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'JSON cargado:'</span><span class="p">,</span> <span class="n">cargado</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>JSON cargado: {'alumnos': ['Ana', 'Luis', 'Zoé'], 'config': {'encoding': 'utf-8', 'newline': ''}, 'curso': 'I/O Avanzado'}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"nombre"</span><span class="p">:</span> <span class="s2">"Zoe"</span><span class="p">,</span> <span class="s2">"curso"</span><span class="p">:</span> <span class="s2">"I/O Avanzado"</span><span class="p">,</span> <span class="s2">"nota"</span><span class="p">:</span> <span class="mf">4.9</span><span class="p">}</span>
+
+<span class="c1"># Compacto, ASCII escapado:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+<span class="c1"># -&gt; {"nombre": "Zoe", "curso": "I/O Avanzado", "nota": 4.9}</span>
+
+<span class="c1"># Legible, Unicode, claves ordenadas:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="c1"># -&gt; {</span>
+<span class="c1">#      "curso": "I/O Avanzado",</span>
+<span class="c1">#      "nombre": "Zoe",</span>
+<span class="c1">#      "nota": 4.9</span>
+<span class="c1">#    }</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{"nombre": "Zoe", "curso": "I/O Avanzado", "nota": 4.9}
+{
+  "curso": "I/O Avanzado",
+  "nombre": "Zoe",
+  "nota": 4.9
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 11. Serialización binaria con pickle (¡cuidado con datos no confiables!)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">pkl</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'ejemplo.pkl'</span><span class="p">)</span>
+<span class="n">modelo_simulado</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'w'</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span> <span class="s1">'bias'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>
+
+<span class="c1"># Guardar</span>
+<span class="k">with</span> <span class="n">pkl</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">modelo_simulado</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
+
+<span class="c1"># Cargar</span>
+<span class="k">with</span> <span class="n">pkl</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Pickle cargado:'</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+
+<span class="c1"># ADVERTENCIA: nunca uses pickle.load() en archivos de orígenes no confiables (riesgo de ejecución de código).</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pickle cargado: {'w': [1.0, 2.0, 3.0], 'bias': 0.1}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 12. Procesamiento batch con globs (patrones)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">base</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'lotes'</span><span class="p">)</span>
+<span class="n">base</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="p">(</span><span class="n">base</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">'parte_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.txt'</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="sa">f</span><span class="s1">'linea_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+
+<span class="c1"># Leer todos los archivos 'parte_*.txt' y consolidar</span>
+<span class="n">salida</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'consolidado.txt'</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">salida</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">archivo</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'parte_*.txt'</span><span class="p">)):</span>
+        <span class="n">contenido</span> <span class="o">=</span> <span class="n">archivo</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">'# </span><span class="si">{</span><span class="n">archivo</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">contenido</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Consolidado -&gt;'</span><span class="p">,</span> <span class="n">salida</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">salida</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)[:</span><span class="mi">120</span><span class="p">],</span> <span class="s1">'...'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Consolidado -&gt; consolidado.txt
+# parte_0.txt
+linea_0
+# parte_1.txt
+linea_1
+# parte_2.txt
+linea_2
+# parte_3.txt
+linea_3
+# parte_4.txt
+linea_4
+ ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 13. Manejo robusto de excepciones y logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'</span><span class="si">%(levelname)s</span><span class="s1">:</span><span class="si">%(message)s</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">leer_seguro</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">texto</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">'strict'</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Leído </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1"> bytes)'</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">texto</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">texto</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'No existe: </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">'Error de decodificación en </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">'</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s1">''</span>
+
+<span class="c1"># Prueba</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">leer_seguro</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">'no_existe.txt'</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR:No existe: no_existe.txt
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 14. API de cadenas: split, rsplit, partition, rpartition, find, replace...</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s2">"  Python, I/O avanzado; cadenas;  rendimiento  "</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'strip:'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'split por ;:'</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">';'</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'rsplit maxsplit=1:'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">';'</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'partition por coma:'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">','</span><span class="p">))</span>  <span class="c1"># (antes, separador, después)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'replace:'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'avanzado'</span><span class="p">,</span> <span class="s1">'PRO'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'startswith("  Py"):'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'  Py'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'endswith("miento  "):'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'miento  '</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'find("I/O"):'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'I/O'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'count("a"):'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'a'</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'join:'</span><span class="p">,</span> <span class="s1">' | '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'c'</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'zfill(5):'</span><span class="p">,</span> <span class="s1">'42'</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'center(20, "-"):'</span><span class="p">,</span> <span class="s1">'TÍTULO'</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>strip: Python, I/O avanzado; cadenas;  rendimiento
+split por ;: ['Python, I/O avanzado', 'cadenas', 'rendimiento']
+rsplit maxsplit=1: ['  Python, I/O avanzado; cadenas', '  rendimiento  ']
+partition por coma: ('  Python', ',', ' I/O avanzado; cadenas;  rendimiento  ')
+replace:   Python, I/O PRO; cadenas;  rendimiento  
+startswith("  Py"): True
+endswith("miento  "): True
+find("I/O"): 10
+count("a"): 5
+join: a | b | c
+zfill(5): 00042
+center(20, "-"): -------TÍTULO-------
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 15. Formateo: f-strings, str.format, Template</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">string</span><span class="w"> </span><span class="kn">import</span> <span class="n">Template</span>
+
+<span class="n">nombre</span> <span class="o">=</span> <span class="s1">'Ana'</span>
+<span class="n">nota</span> <span class="o">=</span> <span class="mf">4.75</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Estudiante: </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s1">, nota redondeada: </span><span class="si">{</span><span class="n">nota</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Formato con posiciones: </span><span class="si">{}</span><span class="s1"> -&gt; </span><span class="si">{:.2f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">nota</span><span class="p">))</span>
+<span class="n">tpl</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s1">'Hola, $who. Tu nota es $score.'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tpl</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">who</span><span class="o">=</span><span class="n">nombre</span><span class="p">,</span> <span class="n">score</span><span class="o">=</span><span class="n">nota</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estudiante: Ana, nota redondeada: 4.8
+Formato con posiciones: Ana -&gt; 4.75
+Hola, Ana. Tu nota es 4.75.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 16. Regex: búsqueda y reemplazo, grupos, backreferences</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="n">texto</span> <span class="o">=</span> <span class="s2">"ID: 2025-10-02 | Usuario: Mario | Email: mario@example.com; Otra: test@test.co"</span>
+<span class="c1"># Extraer emails</span>
+<span class="n">emails</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">'[\w.\-+]+@[\w\-]+(?:\.[\w\-]+)+'</span><span class="p">,</span> <span class="n">texto</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Emails:'</span><span class="p">,</span> <span class="n">emails</span><span class="p">)</span>
+
+<span class="c1"># Reemplazo con grupos nombrados</span>
+<span class="n">pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">'(?P&lt;clave&gt;ID):\s*(?P&lt;valor&gt;[\d\-]+)'</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">pat</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Grupo clave:'</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'clave'</span><span class="p">),</span> <span class="s1">'valor:'</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'valor'</span><span class="p">))</span>
+
+<span class="c1"># Normalizar múltiples espacios</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s1">'Texto    con   espacios    extras'</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\s{2,}'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Normalizado:'</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Emails: ['mario@example.com', 'test@test.co']
+Grupo clave: ID valor: 2025-10-02
+Normalizado: Texto con espacios extras
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 17. Limpieza/normalización Unicode</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">unicodedata</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="s2">"café CAFÉ Straße"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Original:'</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># casefold para comparaciones robustas</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'casefold:'</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">casefold</span><span class="p">())</span>
+
+<span class="c1"># Normalización (NFC vs NFD)</span>
+<span class="n">nfc</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">'NFC'</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">nfd</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">'NFD'</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'NFC == NFD?'</span><span class="p">,</span> <span class="n">nfc</span> <span class="o">==</span> <span class="n">nfd</span><span class="p">)</span>
+
+<span class="c1"># Eliminar diacríticos usando NFD + filtro</span>
+<span class="n">sin_diac</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ch</span> <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s1">'NFD'</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                   <span class="k">if</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">category</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">'Mn'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Sin diacríticos:'</span><span class="p">,</span> <span class="n">sin_diac</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original: café CAFÉ Straße
+casefold: café café strasse
+NFC == NFD? False
+Sin diacríticos: cafe CAFE Straße
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 18. str.translate / maketrans: mapeos masivos eficientes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="s2">"abc123-xyz"</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">({</span><span class="n">c</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">})</span>  <span class="c1"># eliminar dígitos</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Sin dígitos:'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">tabla</span><span class="p">))</span>
+
+<span class="n">tabla2</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">({</span><span class="s1">'-'</span><span class="p">:</span> <span class="s1">'_'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">:</span> <span class="s1">'X'</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Reemplazos múltiples:'</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">tabla2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sin dígitos: abc-xyz
+Reemplazos múltiples: abc123_Xyz
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 19. textwrap: envolver y recortar texto</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+
+<span class="n">largo</span> <span class="o">=</span> <span class="s2">"Python ofrece utilidades para envolver texto en párrafos con ancho fijo, útil para reportes en consola."</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">largo</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'--- recorte ---'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">shorten</span><span class="p">(</span><span class="n">largo</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">placeholder</span><span class="o">=</span><span class="s1">'…'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python ofrece utilidades para envolver
+texto en párrafos con ancho fijo, útil
+para reportes en consola.
+--- recorte ---
+Python ofrece utilidades para envolver texto en…
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 20. Rendimiento práctico</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+
+<span class="c1"># 1) join vs concatenación en bucles</span>
+<span class="n">palabras</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
+<span class="c1"># mala práctica: concatenar en bucle (O(n^2) en algunos casos)</span>
+<span class="n">s1</span> <span class="o">=</span> <span class="s1">''</span>
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">palabras</span><span class="p">:</span>
+    <span class="n">s1</span> <span class="o">+=</span> <span class="n">w</span>  <span class="c1"># evitá esto en bucles grandes</span>
+
+<span class="c1"># buena práctica</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">palabras</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Longitudes iguales:'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">s2</span><span class="p">))</span>
+
+<span class="c1"># 2) Escritura con buffer explícito</span>
+<span class="n">buf</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">buf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="n">resultado</span> <span class="o">=</span> <span class="n">buf</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Buffer OK:'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">resultado</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Longitudes iguales: True
+Buffer OK: True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="miniproyecto-etl-de-logs">
+<h2>21. Mini‑proyecto: ETL de logs<a class="headerlink" href="#miniproyecto-etl-de-logs" title="Link to this heading">#</a></h2>
+<p><strong>Objetivo:</strong> Leer múltiples archivos de log (<code class="docutils literal notranslate"><span class="pre">.log</span></code>), extraer campos con <strong>regex</strong>, normalizar texto, y generar:</p>
+<ul class="simple">
+<li><p>Un <strong>CSV</strong> consolidado.</p></li>
+<li><p>Un <strong>JSON</strong> con estadísticas agregadas.</p></li>
+</ul>
+<p>Formato de línea de ejemplo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2025</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">02</span> <span class="mi">05</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mi">21</span><span class="p">]</span> <span class="n">INFO</span> <span class="n">user</span><span class="o">=</span><span class="n">ana</span> <span class="n">action</span><span class="o">=</span><span class="n">login</span> <span class="n">status</span><span class="o">=</span><span class="n">ok</span> <span class="n">ip</span><span class="o">=</span><span class="mf">10.0.0.1</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span><span class="o">,</span><span class="w"> </span><span class="nn">csv</span><span class="o">,</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">logs_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'logs_demo'</span><span class="p">)</span>
+<span class="n">logs_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Crear logs de ejemplo</span>
+<span class="n">plantillas</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"[2025-10-02 05:43:21] INFO user=ana action=login status=ok ip=10.0.0.</span><span class="si">{i}</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"[2025-10-02 05:44:10] WARN user=luis action=download status=fail ip=10.0.0.</span><span class="si">{i}</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"[2025-10-02 05:45:00] INFO user=zoe action=upload status=ok ip=10.0.0.</span><span class="si">{i}</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">logs_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">'app_</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s1">.log'</span>
+    <span class="k">with</span> <span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">plantillas</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">idx</span><span class="p">))</span>
+
+<span class="c1"># Regex para extraer campos</span>
+<span class="n">pat</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">"\[(?P&lt;timestamp&gt;[^\]]+)\]\s+"</span>
+    <span class="sa">r</span><span class="s2">"(?P&lt;level&gt;INFO|WARN|ERROR)\s+"</span>
+    <span class="sa">r</span><span class="s2">"user=(?P&lt;user&gt;\w+)\s+"</span>
+    <span class="sa">r</span><span class="s2">"action=(?P&lt;action&gt;\w+)\s+"</span>
+    <span class="sa">r</span><span class="s2">"status=(?P&lt;status&gt;\w+)\s+"</span>
+    <span class="sa">r</span><span class="s2">"ip=(?P&lt;ip&gt;[\d.]+)"</span>
+<span class="p">)</span>
+
+<span class="c1"># Salidas</span>
+<span class="n">csv_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'logs_consolidados.csv'</span><span class="p">)</span>
+<span class="n">json_out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'logs_stats.json'</span><span class="p">)</span>
+
+<span class="n">registros</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">archivo</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">logs_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'*.log'</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">archivo</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">pat</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+            <span class="n">registros</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">groupdict</span><span class="p">())</span>
+
+<span class="c1"># Escribir CSV</span>
+<span class="k">with</span> <span class="n">csv_out</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'w'</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s1">'timestamp'</span><span class="p">,</span><span class="s1">'level'</span><span class="p">,</span><span class="s1">'user'</span><span class="p">,</span><span class="s1">'action'</span><span class="p">,</span><span class="s1">'status'</span><span class="p">,</span><span class="s1">'ip'</span><span class="p">])</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">registros</span><span class="p">)</span>
+
+<span class="c1"># Estadísticas agregadas</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'por_usuario'</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'user'</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">registros</span><span class="p">)),</span>
+    <span class="s1">'por_accion'</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'action'</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">registros</span><span class="p">)),</span>
+    <span class="s1">'por_status'</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">registros</span><span class="p">)),</span>
+    <span class="s1">'total'</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">registros</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">json_out</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'CSV:'</span><span class="p">,</span> <span class="n">csv_out</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'JSON stats:'</span><span class="p">,</span> <span class="n">json_out</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">stats</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CSV: logs_consolidados.csv
+JSON stats: logs_stats.json
+{
+  "por_usuario": {
+    "ana": 5,
+    "luis": 5,
+    "zoe": 5
+  },
+  "por_accion": {
+    "login": 5,
+    "download": 5,
+    "upload": 5
+  },
+  "por_status": {
+    "ok": 10,
+    "fail": 5
+  },
+  "total": 15
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recursos-finales">
+<h2>22. Recursos finales<a class="headerlink" href="#recursos-finales" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Documentación oficial de Python: módulos <code class="docutils literal notranslate"><span class="pre">io</span></code>, <code class="docutils literal notranslate"><span class="pre">pathlib</span></code>, <code class="docutils literal notranslate"><span class="pre">csv</span></code>, <code class="docutils literal notranslate"><span class="pre">json</span></code>, <code class="docutils literal notranslate"><span class="pre">gzip</span></code>, <code class="docutils literal notranslate"><span class="pre">bz2</span></code>, <code class="docutils literal notranslate"><span class="pre">lzma</span></code>, <code class="docutils literal notranslate"><span class="pre">pickle</span></code>, <code class="docutils literal notranslate"><span class="pre">unicodedata</span></code>, <code class="docutils literal notranslate"><span class="pre">textwrap</span></code>, <code class="docutils literal notranslate"><span class="pre">re</span></code>.</p></li>
+<li><p>PEP 519 (PathLike), PEP 393 (Flexible String Representation).</p></li>
+<li><p>Buenas prácticas: especificar <code class="docutils literal notranslate"><span class="pre">encoding='utf-8'</span></code>, usar context managers, iteración en streaming para archivos grandes, validación de entradas y manejo explícito de errores.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Pilas_y_Colas_Avanzadas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pilas y Colas en Python — Notebook Avanzado</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ResolucionProblemas.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Taller y Evaluación — Unidad 1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indice">Índice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-base-y-buenas-practicas-de-i-o">1. Conceptos base y buenas prácticas de I/O</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miniproyecto-etl-de-logs">21. Mini‑proyecto: ETL de logs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos-finales">22. Recursos finales</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Santiago Barrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

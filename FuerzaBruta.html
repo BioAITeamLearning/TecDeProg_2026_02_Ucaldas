@@ -1,0 +1,1128 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fuerza Bruta y Complejidad Computacional &#8212; Técnicas de Programación 2026 - 02</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e8cf666a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'FuerzaBruta';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Unidad 2" href="Unidad2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="Técnicas de Programación 2026 - 02 - Home"/>
+    <img src="_static/logo.jpeg" class="logo__image only-dark pst-js-only" alt="Técnicas de Programación 2026 - 02 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenida al curso
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad1.html">Unidad 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduccion.html">Introducción a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ListasTuplasDiccionarios.html">Listas, Tuplas, Diccionarios</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="PilasyColas.html">Pilas y Colas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pila.html">Pilas (Stack) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cola.html">Colas (Queue) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Fuerza Bruta y Complejidad Computacional</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas/blob/main/FuerzaBruta.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas/issues/new?title=Issue%20on%20page%20%2FFuerzaBruta.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/FuerzaBruta.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fuerza Bruta y Complejidad Computacional</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">Objetivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-algoritmo-de-fuerza-bruta">1. ¿Qué es un algoritmo de fuerza bruta?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rasgos-clave">Rasgos clave</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-en-contexto">2. Complejidad computacional en contexto</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-costo">2.1 Modelo de costo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notacion-asintotica">2.2 Notación asintótica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#casos-de-analisis">2.3 Casos de análisis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clases-de-complejidad-vision-de-alto-nivel">2.4 Clases de complejidad (visión de alto nivel)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-crecen-los-tiempos">3. ¿Cómo crecen los tiempos?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patrones-y-familias-de-fuerza-bruta">4. Patrones y familias de fuerza bruta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-busqueda-lineal-vs-binaria">5. Ejemplo 1 — Búsqueda lineal vs. binaria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-busqueda-de-patron-metodo-ingenuo-vs-optimizado">6. Ejemplo 2 — Búsqueda de patrón: método ingenuo vs. optimizado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-explosion-combinatoria-ataque-por-diccionario">7. Ejemplo 3 — Explosión combinatoria: ataque por diccionario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-subset-sum-fuerza-bruta-vs-una-primera-poda">8. Ejemplo 4 — Subset Sum: fuerza bruta vs. una primera poda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-el-problema-del-viajante-tsp-por-fuerza-bruta">9. Ejemplo 5 — El problema del viajante (TSP) por fuerza bruta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-espacial-trade-offs-y-paralelizacion">10. Complejidad espacial, trade-offs y paralelización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-si-usar-fuerza-bruta">11. ¿Cuándo sí usar fuerza bruta?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retos-y-ejercicios">12. Retos y ejercicios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-notas-de-implementacion-en-python">Apéndice — Notas de implementación en Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-y-lecturas-sugeridas">Referencias y lecturas sugeridas</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fuerza-bruta-y-complejidad-computacional">
+<h1>Fuerza Bruta y Complejidad Computacional<a class="headerlink" href="#fuerza-bruta-y-complejidad-computacional" title="Link to this heading">#</a></h1>
+<p><strong>Basado en el material de clase de Mario Alejandro Bravo.</strong></p>
+<p><strong>Propósito:</strong> comprender, desde la teoría y la práctica, qué son los algoritmos de <strong>fuerza bruta</strong>, cómo se analizan en tiempo y espacio, y cómo se relacionan con la <strong>complejidad computacional</strong> (clases P y NP), con experimentos reproducibles en Python.</p>
+<section id="objetivos">
+<h2>Objetivos<a class="headerlink" href="#objetivos" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Definir y caracterizar el enfoque de fuerza bruta y sus variantes (enumeración exhaustiva, generate-and-test, búsqueda ciega).</p></li>
+<li><p>Repasar la notación asintótica (O, Θ, Ω), los casos peor/mejor/promedio, y las clases P / NP.</p></li>
+<li><p>Explorar la explosión combinatoria con ejemplos clásicos: búsqueda lineal, ataque por diccionario, búsqueda de patrón, subset-sum y TSP.</p></li>
+<li><p>Medir tiempos empíricamente y visualizar tasas de crecimiento (log, lineal, cuadrática, exponencial, factorial).</p></li>
+<li><p>Comparar fuerza bruta pura contra una primera poda (branch-and-bound), como puente hacia el backtracking.</p></li>
+<li><p>Discutir cuándo un método de fuerza bruta es aceptable, y qué alternativas existen.</p></li>
+</ol>
+<blockquote>
+<div><p>📎 <strong>Material de apoyo (diapositivas):</strong> <a class="reference download internal" download="" href="_downloads/d9456acd42ee1fa868683cf21cdabc23/FuerzaBruta_Slides.pdf"><span class="xref download myst">Algoritmos de Fuerza Bruta — Fundamentos, Análisis y Aplicaciones (PDF)</span></a></p>
+</div></blockquote>
+</section>
+<section id="que-es-un-algoritmo-de-fuerza-bruta">
+<h2>1. ¿Qué es un algoritmo de fuerza bruta?<a class="headerlink" href="#que-es-un-algoritmo-de-fuerza-bruta" title="Link to this heading">#</a></h2>
+<p>Un <strong>algoritmo de fuerza bruta</strong> intenta resolver un problema <strong>probando sistemáticamente</strong> todas las posibilidades o construyendo todas las soluciones candidatas y verificándolas con un <strong>test</strong>. Es directo, fácil de implementar y <strong>correcto</strong> si explora el espacio completo, pero suele ser <strong>ineficiente</strong> cuando el número de combinaciones crece rápidamente.</p>
+<section id="rasgos-clave">
+<h3>Rasgos clave<a class="headerlink" href="#rasgos-clave" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Enumeración exhaustiva</strong>: lista o genera todas las configuraciones posibles.</p></li>
+<li><p><strong>Generate &amp; Test</strong>: para cada candidato, evalúa si cumple la condición.</p></li>
+<li><p><strong>Ceguera</strong>: carece de conocimiento específico del problema que guíe la búsqueda (a diferencia de heurísticas, poda o programación dinámica).</p></li>
+<li><p><strong>Complejidad alta</strong>: a menudo exponencial o factorial en el tamaño de la entrada.</p></li>
+<li><p><strong>Ventajas</strong>: simplicidad, facilidad de verificar correctitud, útil como línea base o cuando el espacio es pequeño (n ≤ 20).</p></li>
+<li><p><strong>Desventajas</strong>: escala muy mal; puede ser inviable incluso para entradas moderadas.</p></li>
+</ul>
+<blockquote>
+<div><p>Regla mental: si el problema requiere <strong>probar todas las combinaciones</strong> y <strong>no hay</strong> estructura que aprovechar, probablemente sea fuerza bruta.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="complejidad-computacional-en-contexto">
+<h2>2. Complejidad computacional en contexto<a class="headerlink" href="#complejidad-computacional-en-contexto" title="Link to this heading">#</a></h2>
+<section id="modelo-de-costo">
+<h3>2.1 Modelo de costo<a class="headerlink" href="#modelo-de-costo" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Operación básica</strong>: asumimos costo constante para acceso a arreglo, comparaciones simples, suma/resta, etc.</p></li>
+<li><p><strong>Abstracciones</strong>: ignoramos constantes y detalles de hardware para enfocarnos en cómo <em>crece</em> el tiempo/espacio con el tamaño de entrada <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+</ul>
+</section>
+<section id="notacion-asintotica">
+<h3>2.2 Notación asintótica<a class="headerlink" href="#notacion-asintotica" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>O(f(n))</strong> (cota superior): el algoritmo no tarda más que una constante por <code class="docutils literal notranslate"><span class="pre">f(n)</span></code> para <code class="docutils literal notranslate"><span class="pre">n</span></code> suficientemente grande.</p></li>
+<li><p><strong>Ω(f(n))</strong> (cota inferior): el algoritmo tarda al menos una constante por <code class="docutils literal notranslate"><span class="pre">f(n)</span></code>.</p></li>
+<li><p><strong>Θ(f(n))</strong> (cota ajustada): acotado superior e inferior por <code class="docutils literal notranslate"><span class="pre">f(n)</span></code>.</p></li>
+</ul>
+</section>
+<section id="casos-de-analisis">
+<h3>2.3 Casos de análisis<a class="headerlink" href="#casos-de-analisis" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Peor caso</strong>: garantiza rendimiento en el escenario más desfavorable.</p></li>
+<li><p><strong>Mejor caso</strong>: útil para entender límites inferiores, rara vez suficiente por sí solo.</p></li>
+<li><p><strong>Caso promedio</strong>: requiere un modelo probabilístico de entradas.</p></li>
+</ul>
+</section>
+<section id="clases-de-complejidad-vision-de-alto-nivel">
+<h3>2.4 Clases de complejidad (visión de alto nivel)<a class="headerlink" href="#clases-de-complejidad-vision-de-alto-nivel" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>P</strong>: problemas resolubles en tiempo polinomial (≈ “eficientes”).</p></li>
+<li><p><strong>NP</strong>: soluciones verificables en tiempo polinomial (no necesariamente encontrables rápido).</p></li>
+<li><p><strong>NP-completo</strong>: los problemas más “difíciles” de NP; si resuelves uno en P, entonces P = NP.</p></li>
+<li><p><strong>Exponencial / Factorial</strong>: tiempos del tipo <code class="docutils literal notranslate"><span class="pre">c^n</span></code> o <code class="docutils literal notranslate"><span class="pre">n!</span></code>, típicos de fuerza bruta pura.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utilidades compartidas para medir y graficar tiempos (se usan en todos los ejemplos de este notebook)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Ejecuta f(*args, **kwargs) y devuelve (tiempo_en_segundos, resultado)."""</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="n">out</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_growth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s2">"Tiempo (s)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Escalado empírico"</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Grafica una o varias series (ys puede ser una lista de listas) contra x."""</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">serie</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">or</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ys</span><span class="p">)):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">serie</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="como-crecen-los-tiempos">
+<h2>3. ¿Cómo crecen los tiempos?<a class="headerlink" href="#como-crecen-los-tiempos" title="Link to this heading">#</a></h2>
+<p>Comparamos funciones típicas de complejidad: <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">log</span> <span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">n^2</span></code>, <code class="docutils literal notranslate"><span class="pre">2^n</span></code>, <code class="docutils literal notranslate"><span class="pre">n!</span></code>. Observa cómo las exponenciales/factoriales <strong>dominan</strong> rápidamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>  <span class="c1"># n pequeño para que n! no desborde</span>
+<span class="n">logn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">ns</span>
+<span class="n">nlogn</span> <span class="o">=</span> <span class="n">ns</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="n">ns</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">two_n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">ns</span>
+<span class="n">fact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">logn</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'log n (base 2)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'n'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">nlogn</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'n log n'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'n^2'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">two_n</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'2^n'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">fact</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'n!'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">'log'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'n'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'f(n)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Comparación de tasas de crecimiento (escala log en eje Y)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fdc789be260197e14994f0557a710eeb4c13580cb984a005224449f4eafca97d.png" src="_images/fdc789be260197e14994f0557a710eeb4c13580cb984a005224449f4eafca97d.png" />
+</div>
+</div>
+</section>
+<section id="patrones-y-familias-de-fuerza-bruta">
+<h2>4. Patrones y familias de fuerza bruta<a class="headerlink" href="#patrones-y-familias-de-fuerza-bruta" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Búsqueda lineal (secuencial)</strong> sobre una lista: prueba cada elemento hasta encontrar la coincidencia. <code class="docutils literal notranslate"><span class="pre">Θ(n)</span></code>.</p></li>
+<li><p><strong>Enumeración de combinaciones/permutaciones</strong> con <code class="docutils literal notranslate"><span class="pre">itertools</span></code>: tamaño del espacio ≈ <code class="docutils literal notranslate"><span class="pre">C(n,k)</span></code> o <code class="docutils literal notranslate"><span class="pre">n!</span></code>.</p></li>
+<li><p><strong>Generate-and-test</strong>: genera candidatos y valida con un predicado.</p></li>
+<li><p><strong>Búsqueda ciega en grafos</strong> (BFS/DFS sin heurística específica). <em>Nota:</em> BFS/DFS no son “fuerza bruta” per se, pero si exploran exhaustivamente sin poda, se comportan como tal.</p></li>
+<li><p><strong>Backtracking sin poda</strong> ≈ fuerza bruta; con poda ya introduce inteligencia (no es “pura”) — lo verás en la siguiente sección de esta unidad.</p></li>
+</ol>
+</section>
+<section id="ejemplo-1-busqueda-lineal-vs-binaria">
+<h2>5. Ejemplo 1 — Búsqueda lineal vs. binaria<a class="headerlink" href="#ejemplo-1-busqueda-lineal-vs-binaria" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Lineal (fuerza bruta)</strong>: recorre todos los elementos hasta hallar el objetivo. <code class="docutils literal notranslate"><span class="pre">Θ(n)</span></code> en peor caso.</p></li>
+<li><p><strong>Binaria (optimizada)</strong>: requiere datos ordenados; divide y vencerás. <code class="docutils literal notranslate"><span class="pre">Θ(log</span> <span class="pre">n)</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">linear_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">binary_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mid</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">500_000</span><span class="p">]:</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># peor caso para la lineal (el ultimo elemento)</span>
+    <span class="n">t_lineal</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">linear_search</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">t_binaria</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">binary_search</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2"> | lineal ~</span><span class="si">{</span><span class="n">t_lineal</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s | binaria ~</span><span class="si">{</span><span class="n">t_binaria</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=  10000 | lineal ~0.000327s | binaria ~0.000007s
+n= 100000 | lineal ~0.002168s | binaria ~0.000007s
+n= 500000 | lineal ~0.014696s | binaria ~0.000015s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-2-busqueda-de-patron-metodo-ingenuo-vs-optimizado">
+<h2>6. Ejemplo 2 — Búsqueda de patrón: método ingenuo vs. optimizado<a class="headerlink" href="#ejemplo-2-busqueda-de-patron-metodo-ingenuo-vs-optimizado" title="Link to this heading">#</a></h2>
+<p>El método <strong>naive</strong> compara el patrón <code class="docutils literal notranslate"><span class="pre">P</span></code> (longitud <code class="docutils literal notranslate"><span class="pre">m</span></code>) en cada posición del texto <code class="docutils literal notranslate"><span class="pre">T</span></code> (longitud <code class="docutils literal notranslate"><span class="pre">n</span></code>), con salida temprana en cuanto un carácter no coincide ⇒ <code class="docutils literal notranslate"><span class="pre">O(n·m)</span></code> en el peor caso. Lo comparamos contra <code class="docutils literal notranslate"><span class="pre">str.find</span></code> (que internamente usa un algoritmo más eficiente).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="w"> </span><span class="nn">string</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">naive_find</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">bench_pattern</span><span class="p">(</span><span class="n">n_text</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_pat</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_text</span><span class="p">))</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pat</span><span class="p">))</span>
+    <span class="n">t_naive</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">naive_find</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+    <span class="n">t_builtin</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t_naive</span><span class="p">,</span> <span class="n">t_builtin</span>
+
+<span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">20_000</span><span class="p">,</span> <span class="mi">40_000</span><span class="p">,</span> <span class="mi">80_000</span><span class="p">]</span>
+<span class="n">naive_t</span><span class="p">,</span> <span class="n">builtin_t</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">:</span>
+    <span class="n">t_na</span><span class="p">,</span> <span class="n">t_bi</span> <span class="o">=</span> <span class="n">bench_pattern</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">naive_t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_na</span><span class="p">)</span>
+    <span class="n">builtin_t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_bi</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2"> | naive=</span><span class="si">{</span><span class="n">t_na</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s  str.find=</span><span class="si">{</span><span class="n">t_bi</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
+
+<span class="n">plot_growth</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="p">[</span><span class="n">naive_t</span><span class="p">,</span> <span class="n">builtin_t</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"naive_find (fuerza bruta)"</span><span class="p">,</span> <span class="s2">"str.find (optimizado)"</span><span class="p">],</span>
+            <span class="n">x_label</span><span class="o">=</span><span class="s2">"Tamaño del texto (n)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Busqueda de patron: ingenuo vs. optimizado"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n= 10000 | naive=0.000549s  str.find=0.000008s
+n= 20000 | naive=0.001053s  str.find=0.000012s
+n= 40000 | naive=0.002088s  str.find=0.000023s
+n= 80000 | naive=0.004602s  str.find=0.000049s
+</pre></div>
+</div>
+<img alt="_images/1b80d080e4e9ee29fe46ba4db91698bd6d87afd1e5baaf06460f8466b5ed1696.png" src="_images/1b80d080e4e9ee29fe46ba4db91698bd6d87afd1e5baaf06460f8466b5ed1696.png" />
+</div>
+</div>
+</section>
+<section id="ejemplo-3-explosion-combinatoria-ataque-por-diccionario">
+<h2>7. Ejemplo 3 — Explosión combinatoria: ataque por diccionario<a class="headerlink" href="#ejemplo-3-explosion-combinatoria-ataque-por-diccionario" title="Link to this heading">#</a></h2>
+<p>Dado un alfabeto de tamaño <code class="docutils literal notranslate"><span class="pre">k</span></code> y una longitud objetivo <code class="docutils literal notranslate"><span class="pre">n</span></code>, existen <code class="docutils literal notranslate"><span class="pre">k^n</span></code> cadenas posibles. Probamos <strong>todas</strong> las combinaciones hasta encontrar el objetivo, y medimos cómo crece el tiempo con <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">brute_force_match</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Prueba cadenas en orden lexicografico. Devuelve (intentos, cadena_encontrada)."""</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">attempts</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">alphabet</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">attempts</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">cand</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cand</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">attempts</span><span class="p">,</span> <span class="n">cand</span>
+    <span class="k">return</span> <span class="n">attempts</span><span class="p">,</span> <span class="s2">""</span>
+
+<span class="c1"># Prueba rapida</span>
+<span class="n">alphabet</span> <span class="o">=</span> <span class="s2">"abcd"</span>
+<span class="n">target</span> <span class="o">=</span> <span class="s2">"cab"</span>
+<span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="n">attempts</span><span class="p">,</span> <span class="n">encontrada</span><span class="p">)</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">brute_force_match</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"target='</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">' -&gt; encontrada='</span><span class="si">{</span><span class="n">encontrada</span><span class="si">}</span><span class="s2">', intentos=</span><span class="si">{</span><span class="n">attempts</span><span class="si">}</span><span class="s2">, tiempo=</span><span class="si">{</span><span class="n">dt</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
+
+<span class="c1"># Crecimiento con la longitud n (alfabeto fijo de 5 letras: k=5)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">runner_len</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="s2">"abcde"</span>
+    <span class="n">obj</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">dt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">brute_force_match</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dt</span>
+
+<span class="n">lens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>  <span class="c1"># k^n con k=5: hasta 5^6 = 15625</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">runner_len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">lens</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lens</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s  (espacio de busqueda = 5^</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="mi">5</span><span class="o">**</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+
+<span class="n">plot_growth</span><span class="p">(</span><span class="n">lens</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">"Longitud objetivo (n)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Fuerza bruta sobre cadenas (k^n, k=5)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>target='cab' -&gt; encontrada='cab', intentos=34, tiempo=0.000009s
+n=1: 0.000003s  (espacio de busqueda = 5^1 = 5)
+n=2: 0.000002s  (espacio de busqueda = 5^2 = 25)
+n=3: 0.000007s  (espacio de busqueda = 5^3 = 125)
+n=4: 0.000011s  (espacio de busqueda = 5^4 = 625)
+n=5: 0.000155s  (espacio de busqueda = 5^5 = 3125)
+n=6: 0.000049s  (espacio de busqueda = 5^6 = 15625)
+</pre></div>
+</div>
+<img alt="_images/18eb4c465b5817d0ba1f7e660abb632d2c39055ab65ccf52fb5c2669a5fc41a3.png" src="_images/18eb4c465b5817d0ba1f7e660abb632d2c39055ab65ccf52fb5c2669a5fc41a3.png" />
+</div>
+</div>
+</section>
+<section id="ejemplo-4-subset-sum-fuerza-bruta-vs-una-primera-poda">
+<h2>8. Ejemplo 4 — Subset Sum: fuerza bruta vs. una primera poda<a class="headerlink" href="#ejemplo-4-subset-sum-fuerza-bruta-vs-una-primera-poda" title="Link to this heading">#</a></h2>
+<p><strong>Subset Sum</strong>: dado un conjunto de enteros y un objetivo <code class="docutils literal notranslate"><span class="pre">T</span></code>, ¿existe un subconjunto que sume exactamente <code class="docutils literal notranslate"><span class="pre">T</span></code>?</p>
+<ul class="simple">
+<li><p><strong>Fuerza bruta</strong>: prueba las <code class="docutils literal notranslate"><span class="pre">2^n</span></code> máscaras de bits posibles.</p></li>
+<li><p><strong>Con poda (branch-and-bound)</strong>: si la suma parcial ya supera <code class="docutils literal notranslate"><span class="pre">T</span></code> (con números no negativos), se corta esa rama sin seguir explorando — es, en esencia, un backtracking con una condición de poda. Esta comparación es el puente hacia la sección de <strong>Backtracking</strong> de esta unidad.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">subset_sum_bruteforce</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">subset_sum_bnb</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">arr_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr_sorted</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">current</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">current</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">:</span>      <span class="c1"># &lt;- poda: ya nos pasamos, no seguimos por esta rama</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">current</span> <span class="o">+</span> <span class="n">arr_sorted</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">current</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Correctitud</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Fuerza bruta:"</span><span class="p">,</span> <span class="n">subset_sum_bruteforce</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Con poda    :"</span><span class="p">,</span> <span class="n">subset_sum_bnb</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fuerza bruta: True
+Con poda    : True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_instance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+    <span class="n">rnd</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">rnd</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="p">,</span> <span class="n">target</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 2^22 ya es notable para la fuerza bruta pura</span>
+<span class="n">t_brute</span><span class="p">,</span> <span class="n">t_bnb</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
+    <span class="n">nums</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">make_instance</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">dt1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">subset_sum_bruteforce</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="n">dt2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">subset_sum_bnb</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="n">t_brute</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dt1</span><span class="p">)</span>
+    <span class="n">t_bnb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dt2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;2</span><span class="si">}</span><span class="s2"> | fuerza bruta=</span><span class="si">{</span><span class="n">dt1</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s | con poda=</span><span class="si">{</span><span class="n">dt2</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
+
+<span class="n">plot_growth</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="n">t_brute</span><span class="p">,</span> <span class="n">t_bnb</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"fuerza bruta (2^n)"</span><span class="p">,</span> <span class="s2">"con poda (branch-and-bound)"</span><span class="p">],</span>
+            <span class="n">x_label</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Subset Sum: fuerza bruta vs. poda"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=10 | fuerza bruta=0.000054s | con poda=0.000006s
+n=12 | fuerza bruta=0.000097s | con poda=0.000004s
+n=14 | fuerza bruta=0.000175s | con poda=0.000008s
+n=16 | fuerza bruta=0.000164s | con poda=0.000002s
+n=18 | fuerza bruta=0.000912s | con poda=0.000004s
+n=20 | fuerza bruta=0.000332s | con poda=0.000003s
+n=22 | fuerza bruta=0.002909s | con poda=0.000007s
+</pre></div>
+</div>
+<img alt="_images/f33eb7b50e74edae6db9a31c8612c36e1b2d1d49eee6aea5d3024a1b12a74062.png" src="_images/f33eb7b50e74edae6db9a31c8612c36e1b2d1d49eee6aea5d3024a1b12a74062.png" />
+</div>
+</div>
+</section>
+<section id="ejemplo-5-el-problema-del-viajante-tsp-por-fuerza-bruta">
+<h2>9. Ejemplo 5 — El problema del viajante (TSP) por fuerza bruta<a class="headerlink" href="#ejemplo-5-el-problema-del-viajante-tsp-por-fuerza-bruta" title="Link to this heading">#</a></h2>
+<p>Para <code class="docutils literal notranslate"><span class="pre">n</span></code> ciudades, fijando una ciudad de inicio, hay <code class="docutils literal notranslate"><span class="pre">(n-1)!</span></code> rutas posibles a explorar. Probamos todas para <code class="docutils literal notranslate"><span class="pre">n</span></code> pequeño y medimos el tiempo — el crecimiento factorial se nota de inmediato.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutations</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">tsp_bruteforce</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">best_cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
+    <span class="n">best_path</span> <span class="o">=</span> <span class="p">()</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>  <span class="c1"># fijamos la ciudad 0 como origen</span>
+    <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">:</span>
+            <span class="n">cost</span> <span class="o">+=</span> <span class="n">dist</span><span class="p">[</span><span class="n">prev</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span>
+            <span class="n">prev</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="n">cost</span> <span class="o">+=</span> <span class="n">dist</span><span class="p">[</span><span class="n">prev</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># cerrar el ciclo</span>
+        <span class="k">if</span> <span class="n">cost</span> <span class="o">&lt;</span> <span class="n">best_cost</span><span class="p">:</span>
+            <span class="n">best_cost</span> <span class="o">=</span> <span class="n">cost</span>
+            <span class="n">best_path</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span> <span class="o">+</span> <span class="n">perm</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
+    <span class="k">return</span> <span class="n">best_cost</span><span class="p">,</span> <span class="n">best_path</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_tsp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">pts</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">pts</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">pts</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">dist</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>  <span class="c1"># 5!=120, 6!=720, 7!=5040 rutas</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">make_tsp</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">tsp_bruteforce</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> | tiempo=</span><span class="si">{</span><span class="n">dt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s | costo=</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | ruta=</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=6 | tiempo=0.0001s | costo=3.0154 | ruta=(0, 4, 2, 5, 3, 1, 0)
+n=7 | tiempo=0.0006s | costo=1.8777 | ruta=(0, 3, 1, 6, 4, 2, 5, 0)
+n=8 | tiempo=0.0048s | costo=2.7345 | ruta=(0, 5, 3, 2, 1, 7, 4, 6, 0)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="complejidad-espacial-trade-offs-y-paralelizacion">
+<h2>10. Complejidad espacial, trade-offs y paralelización<a class="headerlink" href="#complejidad-espacial-trade-offs-y-paralelizacion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Espacio</strong>: la fuerza bruta suele usar poco espacio (se puede generar <em>on-the-fly</em> con iteradores), aunque puede crecer si memorizamos estados.</p></li>
+<li><p><strong>Tiempo vs. espacio</strong>: a veces conviene gastar memoria para evitar repetir trabajo (tabulación, <em>caching</em>) — pero entonces deja de ser fuerza bruta pura.</p></li>
+<li><p><strong>Paralelización</strong>: como cada candidato se evalúa de forma independiente, la fuerza bruta paraleliza bien (CPU/GPU/clúster). Aun así, la explosión combinatoria puede dominar igual.</p></li>
+<li><p><strong>Heurísticas y poda</strong>: podar ramas imposibles o poco prometedoras, <em>branch &amp; bound</em>, búsqueda informada — mejoran lo práctico, pero ya no es fuerza bruta “pura” (así empieza el backtracking).</p></li>
+<li><p><strong>Aleatoriedad</strong>: <em>random restarts</em>, Monte Carlo, Las Vegas — reducen tiempos esperados, sin garantías deterministas de peor caso.</p></li>
+</ul>
+</section>
+<section id="cuando-si-usar-fuerza-bruta">
+<h2>11. ¿Cuándo sí usar fuerza bruta?<a class="headerlink" href="#cuando-si-usar-fuerza-bruta" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>El espacio de búsqueda es pequeño (o está acotado por requisitos de negocio).</p></li>
+<li><p>Necesitas una <strong>línea base</strong> para comparar contra optimizaciones más avanzadas.</p></li>
+<li><p>Requieres soluciones exactas y no hay métodos mejores para tu tamaño de <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p>Tienes recursos de cómputo masivos o ventanas de cálculo “offline”.</p></li>
+<li><p>Forma parte de una solución híbrida (ej. fuerza bruta en la frontera de un algoritmo de divide y vencerás).</p></li>
+</ul>
+<p><strong>Cuándo evitarla:</strong> cuando <code class="docutils literal notranslate"><span class="pre">n</span></code> o el espacio de búsqueda crecen de forma que ningún multiplicador razonable de hardware alcanza (exponencial/factorial).</p>
+</section>
+<section id="retos-y-ejercicios">
+<h2>12. Retos y ejercicios<a class="headerlink" href="#retos-y-ejercicios" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Ataque por diccionario</strong>: calcula el tiempo esperado de probar <code class="docutils literal notranslate"><span class="pre">A^L</span></code> combinaciones dado <code class="docutils literal notranslate"><span class="pre">X</span></code> intentos por segundo.</p></li>
+<li><p><strong>Más poda en Subset Sum</strong>: ordena por valor absoluto y corta ramas cuando la suma parcial ya excede el objetivo (con negativos incluidos).</p></li>
+<li><p><strong>Naive vs. KMP</strong>: implementa Knuth-Morris-Pratt y compáralo con <code class="docutils literal notranslate"><span class="pre">naive_find</span></code> en casos adversos (ver las diapositivas para la idea del algoritmo).</p></li>
+<li><p><strong>TSP con <code class="docutils literal notranslate"><span class="pre">n=9..11</span></code></strong>: mide el tiempo y grafica <code class="docutils literal notranslate"><span class="pre">n</span></code> vs. tiempo. ¿Qué curva emerge?</p></li>
+<li><p><strong>Paralelización</strong>: usa <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> para repartir el espacio de búsqueda de <em>subset-sum</em> entre varios procesos.</p></li>
+<li><p><strong>Meet-in-the-middle</strong>: guarda las sumas de la mitad del conjunto y compáralas contra la fuerza bruta pura — ¿cuánto mejora?</p></li>
+</ol>
+</section>
+<section id="apendice-notas-de-implementacion-en-python">
+<h2>Apéndice — Notas de implementación en Python<a class="headerlink" href="#apendice-notas-de-implementacion-en-python" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">itertools.product</span></code>, <code class="docutils literal notranslate"><span class="pre">combinations</span></code>, <code class="docutils literal notranslate"><span class="pre">permutations</span></code> generan secuencias sin materializarlas (bueno en memoria).</p></li>
+<li><p>Usa <code class="docutils literal notranslate"><span class="pre">time.perf_counter()</span></code> para mediciones finas.</p></li>
+<li><p>Evita imprimir dentro de bucles de medición (afecta los tiempos).</p></li>
+<li><p>Para reproducibilidad, fija semillas de <code class="docutils literal notranslate"><span class="pre">random</span></code>.</p></li>
+</ul>
+</section>
+<section id="referencias-y-lecturas-sugeridas">
+<h2>Referencias y lecturas sugeridas<a class="headerlink" href="#referencias-y-lecturas-sugeridas" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Cormen, Leiserson, Rivest, Stein. <em>Introduction to Algorithms</em> (CLRS) — capítulos de complejidad y problemas NP-completos.</p></li>
+<li><p>Kleinberg, Tardos. <em>Algorithm Design</em> — secciones sobre <em>brute force</em> y técnicas de diseño.</p></li>
+<li><p>Sipser. <em>Introduction to the Theory of Computation</em> — clases P y NP.</p></li>
+<li><p>Skiena. <em>The Algorithm Design Manual</em> — catálogo de problemas y enfoques prácticos.</p></li>
+<li><p>Garey, Johnson. <em>Computers and Intractability: A Guide to the Theory of NP-Completeness</em>.</p></li>
+<li><p>Dasgupta, Papadimitriou, Vazirani. <em>Algorithms</em>.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Unidad2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Unidad 2</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">Objetivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-algoritmo-de-fuerza-bruta">1. ¿Qué es un algoritmo de fuerza bruta?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rasgos-clave">Rasgos clave</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-en-contexto">2. Complejidad computacional en contexto</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-costo">2.1 Modelo de costo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notacion-asintotica">2.2 Notación asintótica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#casos-de-analisis">2.3 Casos de análisis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clases-de-complejidad-vision-de-alto-nivel">2.4 Clases de complejidad (visión de alto nivel)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-crecen-los-tiempos">3. ¿Cómo crecen los tiempos?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patrones-y-familias-de-fuerza-bruta">4. Patrones y familias de fuerza bruta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-busqueda-lineal-vs-binaria">5. Ejemplo 1 — Búsqueda lineal vs. binaria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-busqueda-de-patron-metodo-ingenuo-vs-optimizado">6. Ejemplo 2 — Búsqueda de patrón: método ingenuo vs. optimizado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-explosion-combinatoria-ataque-por-diccionario">7. Ejemplo 3 — Explosión combinatoria: ataque por diccionario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-subset-sum-fuerza-bruta-vs-una-primera-poda">8. Ejemplo 4 — Subset Sum: fuerza bruta vs. una primera poda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-el-problema-del-viajante-tsp-por-fuerza-bruta">9. Ejemplo 5 — El problema del viajante (TSP) por fuerza bruta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-espacial-trade-offs-y-paralelizacion">10. Complejidad espacial, trade-offs y paralelización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-si-usar-fuerza-bruta">11. ¿Cuándo sí usar fuerza bruta?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retos-y-ejercicios">12. Retos y ejercicios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-notas-de-implementacion-en-python">Apéndice — Notas de implementación en Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-y-lecturas-sugeridas">Referencias y lecturas sugeridas</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Santiago Barrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
