@@ -1,0 +1,1361 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Backtracking en Python &#8212; Técnicas de Programación 2026 - 02</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e8cf666a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Backtracking_Notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Taller y Evaluación — Unidad 2" href="ResolucionProblemas2.html" />
+    <link rel="prev" title="Backtracking" href="Backtracking.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="Técnicas de Programación 2026 - 02 - Home"/>
+    <img src="_static/logo.jpeg" class="logo__image only-dark pst-js-only" alt="Técnicas de Programación 2026 - 02 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenida al curso
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad1.html">Unidad 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduccion.html">Introducción a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ListasTuplasDiccionarios.html">Listas, Tuplas, Diccionarios</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="PilasyColas.html">Pilas y Colas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pila.html">Pilas (Stack) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cola.html">Colas (Queue) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FuerzaBruta.html">Fuerza Bruta y Complejidad Computacional</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Recursividad_Notebook.html">Recursividad en Python — Pila, Cola y Cruzada</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="Backtracking.html">Backtracking</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Backtracking en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas2.html">Taller y Evaluación — Unidad 2</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas/blob/main/Backtracking_Notebook.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas/issues/new?title=Issue%20on%20page%20%2FBacktracking_Notebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Backtracking_Notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Backtracking en Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-backtracking-recap">1) ¿Qué es backtracking? (recap)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plantilla-universal-de-backtracking">2) Plantilla universal de backtracking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-resueltos-con-la-plantilla">3) Ejemplos resueltos con la plantilla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cadenas-de-a-y-b-de-longitud-n">Cadenas de <code class="docutils literal notranslate"><span class="pre">A</span></code> y <code class="docutils literal notranslate"><span class="pre">B</span></code> de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#listas-de-numeros-del-1-al-3-de-longitud-n">Listas de números del 1 al 3 de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutaciones-de-una-lista-pequena">Permutaciones de una lista pequeña</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#midiendo-la-poda-nodos-explorados">4) Midiendo la poda: nodos explorados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-subconjuntos-patron-incluir-excluir">5) Generación de subconjuntos (patrón Incluir/Excluir)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poda-con-restricciones-n-reinas">6) Poda con restricciones: N-Reinas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-mochila-0-1-por-backtracking">7) Aplicación: Mochila 0-1 por backtracking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-caminos-en-un-laberinto">8) Aplicación: caminos en un laberinto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos">9) Ejercicios propuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-de-referencia-opcional">10) Soluciones de referencia (opcional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-cuando-usar-backtracking-errores-frecuentes-y-material-de-apoyo">11) Apéndice: cuándo usar backtracking, errores frecuentes y material de apoyo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="backtracking-en-python">
+<h1>Backtracking en Python<a class="headerlink" href="#backtracking-en-python" title="Link to this heading">#</a></h1>
+<p><strong>Curso:</strong> Técnicas de Programación · Unidad 2
+<strong>Tema:</strong> Backtracking</p>
+<blockquote>
+<div><p>Este notebook desarrolla la <strong>plantilla universal de backtracking</strong>, ejemplos resueltos con la misma estructura
+(probar → avanzar → retroceder), una medición concreta de la <strong>poda temprana</strong> (nodos explorados con y sin restricciones),
+aplicaciones clásicas (N-Reinas, mochila 0-1, caminos en un laberinto) y <strong>ejercicios propuestos</strong> para completar.</p>
+<p>📎 <strong>Material de apoyo (teoría completa):</strong> revisa primero la página <a class="reference internal" href="Backtracking.html"><span class="std std-doc">Backtracking</span></a> de esta unidad — tiene
+la comparación con fuerza bruta/recursión/PD, la analogía del laberinto y el PDF de la clase.</p>
+</div></blockquote>
+<section id="contenidos">
+<h2>Contenidos<a class="headerlink" href="#contenidos" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#que-es"><span class="xref myst">¿Qué es backtracking? (recap)</span></a></p></li>
+<li><p><a class="reference internal" href="#plantilla"><span class="xref myst">Plantilla universal de backtracking</span></a></p></li>
+<li><p><a class="reference internal" href="#ejemplos"><span class="xref myst">Ejemplos resueltos con la plantilla</span></a></p>
+<ul class="simple">
+<li><p>Cadenas de A/B de longitud n</p></li>
+<li><p>Listas de 1 a 3 de longitud n</p></li>
+<li><p>Permutaciones de una lista</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#poda"><span class="xref myst">Midiendo la poda: nodos explorados</span></a></p></li>
+<li><p><a class="reference internal" href="#subconjuntos"><span class="xref myst">Generación de subconjuntos (patrón Incluir/Excluir)</span></a></p></li>
+<li><p><a class="reference internal" href="#nreinas"><span class="xref myst">Poda con restricciones: N-Reinas</span></a></p></li>
+<li><p><a class="reference internal" href="#mochila"><span class="xref myst">Aplicación: Mochila 0-1 por backtracking</span></a></p></li>
+<li><p><a class="reference internal" href="#laberinto"><span class="xref myst">Aplicación: caminos en un laberinto</span></a></p></li>
+<li><p><a class="reference internal" href="#ejercicios"><span class="xref myst">Ejercicios propuestos</span></a></p></li>
+<li><p><a class="reference internal" href="#soluciones"><span class="xref myst">Soluciones de referencia (opcional)</span></a></p></li>
+<li><p><a class="reference internal" href="#apendice"><span class="xref myst">Apéndice: cuándo usar backtracking, errores frecuentes y material de apoyo</span></a></p></li>
+</ol>
+<p><a id="que-es"></a></p>
+</section>
+<section id="que-es-backtracking-recap">
+<h2>1) ¿Qué es backtracking? (recap)<a class="headerlink" href="#que-es-backtracking-recap" title="Link to this heading">#</a></h2>
+<p>El <strong>backtracking</strong> construye una solución <strong>incrementalmente</strong>, probando candidatos parciales, y <strong>retrocede</strong> tan pronto
+como detecta que un camino no puede conducir a una solución válida. Esa <strong>poda temprana</strong> es lo que lo diferencia de la
+fuerza bruta pura (que genera todo y valida al final).</p>
+<p>La estructura es siempre la misma, en tres fases:</p>
+<ol class="arabic simple">
+<li><p><strong>Probar</strong>: elegir una opción y verificar si es válida.</p></li>
+<li><p><strong>Avanzar</strong>: si es válida, agregarla a la solución parcial y recurrir.</p></li>
+<li><p><strong>Retroceder</strong>: al volver, deshacer la opción y probar la siguiente.</p></li>
+</ol>
+<blockquote>
+<div><p>La teoría completa (espacio de estados, árbol de decisiones, comparación con otros paradigmas) está en la página
+<a class="reference internal" href="Backtracking.html"><span class="std std-doc">Backtracking</span></a> de esta unidad.</p>
+</div></blockquote>
+<p><a id="plantilla"></a></p>
+</section>
+<section id="plantilla-universal-de-backtracking">
+<h2>2) Plantilla universal de backtracking<a class="headerlink" href="#plantilla-universal-de-backtracking" title="Link to this heading">#</a></h2>
+<p>Los cuatro componentes que cambian según el problema son la <strong>condición de éxito</strong>, la <strong>validez</strong> de una opción, y cómo se
+<strong>agrega/deshace</strong> una opción de la solución parcial. La arquitectura de tres fases permanece constante.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">backtracking_template</span><span class="p">(</span><span class="n">opciones</span><span class="p">,</span> <span class="n">profundidad</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Plantilla universal de backtracking: genera todas las secuencias de 'profundidad'</span>
+<span class="sd">    elementos tomados (con repeticion) de 'opciones'."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># 1. Condicion de exito: la solucion alcanzo la profundidad deseada</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span> <span class="o">==</span> <span class="n">profundidad</span><span class="p">:</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solucion</span><span class="p">[:])</span>   <span class="c1"># copiamos, no referenciamos</span>
+            <span class="k">return</span>
+
+        <span class="c1"># 2. Recorrer todas las opciones posibles</span>
+        <span class="k">for</span> <span class="n">opcion</span> <span class="ow">in</span> <span class="n">opciones</span><span class="p">:</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opcion</span><span class="p">)</span>          <span class="c1"># PROBAR + AVANZAR (aqui no hay restriccion que validar)</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>               <span class="c1"># recursion</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>                    <span class="c1"># RETROCEDER (deshacer)</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+<span class="c1"># Ejemplo rapido de uso de la plantilla</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">backtracking_template</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[['A', 'A'], ['A', 'B'], ['B', 'A'], ['B', 'B']]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="ejemplos"></a></p>
+</section>
+<section id="ejemplos-resueltos-con-la-plantilla">
+<h2>3) Ejemplos resueltos con la plantilla<a class="headerlink" href="#ejemplos-resueltos-con-la-plantilla" title="Link to this heading">#</a></h2>
+<p>Tres variaciones directas de la plantilla: solo cambian las <strong>opciones</strong> y cómo se <strong>guarda</strong> la solución.</p>
+<section id="cadenas-de-a-y-b-de-longitud-n">
+<h3>Cadenas de <code class="docutils literal notranslate"><span class="pre">A</span></code> y <code class="docutils literal notranslate"><span class="pre">B</span></code> de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code><a class="headerlink" href="#cadenas-de-a-y-b-de-longitud-n" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cadenas_AB</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Genera todas las cadenas posibles de tamano n usando las letras A y B."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>                    <span class="c1"># caso base</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">solucion</span><span class="p">))</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">letra</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">]:</span>                   <span class="c1"># opciones</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">letra</span><span class="p">)</span>                  <span class="c1"># probar + avanzar</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>                           <span class="c1"># retroceder</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cadenas_AB</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['AAA', 'AAB', 'ABA', 'ABB', 'BAA', 'BAB', 'BBA', 'BBB']
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="listas-de-numeros-del-1-al-3-de-longitud-n">
+<h3>Listas de números del 1 al 3 de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code><a class="headerlink" href="#listas-de-numeros-del-1-al-3-de-longitud-n" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">listas_1_a_3</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Genera todas las listas de longitud n usando los numeros 1, 2 y 3."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solucion</span><span class="p">[:])</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">listas_1_a_3</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 1, 1], [1, 1, 2], [1, 1, 3], [1, 2, 1], [1, 2, 2], [1, 2, 3], [1, 3, 1], [1, 3, 2], [1, 3, 3], [2, 1, 1], [2, 1, 2], [2, 1, 3], [2, 2, 1], [2, 2, 2], [2, 2, 3], [2, 3, 1], [2, 3, 2], [2, 3, 3], [3, 1, 1], [3, 1, 2], [3, 1, 3], [3, 2, 1], [3, 2, 2], [3, 2, 3], [3, 3, 1], [3, 3, 2], [3, 3, 3]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="permutaciones-de-una-lista-pequena">
+<h3>Permutaciones de una lista pequeña<a class="headerlink" href="#permutaciones-de-una-lista-pequena" title="Link to this heading">#</a></h3>
+<p><strong>Problema:</strong> dada una lista sin elementos repetidos, generar todas sus permutaciones. La opción “no está usado todavía”
+es la condición de validez.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">permutaciones</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Genera todas las permutaciones de nums. Complejidad: O(n! * n)."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>             <span class="c1"># caso base: permutacion completa</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solucion</span><span class="p">[:])</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">solucion</span><span class="p">:</span>                      <span class="c1"># PROBAR: valido si no se ha usado (O(n))</span>
+                <span class="k">continue</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>                       <span class="c1"># AVANZAR</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>                               <span class="c1"># RETROCEDER</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">permutaciones</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">permutaciones</span><span class="p">([</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+[['A', 'B', 'C'], ['A', 'C', 'B'], ['B', 'A', 'C'], ['B', 'C', 'A'], ['C', 'A', 'B'], ['C', 'B', 'A']]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Optimización:</strong> <code class="docutils literal notranslate"><span class="pre">num</span> <span class="pre">in</span> <span class="pre">solucion</span></code> es <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> por cada elemento probado. Con un <code class="docutils literal notranslate"><span class="pre">set</span></code> auxiliar la validación baja a
+<code class="docutils literal notranslate"><span class="pre">O(1)</span></code>, y el total pasa de <code class="docutils literal notranslate"><span class="pre">O(n²</span> <span class="pre">·</span> <span class="pre">n!)</span></code> a <code class="docutils literal notranslate"><span class="pre">O(n</span> <span class="pre">·</span> <span class="pre">n!)</span></code> — notable para <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">≥</span> <span class="pre">8</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">permutaciones_optimizada</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Version optimizada: un set 'usados' valida en O(1) en vez de O(n)."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">usados</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solucion</span><span class="p">[:])</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">usados</span><span class="p">:</span>
+                <span class="n">usados</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+                <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+                <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+                <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">usados</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+<span class="k">assert</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">permutaciones_optimizada</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span> <span class="o">==</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">permutaciones</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: permutaciones_optimizada coincide con permutaciones"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: permutaciones_optimizada coincide con permutaciones
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="poda"></a></p>
+</section>
+</section>
+<section id="midiendo-la-poda-nodos-explorados">
+<h2>4) Midiendo la poda: nodos explorados<a class="headerlink" href="#midiendo-la-poda-nodos-explorados" title="Link to this heading">#</a></h2>
+<p>Generamos todas las cadenas binarias de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code> (sin restricciones) y contamos cuántos <strong>nodos</strong> visita el árbol de
+llamadas. Sin restricciones que podar, backtracking explora exactamente lo mismo que la fuerza bruta: <code class="docutils literal notranslate"><span class="pre">2^(n+1)</span> <span class="pre">-</span> <span class="pre">1</span></code> nodos
+para un árbol binario de altura <code class="docutils literal notranslate"><span class="pre">n</span></code>. La poda real la vemos en la sección de N-Reinas, donde sí hay restricciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">combinaciones_binarias</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Genera todas las cadenas binarias de longitud n. Tambien cuenta nodos visitados."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nodos_visitados</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">nodos_visitados</span>
+        <span class="n">nodos_visitados</span> <span class="o">+=</span> <span class="mi">1</span>                        <span class="c1"># contamos este nodo (llamada)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>                        <span class="c1"># caso base</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">solucion</span><span class="p">)))</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>                             <span class="c1"># opciones</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bit</span><span class="p">)</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span><span class="p">,</span> <span class="n">nodos_visitados</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">combos</span><span class="p">,</span> <span class="n">nodos</span> <span class="o">=</span> <span class="n">combinaciones_binarias</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">esperado</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">nodos</span> <span class="o">==</span> <span class="n">esperado</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">combos</span><span class="p">)</span><span class="si">}</span><span class="s2"> combinaciones, </span><span class="si">{</span><span class="n">nodos</span><span class="si">}</span><span class="s2"> nodos visitados (formula 2^(n+1)-1 = </span><span class="si">{</span><span class="n">esperado</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=3: 8 combinaciones, 15 nodos visitados (formula 2^(n+1)-1 = 15)
+n=5: 32 combinaciones, 63 nodos visitados (formula 2^(n+1)-1 = 63)
+n=10: 1024 combinaciones, 2047 nodos visitados (formula 2^(n+1)-1 = 2047)
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="subconjuntos"></a></p>
+</section>
+<section id="generacion-de-subconjuntos-patron-incluir-excluir">
+<h2>5) Generación de subconjuntos (patrón Incluir/Excluir)<a class="headerlink" href="#generacion-de-subconjuntos-patron-incluir-excluir" title="Link to this heading">#</a></h2>
+<p><strong>Problema:</strong> dado un conjunto de elementos, generar todos sus subconjuntos posibles (el conjunto potencia). Para
+<code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">3}</span></code> hay <code class="docutils literal notranslate"><span class="pre">2^3</span> <span class="pre">=</span> <span class="pre">8</span></code> subconjuntos. En cada posición decidimos <strong>incluir</strong> o <strong>excluir</strong> el elemento — cada solución
+parcial (incluso incompleta) ya es un subconjunto válido, así que se registra en <strong>cada</strong> llamada, no solo en las hojas.</p>
+<p><strong>Complejidad:</strong> temporal <code class="docutils literal notranslate"><span class="pre">O(n</span> <span class="pre">·</span> <span class="pre">2^n)</span></code> (2ⁿ subconjuntos, copiar cada uno cuesta <code class="docutils literal notranslate"><span class="pre">O(n)</span></code>), espacial <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> (profundidad de
+la recursión).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">subconjuntos</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Genera todos los subconjuntos de nums (patron incluir/excluir por posicion)."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">inicio</span><span class="p">,</span> <span class="n">subconjunto</span><span class="p">):</span>
+        <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subconjunto</span><span class="p">[:])</span>              <span class="c1"># cada estado parcial ya es valido</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">inicio</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="n">subconjunto</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>                 <span class="c1"># PROBAR + AVANZAR: incluir nums[i]</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">subconjunto</span><span class="p">)</span>
+            <span class="n">subconjunto</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>                             <span class="c1"># RETROCEDER: excluir nums[i]</span>
+
+    <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">subconjuntos</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="nreinas"></a></p>
+</section>
+<section id="poda-con-restricciones-n-reinas">
+<h2>6) Poda con restricciones: N-Reinas<a class="headerlink" href="#poda-con-restricciones-n-reinas" title="Link to this heading">#</a></h2>
+<p><strong>Problema:</strong> colocar <code class="docutils literal notranslate"><span class="pre">N</span></code> reinas en un tablero <code class="docutils literal notranslate"><span class="pre">N×N</span></code> sin que se ataquen entre sí (misma fila, columna o diagonal). Aquí sí
+hay una restricción real que evaluar en cada paso, y por lo tanto poda real: si una columna ya está ocupada o cae en una
+diagonal ocupada, <strong>ni siquiera se avanza con ella</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">n_reinas</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">contar_nodos</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Devuelve todas las soluciones de colocar n reinas sin que se ataquen.</span>
+<span class="sd">    Si contar_nodos=True, tambien devuelve cuantos nodos (llamadas) se exploraron."""</span>
+    <span class="n">soluciones</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">columnas</span><span class="p">,</span> <span class="n">diag1</span><span class="p">,</span> <span class="n">diag2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="nb">set</span><span class="p">(),</span> <span class="nb">set</span><span class="p">()</span>   <span class="c1"># diag1: fila-col, diag2: fila+col</span>
+    <span class="n">nodos</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">nodos</span>
+        <span class="n">nodos</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fila</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fila</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>                                    <span class="c1"># caso base: una reina por fila</span>
+            <span class="n">soluciones</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solucion</span><span class="p">[:])</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columnas</span> <span class="ow">or</span> <span class="p">(</span><span class="n">fila</span> <span class="o">-</span> <span class="n">col</span><span class="p">)</span> <span class="ow">in</span> <span class="n">diag1</span> <span class="ow">or</span> <span class="p">(</span><span class="n">fila</span> <span class="o">+</span> <span class="n">col</span><span class="p">)</span> <span class="ow">in</span> <span class="n">diag2</span><span class="p">:</span>
+                <span class="k">continue</span>                                    <span class="c1"># PROBAR: no es valida, se poda (ni se avanza)</span>
+            <span class="n">columnas</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">col</span><span class="p">);</span> <span class="n">diag1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fila</span> <span class="o">-</span> <span class="n">col</span><span class="p">);</span> <span class="n">diag2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fila</span> <span class="o">+</span> <span class="n">col</span><span class="p">)</span>   <span class="c1"># AVANZAR</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>                                                      <span class="c1"># RETROCEDER</span>
+            <span class="n">columnas</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">col</span><span class="p">);</span> <span class="n">diag1</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fila</span> <span class="o">-</span> <span class="n">col</span><span class="p">);</span> <span class="n">diag2</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fila</span> <span class="o">+</span> <span class="n">col</span><span class="p">)</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">soluciones</span><span class="p">,</span> <span class="n">nodos</span><span class="p">)</span> <span class="k">if</span> <span class="n">contar_nodos</span> <span class="k">else</span> <span class="n">soluciones</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">imprimir_tablero</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">" Q "</span> <span class="k">if</span> <span class="n">solucion</span><span class="p">[</span><span class="n">fila</span><span class="p">]</span> <span class="o">==</span> <span class="n">col</span> <span class="k">else</span> <span class="s2">" . "</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+
+<span class="n">soluciones</span><span class="p">,</span> <span class="n">nodos</span> <span class="o">=</span> <span class="n">n_reinas</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">contar_nodos</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"N-Reinas(4): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">soluciones</span><span class="p">)</span><span class="si">}</span><span class="s2"> soluciones, </span><span class="si">{</span><span class="n">nodos</span><span class="si">}</span><span class="s2"> nodos explorados (con poda)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Fuerza bruta sin poda habria probado 4^4 = </span><span class="si">{</span><span class="mi">4</span><span class="o">**</span><span class="mi">4</span><span class="si">}</span><span class="s2"> tableros completos antes de validar cada uno"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">soluciones</span><span class="p">:</span>
+    <span class="n">imprimir_tablero</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N-Reinas(4): 2 soluciones, 17 nodos explorados (con poda)
+Fuerza bruta sin poda habria probado 4^4 = 256 tableros completos antes de validar cada uno
+ .  Q  .  . 
+ .  .  .  Q 
+ Q  .  .  . 
+ .  .  Q  . 
+
+ .  .  Q  . 
+ Q  .  .  . 
+ .  .  .  Q 
+ .  Q  .  . 
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="mochila"></a></p>
+</section>
+<section id="aplicacion-mochila-0-1-por-backtracking">
+<h2>7) Aplicación: Mochila 0-1 por backtracking<a class="headerlink" href="#aplicacion-mochila-0-1-por-backtracking" title="Link to this heading">#</a></h2>
+<p><strong>Problema:</strong> dado un conjunto de objetos con peso y valor, y una capacidad máxima, decidir para cada objeto si se toma
+(1) o no (0), maximizando el valor sin exceder la capacidad. Es el patrón incluir/excluir aplicado a optimización: se
+exploran las <code class="docutils literal notranslate"><span class="pre">2^n</span></code> combinaciones y se descarta cualquiera que exceda la capacidad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mochila_01</span><span class="p">(</span><span class="n">pesos</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">capacidad</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Explora todas las combinaciones (tomar/no tomar) y retorna la de mayor valor</span>
+<span class="sd">    que no exceda la capacidad. Fuerza bruta con poda simple por backtracking."""</span>
+    <span class="n">mejor_valor</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mejor_solucion</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">solucion</span><span class="p">,</span> <span class="n">peso_acum</span><span class="p">,</span> <span class="n">valor_acum</span><span class="p">):</span>
+        <span class="k">nonlocal</span> <span class="n">mejor_valor</span><span class="p">,</span> <span class="n">mejor_solucion</span>
+
+        <span class="k">if</span> <span class="n">peso_acum</span> <span class="o">&gt;</span> <span class="n">capacidad</span><span class="p">:</span>                 <span class="c1"># PODA: esta rama ya no puede ser valida</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pesos</span><span class="p">):</span>                         <span class="c1"># caso base: decidimos sobre todos los objetos</span>
+            <span class="k">if</span> <span class="n">valor_acum</span> <span class="o">&gt;</span> <span class="n">mejor_valor</span><span class="p">:</span>
+                <span class="n">mejor_valor</span> <span class="o">=</span> <span class="n">valor_acum</span>
+                <span class="n">mejor_solucion</span> <span class="o">=</span> <span class="n">solucion</span><span class="p">[:]</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">tomar</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>                          <span class="c1"># opciones: no tomar u tomar el objeto i</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tomar</span><span class="p">)</span>
+            <span class="n">nuevo_peso</span> <span class="o">=</span> <span class="n">peso_acum</span> <span class="o">+</span> <span class="p">(</span><span class="n">pesos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">tomar</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">nuevo_valor</span> <span class="o">=</span> <span class="n">valor_acum</span> <span class="o">+</span> <span class="p">(</span><span class="n">valores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">if</span> <span class="n">tomar</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">solucion</span><span class="p">,</span> <span class="n">nuevo_peso</span><span class="p">,</span> <span class="n">nuevo_valor</span><span class="p">)</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="n">backtrack</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mejor_valor</span><span class="p">,</span> <span class="n">mejor_solucion</span>
+
+
+<span class="n">pesos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">valores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">capacidad</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">mejor_valor</span><span class="p">,</span> <span class="n">mejor_solucion</span> <span class="o">=</span> <span class="n">mochila_01</span><span class="p">(</span><span class="n">pesos</span><span class="p">,</span> <span class="n">valores</span><span class="p">,</span> <span class="n">capacidad</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Mejor valor:"</span><span class="p">,</span> <span class="n">mejor_valor</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Solucion (0=no tomar, 1=tomar):"</span><span class="p">,</span> <span class="n">mejor_solucion</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mejor valor: 7
+Solucion (0=no tomar, 1=tomar): [1, 1, 0, 0]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="laberinto"></a></p>
+</section>
+<section id="aplicacion-caminos-en-un-laberinto">
+<h2>8) Aplicación: caminos en un laberinto<a class="headerlink" href="#aplicacion-caminos-en-un-laberinto" title="Link to this heading">#</a></h2>
+<p><strong>Problema:</strong> dado un laberinto (matriz con <code class="docutils literal notranslate"><span class="pre">0</span></code> = libre y <code class="docutils literal notranslate"><span class="pre">1</span></code> = obstáculo), encontrar todos los caminos desde una celda
+inicial hasta una final, moviéndose en las 4 direcciones sin repetir celda. La matriz <code class="docutils literal notranslate"><span class="pre">visitado</span></code> es el estado que se
+<strong>marca al avanzar y se desmarca al retroceder</strong> — si no se desmarcara, el backtracking no podría explorar otras rutas
+que pasen por la misma celda.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">caminos_en_laberinto</span><span class="p">(</span><span class="n">laberinto</span><span class="p">,</span> <span class="n">inicio</span><span class="p">,</span> <span class="n">fin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Encuentra todos los caminos entre inicio y fin en un laberinto, moviendose en las 4 direcciones."""</span>
+    <span class="n">filas</span><span class="p">,</span> <span class="n">columnas</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">laberinto</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">laberinto</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">visitado</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">columnas</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">filas</span><span class="p">)]</span>
+    <span class="n">movimientos</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>  <span class="c1"># arriba, abajo, izquierda, derecha</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">es_valida</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">f</span> <span class="o">&lt;</span> <span class="n">filas</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="n">columnas</span> <span class="ow">and</span> <span class="n">laberinto</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visitado</span><span class="p">[</span><span class="n">f</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">camino</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="n">fin</span><span class="p">:</span>                                     <span class="c1"># caso base: llegamos a la meta</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">camino</span><span class="p">[:])</span>
+            <span class="k">return</span>
+        <span class="n">f</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">pos</span>
+        <span class="k">for</span> <span class="n">df</span><span class="p">,</span> <span class="n">dc</span> <span class="ow">in</span> <span class="n">movimientos</span><span class="p">:</span>
+            <span class="n">nf</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">f</span> <span class="o">+</span> <span class="n">df</span><span class="p">,</span> <span class="n">c</span> <span class="o">+</span> <span class="n">dc</span>
+            <span class="k">if</span> <span class="n">es_valida</span><span class="p">(</span><span class="n">nf</span><span class="p">,</span> <span class="n">nc</span><span class="p">):</span>
+                <span class="n">visitado</span><span class="p">[</span><span class="n">nf</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>                        <span class="c1"># AVANZAR: marcar visitada</span>
+                <span class="n">camino</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">nc</span><span class="p">))</span>
+                <span class="n">backtrack</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">nc</span><span class="p">),</span> <span class="n">camino</span><span class="p">)</span>
+                <span class="n">camino</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>                                       <span class="c1"># RETROCEDER: desmarcar</span>
+                <span class="n">visitado</span><span class="p">[</span><span class="n">nf</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">fi</span><span class="p">,</span> <span class="n">ci</span> <span class="o">=</span> <span class="n">inicio</span>
+    <span class="n">ff</span><span class="p">,</span> <span class="n">cf</span> <span class="o">=</span> <span class="n">fin</span>
+    <span class="k">if</span> <span class="n">laberinto</span><span class="p">[</span><span class="n">fi</span><span class="p">][</span><span class="n">ci</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">laberinto</span><span class="p">[</span><span class="n">ff</span><span class="p">][</span><span class="n">cf</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>                                               <span class="c1"># inicio o fin son obstaculos</span>
+
+    <span class="n">visitado</span><span class="p">[</span><span class="n">fi</span><span class="p">][</span><span class="n">ci</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">backtrack</span><span class="p">(</span><span class="n">inicio</span><span class="p">,</span> <span class="p">[</span><span class="n">inicio</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="n">laberinto</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="p">]</span>
+
+<span class="n">rutas</span> <span class="o">=</span> <span class="n">caminos_en_laberinto</span><span class="p">(</span><span class="n">laberinto</span><span class="p">,</span> <span class="n">inicio</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">fin</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Numero de rutas encontradas:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rutas</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ruta</span> <span class="ow">in</span> <span class="n">rutas</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ruta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Numero de rutas encontradas: 1
+[(0, 0), (0, 1), (1, 1), (2, 1), (2, 2), (2, 3)]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="ejercicios"></a></p>
+</section>
+<section id="ejercicios-propuestos">
+<h2>9) Ejercicios propuestos<a class="headerlink" href="#ejercicios-propuestos" title="Link to this heading">#</a></h2>
+<p>En todos, mantén la misma estructura de backtracking:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">condicion_de_parada</span><span class="p">:</span>
+        <span class="n">guardar_solucion</span>
+        <span class="k">return</span>
+    <span class="k">for</span> <span class="n">opcion</span> <span class="ow">in</span> <span class="n">opciones</span><span class="p">:</span>
+        <span class="n">hacer</span>
+        <span class="n">backtrack</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+        <span class="n">deshacer</span>
+</pre></div>
+</div>
+<p>Solo cambian las <strong>opciones</strong>, la <strong>condición de parada</strong> y la forma de <strong>guardar la solución</strong>.</p>
+<ol class="arabic simple">
+<li><p>Cadenas de <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code> y <code class="docutils literal notranslate"><span class="pre">C</span></code> de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p>Listas de números del 1 al 3 de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p>Simular lanzamientos de un dado (1-6) <code class="docutils literal notranslate"><span class="pre">n</span></code> veces.</p></li>
+<li><p>Cadenas de dígitos (0-9) de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
+<li><p>Cadenas de <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code> donde no haya dos letras iguales seguidas.</p></li>
+<li><p>Secuencias no decrecientes de números del 1 al 5.</p></li>
+<li><p>Todas las permutaciones de <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> (ya viste este patrón arriba — inténtalo sin mirar).</p></li>
+<li><p>Todas las permutaciones de <code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">'C']</span></code>.</p></li>
+<li><p>Cadenas binarias de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code> con exactamente <code class="docutils literal notranslate"><span class="pre">k</span></code> unos.</p></li>
+<li><p>Combinaciones de Tomar/No tomar (<code class="docutils literal notranslate"><span class="pre">'T'</span></code>/<code class="docutils literal notranslate"><span class="pre">'N'</span></code>) para una lista de <code class="docutils literal notranslate"><span class="pre">n</span></code> elementos.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Completa cada funcion usando la misma estructura de backtracking.</span>
+<span class="c1"># Los parametros y el TODO son una guia; ajusta la firma si tu solucion lo necesita.</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_1</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO: condicion de parada -&gt; if len(solucion) == n: resultado.append(...); return</span>
+        <span class="c1"># TODO: opciones -&gt; for letra in ["A", "B", "C"]: ...</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_3</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO: opciones -&gt; for cara in range(1, 7): ...</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_4</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO: opciones -&gt; for digito in range(10): ...</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_5</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO: valido si solucion esta vacia o el ultimo elemento != la opcion actual</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_6</span><span class="p">(</span><span class="n">maximo</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO: opciones deben ser &gt;= al ultimo elemento agregado (no decrecientes)</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_7</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO: reutiliza el patron de "permutaciones" visto arriba</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_8</span><span class="p">(</span><span class="n">letras</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_9</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">,</span> <span class="n">unos_usados</span><span class="p">):</span>
+        <span class="c1"># TODO: condicion de parada -&gt; len(solucion) == n and unos_usados == k</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_10</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="c1"># TODO: opciones -&gt; for decision in ["T", "N"]: ...</span>
+        <span class="k">pass</span>
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Plantillas listas para completar: ejercicio_1 .. ejercicio_10"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Plantillas listas para completar: ejercicio_1 .. ejercicio_10
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="soluciones"></a></p>
+</section>
+<section id="soluciones-de-referencia-opcional">
+<h2>10) Soluciones de referencia (opcional)<a class="headerlink" href="#soluciones-de-referencia-opcional" title="Link to this heading">#</a></h2>
+<p>Solo dos, para que compruebes tu enfoque sin arruinar el resto de los ejercicios — inténtalos primero por tu cuenta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solucion_ejercicio_1</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Ejercicio 1: cadenas de A, B y C de longitud n."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">solucion</span><span class="p">))</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">letra</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">]:</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">letra</span><span class="p">)</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">solucion_ejercicio_2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Ejercicio 2: listas de numeros del 1 al 3 de longitud n."""</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">resultado</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solucion</span><span class="p">[:])</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="n">backtrack</span><span class="p">([])</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">solucion_ejercicio_1</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solucion_ejercicio_2</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['AAA', 'AAB', 'AAC', 'ABA', 'ABB', 'ABC', 'ACA', 'ACB', 'ACC', 'BAA', 'BAB', 'BAC', 'BBA', 'BBB', 'BBC', 'BCA', 'BCB', 'BCC', 'CAA', 'CAB', 'CAC', 'CBA', 'CBB', 'CBC', 'CCA', 'CCB', 'CCC']
+[[1, 1, 1], [1, 1, 2], [1, 1, 3], [1, 2, 1], [1, 2, 2], [1, 2, 3], [1, 3, 1], [1, 3, 2], [1, 3, 3], [2, 1, 1], [2, 1, 2], [2, 1, 3], [2, 2, 1], [2, 2, 2], [2, 2, 3], [2, 3, 1], [2, 3, 2], [2, 3, 3], [3, 1, 1], [3, 1, 2], [3, 1, 3], [3, 2, 1], [3, 2, 2], [3, 2, 3], [3, 3, 1], [3, 3, 2], [3, 3, 3]]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="apendice"></a></p>
+</section>
+<section id="apendice-cuando-usar-backtracking-errores-frecuentes-y-material-de-apoyo">
+<h2>11) Apéndice: cuándo usar backtracking, errores frecuentes y material de apoyo<a class="headerlink" href="#apendice-cuando-usar-backtracking-errores-frecuentes-y-material-de-apoyo" title="Link to this heading">#</a></h2>
+<p><strong>¿Cuándo usarlo?</strong></p>
+<ul class="simple">
+<li><p>Necesitas <strong>todas</strong> las soluciones posibles, o</p></li>
+<li><p>Las restricciones pueden evaluarse <strong>incrementalmente</strong> (poda temprana real), o</p></li>
+<li><p>El espacio es exponencial pero <strong>podable</strong>.</p></li>
+</ul>
+<p><strong>¿Cuándo evitarlo?</strong></p>
+<ul class="simple">
+<li><p>Solo necesitas una solución y hay heurísticas o un algoritmo <em>greedy</em> que funciona.</p></li>
+<li><p>Hay mucho solapamiento de subproblemas — usa programación dinámica en su lugar.</p></li>
+<li><p>No puedes podar efectivamente el espacio de búsqueda (entonces es solo fuerza bruta con pasos extra).</p></li>
+</ul>
+<p><strong>Errores frecuentes</strong></p>
+<ul class="simple">
+<li><p>Olvidar el <code class="docutils literal notranslate"><span class="pre">pop()</span></code> (o el <code class="docutils literal notranslate"><span class="pre">remove</span></code>/<code class="docutils literal notranslate"><span class="pre">deshacer</span></code> correspondiente) — sin retroceder, el estado queda contaminado para las
+siguientes ramas.</p></li>
+<li><p>Guardar una <strong>referencia</strong> a la solución en vez de una <strong>copia</strong> (<code class="docutils literal notranslate"><span class="pre">resultado.append(solucion)</span></code> en vez de
+<code class="docutils literal notranslate"><span class="pre">resultado.append(solucion[:])</span></code>) — todas las soluciones guardadas terminan apuntando a la misma lista, vacía al final.</p></li>
+<li><p>Validar demasiado tarde: revisar la restricción <strong>antes</strong> de avanzar (poda), no después de construir la solución completa.</p></li>
+<li><p>No definir una condición de parada alcanzable, o no progresar hacia ella.</p></li>
+</ul>
+<p><strong>Material de apoyo</strong></p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/6d9f0873669b41756470c42e40acbdd3/FundamentosdelBacktracking.pdf"><span class="xref download myst">Fundamentos del Backtracking (PDF)</span></a></p></li>
+</ul>
+<blockquote>
+<div><p>El backtracking es la culminación natural de la recursión: la misma estructura de caso base + caso recursivo, ahora con
+una decisión explícita en cada paso y la disciplina de deshacer lo que no funcionó.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Backtracking.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Backtracking</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ResolucionProblemas2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Taller y Evaluación — Unidad 2</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-backtracking-recap">1) ¿Qué es backtracking? (recap)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plantilla-universal-de-backtracking">2) Plantilla universal de backtracking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-resueltos-con-la-plantilla">3) Ejemplos resueltos con la plantilla</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cadenas-de-a-y-b-de-longitud-n">Cadenas de <code class="docutils literal notranslate"><span class="pre">A</span></code> y <code class="docutils literal notranslate"><span class="pre">B</span></code> de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#listas-de-numeros-del-1-al-3-de-longitud-n">Listas de números del 1 al 3 de longitud <code class="docutils literal notranslate"><span class="pre">n</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutaciones-de-una-lista-pequena">Permutaciones de una lista pequeña</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#midiendo-la-poda-nodos-explorados">4) Midiendo la poda: nodos explorados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-subconjuntos-patron-incluir-excluir">5) Generación de subconjuntos (patrón Incluir/Excluir)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poda-con-restricciones-n-reinas">6) Poda con restricciones: N-Reinas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-mochila-0-1-por-backtracking">7) Aplicación: Mochila 0-1 por backtracking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-caminos-en-un-laberinto">8) Aplicación: caminos en un laberinto</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos">9) Ejercicios propuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-de-referencia-opcional">10) Soluciones de referencia (opcional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-cuando-usar-backtracking-errores-frecuentes-y-material-de-apoyo">11) Apéndice: cuándo usar backtracking, errores frecuentes y material de apoyo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Santiago Barrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1365 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Recursividad en Python — Pila, Cola y Cruzada &#8212; Técnicas de Programación 2026 - 02</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e8cf666a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Recursividad_Notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Backtracking" href="Backtracking.html" />
+    <link rel="prev" title="Recursividad" href="Recursividad.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.jpeg" class="logo__image only-light" alt="Técnicas de Programación 2026 - 02 - Home"/>
+    <img src="_static/logo.jpeg" class="logo__image only-dark pst-js-only" alt="Técnicas de Programación 2026 - 02 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenida al curso
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad1.html">Unidad 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduccion.html">Introducción a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ListasTuplasDiccionarios.html">Listas, Tuplas, Diccionarios</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="PilasyColas.html">Pilas y Colas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pila.html">Pilas (Stack) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cola.html">Colas (Queue) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FuerzaBruta.html">Fuerza Bruta y Complejidad Computacional</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Recursividad en Python — Pila, Cola y Cruzada</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Backtracking.html">Backtracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Backtracking_Notebook.html">Backtracking en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas2.html">Taller y Evaluación — Unidad 2</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas/blob/main/Recursividad_Notebook.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/SantiagoBT1302/TecnicasDeProgramacion_2026-II_UCaldas/issues/new?title=Issue%20on%20page%20%2FRecursividad_Notebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Recursividad_Notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Recursividad en Python — Pila, Cola y Cruzada</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-recursividad">1) ¿Qué es la recursividad?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursividad-vs-iteracion">2) Recursividad vs Iteración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-una-funcion-recursiva-plantilla">3) Estructura de una función recursiva (plantilla)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-tres-tipos-de-recursion-pila-cola-y-cruzada">4) Los tres tipos de recursión: pila, cola y cruzada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-basicos-recursion-de-pila-patron-indice">5) Ejemplos básicos (recursión de pila, patrón Índice)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patron-indice-suma-lista">Patrón ÍNDICE: <code class="docutils literal notranslate"><span class="pre">suma_lista</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-desempeno-en-fibonacci">Comparación de desempeño en Fibonacci</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-de-cola-en-profundidad-transformar-pila-cola">6) Recursión de cola en profundidad: transformar pila → cola</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-en-5-pasos-de-pila-a-cola">Transformación en 5 pasos (de pila a cola)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-cola-a-iterativo-el-paso-final">De cola a iterativo (el paso final)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-de-recursion-en-python">7) Límites de recursión en Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-cruzada-auto-invocacion-indirecta">8) Recursión cruzada (auto-invocación indirecta)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-y-venceras-potencia-rapida-exponentiacion-binaria">9) Divide y vencerás: potencia rápida (exponentiación binaria)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patron-divide-y-venceras">Patrón DIVIDE Y VENCERÁS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recorridos-de-arboles-binarios-pre-in-post-orden">10) Recorridos de árboles binarios (pre/in/post-orden)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programacion-dinamica-top-down-memoizacion-vs-bottom-up">11) Programación dinámica: Top-Down (memoización) vs Bottom-Up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-visualiza-el-arbol-de-llamadas-con-un-decorador">12) Bonus: visualiza el árbol de llamadas con un decorador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos-con-plantillas">13) Ejercicios propuestos (con plantillas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-invertir-una-lista-recursivamente">A) Invertir una lista recursivamente</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-profundidad-maxima-de-un-arbol-binario">B) Profundidad máxima de un árbol binario</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-convierte-suma-lista-pila-a-una-version-de-cola-con-acumulador">C) Convierte <code class="docutils literal notranslate"><span class="pre">suma_lista_pila</span></code> a una versión de cola con acumulador</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-recursion-cruzada-es-multiplo-de-3-resto-de-3">D) Recursión cruzada: <code class="docutils literal notranslate"><span class="pre">es_multiplo_de_3</span></code> / <code class="docutils literal notranslate"><span class="pre">resto_de_3</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-divide-y-venceras-potencia-dyc-con-exponente-negativo">E) Divide y vencerás: <code class="docutils literal notranslate"><span class="pre">potencia_dyc</span></code> con exponente negativo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-consejos-errores-frecuentes-y-material-de-apoyo">14) Apéndice: consejos, errores frecuentes y material de apoyo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="recursividad-en-python-pila-cola-y-cruzada">
+<h1>Recursividad en Python — Pila, Cola y Cruzada<a class="headerlink" href="#recursividad-en-python-pila-cola-y-cruzada" title="Link to this heading">#</a></h1>
+<p><strong>Curso:</strong> Técnicas de Programación · Unidad 2
+<strong>Tema:</strong> Recursividad</p>
+<blockquote>
+<div><p>Este notebook explica <strong>qué es la recursividad</strong>, la compara con la <strong>iteración</strong>, y desarrolla en profundidad sus <strong>tres formas</strong>:
+<strong>recursión de pila</strong>, <strong>recursión de cola</strong> y <strong>recursión cruzada</strong>. También cubre los <strong>patrones de diseño</strong> más comunes
+(Índice y Divide y Vencerás), los <strong>límites de recursión</strong> en Python, y ejemplos clásicos (memoización, recorridos de
+árboles), más <strong>ejercicios guiados</strong>. Búsqueda y backtracking se ven a fondo en la próxima sección de la unidad.</p>
+<p>📎 <strong>Material de apoyo (teoría y plantillas):</strong> revisa primero la página <a class="reference internal" href="Recursividad.html"><span class="std std-doc">Recursividad</span></a> de esta unidad — tiene las
+diapositivas y el handout con más ejemplos y plantillas en blanco para practicar.</p>
+</div></blockquote>
+<section id="contenidos">
+<h2>Contenidos<a class="headerlink" href="#contenidos" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#que-es"><span class="xref myst">¿Qué es la recursividad?</span></a></p></li>
+<li><p><a class="reference internal" href="#rec-vs-it"><span class="xref myst">Recursividad vs Iteración</span></a></p></li>
+<li><p><a class="reference internal" href="#estructura"><span class="xref myst">Estructura de una función recursiva</span></a></p></li>
+<li><p><a class="reference internal" href="#tres-tipos"><span class="xref myst">Los tres tipos de recursión: pila, cola y cruzada</span></a></p></li>
+<li><p><a class="reference internal" href="#basicos"><span class="xref myst">Ejemplos básicos (patrón Índice)</span></a></p>
+<ul class="simple">
+<li><p>Factorial (iterativo vs recursivo de pila)</p></li>
+<li><p>Suma de lista (patrón Índice)</p></li>
+<li><p>Fibonacci (naive, con memoización y versión iterativa)</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cola-profundidad"><span class="xref myst">Recursión de cola en profundidad: transformar pila → cola</span></a></p></li>
+<li><p><a class="reference internal" href="#limites"><span class="xref myst">Límites de recursión en Python</span></a></p></li>
+<li><p><a class="reference internal" href="#cruzada"><span class="xref myst">Recursión cruzada: <code class="docutils literal notranslate"><span class="pre">es_par</span></code> / <code class="docutils literal notranslate"><span class="pre">es_impar</span></code></span></a></p></li>
+<li><p><a class="reference internal" href="#byc"><span class="xref myst">Divide y vencerás: potencia rápida (exponentiación binaria)</span></a></p></li>
+<li><p><a class="reference internal" href="#arboles"><span class="xref myst">Recorridos de árboles binarios</span></a></p></li>
+<li><p><a class="reference internal" href="#dp"><span class="xref myst">Programación dinámica (Top-Down vs Bottom-Up)</span></a></p></li>
+<li><p><a class="reference internal" href="#trace"><span class="xref myst">Bonus: visualiza el árbol de llamadas con un decorador</span></a></p></li>
+<li><p><a class="reference internal" href="#ejercicios"><span class="xref myst">Ejercicios propuestos con plantillas</span></a></p></li>
+<li><p><a class="reference internal" href="#apendice"><span class="xref myst">Apéndice: consejos, errores frecuentes y material de apoyo</span></a></p></li>
+</ol>
+<p><a id="que-es"></a></p>
+</section>
+<section id="que-es-la-recursividad">
+<h2>1) ¿Qué es la recursividad?<a class="headerlink" href="#que-es-la-recursividad" title="Link to this heading">#</a></h2>
+<p>La <strong>recursividad</strong> es una técnica en la que una <strong>función se llama a sí misma</strong> para resolver un problema descomponiéndolo en
+subproblemas más pequeños pero de la <strong>misma forma</strong>. En esencia, el diseño incluye siempre:</p>
+<ul class="simple">
+<li><p><strong>Caso base (condición de parada):</strong> la forma más simple del problema que <strong>no</strong> hace llamadas recursivas.</p></li>
+<li><p><strong>Caso recursivo (reducción):</strong> una llamada a la misma función (o a otra función, en la recursión cruzada) con el problema
+<strong>más pequeño</strong>, que <strong>progresa</strong> hacia el caso base.</p></li>
+</ul>
+<blockquote>
+<div><p>Piénsalo como muñecas rusas: vas abriendo versiones cada vez más pequeñas hasta llegar a la más simple.</p>
+</div></blockquote>
+<p><a id="rec-vs-it"></a></p>
+</section>
+<section id="recursividad-vs-iteracion">
+<h2>2) Recursividad vs Iteración<a class="headerlink" href="#recursividad-vs-iteracion" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Iteración</strong>: usa bucles (<code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>) y variables de control explícitas.</p></li>
+<li><p><strong>Recursividad</strong>: delega el “bucle” al <strong>call stack</strong> del intérprete, expresando el algoritmo de forma muy cercana a su
+definición matemática o estructural (p. ej., árboles).</p></li>
+</ul>
+<p><strong>Regla práctica</strong>: casi todo lo recursivo puede escribirse de forma iterativa; elegir uno u otro depende de <strong>claridad</strong>, <strong>legibilidad</strong>
+y <strong>eficiencia</strong>.</p>
+<p><a id="estructura"></a></p>
+</section>
+<section id="estructura-de-una-funcion-recursiva-plantilla">
+<h2>3) Estructura de una función recursiva (plantilla)<a class="headerlink" href="#estructura-de-una-funcion-recursiva-plantilla" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Validación de entrada</strong> (opcional pero recomendable).</p></li>
+<li><p><strong>Caso base</strong>: retorna sin llamar de nuevo a la función.</p></li>
+<li><p><strong>Caso recursivo</strong>: llama a la función (o a otra, si es cruzada) con una versión más simple del problema y <strong>combina</strong> los resultados.</p></li>
+</ol>
+<blockquote>
+<div><p>Es <strong>crítico</strong> garantizar la <strong>terminación</strong>: cada llamada debe acercarse al caso base.</p>
+</div></blockquote>
+<p><a id="tres-tipos"></a></p>
+</section>
+<section id="los-tres-tipos-de-recursion-pila-cola-y-cruzada">
+<h2>4) Los tres tipos de recursión: pila, cola y cruzada<a class="headerlink" href="#los-tres-tipos-de-recursion-pila-cola-y-cruzada" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tipo</p></th>
+<th class="head"><p>Idea central</p></th>
+<th class="head"><p>¿Qué queda pendiente al volver?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>De pila</strong></p></td>
+<td><p>Cada llamada espera el resultado de la siguiente para poder terminar su propia operación</p></td>
+<td><p>Una operación pendiente (multiplicar, sumar, concatenar…) — se van <strong>apilando</strong> marcos</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>De cola</strong></p></td>
+<td><p>La llamada recursiva es <strong>lo último</strong> que hace la función, y su resultado <strong>es</strong> el resultado final</p></td>
+<td><p>Nada: el acumulador ya trae la respuesta lista</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Cruzada</strong></p></td>
+<td><p>Dos (o más) funciones distintas se llaman <strong>entre sí</strong> (auto-invocación indirecta) hasta llegar a un caso base</p></td>
+<td><p>Depende de cada función, pero el patrón es el mismo: caso base + progreso</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En las siguientes secciones vemos cada una con código y traza. Empezamos con recursión <strong>de pila</strong>, la más común y la que ya
+conoces de la sección de Fuerza Bruta de esta unidad.</p>
+<p><a id="basicos"></a></p>
+</section>
+<section id="ejemplos-basicos-recursion-de-pila-patron-indice">
+<h2>5) Ejemplos básicos (recursión de pila, patrón Índice)<a class="headerlink" href="#ejemplos-basicos-recursion-de-pila-patron-indice" title="Link to this heading">#</a></h2>
+<p>Empezamos con <strong>factorial</strong>, el ejemplo clásico de recursión <strong>de pila</strong>: cada llamada debe esperar el resultado de <code class="docutils literal notranslate"><span class="pre">n-1</span></code> antes
+de poder multiplicar y retornar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_iterativo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calcula n! de forma iterativa."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"n debe ser entero"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"El factorial no está definido para n negativos"</span><span class="p">)</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">resultado</span> <span class="o">*=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">factorial_pila</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calcula n! de forma recursiva de PILA: la multiplicación por n queda pendiente</span>
+<span class="sd">    hasta que regresa la llamada de n-1."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"n debe ser entero"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"El factorial no está definido para n negativos"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>   <span class="c1"># Caso base</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># &lt;- multiplicar por n queda PENDIENTE hasta que vuelva la llamada</span>
+
+<span class="c1"># Pruebas rápidas</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">factorial_iterativo</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: factorial iterativo y recursivo (de pila) producen el mismo resultado para k=0..5"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: factorial iterativo y recursivo (de pila) producen el mismo resultado para k=0..5
+</pre></div>
+</div>
+</div>
+</div>
+<section id="patron-indice-suma-lista">
+<h3>Patrón ÍNDICE: <code class="docutils literal notranslate"><span class="pre">suma_lista</span></code><a class="headerlink" href="#patron-indice-suma-lista" title="Link to this heading">#</a></h3>
+<p>Este patrón recorre una estructura avanzando un índice (o “cortando” la lista con <code class="docutils literal notranslate"><span class="pre">xs[1:]</span></code>) hasta un caso base, y combina el
+resultado al volver. Aquí mostramos la versión <strong>de pila</strong> (<code class="docutils literal notranslate"><span class="pre">suma_lista_pila</span></code>, con una suma pendiente) junto a una primera
+aproximación <strong>de cola</strong> (<code class="docutils literal notranslate"><span class="pre">suma_lista_cola</span></code>, con un acumulador) — la profundizamos en la siguiente sección.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">suma_lista_pila</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Patrón ÍNDICE, recursión DE PILA: la suma con xs[0] queda pendiente."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xs</span><span class="p">:</span>                <span class="c1"># Caso base: lista vacía</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">suma_lista_pila</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>  <span class="c1"># &lt;- suma pendiente hasta que vuelve la llamada</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">suma_lista_cola</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">acumulador</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Patrón ÍNDICE, recursión DE COLA: el acumulador ya lleva la respuesta parcial,</span>
+<span class="sd">    no queda ninguna operación pendiente al volver."""</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xs</span><span class="p">:</span>                <span class="c1"># Caso base</span>
+        <span class="k">return</span> <span class="n">acumulador</span>
+    <span class="k">return</span> <span class="n">suma_lista_cola</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">acumulador</span> <span class="o">+</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># &lt;- la llamada recursiva ES el resultado final</span>
+
+<span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"suma_lista_pila:"</span><span class="p">,</span> <span class="n">suma_lista_pila</span><span class="p">(</span><span class="n">datos</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"suma_lista_cola:"</span><span class="p">,</span> <span class="n">suma_lista_cola</span><span class="p">(</span><span class="n">datos</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>suma_lista_pila: 15
+suma_lista_cola: 15
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Versión recursiva ingenua (de pila): O(phi^n) tiempo aprox, por recomputación."""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Recursión con memoización (Top-Down). Tiempo O(n), espacio O(n)."""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Versión iterativa (Bottom-Up). Tiempo O(n), espacio O(1)."""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+<span class="c1"># Pruebas equivalentes</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: fib_memo y fib_iter coinciden para n=0..19"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: fib_memo y fib_iter coinciden para n=0..19
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparacion-de-desempeno-en-fibonacci">
+<h3>Comparación de desempeño en Fibonacci<a class="headerlink" href="#comparacion-de-desempeno-en-fibonacci" title="Link to this heading">#</a></h3>
+<p>Medimos tiempo de ejecución de <code class="docutils literal notranslate"><span class="pre">fib_naive</span></code>, <code class="docutils literal notranslate"><span class="pre">fib_memo</span></code> y <code class="docutils literal notranslate"><span class="pre">fib_iter</span></code> para valores crecientes de <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<blockquote>
+<div><p><strong>Nota:</strong> No se especifican estilos ni colores para cumplir con la guía de gráficos.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">medir_tiempo</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">tiempos_naive</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tiempos_memo</span>  <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tiempos_iter</span>  <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Evitamos que el cache sesgue las primeras mediciones</span>
+<span class="n">fib_memo</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
+    <span class="c1"># Medimos varias veces para estabilizar</span>
+    <span class="n">repeticiones</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">t_naive</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">medir_tiempo</span><span class="p">(</span><span class="n">fib_naive</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeticiones</span><span class="p">))</span> <span class="o">/</span> <span class="n">repeticiones</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">35</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'nan'</span><span class="p">)</span>
+    <span class="n">t_memo</span>  <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">medir_tiempo</span><span class="p">(</span><span class="n">fib_memo</span><span class="p">,</span>  <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeticiones</span><span class="p">))</span> <span class="o">/</span> <span class="n">repeticiones</span>
+    <span class="n">t_iter</span>  <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">medir_tiempo</span><span class="p">(</span><span class="n">fib_iter</span><span class="p">,</span>  <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeticiones</span><span class="p">))</span> <span class="o">/</span> <span class="n">repeticiones</span>
+    <span class="n">tiempos_naive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_naive</span><span class="p">)</span>
+    <span class="n">tiempos_memo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_memo</span><span class="p">)</span>
+    <span class="n">tiempos_iter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_iter</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">tiempos_memo</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'fib_memo (O(n))'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">tiempos_iter</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'s'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'fib_iter (O(n))'</span><span class="p">)</span>
+<span class="c1"># Para naive, puede crecer rápido; mostramos si está disponible</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tiempos_naive</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">tiempos_naive</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'^'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'fib_naive (~exp)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"segundos"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Tiempos de ejecución Fibonacci"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/215e2af5a8669305200bf2c208b113456eb554a96ec8060c3a96fc3e0a88ff37.png" src="_images/215e2af5a8669305200bf2c208b113456eb554a96ec8060c3a96fc3e0a88ff37.png" />
+</div>
+</div>
+<p><a id="cola-profundidad"></a></p>
+</section>
+</section>
+<section id="recursion-de-cola-en-profundidad-transformar-pila-cola">
+<h2>6) Recursión de cola en profundidad: transformar pila → cola<a class="headerlink" href="#recursion-de-cola-en-profundidad-transformar-pila-cola" title="Link to this heading">#</a></h2>
+<img alt="Traza de recursion de cola de factorial_cola(4, acc=1), con el acumulador viajando ya resuelto" src="_images/recursion_cola.png" />
+<p>Una llamada es <strong>de cola</strong> cuando la llamada recursiva es <strong>lo último</strong> que hace la función — no hay ninguna operación
+pendiente después de ella. Eso la hace, en teoría, optimizable (el intérprete podría reusar el marco de pila). <strong>Python no
+hace esa optimización</strong> (no hay <em>tail-call optimization</em>), así que una recursión de cola sigue creando un marco por llamada
+y puede agotar el límite de recursión igual que una de pila — la ventaja real es de <strong>claridad</strong>, no de memoria, salvo que
+la conviertas en un bucle.</p>
+<section id="transformacion-en-5-pasos-de-pila-a-cola">
+<h3>Transformación en 5 pasos (de pila a cola)<a class="headerlink" href="#transformacion-en-5-pasos-de-pila-a-cola" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Identifica la operación pendiente</strong> en la versión de pila (ej. <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">factorial_pila(n-1)</span></code>).</p></li>
+<li><p><strong>Agrega un parámetro acumulador</strong> con un valor inicial neutro para esa operación (<code class="docutils literal notranslate"><span class="pre">1</span></code> para producto, <code class="docutils literal notranslate"><span class="pre">0</span></code> para suma).</p></li>
+<li><p><strong>Actualiza el acumulador antes de la llamada recursiva</strong>, aplicando la operación pendiente sobre él (<code class="docutils literal notranslate"><span class="pre">acumulador</span> <span class="pre">*</span> <span class="pre">n</span></code>).</p></li>
+<li><p><strong>Haz que la llamada recursiva sea el <code class="docutils literal notranslate"><span class="pre">return</span></code></strong>, sin nada más alrededor.</p></li>
+<li><p><strong>El caso base retorna el acumulador</strong> directamente — ya es la respuesta.</p></li>
+</ol>
+</section>
+<section id="de-cola-a-iterativo-el-paso-final">
+<h3>De cola a iterativo (el paso final)<a class="headerlink" href="#de-cola-a-iterativo-el-paso-final" title="Link to this heading">#</a></h3>
+<p>Como Python no optimiza la cola, el único beneficio real en memoria es convertir la recursión de cola en un <strong>bucle <code class="docutils literal notranslate"><span class="pre">while</span></code></strong>:
+el acumulador de la versión de cola se vuelve, casi literalmente, la variable que actualiza el bucle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_pila</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>          <span class="c1"># operación pendiente: multiplicar por n</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">factorial_cola</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">acumulador</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">acumulador</span>                      <span class="c1"># el acumulador YA es la respuesta</span>
+    <span class="k">return</span> <span class="n">factorial_cola</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">acumulador</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># último paso: nada pendiente después</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">factorial_iterativo_desde_cola</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""El acumulador de factorial_cola se vuelve la variable del bucle."""</span>
+    <span class="n">acumulador</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">acumulador</span> <span class="o">*=</span> <span class="n">n</span>
+        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">acumulador</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_cola</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_iterativo_desde_cola</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: las tres versiones (pila, cola, iterativa) coinciden para k=0..7"</span><span class="p">)</span>
+
+<span class="c1"># Prueba de que Python NO optimiza la cola: ambas formas agotan la pila con el mismo N aprox.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">limite</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">()</span>
+<span class="n">n_grande</span> <span class="o">=</span> <span class="n">limite</span> <span class="o">+</span> <span class="mi">50</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">factorial_cola</span><span class="p">(</span><span class="n">n_grande</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"No debería llegar aquí"</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">RecursionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"RecursionError con n=</span><span class="si">{</span><span class="n">n_grande</span><span class="si">}</span><span class="s2">: la version de cola tambien crea un marco por llamada"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: las tres versiones (pila, cola, iterativa) coinciden para k=0..7
+RecursionError con n=1050: la version de cola tambien crea un marco por llamada
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="limites"></a></p>
+</section>
+</section>
+<section id="limites-de-recursion-en-python">
+<h2>7) Límites de recursión en Python<a class="headerlink" href="#limites-de-recursion-en-python" title="Link to this heading">#</a></h2>
+<p>Python protege contra desbordamientos de pila con un <strong>límite de recursión</strong>. Puedes consultarlo, y con cuidado, ajustarlo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Límite actual:"</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rec_sin_fin</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">rec_sin_fin</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">rec_sin_fin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">RecursionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Atrapado un RecursionError real:"</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="c1"># ¡Usar con precaución! Subir el límite no arregla una recursión mal diseñada,</span>
+<span class="c1"># solo pospone el problema y puede colgar el intérprete en casos extremos.</span>
+<span class="c1"># sys.setrecursionlimit(3000)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Límite actual: 1000
+Atrapado un RecursionError real: maximum recursion depth exceeded
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="cruzada"></a></p>
+</section>
+<section id="recursion-cruzada-auto-invocacion-indirecta">
+<h2>8) Recursión cruzada (auto-invocación indirecta)<a class="headerlink" href="#recursion-cruzada-auto-invocacion-indirecta" title="Link to this heading">#</a></h2>
+<img alt="es_par(4) y es_impar se llaman mutuamente hasta llegar al caso base es_par(0) = True" src="_images/recursion_cruzada.png" />
+<p>En la recursión <strong>cruzada</strong> (o <strong>mutua</strong>), una función <code class="docutils literal notranslate"><span class="pre">A</span></code> llama a una función <code class="docutils literal notranslate"><span class="pre">B</span></code>, y <code class="docutils literal notranslate"><span class="pre">B</span></code> vuelve a llamar a <code class="docutils literal notranslate"><span class="pre">A</span></code> — ninguna se
+llama directamente a sí misma, pero la cadena de llamadas sigue creciendo (y reduciéndose) igual que en una recursión normal.
+Es el mismo contrato de siempre: <strong>cada función necesita su propio caso base</strong>, y cada llamada debe <strong>progresar</strong> hacia él.</p>
+<p>Aparece de forma natural en <strong>parsers</strong> (una función que reconoce expresiones llama a otra que reconoce términos, que llama
+de vuelta a la de expresiones) y en <strong>máquinas de estados</strong> implementadas con funciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">es_par</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Caso base: 0 es par. Si no, pregunta si n-1 es impar (llamando a OTRA función)."""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">es_impar</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">es_impar</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Caso base: 0 no es impar. Si no, pregunta si n-1 es par (llamando a OTRA función)."""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">es_par</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">es_par</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">es_impar</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: es_par/es_impar (recursion cruzada) coinciden con el operador % para n=0..9"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"es_par(4) -&gt;"</span><span class="p">,</span> <span class="n">es_par</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="s2">" | es_impar(7) -&gt;"</span><span class="p">,</span> <span class="n">es_impar</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: es_par/es_impar (recursion cruzada) coinciden con el operador % para n=0..9
+es_par(4) -&gt; True  | es_impar(7) -&gt; True
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="byc"></a></p>
+</section>
+<section id="divide-y-venceras-potencia-rapida-exponentiacion-binaria">
+<h2>9) Divide y vencerás: potencia rápida (exponentiación binaria)<a class="headerlink" href="#divide-y-venceras-potencia-rapida-exponentiacion-binaria" title="Link to this heading">#</a></h2>
+<section id="patron-divide-y-venceras">
+<h3>Patrón DIVIDE Y VENCERÁS<a class="headerlink" href="#patron-divide-y-venceras" title="Link to this heading">#</a></h3>
+<p>Este patrón parte el problema en subproblemas independientes, resuelve el subproblema y combina el resultado. Para calcular
+<code class="docutils literal notranslate"><span class="pre">a**n</span></code> no hace falta multiplicar <code class="docutils literal notranslate"><span class="pre">a</span></code> por sí mismo <code class="docutils literal notranslate"><span class="pre">n</span></code> veces: si <code class="docutils literal notranslate"><span class="pre">n</span></code> es par, <code class="docutils literal notranslate"><span class="pre">a**n</span> <span class="pre">=</span> <span class="pre">(a**(n//2))**2</span></code>, y si es impar,
+<code class="docutils literal notranslate"><span class="pre">a**n</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">a**(n-1)</span></code>. Cada llamada <strong>parte el exponente a la mitad</strong>, así que en vez de <code class="docutils literal notranslate"><span class="pre">n</span></code> llamadas necesitamos solo
+<code class="docutils literal notranslate"><span class="pre">O(log</span> <span class="pre">n)</span></code>.</p>
+<blockquote>
+<div><p><strong>Nota:</strong> la búsqueda binaria y el backtracking (Torres de Hanoi, generación de subconjuntos, N-Reinas) también son
+ejemplos naturales de estos patrones — los vas a ver a fondo en la próxima sección de la unidad, dedicada a
+<strong>búsqueda y backtracking</strong>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">potencia_dyc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Calcula a**n con exponenciacion rapida (divide y venceras). n entero &gt;= 0."""</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>              <span class="c1"># Caso base</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="n">mitad</span> <span class="o">=</span> <span class="n">potencia_dyc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>      <span class="c1"># subproblema: parte el exponente a la mitad</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mitad</span> <span class="o">*</span> <span class="n">mitad</span>             <span class="c1"># combinar: n par</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">mitad</span> <span class="o">*</span> <span class="n">mitad</span>         <span class="c1"># combinar: n impar</span>
+
+<span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">potencia_dyc</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span> <span class="o">==</span> <span class="n">base</span> <span class="o">**</span> <span class="n">exp</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: potencia_dyc coincide con ** para bases 2,3,5 y exponentes 0..5"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"potencia_dyc(2, 10) -&gt;"</span><span class="p">,</span> <span class="n">potencia_dyc</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: potencia_dyc coincide con ** para bases 2,3,5 y exponentes 0..5
+potencia_dyc(2, 10) -&gt; 1024
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="arboles"></a></p>
+</section>
+</section>
+<section id="recorridos-de-arboles-binarios-pre-in-post-orden">
+<h2>10) Recorridos de árboles binarios (pre/in/post-orden)<a class="headerlink" href="#recorridos-de-arboles-binarios-pre-in-post-orden" title="Link to this heading">#</a></h2>
+<p>Las estructuras jerárquicas se describen naturalmente con recursividad <strong>de pila</strong>: cada llamada combina lo que retornan sus
+dos hijos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span><span class="p">,</span> <span class="n">izq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">der</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">izq</span> <span class="o">=</span> <span class="n">izq</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">der</span> <span class="o">=</span> <span class="n">der</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span> <span class="o">+</span> <span class="n">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="n">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span> <span class="o">+</span> <span class="n">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="n">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span>
+
+<span class="c1"># Árbol de ejemplo</span>
+<span class="c1">#         4</span>
+<span class="c1">#       /   \</span>
+<span class="c1">#      2     6</span>
+<span class="c1">#     / \   / \</span>
+<span class="c1">#    1   3 5   7</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">Nodo</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span>
+            <span class="n">Nodo</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">7</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Preorden:  "</span><span class="p">,</span> <span class="n">preorden</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Inorden:   "</span><span class="p">,</span> <span class="n">inorden</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Postorden: "</span><span class="p">,</span> <span class="n">postorden</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preorden:   [4, 2, 1, 3, 6, 5, 7]
+Inorden:    [1, 2, 3, 4, 5, 6, 7]
+Postorden:  [1, 3, 2, 5, 7, 6, 4]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="dp"></a></p>
+</section>
+<section id="programacion-dinamica-top-down-memoizacion-vs-bottom-up">
+<h2>11) Programación dinámica: Top-Down (memoización) vs Bottom-Up<a class="headerlink" href="#programacion-dinamica-top-down-memoizacion-vs-bottom-up" title="Link to this heading">#</a></h2>
+<p>La recursión combinada con <strong>memoización</strong> evita recomputaciones; la alternativa iterativa <strong>Bottom-Up</strong> construye la solución
+desde los casos base. Ya lo vimos con Fibonacci; otro ejemplo ilustrativo es el <strong>cambio de monedas</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cambio_minimo_bottom_up</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">monedas</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Número mínimo de monedas para alcanzar 'valor'. Bottom-Up (iterativo)."""</span>
+    <span class="n">INF</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
+    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">INF</span><span class="p">]</span><span class="o">*</span><span class="n">valor</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">valor</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">monedas</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">:</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="o">-</span><span class="n">m</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">valor</span><span class="p">]</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">valor</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">INF</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cambio_minimo_top_down</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">monedas_tuple</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Top-Down (recursivo con memo). monedas_tuple para permitir cache."""</span>
+    <span class="k">if</span> <span class="n">valor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">INF</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
+    <span class="n">ans</span> <span class="o">=</span> <span class="n">INF</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">monedas_tuple</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">valor</span><span class="p">:</span>
+            <span class="n">sub</span> <span class="o">=</span> <span class="n">cambio_minimo_top_down</span><span class="p">(</span><span class="n">valor</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span> <span class="n">monedas_tuple</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sub</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">ans</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sub</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans</span> <span class="k">if</span> <span class="n">ans</span> <span class="o">&lt;</span> <span class="n">INF</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="n">monedas</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Bottom-Up:"</span><span class="p">,</span> <span class="n">cambio_minimo_bottom_up</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">monedas</span><span class="p">)))</span>
+<span class="n">cambio_minimo_top_down</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Top-Down :"</span><span class="p">,</span> <span class="n">cambio_minimo_top_down</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">monedas</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bottom-Up: 2
+Top-Down : 2
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="trace"></a></p>
+</section>
+<section id="bonus-visualiza-el-arbol-de-llamadas-con-un-decorador">
+<h2>12) Bonus: visualiza el árbol de llamadas con un decorador<a class="headerlink" href="#bonus-visualiza-el-arbol-de-llamadas-con-un-decorador" title="Link to this heading">#</a></h2>
+<p>Este pequeño decorador imprime cada llamada con sangría según su profundidad, y su retorno al volver — útil para <strong>ver</strong> el
+árbol de llamadas de cualquier función recursiva sin dibujarlo a mano.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">trace</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">indent</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">'│ '</span> <span class="o">*</span> <span class="p">(</span><span class="n">depth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s1">'├─ '</span> <span class="k">if</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">''</span><span class="p">)</span>
+
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">indent</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span><span class="si">}{</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}{</span><span class="n">args</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">indent</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span><span class="si">}</span><span class="s2">-&gt; </span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@trace</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">suma_trazada</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">suma_trazada</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">suma_trazada</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>suma_trazada([2, 4, 1],)
+├─ suma_trazada([2, 4, 1], 1)
+│ ├─ suma_trazada([2, 4, 1], 2)
+│ │ ├─ suma_trazada([2, 4, 1], 3)
+│ │ ├─ -&gt; 0
+│ ├─ -&gt; 1
+├─ -&gt; 5
+-&gt; 7
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="ejercicios"></a></p>
+</section>
+<section id="ejercicios-propuestos-con-plantillas">
+<h2>13) Ejercicios propuestos (con plantillas)<a class="headerlink" href="#ejercicios-propuestos-con-plantillas" title="Link to this heading">#</a></h2>
+<section id="a-invertir-una-lista-recursivamente">
+<h3>A) Invertir una lista recursivamente<a class="headerlink" href="#a-invertir-una-lista-recursivamente" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Implementa una función que retorne una <strong>nueva lista invertida</strong> usando recursión.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">invertir</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
+    <span class="c1"># TODO</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="b-profundidad-maxima-de-un-arbol-binario">
+<h3>B) Profundidad máxima de un árbol binario<a class="headerlink" href="#b-profundidad-maxima-de-un-arbol-binario" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Dado un <code class="docutils literal notranslate"><span class="pre">Nodo</span></code> (como en la sección de árboles), calcula la <strong>altura</strong> del árbol.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">altura</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
+    <span class="c1"># TODO</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="c-convierte-suma-lista-pila-a-una-version-de-cola-con-acumulador">
+<h3>C) Convierte <code class="docutils literal notranslate"><span class="pre">suma_lista_pila</span></code> a una versión de cola con acumulador<a class="headerlink" href="#c-convierte-suma-lista-pila-a-una-version-de-cola-con-acumulador" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Sigue la <strong>transformación en 5 pasos</strong> de la sección 6 y verifica que ambas versiones coinciden.</p></li>
+</ul>
+</section>
+<section id="d-recursion-cruzada-es-multiplo-de-3-resto-de-3">
+<h3>D) Recursión cruzada: <code class="docutils literal notranslate"><span class="pre">es_multiplo_de_3</span></code> / <code class="docutils literal notranslate"><span class="pre">resto_de_3</span></code><a class="headerlink" href="#d-recursion-cruzada-es-multiplo-de-3-resto-de-3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Escribe dos funciones que se llamen mutuamente para calcular <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">3</span></code> sin usar el operador <code class="docutils literal notranslate"><span class="pre">%</span></code> (usa restas de a uno).</p></li>
+</ul>
+</section>
+<section id="e-divide-y-venceras-potencia-dyc-con-exponente-negativo">
+<h3>E) Divide y vencerás: <code class="docutils literal notranslate"><span class="pre">potencia_dyc</span></code> con exponente negativo<a class="headerlink" href="#e-divide-y-venceras-potencia-dyc-con-exponente-negativo" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Extiende <code class="docutils literal notranslate"><span class="pre">potencia_dyc(a,</span> <span class="pre">n)</span></code> para que acepte <code class="docutils literal notranslate"><span class="pre">n</span></code> negativo, devolviendo <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">a**abs(n)</span></code>.</p></li>
+</ul>
+<p><a id="apendice"></a></p>
+</section>
+</section>
+<section id="apendice-consejos-errores-frecuentes-y-material-de-apoyo">
+<h2>14) Apéndice: consejos, errores frecuentes y material de apoyo<a class="headerlink" href="#apendice-consejos-errores-frecuentes-y-material-de-apoyo" title="Link to this heading">#</a></h2>
+<p><strong>Consejos</strong></p>
+<ul class="simple">
+<li><p><strong>Define primero el caso base</strong>, luego el caso recursivo (o los casos recursivos, si es cruzada).</p></li>
+<li><p><strong>Verifica progresión</strong> hacia el caso base (evita recursión infinita).</p></li>
+<li><p><strong>Entrada válida</strong>: valida tipos y rangos cuando sea pertinente.</p></li>
+<li><p><strong>Cuidado con Python y recursión de cola</strong>: Python <strong>no</strong> hace <em>tail-call optimization</em> — una recursión de cola sigue
+gastando un marco de pila por llamada.</p></li>
+<li><p><strong>Límites de recursión</strong>: consulta/ajusta con <code class="docutils literal notranslate"><span class="pre">sys.getrecursionlimit()</span></code> y <code class="docutils literal notranslate"><span class="pre">sys.setrecursionlimit()</span></code> con prudencia.</p></li>
+<li><p><strong>Perfílalo</strong>: si una recursión es lenta por recomputación, usa <strong>memoización</strong> o considera una versión iterativa.</p></li>
+</ul>
+<p><strong>Errores frecuentes</strong></p>
+<ul class="simple">
+<li><p>Olvidar el caso base, o tenerlo inalcanzable.</p></li>
+<li><p>No avanzar hacia el caso base (un parámetro que no cambia).</p></li>
+<li><p>Modificar listas en sitio sin control (usa copias, o deshaz un <code class="docutils literal notranslate"><span class="pre">append</span></code> con <code class="docutils literal notranslate"><span class="pre">pop()</span></code> si acumulas sobre una sola lista compartida).</p></li>
+<li><p>Mezclar retornos y efectos secundarios (decide si la función <em>devuelve</em> o <em>imprime/guarda</em>).</p></li>
+<li><p>No probar con casos vacío y de tamaño 1.</p></li>
+</ul>
+<p><strong>Material de apoyo (teoría completa y plantillas en blanco)</strong></p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/01548dc9b8a7e810cfb020fec1861746/RecursividadenPython.pdf"><span class="xref download myst">Recursividad en Python — introducción (PDF)</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/8d38111b95aeafb39497c6c78967b197/RecursividadPatronesEsenciales.pdf"><span class="xref download myst">Patrones esenciales: Índice, Divide y Vencerás, Incluir/Excluir (PDF)</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/78239852b08f53a3013ceea740f076ee/RecursionDeCola.pdf"><span class="xref download myst">Recursión de cola: teoría, patrones y práctica (PDF)</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/dea1d46a2d747bc9a0ca7c583968db69/PlantillasRecursividad_handout.pdf"><span class="xref download myst">Plantillas de aula para practicar los tres patrones (PDF)</span></a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/3ebffc05381f1430670bcbf6be3a7329/DiagramasArbolTrazaRecursiva.pdf"><span class="xref download myst">Diagramas de árbol y trazas recursivas (PDF)</span></a></p></li>
+</ul>
+<blockquote>
+<div><p>Con práctica, podrás identificar problemas <strong>naturalmente recursivos</strong> (árboles, divide y vencerás) y elegir con criterio
+entre recursión de pila, de cola o cruzada — y saber cuándo conviene pasarlos a una versión iterativa. La próxima sección
+de la unidad retoma estos mismos patrones para <strong>búsqueda y backtracking</strong>.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Recursividad.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Recursividad</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Backtracking.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Backtracking</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-recursividad">1) ¿Qué es la recursividad?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursividad-vs-iteracion">2) Recursividad vs Iteración</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-una-funcion-recursiva-plantilla">3) Estructura de una función recursiva (plantilla)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-tres-tipos-de-recursion-pila-cola-y-cruzada">4) Los tres tipos de recursión: pila, cola y cruzada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-basicos-recursion-de-pila-patron-indice">5) Ejemplos básicos (recursión de pila, patrón Índice)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patron-indice-suma-lista">Patrón ÍNDICE: <code class="docutils literal notranslate"><span class="pre">suma_lista</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-desempeno-en-fibonacci">Comparación de desempeño en Fibonacci</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-de-cola-en-profundidad-transformar-pila-cola">6) Recursión de cola en profundidad: transformar pila → cola</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-en-5-pasos-de-pila-a-cola">Transformación en 5 pasos (de pila a cola)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-cola-a-iterativo-el-paso-final">De cola a iterativo (el paso final)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-de-recursion-en-python">7) Límites de recursión en Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-cruzada-auto-invocacion-indirecta">8) Recursión cruzada (auto-invocación indirecta)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-y-venceras-potencia-rapida-exponentiacion-binaria">9) Divide y vencerás: potencia rápida (exponentiación binaria)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patron-divide-y-venceras">Patrón DIVIDE Y VENCERÁS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recorridos-de-arboles-binarios-pre-in-post-orden">10) Recorridos de árboles binarios (pre/in/post-orden)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programacion-dinamica-top-down-memoizacion-vs-bottom-up">11) Programación dinámica: Top-Down (memoización) vs Bottom-Up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-visualiza-el-arbol-de-llamadas-con-un-decorador">12) Bonus: visualiza el árbol de llamadas con un decorador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos-con-plantillas">13) Ejercicios propuestos (con plantillas)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-invertir-una-lista-recursivamente">A) Invertir una lista recursivamente</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-profundidad-maxima-de-un-arbol-binario">B) Profundidad máxima de un árbol binario</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-convierte-suma-lista-pila-a-una-version-de-cola-con-acumulador">C) Convierte <code class="docutils literal notranslate"><span class="pre">suma_lista_pila</span></code> a una versión de cola con acumulador</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-recursion-cruzada-es-multiplo-de-3-resto-de-3">D) Recursión cruzada: <code class="docutils literal notranslate"><span class="pre">es_multiplo_de_3</span></code> / <code class="docutils literal notranslate"><span class="pre">resto_de_3</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-divide-y-venceras-potencia-dyc-con-exponente-negativo">E) Divide y vencerás: <code class="docutils literal notranslate"><span class="pre">potencia_dyc</span></code> con exponente negativo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-consejos-errores-frecuentes-y-material-de-apoyo">14) Apéndice: consejos, errores frecuentes y material de apoyo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Santiago Barrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
