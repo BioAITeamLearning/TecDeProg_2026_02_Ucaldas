@@ -26,8 +26,11 @@ Casi cualquier función recursiva sigue uno de estos tres moldes:
 | Patrón | Idea | Ejemplo |
 |---|---|---|
 | **Índice** | Avanza un puntero (o recorta la entrada) hasta un caso base | `suma_lista(xs, i)` |
-| **Divide y vencerás** | Parte el problema en subproblemas independientes, resuelve y combina | Búsqueda binaria |
-| **Incluir/Excluir** | En cada posición decides si tomas o no el elemento (backtracking) | Generar subconjuntos |
+| **Divide y vencerás** | Parte el problema en subproblemas independientes, resuelve y combina | Potencia rápida: `a**n` en `O(log n)` |
+
+```{note}
+El patrón **Incluir/Excluir** (decidir en cada posición si tomas o no un elemento) y ejemplos como búsqueda binaria y backtracking se ven a fondo en la próxima sección de la unidad, dedicada a **búsqueda y backtracking**.
+```
 
 ```{image} _static/unidad2/recursion_pila.png
 :alt: Traza de la recursion de pila en factorial(4): se apilan las llamadas y luego se resuelven multiplicando
@@ -58,6 +61,6 @@ Teoría, ejemplos y plantillas en blanco 📎 [Introducción a la recursividad (
 
 ## Manos a la obra! 💪🐍
 
-El notebook de esta sección desarrolla en código todo lo anterior: factorial y suma de lista (pila vs. cola), la transformación paso a paso de pila a cola, `es_par`/`es_impar` (cruzada), búsqueda binaria, backtracking (Hanoi y subconjuntos), recorridos de árboles, memoización vs. programación dinámica Bottom-Up, y un decorador para visualizar tú mismo el árbol de llamadas de cualquier función recursiva.
+El notebook de esta sección desarrolla en código todo lo anterior: factorial y suma de lista (pila vs. cola), la transformación paso a paso de pila a cola, `es_par`/`es_impar` (cruzada), potencia rápida (divide y vencerás), recorridos de árboles, memoización vs. programación dinámica Bottom-Up, y un decorador para visualizar tú mismo el árbol de llamadas de cualquier función recursiva.
 
 1. {doc}`Recursividad_Notebook` — recursión de pila, de cola y cruzada, con ejemplos ejecutables y ejercicios propuestos.
