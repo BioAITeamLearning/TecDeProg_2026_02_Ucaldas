@@ -4,7 +4,7 @@ title: Resolución Problemas, Taller y Evaluación
 # Taller y Evaluación — Unidad 2
 
 ```{note}
-Se podría colocar acá el taller y la fomra de evaluación. demás de la unidad 1.
+Se podría colocar acá el taller y la fomra de evaluación. demás de la unidad 2.
 ```
 
 ## Taller Unidad 2
