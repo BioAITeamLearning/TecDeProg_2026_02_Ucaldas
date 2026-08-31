@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-- file: Unidad1
+- file: Unidad1 
   sections:
     - file: "Introduccion"
     - file: "ListasTuplasDiccionarios"
@@ -12,5 +12,8 @@ chapters:
     - file: "Pila"
     - file: "Cola"
     - file: "Pilas_y_Colas_Avanzadas"
+    - file: "ManejoDeArchivos"
     - file: "ResolucionProblemas"
-    #- file: "recursos_extra"
+- file: Unidad2
+  sections:
+    - file: "FuerzaBruta"
