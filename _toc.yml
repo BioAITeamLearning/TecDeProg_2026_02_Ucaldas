@@ -24,3 +24,12 @@ chapters:
       sections:
         - file: "Backtracking_Notebook"
     - file: "ResolucionProblemas2"
+- file: Unidad3
+  sections:
+    - file: "Busqueda"
+      sections:
+        - file: "Busqueda_Notebook"
+    - file: "Ordenamiento"
+      sections:
+        - file: "Ordenamiento_Notebook"
+    - file: "ResolucionProblemas3"
