@@ -1,0 +1,1172 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Algoritmos de búsqueda en Python &#8212; Técnicas de Programación 2026 - 02</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e8cf666a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Busqueda_Notebook';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Ordenamiento" href="Ordenamiento.html" />
+    <link rel="prev" title="Búsqueda" href="Busqueda.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logosem.png" class="logo__image only-light" alt="Técnicas de Programación 2026 - 02 - Home"/>
+    <img src="_static/logosem.png" class="logo__image only-dark pst-js-only" alt="Técnicas de Programación 2026 - 02 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenida al curso
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad1.html">Unidad 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduccion.html">Introducción a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ListasTuplasDiccionarios.html">Listas, Tuplas, Diccionarios</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="PilasyColas.html">Pilas y Colas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pila.html">Pilas (Stack) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cola.html">Colas (Queue) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="FuerzaBruta.html">Fuerza Bruta y Complejidad Computacional</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Recursividad_Notebook.html">Recursividad en Python — Pila, Cola y Cruzada</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Backtracking.html">Backtracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Backtracking_Notebook.html">Backtracking en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas2.html">Taller y Evaluación — Unidad 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad3.html">Unidad 3</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="Busqueda.html">Búsqueda</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Algoritmos de búsqueda en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Ordenamiento.html">Ordenamiento</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Ordenamiento_Notebook.html">Algoritmos de ordenamiento en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas3.html">Taller y Evaluación — Unidad 3</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/TecDeProg_2026_02_Ucaldas/blob/main/Busqueda_Notebook.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/TecDeProg_2026_02_Ucaldas" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/TecDeProg_2026_02_Ucaldas/issues/new?title=Issue%20on%20page%20%2FBusqueda_Notebook.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Busqueda_Notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Algoritmos de búsqueda en Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-lineal">1) Búsqueda lineal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea-basica">Idea básica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocodigo">Pseudocódigo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad">Complejidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-con-busqueda-lineal">Ejemplo con búsqueda lineal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-binaria-iterativa">2) Búsqueda binaria (iterativa)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Idea básica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Pseudocódigo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Complejidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-con-busqueda-binaria">Ejemplo con búsqueda binaria</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-binaria-recursiva">3) Búsqueda binaria (recursiva)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-importa-que-la-lista-este-ordenada">4) ¿Por qué importa que la lista esté ordenada?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-rendimiento-o-n-vs-o-log-n">5) Comparación de rendimiento: O(n) vs O(log n)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variantes-utiles-primera-y-ultima-ocurrencia">6) Variantes útiles: primera y última ocurrencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos">7) Ejercicios propuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-de-referencia-opcional">8) Soluciones de referencia (opcional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice">9) Apéndice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cual-algoritmo-usar">¿Cuál algoritmo usar?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-frecuentes">Errores frecuentes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#material-de-apoyo">Material de apoyo</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="algoritmos-de-busqueda-en-python">
+<h1>Algoritmos de búsqueda en Python<a class="headerlink" href="#algoritmos-de-busqueda-en-python" title="Link to this heading">#</a></h1>
+<p><strong>Curso:</strong> Técnicas de Programación · Unidad 3
+<strong>Tema:</strong> Búsqueda lineal y búsqueda binaria</p>
+<blockquote>
+<div><p>Este notebook desarrolla los dos algoritmos de búsqueda de la unidad: <strong>búsqueda lineal</strong> (funciona en cualquier lista) y
+<strong>búsqueda binaria</strong> (mucho más rápida, pero exige que la lista esté ordenada). Incluye implementación iterativa y
+recursiva de cada una, una comparación de rendimiento y ejercicios propuestos.</p>
+<p>📎 <strong>Material de apoyo (teoría completa):</strong> revisa primero la página <a class="reference internal" href="Busqueda.html"><span class="std std-doc">Busqueda</span></a> de esta unidad.</p>
+</div></blockquote>
+<section id="contenidos">
+<h2>Contenidos<a class="headerlink" href="#contenidos" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#lineal"><span class="xref myst">Búsqueda lineal</span></a></p></li>
+<li><p><a class="reference internal" href="#binaria"><span class="xref myst">Búsqueda binaria (iterativa)</span></a></p></li>
+<li><p><a class="reference internal" href="#binaria-recursiva"><span class="xref myst">Búsqueda binaria (recursiva)</span></a></p></li>
+<li><p><a class="reference internal" href="#requisito-orden"><span class="xref myst">¿Por qué importa que la lista esté ordenada?</span></a></p></li>
+<li><p><a class="reference internal" href="#rendimiento"><span class="xref myst">Comparación de rendimiento: O(n) vs O(log n)</span></a></p></li>
+<li><p><a class="reference internal" href="#variantes"><span class="xref myst">Variantes útiles: primera/última ocurrencia</span></a></p></li>
+<li><p><a class="reference internal" href="#ejercicios"><span class="xref myst">Ejercicios propuestos</span></a></p></li>
+<li><p><a class="reference internal" href="#soluciones"><span class="xref myst">Soluciones de referencia (opcional)</span></a></p></li>
+<li><p><a class="reference internal" href="#apendice"><span class="xref myst">Apéndice: errores frecuentes y material de apoyo</span></a></p></li>
+</ol>
+<p><a id="lineal"></a></p>
+</section>
+<section id="busqueda-lineal">
+<h2>1) Búsqueda lineal<a class="headerlink" href="#busqueda-lineal" title="Link to this heading">#</a></h2>
+<section id="idea-basica">
+<h3>Idea básica<a class="headerlink" href="#idea-basica" title="Link to this heading">#</a></h3>
+<p>Recorres la lista <strong>de principio a fin</strong>, elemento por elemento, comparando cada uno con el valor que buscas. Si lo
+encuentras, devuelves su posición; si llegas al final sin encontrarlo, no está.</p>
+<p>Es el algoritmo de búsqueda más simple posible: no necesita que la lista tenga ningún orden particular.</p>
+</section>
+<section id="pseudocodigo">
+<h3>Pseudocódigo<a class="headerlink" href="#pseudocodigo" title="Link to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>para i desde 0 hasta n-1:
+    si arr[i] == objetivo:
+        retornar i
+retornar -1  (no encontrado)
+</pre></div>
+</div>
+</section>
+<section id="complejidad">
+<h3>Complejidad<a class="headerlink" href="#complejidad" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Peor caso (no está, o está de último): <strong>O(n)</strong></p></li>
+<li><p>Mejor caso (está de primero): <strong>O(1)</strong></p></li>
+<li><p>No requiere que la lista esté ordenada.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">busqueda_lineal</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Retorna el indice de la primera aparicion de objetivo en arr, o -1 si no esta.</span>
+
+<span class="sd">    Funciona con cualquier lista, ordenada o no.</span>
+<span class="sd">    """</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">valor</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">valor</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-con-busqueda-lineal">
+<h3>Ejemplo con búsqueda lineal<a class="headerlink" href="#ejemplo-con-busqueda-lineal" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">objetivo</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">busqueda_lineal</span><span class="p">(</span><span class="n">datos</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">objetivo</span><span class="si">}</span><span class="s2"> encontrado en el indice </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">objetivo</span><span class="si">}</span><span class="s2"> no esta en la lista"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23 encontrado en el indice 2
+32 encontrado en el indice 3
+100 no esta en la lista
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="binaria"></a></p>
+</section>
+</section>
+<section id="busqueda-binaria-iterativa">
+<h2>2) Búsqueda binaria (iterativa)<a class="headerlink" href="#busqueda-binaria-iterativa" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Idea básica<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Si la lista <strong>ya está ordenada</strong>, no hace falta revisarla elemento por elemento: puedes descartar la mitad de los
+candidatos en cada paso.</p>
+<ol class="arabic simple">
+<li><p>Mira el elemento del <strong>medio</strong> del rango actual.</p></li>
+<li><p>Si es el objetivo, listo.</p></li>
+<li><p>Si el objetivo es <strong>menor</strong>, descarta la mitad derecha (incluyendo el medio) y repite en la mitad izquierda.</p></li>
+<li><p>Si el objetivo es <strong>mayor</strong>, descarta la mitad izquierda y repite en la mitad derecha.</p></li>
+<li><p>Si el rango queda vacío, el objetivo no está.</p></li>
+</ol>
+<img alt="Busqueda binaria descartando la mitad del rango en cada ronda hasta encontrar el objetivo" src="_images/busqueda_binaria.png" />
+</section>
+<section id="id2">
+<h3>Pseudocódigo<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>lo, hi = 0, n-1
+mientras lo &lt;= hi:
+    mid = (lo + hi) // 2
+    si arr[mid] == objetivo: retornar mid
+    si arr[mid] &lt; objetivo:  lo = mid + 1
+    si no:                   hi = mid - 1
+retornar -1  (no encontrado)
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>Complejidad<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Peor y promedio: <strong>O(log n)</strong> — cada paso reduce el rango a la mitad.</p></li>
+<li><p>Requiere que la lista esté <strong>ordenada</strong>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">busqueda_binaria</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Retorna el indice de objetivo en arr (ordenada ascendentemente), o -1 si no esta."""</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mid</span>
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-con-busqueda-binaria">
+<h3>Ejemplo con búsqueda binaria<a class="headerlink" href="#ejemplo-con-busqueda-binaria" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">valores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">68</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">81</span><span class="p">]</span>  <span class="c1"># ya ordenada</span>
+
+<span class="k">for</span> <span class="n">objetivo</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">busqueda_binaria</span><span class="p">(</span><span class="n">valores</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">objetivo</span><span class="si">}</span><span class="s2"> encontrado en el indice </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">objetivo</span><span class="si">}</span><span class="s2"> no esta en la lista"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23 encontrado en el indice 5
+81 encontrado en el indice 14
+100 no esta en la lista
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="binaria-recursiva"></a></p>
+</section>
+</section>
+<section id="busqueda-binaria-recursiva">
+<h2>3) Búsqueda binaria (recursiva)<a class="headerlink" href="#busqueda-binaria-recursiva" title="Link to this heading">#</a></h2>
+<p>La misma idea se puede escribir de forma recursiva: cada llamada recibe un rango <code class="docutils literal notranslate"><span class="pre">[lo,</span> <span class="pre">hi]</span></code> más pequeño que la anterior,
+hasta llegar al caso base (rango vacío, o se encontró el objetivo). Es el mismo patrón de <strong>divide y vencerás</strong> que vimos
+en la Unidad 2 con <code class="docutils literal notranslate"><span class="pre">potencia_dyc</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">busqueda_binaria_recursiva</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">,</span> <span class="n">lo</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">hi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Version recursiva de busqueda binaria. Usa el mismo rango [lo, hi] que la iterativa."""</span>
+    <span class="k">if</span> <span class="n">hi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">hi</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># Caso base: rango vacio -&gt; no encontrado</span>
+    <span class="k">if</span> <span class="n">lo</span> <span class="o">&gt;</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mid</span>
+    <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">objetivo</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">busqueda_binaria_recursiva</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">,</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hi</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">busqueda_binaria_recursiva</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">,</span> <span class="n">lo</span><span class="p">,</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># Debe dar exactamente los mismos resultados que la version iterativa</span>
+<span class="k">for</span> <span class="n">objetivo</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+    <span class="k">assert</span> <span class="n">busqueda_binaria_recursiva</span><span class="p">(</span><span class="n">valores</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">==</span> <span class="n">busqueda_binaria</span><span class="p">(</span><span class="n">valores</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"La version recursiva coincide con la iterativa para todos los casos probados."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La version recursiva coincide con la iterativa para todos los casos probados.
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="requisito-orden"></a></p>
+</section>
+<section id="por-que-importa-que-la-lista-este-ordenada">
+<h2>4) ¿Por qué importa que la lista esté ordenada?<a class="headerlink" href="#por-que-importa-que-la-lista-este-ordenada" title="Link to this heading">#</a></h2>
+<p>La búsqueda binaria <strong>asume</strong> que puede descartar la mitad de la lista con una sola comparación. Eso solo es válido si
+la lista está ordenada: si el elemento del medio es mayor que el objetivo, <em>todos</em> los elementos a su derecha también lo
+son (porque están ordenados) — por eso es seguro descartarlos.</p>
+<p>Si la lista <strong>no</strong> está ordenada, esa suposición se rompe y la búsqueda binaria puede dar resultados incorrectos, aunque
+el elemento sí esté en la lista.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lista_desordenada</span> <span class="o">=</span> <span class="p">[</span><span class="mi">34</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">62</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+
+<span class="c1"># 9 SI esta en la lista (en el indice 7), pero la lista no esta ordenada</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">busqueda_binaria</span><span class="p">(</span><span class="n">lista_desordenada</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"busqueda_binaria dice: indice </span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"pero 9 SI esta en la lista, en el indice </span><span class="si">{</span><span class="n">lista_desordenada</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"busqueda_binaria asumio que podia descartar mitades como si la lista estuviera ordenada, y se equivoco."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Moraleja: si la lista no esta ordenada, usa busqueda_lineal (o primero ordena con sorted())."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>busqueda_binaria dice: indice -1
+pero 9 SI esta en la lista, en el indice 7
+busqueda_binaria asumio que podia descartar mitades como si la lista estuviera ordenada, y se equivoco.
+Moraleja: si la lista no esta ordenada, usa busqueda_lineal (o primero ordena con sorted()).
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="rendimiento"></a></p>
+</section>
+<section id="comparacion-de-rendimiento-o-n-vs-o-log-n">
+<h2>5) Comparación de rendimiento: O(n) vs O(log n)<a class="headerlink" href="#comparacion-de-rendimiento-o-n-vs-o-log-n" title="Link to this heading">#</a></h2>
+<p>La diferencia entre O(n) y O(log n) parece pequeña en el papel, pero crece muchísimo con el tamaño de la lista. Vamos a
+contar cuántas <strong>comparaciones</strong> hace cada algoritmo (no el tiempo en segundos, que depende de la máquina) buscando el
+peor caso: un valor que no está en la lista.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">busqueda_lineal_contada</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Igual que busqueda_lineal, pero retorna el numero de comparaciones realizadas."""</span>
+    <span class="n">comparaciones</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">valor</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="n">comparaciones</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">valor</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">comparaciones</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">busqueda_binaria_contada</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Igual que busqueda_binaria, pero retorna el numero de comparaciones realizadas."""</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">comparaciones</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">comparaciones</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">comparaciones</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'tamano n'</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'lineal (peor caso)'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'binaria (peor caso)'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">1_000_000</span><span class="p">]:</span>
+    <span class="n">lista_ordenada</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">objetivo</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># no esta en la lista -&gt; fuerza el peor caso en ambas</span>
+    <span class="n">c_lin</span> <span class="o">=</span> <span class="n">busqueda_lineal_contada</span><span class="p">(</span><span class="n">lista_ordenada</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
+    <span class="n">c_bin</span> <span class="o">=</span> <span class="n">busqueda_binaria_contada</span><span class="p">(</span><span class="n">lista_ordenada</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">c_lin</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">c_bin</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  tamano n |   lineal (peor caso) |  binaria (peor caso)
+        10 |                   10 |                    3
+       100 |                  100 |                    6
+      1000 |                 1000 |                    9
+     10000 |                10000 |                   13
+    100000 |               100000 |                   16
+   1000000 |              1000000 |                   19
+</pre></div>
+</div>
+</div>
+</div>
+<p>Con un millón de elementos, la búsqueda lineal necesita hasta un millón de comparaciones en el peor caso, mientras que
+la binaria necesita apenas unas 20 — esa es la diferencia entre O(n) y O(log n) en la práctica.</p>
+<p><a id="variantes"></a></p>
+</section>
+<section id="variantes-utiles-primera-y-ultima-ocurrencia">
+<h2>6) Variantes útiles: primera y última ocurrencia<a class="headerlink" href="#variantes-utiles-primera-y-ultima-ocurrencia" title="Link to this heading">#</a></h2>
+<p>Si la lista ordenada tiene <strong>valores repetidos</strong>, la búsqueda binaria estándar encuentra <em>alguna</em> ocurrencia del
+objetivo, pero no necesariamente la primera. Con un pequeño ajuste (seguir buscando hacia un lado en vez de parar de
+inmediato) se puede encontrar específicamente la primera o la última.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">primera_ocurrencia</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Retorna el indice de la PRIMERA aparicion de objetivo en arr (ordenada), o -1 si no esta."""</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="n">resultado</span> <span class="o">=</span> <span class="n">mid</span>       <span class="c1"># candidato encontrado, pero puede haber uno mas a la izquierda</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ultima_ocurrencia</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Retorna el indice de la ULTIMA aparicion de objetivo en arr (ordenada), o -1 si no esta."""</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="n">resultado</span> <span class="o">=</span> <span class="n">mid</span>       <span class="c1"># candidato encontrado, pero puede haber uno mas a la derecha</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">resultado</span>
+
+
+<span class="n">con_repetidos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"primera aparicion de 3:"</span><span class="p">,</span> <span class="n">primera_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ultima aparicion de 3 :"</span><span class="p">,</span> <span class="n">ultima_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"cuantas veces aparece 3:"</span><span class="p">,</span> <span class="n">ultima_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">primera_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>primera aparicion de 3: 1
+ultima aparicion de 3 : 4
+cuantas veces aparece 3: 4
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="ejercicios"></a></p>
+</section>
+<section id="ejercicios-propuestos">
+<h2>7) Ejercicios propuestos<a class="headerlink" href="#ejercicios-propuestos" title="Link to this heading">#</a></h2>
+<p>Completa las siguientes funciones (los <code class="docutils literal notranslate"><span class="pre">TODO</span></code> marcan lo que falta). Puedes usar <code class="docutils literal notranslate"><span class="pre">assert</span></code> para probar tus propias
+soluciones antes de revisar las de referencia.</p>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">contar_ocurrencias</span></code></strong>: usando <code class="docutils literal notranslate"><span class="pre">primera_ocurrencia</span></code> y <code class="docutils literal notranslate"><span class="pre">ultima_ocurrencia</span></code>, cuenta cuántas veces aparece un valor en
+una lista ordenada, en O(log n).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">busqueda_lineal_todas</span></code></strong>: retorna una lista con <strong>todos</strong> los índices donde aparece el objetivo (no solo el
+primero), recorriendo la lista una sola vez.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">existe_en_alguna</span></code></strong>: dado un valor y una lista de listas ordenadas, retorna <code class="docutils literal notranslate"><span class="pre">True</span></code> si el valor aparece en
+<em>alguna</em> de ellas (usa búsqueda binaria en cada una).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">indice_insercion</span></code></strong>: dado un valor y una lista ordenada donde el valor <strong>no</strong> está, retorna el índice donde
+habría que insertarlo para mantener el orden (pista: es una variante de búsqueda binaria que no necesita encontrar
+una igualdad exacta).</p></li>
+<li><p><strong>Reto — búsqueda en lista rotada</strong>: una lista ordenada fue “rotada” (por ejemplo <code class="docutils literal notranslate"><span class="pre">[23,</span> <span class="pre">34,</span> <span class="pre">41,</span> <span class="pre">2,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">12,</span> <span class="pre">16]</span></code>).
+Diseña <code class="docutils literal notranslate"><span class="pre">busqueda_en_rotada(arr,</span> <span class="pre">objetivo)</span></code> que encuentre el objetivo en O(log n) sin ordenar la lista primero.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">contar_ocurrencias</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="c1"># TODO: usa primera_ocurrencia y ultima_ocurrencia</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">busqueda_lineal_todas</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="c1"># TODO: retorna una lista con todos los indices donde aparece objetivo</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">existe_en_alguna</span><span class="p">(</span><span class="n">listas_ordenadas</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="c1"># TODO: retorna True si objetivo aparece en alguna de las listas (todas ordenadas)</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">indice_insercion</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="c1"># TODO: retorna el indice donde insertar objetivo para mantener el orden</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">busqueda_en_rotada</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="c1"># TODO (reto): busqueda binaria adaptada a una lista ordenada rotada</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="soluciones"></a></p>
+</section>
+<section id="soluciones-de-referencia-opcional">
+<h2>8) Soluciones de referencia (opcional)<a class="headerlink" href="#soluciones-de-referencia-opcional" title="Link to this heading">#</a></h2>
+<p>Solo se muestran las soluciones de los ejercicios 1 y 4 — intenta resolver el resto por tu cuenta antes de buscar
+más ayuda.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solucion_contar_ocurrencias</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">primera</span> <span class="o">=</span> <span class="n">primera_ocurrencia</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">primera</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="n">ultima</span> <span class="o">=</span> <span class="n">ultima_ocurrencia</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ultima</span> <span class="o">-</span> <span class="n">primera</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">solucion_indice_insercion</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">lo</span>  <span class="c1"># lo termina apuntando al primer indice donde objetivo "cabria"</span>
+
+
+<span class="k">assert</span> <span class="n">solucion_contar_ocurrencias</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+<span class="k">assert</span> <span class="n">solucion_contar_ocurrencias</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="k">assert</span> <span class="n">solucion_indice_insercion</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="mi">9</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="k">assert</span> <span class="n">solucion_indice_insercion</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="k">assert</span> <span class="n">solucion_indice_insercion</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="mi">20</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Las soluciones de referencia pasan todas las pruebas."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Las soluciones de referencia pasan todas las pruebas.
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="apendice"></a></p>
+</section>
+<section id="apendice">
+<h2>9) Apéndice<a class="headerlink" href="#apendice" title="Link to this heading">#</a></h2>
+<section id="cual-algoritmo-usar">
+<h3>¿Cuál algoritmo usar?<a class="headerlink" href="#cual-algoritmo-usar" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Situación</p></th>
+<th class="head"><p>Usa</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Lista pequeña, o no está ordenada</p></td>
+<td><p>Búsqueda lineal</p></td>
+</tr>
+<tr class="row-odd"><td><p>Lista grande y ya ordenada</p></td>
+<td><p>Búsqueda binaria</p></td>
+</tr>
+<tr class="row-even"><td><p>Lista grande, no ordenada, y vas a buscar muchas veces</p></td>
+<td><p>Ordénala una vez (<code class="docutils literal notranslate"><span class="pre">sorted()</span></code>) y luego usa búsqueda binaria</p></td>
+</tr>
+<tr class="row-odd"><td><p>Necesitas contar repeticiones o encontrar límites de un rango</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">primera_ocurrencia</span></code> / <code class="docutils literal notranslate"><span class="pre">ultima_ocurrencia</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="errores-frecuentes">
+<h3>Errores frecuentes<a class="headerlink" href="#errores-frecuentes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Usar búsqueda binaria en una lista <strong>no ordenada</strong> — el resultado no es confiable (puede decir “no está” cuando sí
+está).</p></li>
+<li><p>Calcular mal el punto medio o los límites <code class="docutils literal notranslate"><span class="pre">lo</span></code>/<code class="docutils literal notranslate"><span class="pre">hi</span></code>, dejando el ciclo en un <strong>bucle infinito</strong> (por ejemplo, olvidar
+<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1</span></code> o <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">1</span></code> al mover <code class="docutils literal notranslate"><span class="pre">lo</span></code>/<code class="docutils literal notranslate"><span class="pre">hi</span></code>).</p></li>
+<li><p>Confundir “no encontrado” (<code class="docutils literal notranslate"><span class="pre">-1</span></code>) con un índice válido — siempre revisa el valor de retorno antes de usarlo para
+indexar la lista.</p></li>
+</ul>
+</section>
+<section id="material-de-apoyo">
+<h3>Material de apoyo<a class="headerlink" href="#material-de-apoyo" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Página de teoría de esta sección: <a class="reference internal" href="Busqueda.html"><span class="std std-doc">Busqueda</span></a></p></li>
+</ul>
+<blockquote>
+<div><p>La búsqueda binaria es el primer ejemplo concreto de por qué la complejidad algorítmica importa: la misma tarea,
+resuelta con una idea distinta, pasa de ser impráctica a instantánea en listas grandes.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Busqueda.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Búsqueda</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Ordenamiento.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ordenamiento</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-lineal">1) Búsqueda lineal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea-basica">Idea básica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pseudocodigo">Pseudocódigo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad">Complejidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-con-busqueda-lineal">Ejemplo con búsqueda lineal</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-binaria-iterativa">2) Búsqueda binaria (iterativa)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Idea básica</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Pseudocódigo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Complejidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-con-busqueda-binaria">Ejemplo con búsqueda binaria</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busqueda-binaria-recursiva">3) Búsqueda binaria (recursiva)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-importa-que-la-lista-este-ordenada">4) ¿Por qué importa que la lista esté ordenada?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-rendimiento-o-n-vs-o-log-n">5) Comparación de rendimiento: O(n) vs O(log n)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variantes-utiles-primera-y-ultima-ocurrencia">6) Variantes útiles: primera y última ocurrencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos">7) Ejercicios propuestos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-de-referencia-opcional">8) Soluciones de referencia (opcional)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice">9) Apéndice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cual-algoritmo-usar">¿Cuál algoritmo usar?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-frecuentes">Errores frecuentes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#material-de-apoyo">Material de apoyo</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Santiago Barrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

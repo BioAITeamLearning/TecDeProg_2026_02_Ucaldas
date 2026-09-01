@@ -112,7 +112,7 @@ backtracking.
 :::
 
 :::{grid-item-card}
-:link: Tema_1_2_Sentencias_libs_text_list_dict_inputs_Condicionales_10_08_2023
+:link: Unidad2
 :link-type: doc
 :class-header: bg-light
 :class-body: text-start
@@ -129,7 +129,7 @@ backtracking.
 :::
 
 :::{grid-item-card}
-:link: Tema_1_3_Estruct_repetitivas_funciones_10_08_2023
+:link: Unidad3
 :link-type: doc
 :class-header: bg-light
 :class-body: text-start
