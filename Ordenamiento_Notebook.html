@@ -521,8 +521,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-rendimiento">5) Comparación de rendimiento</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa">6) Tabla comparativa</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos">7) Ejercicios propuestos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-de-referencia-opcional">8) Soluciones de referencia (opcional)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice">9) Apéndice</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice">8) Apéndice</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cual-algoritmo-usar">¿Cuál algoritmo usar?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-frecuentes">Errores frecuentes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#material-de-apoyo">Material de apoyo</a></li>
@@ -561,7 +560,6 @@ ejercicios propuestos.</p>
 <li><p><a class="reference internal" href="#rendimiento"><span class="xref myst">Comparación de rendimiento</span></a></p></li>
 <li><p><a class="reference internal" href="#comparativa"><span class="xref myst">Tabla comparativa</span></a></p></li>
 <li><p><a class="reference internal" href="#ejercicios"><span class="xref myst">Ejercicios propuestos</span></a></p></li>
-<li><p><a class="reference internal" href="#soluciones"><span class="xref myst">Soluciones de referencia (opcional)</span></a></p></li>
 <li><p><a class="reference internal" href="#apendice"><span class="xref myst">Apéndice: cuándo usar cada uno y material de apoyo</span></a></p></li>
 </ol>
 <p><a id="apoyo"></a></p>
@@ -1026,53 +1024,10 @@ para ordenarla por <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 </div>
-<p><a id="soluciones"></a></p>
-</section>
-<section id="soluciones-de-referencia-opcional">
-<h2>8) Soluciones de referencia (opcional)<a class="headerlink" href="#soluciones-de-referencia-opcional" title="Link to this heading">#</a></h2>
-<p>Solo se muestran las soluciones de los ejercicios 1 y 3 — intenta resolver el resto por tu cuenta antes de buscar
-más ayuda.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solucion_bubble_sort_descendente</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">hubo_intercambio</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>      <span class="c1"># unico cambio: &lt; en vez de &gt;</span>
-                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                <span class="n">hubo_intercambio</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">hubo_intercambio</span><span class="p">:</span>
-            <span class="k">break</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">solucion_esta_ordenada</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">return</span> <span class="kc">True</span>
-
-
-<span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-<span class="n">solucion_bubble_sort_descendente</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">datos</span> <span class="o">==</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-
-<span class="k">assert</span> <span class="n">solucion_esta_ordenada</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span> <span class="ow">is</span> <span class="kc">True</span>
-<span class="k">assert</span> <span class="n">solucion_esta_ordenada</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="ow">is</span> <span class="kc">False</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Las soluciones de referencia pasan todas las pruebas."</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Las soluciones de referencia pasan todas las pruebas.
-</pre></div>
-</div>
-</div>
-</div>
 <p><a id="apendice"></a></p>
 </section>
 <section id="apendice">
-<h2>9) Apéndice<a class="headerlink" href="#apendice" title="Link to this heading">#</a></h2>
+<h2>8) Apéndice<a class="headerlink" href="#apendice" title="Link to this heading">#</a></h2>
 <section id="cual-algoritmo-usar">
 <h3>¿Cuál algoritmo usar?<a class="headerlink" href="#cual-algoritmo-usar" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -1205,8 +1160,7 @@ mejor cómo funciona cada algoritmo.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-rendimiento">5) Comparación de rendimiento</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-comparativa">6) Tabla comparativa</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos">7) Ejercicios propuestos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#soluciones-de-referencia-opcional">8) Soluciones de referencia (opcional)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice">9) Apéndice</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice">8) Apéndice</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cual-algoritmo-usar">¿Cuál algoritmo usar?</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errores-frecuentes">Errores frecuentes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#material-de-apoyo">Material de apoyo</a></li>
