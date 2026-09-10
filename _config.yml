@@ -6,6 +6,14 @@ author: Santiago Barrero
 copyright: "2026"
 logo: _static/images/logosem.png
 
+# Archivos y carpetas que Sphinx NO debe indexar como parte del libro.
+# Sin esto, el entorno virtual .venv/ se escanea entero (55 warnings de toctree).
+exclude_patterns:
+  - .venv
+  - _build
+  - README.md
+  - "**.ipynb_checkpoints"
+
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
