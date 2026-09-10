@@ -779,9 +779,13 @@ peor caso: un valor que no está en la lista.</p>
         <span class="k">if</span> <span class="n">valor</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
             <span class="k">break</span>
     <span class="k">return</span> <span class="n">comparaciones</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">busqueda_binaria_contada</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">busqueda_binaria_contada</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Igual que busqueda_binaria, pero retorna el numero de comparaciones realizadas."""</span>
     <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">comparaciones</span> <span class="o">=</span> <span class="mi">0</span>
@@ -795,26 +799,19 @@ peor caso: un valor que no está en la lista.</p>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">comparaciones</span>
-
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'tamano n'</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'lineal (peor caso)'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'binaria (peor caso)'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'tamano n'</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'lineal (peor caso)'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">'binaria (peor caso)'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">1_000_000</span><span class="p">]:</span>
     <span class="n">lista_ordenada</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     <span class="n">objetivo</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># no esta en la lista -&gt; fuerza el peor caso en ambas</span>
     <span class="n">c_lin</span> <span class="o">=</span> <span class="n">busqueda_lineal_contada</span><span class="p">(</span><span class="n">lista_ordenada</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
     <span class="n">c_bin</span> <span class="o">=</span> <span class="n">busqueda_binaria_contada</span><span class="p">(</span><span class="n">lista_ordenada</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">c_lin</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">c_bin</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  tamano n |   lineal (peor caso) |  binaria (peor caso)
-        10 |                   10 |                    3
-       100 |                  100 |                    6
-      1000 |                 1000 |                    9
-     10000 |                10000 |                   13
-    100000 |               100000 |                   16
-   1000000 |              1000000 |                   19
 </pre></div>
 </div>
 </div>
@@ -844,9 +841,13 @@ inmediato) se puede encontrar específicamente la primera o la última.</p>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ultima_ocurrencia</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ultima_ocurrencia</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Retorna el indice de la ULTIMA aparicion de objetivo en arr (ordenada), o -1 si no esta."""</span>
     <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
@@ -860,19 +861,16 @@ inmediato) se puede encontrar específicamente la primera o la última.</p>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="n">con_repetidos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"primera aparicion de 3:"</span><span class="p">,</span> <span class="n">primera_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"ultima aparicion de 3 :"</span><span class="p">,</span> <span class="n">ultima_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"cuantas veces aparece 3:"</span><span class="p">,</span> <span class="n">ultima_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">primera_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>primera aparicion de 3: 1
-ultima aparicion de 3 : 4
-cuantas veces aparece 3: 4
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">con_repetidos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"primera aparicion de 3:"</span><span class="p">,</span> <span class="n">primera_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"ultima aparicion de 3 :"</span><span class="p">,</span> <span class="n">ultima_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"cuantas veces aparece 3:"</span><span class="p">,</span> <span class="n">ultima_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">primera_ocurrencia</span><span class="p">(</span><span class="n">con_repetidos</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -900,24 +898,40 @@ Diseña <code class="docutils literal notranslate"><span class="pre">busqueda_en
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">contar_ocurrencias</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="c1"># TODO: usa primera_ocurrencia y ultima_ocurrencia</span>
     <span class="k">pass</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">busqueda_lineal_todas</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">busqueda_lineal_todas</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
     <span class="c1"># TODO: retorna una lista con todos los indices donde aparece objetivo</span>
     <span class="k">pass</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">existe_en_alguna</span><span class="p">(</span><span class="n">listas_ordenadas</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">existe_en_alguna</span><span class="p">(</span><span class="n">listas_ordenadas</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="c1"># TODO: retorna True si objetivo aparece en alguna de las listas (todas ordenadas)</span>
     <span class="k">pass</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">indice_insercion</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">indice_insercion</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="c1"># TODO: retorna el indice donde insertar objetivo para mantener el orden</span>
     <span class="k">pass</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">busqueda_en_rotada</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">busqueda_en_rotada</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="c1"># TODO (reto): busqueda binaria adaptada a una lista ordenada rotada</span>
     <span class="k">pass</span>
 </pre></div>

@@ -553,12 +553,22 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">crear_cola</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">"""Crea y retorna una cola vacía (lista)."""</span>
     <span class="k">return</span> <span class="p">[]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">encolar</span><span class="p">(</span><span class="n">cola</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">encolar</span><span class="p">(</span><span class="n">cola</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Enqueue: agrega un elemento al final de la cola."""</span>
     <span class="n">cola</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">desencolar</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">desencolar</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Dequeue: elimina y retorna el elemento del frente de la cola.</span>
 <span class="sd">    Retorna None si está vacía.</span>
@@ -567,20 +577,35 @@
     <span class="k">if</span> <span class="n">esta_vacia_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">cola</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">frente</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">frente</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Peek front: retorna el elemento al frente sin eliminarlo. None si vacía."""</span>
     <span class="k">if</span> <span class="n">esta_vacia_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">cola</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">final</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">final</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Peek back: retorna el último elemento sin eliminarlo. None si vacía."""</span>
     <span class="k">if</span> <span class="n">esta_vacia_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">cola</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">esta_vacia_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">esta_vacia_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""True si la cola no tiene elementos."""</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">cola</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 </pre></div>
@@ -595,8 +620,13 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tamanio_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Cantidad de elementos en la cola."""</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">cola</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">vaciar_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">vaciar_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Elimina todos los elementos de la cola."""</span>
     <span class="n">cola</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 </pre></div>
@@ -621,8 +651,13 @@
         <span class="n">recorrido</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">recorrido</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">buscar_en_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">buscar_en_cola</span><span class="p">(</span><span class="n">cola</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Busca 'objetivo' en la cola usando ciclo.</span>
 <span class="sd">    Retorna el índice relativo al frente (0 es frente) o -1 si no está.</span>
@@ -643,24 +678,7 @@
 <h2>Demostración<a class="headerlink" href="#demostracion" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
-    <span class="c1"># Cola</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="n">crear_cola</span><span class="p">()</span>
-    <span class="n">encolar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">)</span>
-    <span class="n">encolar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">)</span>
-    <span class="n">encolar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Cola:"</span><span class="p">,</span> <span class="n">recorrer_cola</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>                       <span class="c1"># ['A', 'B', 'C']</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Frente:"</span><span class="p">,</span> <span class="n">frente</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>                            <span class="c1"># 'A'</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Desencolar:"</span><span class="p">,</span> <span class="n">desencolar</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>                    <span class="c1"># 'A'</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Cola ahora:"</span><span class="p">,</span> <span class="n">recorrer_cola</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>                 <span class="c1"># ['B', 'C']</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cola: ['A', 'B', 'C']
-Frente: A
-Desencolar: A
-Cola ahora: ['B', 'C']
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>

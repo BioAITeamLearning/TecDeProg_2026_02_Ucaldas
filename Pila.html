@@ -553,28 +553,53 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">crear_pila</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">"""Crea y retorna una pila vacía (lista)."""</span>
     <span class="k">return</span> <span class="p">[]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">apilar</span><span class="p">(</span><span class="n">pila</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apilar</span><span class="p">(</span><span class="n">pila</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Push: agrega un elemento en la cima de la pila."""</span>
     <span class="n">pila</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">desapilar</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">desapilar</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Pop: elimina y retorna el elemento en la cima. Retorna None si está vacía."""</span>
     <span class="k">if</span> <span class="n">esta_vacia_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">pila</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">cima</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cima</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Peek: retorna el elemento en la cima sin eliminarlo. Retorna None si está vacía."""</span>
     <span class="k">if</span> <span class="n">esta_vacia_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">pila</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">esta_vacia_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">esta_vacia_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""True si la pila no tiene elementos."""</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">pila</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">tamanio_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tamanio_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Cantidad de elementos en la pila."""</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">pila</span><span class="p">)</span>
 </pre></div>
@@ -620,8 +645,13 @@
             <span class="n">recorrido</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pila</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">recorrido</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">buscar_en_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">buscar_en_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Busca 'objetivo' en la pila usando ciclo.</span>
 <span class="sd">    Retorna el índice relativo a la base (0 es fondo) o -1 si no está.</span>
@@ -652,8 +682,13 @@
         <span class="n">copia</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pila</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">copia</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">invertir_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">invertir_pila</span><span class="p">(</span><span class="n">pila</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Invierte la pila in-place usando solo pops y appends (a pedal)."""</span>
     <span class="n">aux</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># pasar todo a aux (quedará en orden invertido)</span>
@@ -671,27 +706,7 @@
 <h2>Demostración<a class="headerlink" href="#demostracion" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
-    <span class="c1"># Pila</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">crear_pila</span><span class="p">()</span>
-    <span class="n">apilar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-    <span class="n">apilar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-    <span class="n">apilar</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Pila (desde cima):"</span><span class="p">,</span> <span class="n">recorrer_pila</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>   <span class="c1"># [30, 20, 10]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Cima:"</span><span class="p">,</span> <span class="n">cima</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>                                <span class="c1"># 30</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Desapilar:"</span><span class="p">,</span> <span class="n">desapilar</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>                      <span class="c1"># 30</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Pila ahora:"</span><span class="p">,</span> <span class="n">recorrer_pila</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>           <span class="c1"># [20, 10]</span>
-    <span class="n">invertir_pila</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Pila invertida:"</span><span class="p">,</span> <span class="n">recorrer_pila</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>       <span class="c1"># [10, 20]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pila (desde cima): [30, 20, 10]
-Cima: 30
-Desapilar: 30
-Pila ahora: [20, 10]
-Pila invertida: [20, 10]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>

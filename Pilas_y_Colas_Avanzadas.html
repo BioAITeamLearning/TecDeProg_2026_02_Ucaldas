@@ -508,7 +508,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recorrido-de-grafos-bfs-con-cola">Recorrido de grafos: <strong>BFS</strong> con cola</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backtracking-con-pila-implicita-recursion-o-explicita">Backtracking con pila implícita (recursión) o explícita</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#micro-benchmark-lista-vs-deque-insercion-eliminacion-al-inicio">Micro-benchmark: lista vs <code class="docutils literal notranslate"><span class="pre">deque</span></code> (inserción/eliminación al inicio)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-practico-sistema-de-turnos-medicos-con-prioridad">Ejercicio práctico: <strong>Sistema de Turnos Médicos</strong> (con prioridad)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-aplicado-sistema-de-turnos-medicos-con-prioridad">Ejemplo aplicado: <strong>Sistema de Turnos Médicos</strong> (con prioridad)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-aplicado-historial-de-navegacion-atras-y-adelante">Ejercicio aplicado: <strong>Historial de navegación</strong> (atrás y adelante)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-guiados">Ejercicios guiados</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-rapidas-sanity-checks">Pruebas rápidas (sanity checks)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preguntas-de-reflexion">Preguntas de reflexión</a></li>
@@ -770,8 +771,13 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Queue</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Queue</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -833,8 +839,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tiempo_original</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tiempo_cpu</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nombre</span><span class="si">}</span><span class="s2">(restante=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tiempo_restante</span><span class="si">}</span><span class="s2">)"</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">round_robin</span><span class="p">(</span><span class="n">procesos</span><span class="p">,</span> <span class="n">quantum</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">round_robin</span><span class="p">(</span><span class="n">procesos</span><span class="p">,</span> <span class="n">quantum</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">cola</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">procesos</span><span class="p">:</span>
         <span class="n">cola</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -849,22 +860,15 @@
         <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">tiempo_restante</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">cola</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">timeline</span><span class="p">,</span> <span class="n">tiempo</span>
-
-<span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Proceso</span><span class="p">(</span><span class="s2">"P1"</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">Proceso</span><span class="p">(</span><span class="s2">"P2"</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="n">Proceso</span><span class="p">(</span><span class="s2">"P3"</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
-<span class="n">tl</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">round_robin</span><span class="p">(</span><span class="n">procs</span><span class="p">,</span> <span class="n">quantum</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">tl</span><span class="p">,</span> <span class="n">total</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([(0, 'P1', 3),
-  (3, 'P2', 3),
-  (6, 'P3', 3),
-  (9, 'P1', 2),
-  (11, 'P2', 3),
-  (14, 'P3', 1),
-  (15, 'P2', 3)],
- 18)
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">procs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Proceso</span><span class="p">(</span><span class="s2">"P1"</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">Proceso</span><span class="p">(</span><span class="s2">"P2"</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="n">Proceso</span><span class="p">(</span><span class="s2">"P3"</span><span class="p">,</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">tl</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">round_robin</span><span class="p">(</span><span class="n">procs</span><span class="p">,</span> <span class="n">quantum</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tl</span><span class="p">,</span> <span class="n">total</span>
 </pre></div>
 </div>
 </div>
@@ -1149,8 +1153,8 @@ deque (appendleft/popleft): 0.001 s
 </div>
 </div>
 </section>
-<section id="ejercicio-practico-sistema-de-turnos-medicos-con-prioridad">
-<h2>Ejercicio práctico: <strong>Sistema de Turnos Médicos</strong> (con prioridad)<a class="headerlink" href="#ejercicio-practico-sistema-de-turnos-medicos-con-prioridad" title="Link to this heading">#</a></h2>
+<section id="ejemplo-aplicado-sistema-de-turnos-medicos-con-prioridad">
+<h2>Ejemplo aplicado: <strong>Sistema de Turnos Médicos</strong> (con prioridad)<a class="headerlink" href="#ejemplo-aplicado-sistema-de-turnos-medicos-con-prioridad" title="Link to this heading">#</a></h2>
 <blockquote>
 <div><p>Requerimiento: gestionar cola general y cola de <strong>urgencias</strong> (prioridad). Atender siempre primero urgencias.</p>
 </div></blockquote>
@@ -1198,6 +1202,59 @@ deque (appendleft/popleft): 0.001 s
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(['Luis', 'Carlos', 'Ana', 'María'], 4)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-aplicado-historial-de-navegacion-atras-y-adelante">
+<h2>Ejercicio aplicado: <strong>Historial de navegación</strong> (atrás y adelante)<a class="headerlink" href="#ejercicio-aplicado-historial-de-navegacion-atras-y-adelante" title="Link to this heading">#</a></h2>
+<p>El ejemplo de arriba resolvió un problema de <strong>colas</strong>. Este es su contraparte con <strong>pilas</strong>, y es el
+que te toca a ti.</p>
+<p>Un navegador guarda por dónde has pasado con <strong>dos pilas</strong>: una de páginas anteriores y otra de
+páginas que dejaste atrás al usar el botón <em>atrás</em>.</p>
+<p>Implementa una clase <code class="docutils literal notranslate"><span class="pre">Historial</span></code> con:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>Qué hace</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">visitar(url)</span></code></p></td>
+<td><p>entra a una página nueva</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">atras()</span></code></p></td>
+<td><p>vuelve a la anterior y la retorna; si no hay, retorna <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">adelante()</span></code></p></td>
+<td><p>rehace el último <em>atrás</em>; si no hay, retorna <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">actual()</span></code></p></td>
+<td><p>retorna la página en la que estás parado</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>La regla que hace interesante el problema:</strong> cuando visitas una página nueva <em>después</em> de haber
+ido atrás, el camino de “adelante” <strong>se pierde</strong> — igual que en un navegador real.</p>
+<p>Comprueba tu solución con esta secuencia:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">Historial</span><span class="p">()</span>
+<span class="n">h</span><span class="o">.</span><span class="n">visitar</span><span class="p">(</span><span class="s2">"uni.edu"</span><span class="p">)</span>
+<span class="n">h</span><span class="o">.</span><span class="n">visitar</span><span class="p">(</span><span class="s2">"uni.edu/notas"</span><span class="p">)</span>
+<span class="n">h</span><span class="o">.</span><span class="n">visitar</span><span class="p">(</span><span class="s2">"uni.edu/notas/2026"</span><span class="p">)</span>
+<span class="n">h</span><span class="o">.</span><span class="n">atras</span><span class="p">()</span>        <span class="c1"># -&gt; 'uni.edu/notas'</span>
+<span class="n">h</span><span class="o">.</span><span class="n">atras</span><span class="p">()</span>        <span class="c1"># -&gt; 'uni.edu'</span>
+<span class="n">h</span><span class="o">.</span><span class="n">adelante</span><span class="p">()</span>     <span class="c1"># -&gt; 'uni.edu/notas'</span>
+<span class="n">h</span><span class="o">.</span><span class="n">visitar</span><span class="p">(</span><span class="s2">"uni.edu/horario"</span><span class="p">)</span>
+<span class="n">h</span><span class="o">.</span><span class="n">adelante</span><span class="p">()</span>     <span class="c1"># -&gt; None  (el camino de adelante se borro al visitar)</span>
+<span class="n">h</span><span class="o">.</span><span class="n">actual</span><span class="p">()</span>       <span class="c1"># -&gt; 'uni.edu/horario'</span>
+</pre></div>
+</div>
+<p><strong>Para pensar:</strong> ¿por qué dos pilas y no dos colas? ¿Qué pasaría si usaras <code class="docutils literal notranslate"><span class="pre">pop(0)</span></code> en lugar de <code class="docutils literal notranslate"><span class="pre">pop()</span></code>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
@@ -1363,7 +1420,8 @@ deque (appendleft/popleft): 0.001 s
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recorrido-de-grafos-bfs-con-cola">Recorrido de grafos: <strong>BFS</strong> con cola</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backtracking-con-pila-implicita-recursion-o-explicita">Backtracking con pila implícita (recursión) o explícita</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#micro-benchmark-lista-vs-deque-insercion-eliminacion-al-inicio">Micro-benchmark: lista vs <code class="docutils literal notranslate"><span class="pre">deque</span></code> (inserción/eliminación al inicio)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-practico-sistema-de-turnos-medicos-con-prioridad">Ejercicio práctico: <strong>Sistema de Turnos Médicos</strong> (con prioridad)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-aplicado-sistema-de-turnos-medicos-con-prioridad">Ejemplo aplicado: <strong>Sistema de Turnos Médicos</strong> (con prioridad)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-aplicado-historial-de-navegacion-atras-y-adelante">Ejercicio aplicado: <strong>Historial de navegación</strong> (atrás y adelante)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-guiados">Ejercicios guiados</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-rapidas-sanity-checks">Pruebas rápidas (sanity checks)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preguntas-de-reflexion">Preguntas de reflexión</a></li>

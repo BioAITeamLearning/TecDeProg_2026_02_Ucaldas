@@ -652,8 +652,13 @@ de poder multiplicar y retornar.</p>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">resultado</span> <span class="o">*=</span> <span class="n">i</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">factorial_pila</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_pila</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Calcula n! de forma recursiva de PILA: la multiplicación por n queda pendiente</span>
 <span class="sd">    hasta que regresa la llamada de n-1."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -663,16 +668,16 @@ de poder multiplicar y retornar.</p>
     <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>   <span class="c1"># Caso base</span>
         <span class="k">return</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># &lt;- multiplicar por n queda PENDIENTE hasta que vuelva la llamada</span>
-
-<span class="c1"># Pruebas rápidas</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">factorial_iterativo</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: factorial iterativo y recursivo (de pila) producen el mismo resultado para k=0..5"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: factorial iterativo y recursivo (de pila) producen el mismo resultado para k=0..5
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas rápidas</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">factorial_iterativo</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: factorial iterativo y recursivo (de pila) producen el mismo resultado para k=0..5"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -689,23 +694,27 @@ aproximación <strong>de cola</strong> (<code class="docutils literal notranslat
     <span class="k">if</span> <span class="ow">not</span> <span class="n">xs</span><span class="p">:</span>                <span class="c1"># Caso base: lista vacía</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">suma_lista_pila</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>  <span class="c1"># &lt;- suma pendiente hasta que vuelve la llamada</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">suma_lista_cola</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">acumulador</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">suma_lista_cola</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">acumulador</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Patrón ÍNDICE, recursión DE COLA: el acumulador ya lleva la respuesta parcial,</span>
 <span class="sd">    no queda ninguna operación pendiente al volver."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">xs</span><span class="p">:</span>                <span class="c1"># Caso base</span>
         <span class="k">return</span> <span class="n">acumulador</span>
     <span class="k">return</span> <span class="n">suma_lista_cola</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">acumulador</span> <span class="o">+</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># &lt;- la llamada recursiva ES el resultado final</span>
-
-<span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"suma_lista_pila:"</span><span class="p">,</span> <span class="n">suma_lista_pila</span><span class="p">(</span><span class="n">datos</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"suma_lista_cola:"</span><span class="p">,</span> <span class="n">suma_lista_cola</span><span class="p">(</span><span class="n">datos</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>suma_lista_pila: 15
-suma_lista_cola: 15
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"suma_lista_pila:"</span><span class="p">,</span> <span class="n">suma_lista_pila</span><span class="p">(</span><span class="n">datos</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"suma_lista_cola:"</span><span class="p">,</span> <span class="n">suma_lista_cola</span><span class="p">(</span><span class="n">datos</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -713,21 +722,36 @@ suma_lista_cola: 15
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Versión recursiva ingenua (de pila): O(phi^n) tiempo aprox, por recomputación."""</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">n</span>
     <span class="k">return</span> <span class="n">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Recursión con memoización (Top-Down). Tiempo O(n), espacio O(n)."""</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">n</span>
     <span class="k">return</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Versión iterativa (Bottom-Up). Tiempo O(n), espacio O(1)."""</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">n</span>
@@ -735,16 +759,16 @@ suma_lista_cola: 15
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">b</span>
-
-<span class="c1"># Pruebas equivalentes</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: fib_memo y fib_iter coinciden para n=0..19"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: fib_memo y fib_iter coinciden para n=0..19
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas equivalentes</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: fib_memo y fib_iter coinciden para n=0..19"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -835,21 +859,36 @@ el acumulador de la versión de cola se vuelve, casi literalmente, la variable q
     <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>          <span class="c1"># operación pendiente: multiplicar por n</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">factorial_cola</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">acumulador</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_cola</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">acumulador</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">acumulador</span>                      <span class="c1"># el acumulador YA es la respuesta</span>
     <span class="k">return</span> <span class="n">factorial_cola</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">acumulador</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># último paso: nada pendiente después</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">factorial_iterativo_desde_cola</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_iterativo_desde_cola</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""El acumulador de factorial_cola se vuelve la variable del bucle."""</span>
     <span class="n">acumulador</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">acumulador</span> <span class="o">*=</span> <span class="n">n</span>
         <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">acumulador</span>
-
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
     <span class="k">assert</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_cola</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_iterativo_desde_cola</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"OK: las tres versiones (pila, cola, iterativa) coinciden para k=0..7"</span><span class="p">)</span>
 
@@ -862,12 +901,6 @@ el acumulador de la versión de cola se vuelve, casi literalmente, la variable q
     <span class="nb">print</span><span class="p">(</span><span class="s2">"No debería llegar aquí"</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">RecursionError</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"RecursionError con n=</span><span class="si">{</span><span class="n">n_grande</span><span class="si">}</span><span class="s2">: la version de cola tambien crea un marco por llamada"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: las tres versiones (pila, cola, iterativa) coinciden para k=0..7
-RecursionError con n=1050: la version de cola tambien crea un marco por llamada
 </pre></div>
 </div>
 </div>
@@ -922,24 +955,28 @@ de vuelta a la de expresiones) y en <strong>máquinas de estados</strong> implem
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="n">es_impar</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">es_impar</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">es_impar</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Caso base: 0 no es impar. Si no, pregunta si n-1 es par (llamando a OTRA función)."""</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="n">es_par</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="k">assert</span> <span class="n">es_par</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">es_impar</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"OK: es_par/es_impar (recursion cruzada) coinciden con el operador % para n=0..9"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"es_par(4) -&gt;"</span><span class="p">,</span> <span class="n">es_par</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="s2">" | es_impar(7) -&gt;"</span><span class="p">,</span> <span class="n">es_impar</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: es_par/es_impar (recursion cruzada) coinciden con el operador % para n=0..9
-es_par(4) -&gt; True  | es_impar(7) -&gt; True
 </pre></div>
 </div>
 </div>
@@ -1000,20 +1037,40 @@ dos hijos.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">izq</span> <span class="o">=</span> <span class="n">izq</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">der</span> <span class="o">=</span> <span class="n">der</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span> <span class="o">+</span> <span class="n">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="n">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
     <span class="k">return</span> <span class="n">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span> <span class="o">+</span> <span class="n">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
     <span class="k">return</span> <span class="n">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="n">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span>
-
-<span class="c1"># Árbol de ejemplo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Árbol de ejemplo</span>
 <span class="c1">#         4</span>
 <span class="c1">#       /   \</span>
 <span class="c1">#      2     6</span>
@@ -1029,13 +1086,6 @@ dos hijos.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preorden:   [4, 2, 1, 3, 6, 5, 7]
-Inorden:    [1, 2, 3, 4, 5, 6, 7]
-Postorden:  [1, 3, 2, 5, 7, 6, 4]
-</pre></div>
-</div>
-</div>
 </div>
 <p><a id="dp"></a></p>
 </section>
@@ -1046,8 +1096,13 @@ desde los casos base. Ya lo vimos con Fibonacci; otro ejemplo ilustrativo es el 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">cambio_minimo_bottom_up</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">monedas</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cambio_minimo_bottom_up</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">monedas</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Número mínimo de monedas para alcanzar 'valor'. Bottom-Up (iterativo)."""</span>
     <span class="n">INF</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
     <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">INF</span><span class="p">]</span><span class="o">*</span><span class="n">valor</span>
@@ -1056,8 +1111,13 @@ desde los casos base. Ya lo vimos con Fibonacci; otro ejemplo ilustrativo es el 
             <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">:</span>
                 <span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="o">-</span><span class="n">m</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">valor</span><span class="p">]</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">valor</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">INF</span> <span class="k">else</span> <span class="kc">None</span>
-
-<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">cambio_minimo_top_down</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">monedas_tuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Top-Down (recursivo con memo). monedas_tuple para permitir cache."""</span>
     <span class="k">if</span> <span class="n">valor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1070,18 +1130,17 @@ desde los casos base. Ya lo vimos con Fibonacci; otro ejemplo ilustrativo es el 
             <span class="k">if</span> <span class="n">sub</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">ans</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sub</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">ans</span> <span class="k">if</span> <span class="n">ans</span> <span class="o">&lt;</span> <span class="n">INF</span> <span class="k">else</span> <span class="kc">None</span>
-
-<span class="n">monedas</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monedas</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">v</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Bottom-Up:"</span><span class="p">,</span> <span class="n">cambio_minimo_bottom_up</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">monedas</span><span class="p">)))</span>
 <span class="n">cambio_minimo_top_down</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Top-Down :"</span><span class="p">,</span> <span class="n">cambio_minimo_top_down</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">monedas</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bottom-Up: 2
-Top-Down : 2
 </pre></div>
 </div>
 </div>
@@ -1095,8 +1154,13 @@ Top-Down : 2
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">trace</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">trace</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">indent</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">'│ '</span> <span class="o">*</span> <span class="p">(</span><span class="n">depth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s1">'├─ '</span> <span class="k">if</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">''</span><span class="p">)</span>
 
@@ -1112,29 +1176,24 @@ Top-Down : 2
 
     <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="n">wrapper</span>
-
-<span class="nd">@trace</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@trace</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">suma_trazada</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">suma_trazada</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="n">suma_trazada</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>suma_trazada([2, 4, 1],)
-├─ suma_trazada([2, 4, 1], 1)
-│ ├─ suma_trazada([2, 4, 1], 2)
-│ │ ├─ suma_trazada([2, 4, 1], 3)
-│ │ ├─ -&gt; 0
-│ ├─ -&gt; 1
-├─ -&gt; 5
--&gt; 7
-</pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">suma_trazada</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>

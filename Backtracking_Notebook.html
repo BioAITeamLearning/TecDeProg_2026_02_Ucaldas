@@ -855,35 +855,28 @@ diagonal ocupada, <strong>ni siquiera se avanza con ella</strong>.</p>
 
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">soluciones</span><span class="p">,</span> <span class="n">nodos</span><span class="p">)</span> <span class="k">if</span> <span class="n">contar_nodos</span> <span class="k">else</span> <span class="n">soluciones</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">imprimir_tablero</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">imprimir_tablero</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">solucion</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">fila</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">" Q "</span> <span class="k">if</span> <span class="n">solucion</span><span class="p">[</span><span class="n">fila</span><span class="p">]</span> <span class="o">==</span> <span class="n">col</span> <span class="k">else</span> <span class="s2">" . "</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
     <span class="nb">print</span><span class="p">()</span>
-
-
-<span class="n">soluciones</span><span class="p">,</span> <span class="n">nodos</span> <span class="o">=</span> <span class="n">n_reinas</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">contar_nodos</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soluciones</span><span class="p">,</span> <span class="n">nodos</span> <span class="o">=</span> <span class="n">n_reinas</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">contar_nodos</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"N-Reinas(4): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">soluciones</span><span class="p">)</span><span class="si">}</span><span class="s2"> soluciones, </span><span class="si">{</span><span class="n">nodos</span><span class="si">}</span><span class="s2"> nodos explorados (con poda)"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Fuerza bruta sin poda habria probado 4^4 = </span><span class="si">{</span><span class="mi">4</span><span class="o">**</span><span class="mi">4</span><span class="si">}</span><span class="s2"> tableros completos antes de validar cada uno"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">soluciones</span><span class="p">:</span>
     <span class="n">imprimir_tablero</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N-Reinas(4): 2 soluciones, 17 nodos explorados (con poda)
-Fuerza bruta sin poda habria probado 4^4 = 256 tableros completos antes de validar cada uno
- .  Q  .  . 
- .  .  .  Q 
- Q  .  .  . 
- .  .  Q  . 
-
- .  .  Q  . 
- Q  .  .  . 
- .  .  .  Q 
- .  Q  .  . 
 </pre></div>
 </div>
 </div>
@@ -1049,95 +1042,130 @@ que pasen por la misma celda.</p>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
         <span class="c1"># TODO</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_3</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_3</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
         <span class="c1"># TODO: opciones -&gt; for cara in range(1, 7): ...</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_4</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_4</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
         <span class="c1"># TODO: opciones -&gt; for digito in range(10): ...</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_5</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_5</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
         <span class="c1"># TODO: valido si solucion esta vacia o el ultimo elemento != la opcion actual</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_6</span><span class="p">(</span><span class="n">maximo</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_6</span><span class="p">(</span><span class="n">maximo</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
         <span class="c1"># TODO: opciones deben ser &gt;= al ultimo elemento agregado (no decrecientes)</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_7</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_7</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
         <span class="c1"># TODO: reutiliza el patron de "permutaciones" visto arriba</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_8</span><span class="p">(</span><span class="n">letras</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_8</span><span class="p">(</span><span class="n">letras</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
         <span class="c1"># TODO</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_9</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_9</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">,</span> <span class="n">unos_usados</span><span class="p">):</span>
         <span class="c1"># TODO: condicion de parada -&gt; len(solucion) == n and unos_usados == k</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([],</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_10</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejercicio_10</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">resultado</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">backtrack</span><span class="p">(</span><span class="n">solucion</span><span class="p">):</span>
         <span class="c1"># TODO: opciones -&gt; for decision in ["T", "N"]: ...</span>
         <span class="k">pass</span>
     <span class="n">backtrack</span><span class="p">([])</span>
     <span class="k">return</span> <span class="n">resultado</span>
-
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Plantillas listas para completar: ejercicio_1 .. ejercicio_10"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Plantillas listas para completar: ejercicio_1 .. ejercicio_10
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Plantillas listas para completar: ejercicio_1 .. ejercicio_10"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

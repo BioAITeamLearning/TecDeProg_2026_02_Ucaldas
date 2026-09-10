@@ -596,15 +596,25 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utilidades compartidas para medir y graficar tiempos (se usan en todos los ejemplos de este notebook)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""Ejecuta f(*args, **kwargs) y devuelve (tiempo_en_segundos, resultado)."""</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="n">out</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_growth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s2">"Tiempo (s)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Escalado empírico"</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_growth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s2">"Tiempo (s)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Escalado empírico"</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Grafica una o varias series (ys puede ser una lista de listas) contra x."""</span>
     <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -689,8 +699,13 @@
         <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">i</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">binary_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">binary_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
     <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
         <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
@@ -701,20 +716,18 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">500_000</span><span class="p">]:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">500_000</span><span class="p">]:</span>
     <span class="n">arr</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># peor caso para la lineal (el ultimo elemento)</span>
     <span class="n">t_lineal</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">linear_search</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="n">t_binaria</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">binary_search</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2"> | lineal ~</span><span class="si">{</span><span class="n">t_lineal</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s | binaria ~</span><span class="si">{</span><span class="n">t_binaria</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=  10000 | lineal ~0.000327s | binaria ~0.000007s
-n= 100000 | lineal ~0.002168s | binaria ~0.000007s
-n= 500000 | lineal ~0.014696s | binaria ~0.000015s
 </pre></div>
 </div>
 </div>
@@ -726,8 +739,13 @@ n= 500000 | lineal ~0.014696s | binaria ~0.000015s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="w"> </span><span class="nn">string</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">naive_find</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">naive_find</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
@@ -738,15 +756,25 @@ n= 500000 | lineal ~0.014696s | binaria ~0.000015s
         <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">i</span>
     <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">bench_pattern</span><span class="p">(</span><span class="n">n_text</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_pat</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bench_pattern</span><span class="p">(</span><span class="n">n_text</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_pat</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_text</span><span class="p">))</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pat</span><span class="p">))</span>
     <span class="n">t_naive</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">naive_find</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
     <span class="n">t_builtin</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">t_naive</span><span class="p">,</span> <span class="n">t_builtin</span>
-
-<span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">20_000</span><span class="p">,</span> <span class="mi">40_000</span><span class="p">,</span> <span class="mi">80_000</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">20_000</span><span class="p">,</span> <span class="mi">40_000</span><span class="p">,</span> <span class="mi">80_000</span><span class="p">]</span>
 <span class="n">naive_t</span><span class="p">,</span> <span class="n">builtin_t</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">:</span>
     <span class="n">t_na</span><span class="p">,</span> <span class="n">t_bi</span> <span class="o">=</span> <span class="n">bench_pattern</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -759,15 +787,6 @@ n= 500000 | lineal ~0.014696s | binaria ~0.000015s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n= 10000 | naive=0.000549s  str.find=0.000008s
-n= 20000 | naive=0.001053s  str.find=0.000012s
-n= 40000 | naive=0.002088s  str.find=0.000023s
-n= 80000 | naive=0.004602s  str.find=0.000049s
-</pre></div>
-</div>
-<img alt="_images/1b80d080e4e9ee29fe46ba4db91698bd6d87afd1e5baaf06460f8466b5ed1696.png" src="_images/1b80d080e4e9ee29fe46ba4db91698bd6d87afd1e5baaf06460f8466b5ed1696.png" />
-</div>
 </div>
 </section>
 <section id="ejemplo-3-explosion-combinatoria-ataque-por-diccionario">
@@ -776,8 +795,13 @@ n= 80000 | naive=0.004602s  str.find=0.000049s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">brute_force_match</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">brute_force_match</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Prueba cadenas en orden lexicografico. Devuelve (intentos, cadena_encontrada)."""</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
     <span class="n">attempts</span> <span class="o">=</span> <span class="mi">0</span>
@@ -793,15 +817,25 @@ n= 80000 | naive=0.004602s  str.find=0.000049s
 <span class="n">target</span> <span class="o">=</span> <span class="s2">"cab"</span>
 <span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="n">attempts</span><span class="p">,</span> <span class="n">encontrada</span><span class="p">)</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">brute_force_match</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"target='</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">' -&gt; encontrada='</span><span class="si">{</span><span class="n">encontrada</span><span class="si">}</span><span class="s2">', intentos=</span><span class="si">{</span><span class="n">attempts</span><span class="si">}</span><span class="s2">, tiempo=</span><span class="si">{</span><span class="n">dt</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
-
-<span class="c1"># Crecimiento con la longitud n (alfabeto fijo de 5 letras: k=5)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crecimiento con la longitud n (alfabeto fijo de 5 letras: k=5)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">runner_len</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="s2">"abcde"</span>
     <span class="n">obj</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     <span class="n">dt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">brute_force_match</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dt</span>
-
-<span class="n">lens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>  <span class="c1"># k^n con k=5: hasta 5^6 = 15625</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>  <span class="c1"># k^n con k=5: hasta 5^6 = 15625</span>
 <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">runner_len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">lens</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lens</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s  (espacio de busqueda = 5^</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="mi">5</span><span class="o">**</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
@@ -809,18 +843,6 @@ n= 80000 | naive=0.004602s  str.find=0.000049s
 <span class="n">plot_growth</span><span class="p">(</span><span class="n">lens</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">"Longitud objetivo (n)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Fuerza bruta sobre cadenas (k^n, k=5)"</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>target='cab' -&gt; encontrada='cab', intentos=34, tiempo=0.000009s
-n=1: 0.000003s  (espacio de busqueda = 5^1 = 5)
-n=2: 0.000002s  (espacio de busqueda = 5^2 = 25)
-n=3: 0.000007s  (espacio de busqueda = 5^3 = 125)
-n=4: 0.000011s  (espacio de busqueda = 5^4 = 625)
-n=5: 0.000155s  (espacio de busqueda = 5^5 = 3125)
-n=6: 0.000049s  (espacio de busqueda = 5^6 = 15625)
-</pre></div>
-</div>
-<img alt="_images/18eb4c465b5817d0ba1f7e660abb632d2c39055ab65ccf52fb5c2669a5fc41a3.png" src="_images/18eb4c465b5817d0ba1f7e660abb632d2c39055ab65ccf52fb5c2669a5fc41a3.png" />
 </div>
 </div>
 </section>
@@ -843,8 +865,13 @@ n=6: 0.000049s  (espacio de busqueda = 5^6 = 15625)
         <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="kc">False</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">subset_sum_bnb</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">subset_sum_bnb</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
     <span class="n">arr_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr_sorted</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">current</span><span class="p">):</span>
@@ -858,18 +885,17 @@ n=6: 0.000049s  (espacio de busqueda = 5^6 = 15625)
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">current</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
-<span class="c1"># Correctitud</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correctitud</span>
 <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mi">9</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Fuerza bruta:"</span><span class="p">,</span> <span class="n">subset_sum_bruteforce</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Con poda    :"</span><span class="p">,</span> <span class="n">subset_sum_bnb</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fuerza bruta: True
-Con poda    : True
 </pre></div>
 </div>
 </div>
@@ -917,8 +943,13 @@ n=22 | fuerza bruta=0.002909s | con poda=0.000007s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutations</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">tsp_bruteforce</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tsp_bruteforce</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">best_cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
     <span class="n">best_path</span> <span class="o">=</span> <span class="p">()</span>
@@ -934,24 +965,27 @@ n=22 | fuerza bruta=0.002909s | con poda=0.000007s
             <span class="n">best_cost</span> <span class="o">=</span> <span class="n">cost</span>
             <span class="n">best_path</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span> <span class="o">+</span> <span class="n">perm</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
     <span class="k">return</span> <span class="n">best_cost</span><span class="p">,</span> <span class="n">best_path</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">make_tsp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_tsp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
     <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
     <span class="n">pts</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
     <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">pts</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">pts</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">dist</span>
-
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>  <span class="c1"># 5!=120, 6!=720, 7!=5040 rutas</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="n">make_tsp</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">tsp_bruteforce</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> | tiempo=</span><span class="si">{</span><span class="n">dt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s | costo=</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | ruta=</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=6 | tiempo=0.0001s | costo=3.0154 | ruta=(0, 4, 2, 5, 3, 1, 0)
-n=7 | tiempo=0.0006s | costo=1.8777 | ruta=(0, 3, 1, 6, 4, 2, 5, 0)
-n=8 | tiempo=0.0048s | costo=2.7345 | ruta=(0, 5, 3, 2, 1, 7, 4, 6, 0)
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>  <span class="c1"># 5!=120, 6!=720, 7!=5040 rutas</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">make_tsp</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">tsp_bruteforce</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> | tiempo=</span><span class="si">{</span><span class="n">dt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s | costo=</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | ruta=</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
