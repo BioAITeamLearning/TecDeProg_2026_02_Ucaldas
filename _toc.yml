@@ -8,10 +8,10 @@ chapters:
   sections:
     - file: "Introduccion"
     - file: "ListasTuplasDiccionarios"
-    - file: "POO"
     - file: "PilasyColas"
     - file: "Pila"
     - file: "Cola"
+    - file: "POO"
     - file: "Pilas_y_Colas_Avanzadas"
     - file: "ManejoDeArchivos"
     - file: "ResolucionProblemas"
