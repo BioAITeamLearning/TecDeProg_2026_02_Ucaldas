@@ -248,6 +248,14 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResumenPilasColas.html">Resumen de la Unidad · Pila, Cola y Cola Circular</a></li>
+
+
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
 </ul>
@@ -507,7 +515,10 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-una-clase">1.2 Definir una clase</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-el-parametro-que-java-te-escondia">1.3 <code class="docutils literal notranslate"><span class="pre">self</span></code>: el parámetro que Java te escondía</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-el-parametro-que-java-te-escondia">1.3 <code class="docutils literal notranslate"><span class="pre">self</span></code>: el parámetro que Java te escondía</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-1-el-molde">🛠️ Actividad en clase — la pila, paso 1: el molde</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios">1.4 Ejercicios</a></li>
 </ul>
 </li>
@@ -531,26 +542,38 @@
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#encapsulamiento">5. Encapsulamiento</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-no-tiene-private">5.1 Python no tiene <code class="docutils literal notranslate"><span class="pre">private</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#property-el-getter-que-no-parece-getter">5.2 <code class="docutils literal notranslate"><span class="pre">@property</span></code>: el getter que no parece getter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#property-el-getter-que-no-parece-getter">5.2 <code class="docutils literal notranslate"><span class="pre">@property</span></code>: el getter que no parece getter</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-2-esconder-los-datos">🛠️ Actividad en clase — la pila, paso 2: esconder los datos</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">5.3 Ejercicios</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-especiales-dunder">6. Métodos especiales (<em>dunder</em>)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repr-y-str">6.1 <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> y <code class="docutils literal notranslate"><span class="pre">__str__</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-protocolos-aqui-esta-su-interface">6.2 Los protocolos: aquí está su <code class="docutils literal notranslate"><span class="pre">interface</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eq-el-equals-de-java">6.3 <code class="docutils literal notranslate"><span class="pre">__eq__</span></code>: el <code class="docutils literal notranslate"><span class="pre">equals()</span></code> de Java</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eq-el-equals-de-java">6.3 <code class="docutils literal notranslate"><span class="pre">__eq__</span></code>: el <code class="docutils literal notranslate"><span class="pre">equals()</span></code> de Java</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-3-que-se-comporte-como-las-de-python">🛠️ Actividad en clase — la pila, paso 3: que se comporte como las de Python</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.4 Ejercicios</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#herencia">7. Herencia</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extends-se-escribe-con-parentesis">7.1 <code class="docutils literal notranslate"><span class="pre">extends</span></code> se escribe con paréntesis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sobrescribir-un-metodo">7.2 Sobrescribir un método</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sobrescribir-un-metodo">7.2 Sobrescribir un método</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-4-una-pila-con-tope">🛠️ Actividad en clase — la pila, paso 4: una pila con tope</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.3 Ejercicios</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polimorfismo">8. Polimorfismo</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duck-typing-polimorfismo-sin-interface">8.1 <em>Duck typing</em>: polimorfismo sin <code class="docutils literal notranslate"><span class="pre">interface</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clases-abstractas-cuando-si-quieres-el-contrato-explicito">8.2 Clases abstractas: cuando sí quieres el contrato explícito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clases-abstractas-cuando-si-quieres-el-contrato-explicito">8.2 Clases abstractas: cuando sí quieres el contrato explícito</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-5-que-no-importe-que-estructura-es">🛠️ Actividad en clase — la pila, paso 5: que no importe qué estructura es</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">8.3 Ejercicios</a></li>
 </ul>
 </li>
@@ -757,6 +780,30 @@ ana.saludar()
 <p>Y la otra mitad de la trampa: dentro del método, <code class="docutils literal notranslate"><span class="pre">nombre</span></code> a secas <strong>no existe</strong>. Siempre
 <code class="docutils literal notranslate"><span class="pre">self.nombre</span></code>. En Java podías omitir el <code class="docutils literal notranslate"><span class="pre">this.</span></code> y funcionaba; aquí no.</p>
 </div>
+<section id="actividad-en-clase-la-pila-paso-1-el-molde">
+<h3>🛠️ Actividad en clase — la pila, paso 1: el molde<a class="headerlink" href="#actividad-en-clase-la-pila-paso-1-el-molde" title="Link to this heading">#</a></h3>
+<p>En la clase pasada escribiste la pila con <strong>funciones sueltas</strong>: <code class="docutils literal notranslate"><span class="pre">crear_pila()</span></code>, <code class="docutils literal notranslate"><span class="pre">apilar(pila,</span> <span class="pre">x)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">desapilar(pila)</span></code>. Funcionaba, pero los datos andaban por un lado y las operaciones por otro.</p>
+<p>Vamos a empaquetarla. A lo largo de esta sesión la iremos completando actividad por actividad, y
+al final de la clase vas a tener una clase <code class="docutils literal notranslate"><span class="pre">Pila</span></code> de verdad.</p>
+<p><strong>Ahora mismo, solo esto:</strong></p>
+<ol class="arabic simple">
+<li><p>Define <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Pila</span></code> con un <code class="docutils literal notranslate"><span class="pre">__init__</span></code> que cree la lista interna vacía.</p></li>
+<li><p>Agrégale los métodos <code class="docutils literal notranslate"><span class="pre">apilar(elemento)</span></code> y <code class="docutils literal notranslate"><span class="pre">desapilar()</span></code>.</p></li>
+<li><p>Crea una pila, apila tres cosas, desapila una y muestra el resultado.</p></li>
+</ol>
+<blockquote>
+<div><p>Compara con lo de la clase pasada: ¿dónde quedó el parámetro <code class="docutils literal notranslate"><span class="pre">pila</span></code> que antes le pasabas a cada
+función?</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="ejercicios">
 <h2>1.4 Ejercicios<a class="headerlink" href="#ejercicios" title="Link to this heading">#</a></h2>
@@ -1182,6 +1229,29 @@ conviertes en <code class="docutils literal notranslate"><span class="pre">&#64;
 </ul>
 <p>Por eso verán muchísimo código Python sin un solo getter. No es descuido: es que no hacían falta.</p>
 </div>
+<section id="actividad-en-clase-la-pila-paso-2-esconder-los-datos">
+<h3>🛠️ Actividad en clase — la pila, paso 2: esconder los datos<a class="headerlink" href="#actividad-en-clase-la-pila-paso-2-esconder-los-datos" title="Link to this heading">#</a></h3>
+<p>Tu clase <code class="docutils literal notranslate"><span class="pre">Pila</span></code> del paso 1 tiene la lista expuesta: cualquiera puede escribir
+<code class="docutils literal notranslate"><span class="pre">mi_pila.datos.insert(0,</span> <span class="pre">&quot;trampa&quot;)</span></code> y romper el LIFO. Justo lo que una pila debería impedir.</p>
+<p><strong>Sobre la clase que ya tienes:</strong></p>
+<ol class="arabic simple">
+<li><p>Renombra la lista interna a <code class="docutils literal notranslate"><span class="pre">_datos</span></code>, para señalar que es interna.</p></li>
+<li><p>Agrega una <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> llamada <code class="docutils literal notranslate"><span class="pre">cima</span></code> que retorne el último elemento <strong>sin sacarlo</strong>,
+y que lance <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> si la pila está vacía.</p></li>
+<li><p>Agrega <code class="docutils literal notranslate"><span class="pre">esta_vacia()</span></code>.</p></li>
+<li><p>Comprueba que <code class="docutils literal notranslate"><span class="pre">mi_pila.cima</span></code> funciona <strong>sin paréntesis</strong>.</p></li>
+</ol>
+<blockquote>
+<div><p>Para pensar: el guion bajo no impide nada. ¿Qué es lo que sí gana el que lee tu código?</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="id4">
 <h2>5.3 Ejercicios<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
@@ -1405,6 +1475,35 @@ porque implementa los mismos métodos, no porque lo haya declarado.</p>
 <p><strong>En Java es al revés.</strong> Allá <code class="docutils literal notranslate"><span class="pre">==</span></code> compara referencias y <code class="docutils literal notranslate"><span class="pre">.equals()</span></code> compara contenido.
 En Python <code class="docutils literal notranslate"><span class="pre">==</span></code> compara <strong>contenido</strong> (usa tu <code class="docutils literal notranslate"><span class="pre">__eq__</span></code>) e <code class="docutils literal notranslate"><span class="pre">is</span></code> compara <strong>identidad</strong>.</p>
 </div>
+<section id="actividad-en-clase-la-pila-paso-3-que-se-comporte-como-las-de-python">
+<h3>🛠️ Actividad en clase — la pila, paso 3: que se comporte como las de Python<a class="headerlink" href="#actividad-en-clase-la-pila-paso-3-que-se-comporte-como-las-de-python" title="Link to this heading">#</a></h3>
+<p>Ahora mismo tu pila obliga a escribir <code class="docutils literal notranslate"><span class="pre">mi_pila.tamanio()</span></code> y <code class="docutils literal notranslate"><span class="pre">mi_pila.esta_vacia()</span></code>. Vamos a que se
+use igual que una lista.</p>
+<p><strong>Agrégale a <code class="docutils literal notranslate"><span class="pre">Pila</span></code>:</strong></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__repr__</span></code>, para poder depurarla de un vistazo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__len__</span></code>, para que funcione <code class="docutils literal notranslate"><span class="pre">len(mi_pila)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__bool__</span></code>, para que funcione <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">mi_pila:</span></code> y <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">not</span> <span class="pre">mi_pila:</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__iter__</span></code>, que recorra <strong>de la cima hacia la base</strong> (que es como uno mira una pila).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__contains__</span></code>, para que funcione <code class="docutils literal notranslate"><span class="pre">&quot;algo&quot;</span> <span class="pre">in</span> <span class="pre">mi_pila</span></code>.</p></li>
+</ol>
+<p><strong>Compruébalo:</strong> después de esto, las cinco líneas de abajo deben correr sin que hayas escrito
+ningún método con esos nombres.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">mi_pila</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mi_pila</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">mi_pila</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"tiene elementos"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mi_pila</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"A"</span> <span class="ow">in</span> <span class="n">mi_pila</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="id5">
 <h2>6.4 Ejercicios<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
@@ -1543,6 +1642,28 @@ lo que ya hacía el padre en vez de repetirlo.</p>
 </div>
 </div>
 </div>
+<section id="actividad-en-clase-la-pila-paso-4-una-pila-con-tope">
+<h3>🛠️ Actividad en clase — la pila, paso 4: una pila con tope<a class="headerlink" href="#actividad-en-clase-la-pila-paso-4-una-pila-con-tope" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Crea <code class="docutils literal notranslate"><span class="pre">PilaLimitada(Pila)</span></code> que reciba una <code class="docutils literal notranslate"><span class="pre">capacidad</span></code> en el constructor y llame a
+<code class="docutils literal notranslate"><span class="pre">super().__init__()</span></code>.</p></li>
+<li><p>Sobrescribe <code class="docutils literal notranslate"><span class="pre">apilar</span></code> para que lance <code class="docutils literal notranslate"><span class="pre">OverflowError</span></code> cuando ya esté llena, y que <strong>reutilice</strong>
+la implementación del padre con <code class="docutils literal notranslate"><span class="pre">super().apilar(...)</span></code> cuando sí quepa.</p></li>
+<li><p>Agrega <code class="docutils literal notranslate"><span class="pre">esta_llena()</span></code>.</p></li>
+<li><p>Comprueba que <code class="docutils literal notranslate"><span class="pre">len()</span></code>, <code class="docutils literal notranslate"><span class="pre">in</span></code> y el recorrido <strong>siguen funcionando</strong> sin que los hayas vuelto a
+escribir.</p></li>
+</ol>
+<blockquote>
+<div><p>El punto 4 es el importante: ¿por qué siguen funcionando?</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="id6">
 <h2>7.3 Ejercicios<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
@@ -1684,6 +1805,28 @@ Python <strong>falla</strong> si intentas instanciar una clase que no implement�
 idiomático y lo que verán en el código de las próximas unidades. <code class="docutils literal notranslate"><span class="pre">ABC</span></code> se justifica cuando diseñas
 una jerarquía que <strong>otras personas</strong> van a extender y quieres que el error salga temprano y claro.</p>
 </div>
+<section id="actividad-en-clase-la-pila-paso-5-que-no-importe-que-estructura-es">
+<h3>🛠️ Actividad en clase — la pila, paso 5: que no importe qué estructura es<a class="headerlink" href="#actividad-en-clase-la-pila-paso-5-que-no-importe-que-estructura-es" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Escribe tu clase <code class="docutils literal notranslate"><span class="pre">Cola</span></code> con <code class="docutils literal notranslate"><span class="pre">encolar</span></code>, <code class="docutils literal notranslate"><span class="pre">desencolar</span></code>, <code class="docutils literal notranslate"><span class="pre">__len__</span></code> y <code class="docutils literal notranslate"><span class="pre">__bool__</span></code>.
+<em>(Si te queda tiempo, úsala con <code class="docutils literal notranslate"><span class="pre">collections.deque</span></code> por dentro en vez de una lista.)</em></p></li>
+<li><p>Escribe una función <code class="docutils literal notranslate"><span class="pre">vaciar_e_imprimir(contenedor,</span> <span class="pre">sacar)</span></code> que saque elementos <strong>mientras el
+contenedor tenga</strong>, e imprima cada uno.</p></li>
+<li><p>Llámala con tu <code class="docutils literal notranslate"><span class="pre">Pila</span></code> y con tu <code class="docutils literal notranslate"><span class="pre">Cola</span></code>, pasándole el método correspondiente.</p></li>
+<li><p>Observa la salida: la misma función, los mismos datos, <strong>orden distinto</strong>.</p></li>
+</ol>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">Pila</span></code> y <code class="docutils literal notranslate"><span class="pre">Cola</span></code> no comparten superclase ni interfaz. ¿Por qué funciona igual la misma función
+con las dos?</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="id7">
 <h2>8.3 Ejercicios<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
@@ -2395,7 +2538,10 @@ y que los pesos de un estudiante sumen 100.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-una-clase">1.2 Definir una clase</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-el-parametro-que-java-te-escondia">1.3 <code class="docutils literal notranslate"><span class="pre">self</span></code>: el parámetro que Java te escondía</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-el-parametro-que-java-te-escondia">1.3 <code class="docutils literal notranslate"><span class="pre">self</span></code>: el parámetro que Java te escondía</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-1-el-molde">🛠️ Actividad en clase — la pila, paso 1: el molde</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios">1.4 Ejercicios</a></li>
 </ul>
 </li>
@@ -2419,26 +2565,38 @@ y que los pesos de un estudiante sumen 100.</p>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#encapsulamiento">5. Encapsulamiento</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-no-tiene-private">5.1 Python no tiene <code class="docutils literal notranslate"><span class="pre">private</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#property-el-getter-que-no-parece-getter">5.2 <code class="docutils literal notranslate"><span class="pre">@property</span></code>: el getter que no parece getter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#property-el-getter-que-no-parece-getter">5.2 <code class="docutils literal notranslate"><span class="pre">@property</span></code>: el getter que no parece getter</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-2-esconder-los-datos">🛠️ Actividad en clase — la pila, paso 2: esconder los datos</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">5.3 Ejercicios</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-especiales-dunder">6. Métodos especiales (<em>dunder</em>)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repr-y-str">6.1 <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> y <code class="docutils literal notranslate"><span class="pre">__str__</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-protocolos-aqui-esta-su-interface">6.2 Los protocolos: aquí está su <code class="docutils literal notranslate"><span class="pre">interface</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eq-el-equals-de-java">6.3 <code class="docutils literal notranslate"><span class="pre">__eq__</span></code>: el <code class="docutils literal notranslate"><span class="pre">equals()</span></code> de Java</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eq-el-equals-de-java">6.3 <code class="docutils literal notranslate"><span class="pre">__eq__</span></code>: el <code class="docutils literal notranslate"><span class="pre">equals()</span></code> de Java</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-3-que-se-comporte-como-las-de-python">🛠️ Actividad en clase — la pila, paso 3: que se comporte como las de Python</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.4 Ejercicios</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#herencia">7. Herencia</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extends-se-escribe-con-parentesis">7.1 <code class="docutils literal notranslate"><span class="pre">extends</span></code> se escribe con paréntesis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sobrescribir-un-metodo">7.2 Sobrescribir un método</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sobrescribir-un-metodo">7.2 Sobrescribir un método</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-4-una-pila-con-tope">🛠️ Actividad en clase — la pila, paso 4: una pila con tope</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.3 Ejercicios</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polimorfismo">8. Polimorfismo</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#duck-typing-polimorfismo-sin-interface">8.1 <em>Duck typing</em>: polimorfismo sin <code class="docutils literal notranslate"><span class="pre">interface</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clases-abstractas-cuando-si-quieres-el-contrato-explicito">8.2 Clases abstractas: cuando sí quieres el contrato explícito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clases-abstractas-cuando-si-quieres-el-contrato-explicito">8.2 Clases abstractas: cuando sí quieres el contrato explícito</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actividad-en-clase-la-pila-paso-5-que-no-importe-que-estructura-es">🛠️ Actividad en clase — la pila, paso 5: que no importe qué estructura es</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">8.3 Ejercicios</a></li>
 </ul>
 </li>

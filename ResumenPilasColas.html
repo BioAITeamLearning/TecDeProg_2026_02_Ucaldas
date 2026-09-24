@@ -1,0 +1,1170 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Resumen de la Unidad · Pila, Cola y Cola Circular &#8212; Técnicas de Programación 2026 - 02</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e8cf666a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ResumenPilasColas';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python" href="ManejoDeArchivos.html" />
+    <link rel="prev" title="Pilas y Colas en Python — Notebook Avanzado" href="Pilas_y_Colas_Avanzadas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logosem.png" class="logo__image only-light" alt="Técnicas de Programación 2026 - 02 - Home"/>
+    <img src="_static/logosem.png" class="logo__image only-dark pst-js-only" alt="Técnicas de Programación 2026 - 02 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenida al curso
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad1.html">Unidad 1</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Introduccion.html">Introducción a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ListasTuplasDiccionarios.html">Listas, Tuplas, Diccionarios</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="PilasyColas.html">Pilas y Colas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pila.html">Pilas (Stack) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cola.html">Colas (Queue) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="POO.html">Programación Orientada a Objetos en Python</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Resumen de la Unidad · Pila, Cola y Cola Circular</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="FuerzaBruta.html">Fuerza Bruta y Complejidad Computacional</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Recursividad_Notebook.html">Recursividad en Python — Pila, Cola y Cruzada</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Backtracking.html">Backtracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Backtracking_Notebook.html">Backtracking en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas2.html">Taller y Evaluación — Unidad 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad3.html">Unidad 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Busqueda.html">Búsqueda</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Busqueda_Notebook.html">Algoritmos de búsqueda en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Ordenamiento.html">Ordenamiento</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Ordenamiento_Notebook.html">Algoritmos de ordenamiento en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas3.html">Taller y Evaluación — Unidad 3</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/TecDeProg_2026_02_Ucaldas/blob/main/ResumenPilasColas.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/TecDeProg_2026_02_Ucaldas" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/TecDeProg_2026_02_Ucaldas/issues/new?title=Issue%20on%20page%20%2FResumenPilasColas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ResumenPilasColas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Resumen de la Unidad · Pila, Cola y Cola Circular</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Resumen de la Unidad · Pila, Cola y Cola Circular</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-hace-cada-una">1. Lo que hace cada una</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#los-metodos-lado-a-lado">2. Los métodos, lado a lado</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pila">2.1 Pila</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola">2.2 Cola</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola-circular">2.3 Cola circular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-cuesta-cada-operacion">2.4 Lo que cuesta cada operación</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-encargo">3. El encargo</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#banco-de-pruebas">Banco de pruebas</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4. <code class="docutils literal notranslate"><span class="pre">Pila</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5. <code class="docutils literal notranslate"><span class="pre">Cola</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#colacircular">6. <code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-aplicados">7. Ejercicios aplicados</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="resumen-de-la-unidad-pila-cola-y-cola-circular">
+<h1>Resumen de la Unidad · Pila, Cola y Cola Circular<a class="headerlink" href="#resumen-de-la-unidad-pila-cola-y-cola-circular" title="Link to this heading">#</a></h1>
+<p>Hasta aquí viste tres estructuras y las escribiste con <strong>funciones sueltas</strong>, y después aprendiste
+a escribir <strong>clases</strong>. Este cuaderno junta las dos cosas.</p>
+<p>Tiene dos partes:</p>
+<ol class="arabic simple">
+<li><p>Un <strong>resumen de referencia</strong>: todos los métodos de cada estructura, en tablas, para consultar.</p></li>
+<li><p>Un <strong>encargo</strong>: implementar las tres como clases, con un <strong>banco de pruebas</strong> que te dice si te
+quedaron bien.</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Las tres clases que construyas aquí <strong>las vamos a usar en el resto del curso</strong>. En la Unidad 2 la
+pila reaparece en recursión y <em>backtracking</em>; en la Unidad 3, las colas en los recorridos. No es un
+ejercicio desechable: es tu caja de herramientas.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="lo-que-hace-cada-una">
+<h1>1. Lo que hace cada una<a class="headerlink" href="#lo-que-hace-cada-una" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Pila</p></th>
+<th class="head"><p>Cola</p></th>
+<th class="head"><p>Cola circular</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Principio</strong></p></td>
+<td><p>LIFO — el último en entrar es el primero en salir</p></td>
+<td><p>FIFO — el primero en entrar es el primero en salir</p></td>
+<td><p>FIFO, pero con <strong>cupo fijo</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Por dónde entra</strong></p></td>
+<td><p>por la cima</p></td>
+<td><p>por el final</p></td>
+<td><p>por el final</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Por dónde sale</strong></p></td>
+<td><p>por la cima</p></td>
+<td><p>por el frente</p></td>
+<td><p>por el frente</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>¿Crece?</strong></p></td>
+<td><p>sí</p></td>
+<td><p>sí</p></td>
+<td><p><strong>no</strong>: la capacidad se fija al crearla</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Cuando se llena</strong></p></td>
+<td><p>no se llena</p></td>
+<td><p>no se llena</p></td>
+<td><p>rechaza (o pisa el más viejo)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Se usa para</strong></p></td>
+<td><p>deshacer, recursión, expresiones, <em>backtracking</em></p></td>
+<td><p>turnos, procesos, BFS</p></td>
+<td><p>buffers, últimas N lecturas, Round-Robin</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="los-metodos-lado-a-lado">
+<h1>2. Los métodos, lado a lado<a class="headerlink" href="#los-metodos-lado-a-lado" title="Link to this heading">#</a></h1>
+<section id="pila">
+<h2>2.1 Pila<a class="headerlink" href="#pila" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>Qué hace</p></th>
+<th class="head"><p>Si está vacía</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">apilar(elemento)</span></code></p></td>
+<td><p>pone un elemento en la cima</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">desapilar()</span></code></p></td>
+<td><p>saca y retorna el de la cima</p></td>
+<td><p>lanza <code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cima</span></code> <em>(propiedad)</em></p></td>
+<td><p>retorna el de la cima <strong>sin sacarlo</strong></p></td>
+<td><p>lanza <code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">esta_vacia()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> si no hay elementos</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">len(p)</span></code></p></td>
+<td><p>cuántos elementos hay</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bool(p)</span></code> / <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">p:</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> si tiene elementos</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">p</span></code></p></td>
+<td><p>recorre <strong>de la cima hacia la base</strong></p></td>
+<td><p>no itera</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">p</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> si el elemento está</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">repr(p)</span></code></p></td>
+<td><p>texto legible para depurar</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="cola">
+<h2>2.2 Cola<a class="headerlink" href="#cola" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>Qué hace</p></th>
+<th class="head"><p>Si está vacía</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(elemento)</span></code></p></td>
+<td><p>pone un elemento al final</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code></p></td>
+<td><p>saca y retorna el del frente</p></td>
+<td><p>lanza <code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frente</span></code> <em>(propiedad)</em></p></td>
+<td><p>retorna el del frente <strong>sin sacarlo</strong></p></td>
+<td><p>lanza <code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">final</span></code> <em>(propiedad)</em></p></td>
+<td><p>retorna el del final <strong>sin sacarlo</strong></p></td>
+<td><p>lanza <code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">esta_vacia()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> si no hay elementos</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">len(c)</span></code></p></td>
+<td><p>cuántos elementos hay</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bool(c)</span></code> / <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">c:</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> si tiene elementos</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">c</span></code></p></td>
+<td><p>recorre <strong>del frente hacia el final</strong></p></td>
+<td><p>no itera</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">c</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> si el elemento está</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">repr(c)</span></code></p></td>
+<td><p>texto legible para depurar</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="cola-circular">
+<h2>2.3 Cola circular<a class="headerlink" href="#cola-circular" title="Link to this heading">#</a></h2>
+<p>Todo lo de la cola, <strong>más</strong> el manejo del cupo:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>Qué hace</p></th>
+<th class="head"><p>Casos límite</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ColaCircular(capacidad)</span></code></p></td>
+<td><p>crea la cola con cupo fijo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> si la capacidad es menor que 1</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">capacidad</span></code> <em>(propiedad)</em></p></td>
+<td><p>cuántos caben en total</p></td>
+<td><p><strong>solo lectura</strong>: no se puede reasignar</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(elemento)</span></code></p></td>
+<td><p>pone un elemento al final</p></td>
+<td><p>lanza <code class="docutils literal notranslate"><span class="pre">OverflowError</span></code> si está llena</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code></p></td>
+<td><p>saca y retorna el del frente</p></td>
+<td><p>lanza <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> si está vacía</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frente</span></code> <em>(propiedad)</em></p></td>
+<td><p>el del frente, sin sacarlo</p></td>
+<td><p>lanza <code class="docutils literal notranslate"><span class="pre">IndexError</span></code> si está vacía</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">esta_llena()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> si ya no cabe ni uno más</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">esta_vacia()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> si no hay elementos</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">len(c)</span></code></p></td>
+<td><p>cuántos hay <strong>ahora</strong> (no la capacidad)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">c</span></code></p></td>
+<td><p>recorre en orden <strong>lógico</strong>, no físico</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="lo-que-cuesta-cada-operacion">
+<h2>2.4 Lo que cuesta cada operación<a class="headerlink" href="#lo-que-cuesta-cada-operacion" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operación</p></th>
+<th class="head"><p>Pila (<code class="docutils literal notranslate"><span class="pre">list</span></code>)</p></th>
+<th class="head"><p>Cola (<code class="docutils literal notranslate"><span class="pre">list</span></code>)</p></th>
+<th class="head"><p>Cola (<code class="docutils literal notranslate"><span class="pre">deque</span></code>)</p></th>
+<th class="head"><p>Cola circular</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Meter</p></td>
+<td><p>O(1)</p></td>
+<td><p>O(1)</p></td>
+<td><p>O(1)</p></td>
+<td><p>O(1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sacar</p></td>
+<td><p>O(1)</p></td>
+<td><p><strong>O(n)</strong> ← <code class="docutils literal notranslate"><span class="pre">pop(0)</span></code></p></td>
+<td><p>O(1)</p></td>
+<td><p>O(1)</p></td>
+</tr>
+<tr class="row-even"><td><p>Consultar extremo</p></td>
+<td><p>O(1)</p></td>
+<td><p>O(1)</p></td>
+<td><p>O(1)</p></td>
+<td><p>O(1)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Memoria</p></td>
+<td><p>crece</p></td>
+<td><p>crece</p></td>
+<td><p>crece</p></td>
+<td><p><strong>fija</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>La celda <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> de la segunda columna es la razón por la que tu clase <code class="docutils literal notranslate"><span class="pre">Cola</span></code> <strong>no</strong> debe usar
+<code class="docutils literal notranslate"><span class="pre">lista.pop(0)</span></code>. Es el mismo hallazgo del ejercicio de la ruta del bus.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="el-encargo">
+<h1>3. El encargo<a class="headerlink" href="#el-encargo" title="Link to this heading">#</a></h1>
+<p>Implementa las tres clases: <strong><code class="docutils literal notranslate"><span class="pre">Pila</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">Cola</span></code></strong> y <strong><code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code></strong>.</p>
+<p><strong>Requisitos comunes a las tres:</strong></p>
+<ol class="arabic simple">
+<li><p>La colección interna se llama <strong><code class="docutils literal notranslate"><span class="pre">_datos</span></code></strong> (guion bajo: es interna).</p></li>
+<li><p>Se puede construir <strong>vacía</strong> o <strong>desde un iterable</strong>: <code class="docutils literal notranslate"><span class="pre">Pila([1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code> deja el <code class="docutils literal notranslate"><span class="pre">3</span></code> en la cima;
+<code class="docutils literal notranslate"><span class="pre">Cola([1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code> deja el <code class="docutils literal notranslate"><span class="pre">1</span></code> al frente. <em>(<code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code> recibe la capacidad, no un iterable.)</em></p></li>
+<li><p>Los errores <strong>se lanzan, no se devuelven</strong>: nada de retornar <code class="docutils literal notranslate"><span class="pre">None</span></code> cuando está vacía.
+Usa <code class="docutils literal notranslate"><span class="pre">IndexError</span></code>, <code class="docutils literal notranslate"><span class="pre">OverflowError</span></code> y <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> según la tabla.</p></li>
+<li><p>Implementa los protocolos: <code class="docutils literal notranslate"><span class="pre">__len__</span></code>, <code class="docutils literal notranslate"><span class="pre">__bool__</span></code>, <code class="docutils literal notranslate"><span class="pre">__iter__</span></code>, <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> y, salvo en la
+circular, <code class="docutils literal notranslate"><span class="pre">__contains__</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cima</span></code>, <code class="docutils literal notranslate"><span class="pre">frente</span></code>, <code class="docutils literal notranslate"><span class="pre">final</span></code> y <code class="docutils literal notranslate"><span class="pre">capacidad</span></code> son <strong>propiedades</strong>, no métodos: se usan sin paréntesis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cola</span></code> debe usar <code class="docutils literal notranslate"><span class="pre">collections.deque</span></code> por dentro, para que desencolar sea O(1).</p></li>
+</ol>
+<p>Debajo de cada clase hay un <strong>banco de pruebas</strong>. Ejecútalo: te dice exactamente qué falta.</p>
+<hr class="docutils" />
+<section id="banco-de-pruebas">
+<h2>Banco de pruebas<a class="headerlink" href="#banco-de-pruebas" title="Link to this heading">#</a></h2>
+<p>Ejecuta esta celda <strong>una vez</strong> antes de empezar. No la modifiques.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ============ BANCO DE PRUEBAS (identico al del cuaderno) ============</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_probar</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">casos</span><span class="p">):</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">etiqueta</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="n">casos</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fn</span><span class="p">();</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  OK     </span><span class="si">{</span><span class="n">etiqueta</span><span class="si">}</span><span class="s2">"</span><span class="p">);</span> <span class="n">ok</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  FALLA  </span><span class="si">{</span><span class="n">etiqueta</span><span class="si">}</span><span class="s2">  -&gt; </span><span class="si">{</span><span class="n">e</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">'el resultado no es el esperado'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  ERROR  </span><span class="si">{</span><span class="n">etiqueta</span><span class="si">}</span><span class="s2">  -&gt; </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">  </span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ok</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">casos</span><span class="p">)</span><span class="si">}</span><span class="s2"> pruebas superadas</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_lanza</span><span class="p">(</span><span class="n">excepcion</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span> <span class="n">fn</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">excepcion</span><span class="p">:</span> <span class="k">return</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"lanzo </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> en vez de </span><span class="si">{</span><span class="n">excepcion</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no lanzo </span><span class="si">{</span><span class="n">excepcion</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">probar_pila</span><span class="p">(</span><span class="n">Pila</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construccion</span><span class="p">():</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">Pila</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">Pila</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">Pila</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">cima</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"el ultimo del iterable debe quedar en la cima"</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lifo</span><span class="p">():</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Pila</span><span class="p">();</span> <span class="n">p</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span> <span class="n">p</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="s2">"B"</span><span class="p">);</span> <span class="n">p</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="s2">"C"</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">desapilar</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"C"</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">desapilar</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"B"</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">desapilar</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"A"</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cima_no_saca</span><span class="p">():</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Pila</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span> <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">cima</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"cima no debe eliminar"</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vacias</span><span class="p">():</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Pila</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">p</span><span class="o">.</span><span class="n">esta_vacia</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">p</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">desapilar</span><span class="p">)</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">cima</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">protocolos</span><span class="p">():</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Pila</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">p</span> <span class="ow">and</span> <span class="mi">9</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">p</span>
+        <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">"__iter__ debe ir de la cima hacia la base"</span>
+        <span class="k">assert</span> <span class="s2">"Pila"</span> <span class="ow">in</span> <span class="nb">repr</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="s2">"__repr__ debe nombrar la clase"</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encapsulado</span><span class="p">():</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Pila</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">"datos"</span><span class="p">),</span> <span class="s2">"la lista interna debe llamarse _datos, no datos"</span>
+    <span class="n">_probar</span><span class="p">(</span><span class="s2">"Pila"</span><span class="p">,</span> <span class="p">[(</span><span class="s2">"construccion"</span><span class="p">,</span> <span class="n">construccion</span><span class="p">),</span> <span class="p">(</span><span class="s2">"orden LIFO"</span><span class="p">,</span> <span class="n">lifo</span><span class="p">),</span>
+                     <span class="p">(</span><span class="s2">"cima no elimina"</span><span class="p">,</span> <span class="n">cima_no_saca</span><span class="p">),</span> <span class="p">(</span><span class="s2">"pila vacia"</span><span class="p">,</span> <span class="n">vacias</span><span class="p">),</span>
+                     <span class="p">(</span><span class="s2">"protocolos"</span><span class="p">,</span> <span class="n">protocolos</span><span class="p">),</span> <span class="p">(</span><span class="s2">"encapsulamiento"</span><span class="p">,</span> <span class="n">encapsulado</span><span class="p">)])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">probar_cola</span><span class="p">(</span><span class="n">Cola</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construccion</span><span class="p">():</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">Cola</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">Cola</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">assert</span> <span class="n">Cola</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">frente</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"el primero del iterable debe quedar al frente"</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fifo</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">Cola</span><span class="p">();</span> <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"B"</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"C"</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"A"</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"B"</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"C"</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extremos</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">Cola</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="n">c</span><span class="o">.</span><span class="n">frente</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">final</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"frente/final no deben eliminar"</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vacias</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">Cola</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">c</span><span class="o">.</span><span class="n">esta_vacia</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">c</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">)</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">frente</span><span class="p">)</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">final</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">protocolos</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">Cola</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="k">assert</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">c</span> <span class="ow">and</span> <span class="mi">9</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">c</span>
+        <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"__iter__ debe ir del frente hacia el final"</span>
+        <span class="k">assert</span> <span class="s2">"Cola"</span> <span class="ow">in</span> <span class="nb">repr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">_probar</span><span class="p">(</span><span class="s2">"Cola"</span><span class="p">,</span> <span class="p">[(</span><span class="s2">"construccion"</span><span class="p">,</span> <span class="n">construccion</span><span class="p">),</span> <span class="p">(</span><span class="s2">"orden FIFO"</span><span class="p">,</span> <span class="n">fifo</span><span class="p">),</span>
+                     <span class="p">(</span><span class="s2">"frente y final"</span><span class="p">,</span> <span class="n">extremos</span><span class="p">),</span> <span class="p">(</span><span class="s2">"cola vacia"</span><span class="p">,</span> <span class="n">vacias</span><span class="p">),</span>
+                     <span class="p">(</span><span class="s2">"protocolos"</span><span class="p">,</span> <span class="n">protocolos</span><span class="p">)])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">probar_cola_circular</span><span class="p">(</span><span class="n">ColaCircular</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construccion</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">ColaCircular</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">c</span><span class="o">.</span><span class="n">capacidad</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">esta_vacia</span><span class="p">()</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">ColaCircular</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">llenado</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">ColaCircular</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s2">"ABC"</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">c</span><span class="o">.</span><span class="n">esta_llena</span><span class="p">()</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">OverflowError</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"D"</span><span class="p">))</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">da_la_vuelta</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">ColaCircular</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s2">"ABCD"</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"A"</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"B"</span>
+        <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"E"</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"F"</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">],</span> <span class="sa">f</span><span class="s2">"orden logico incorrecto: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">esta_llena</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">capacidad_fija</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">ColaCircular</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">c</span><span class="o">.</span><span class="n">capacidad</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"la capacidad no puede cambiar"</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">_datos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"el arreglo interno no debe crecer"</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">vacias</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">ColaCircular</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">)</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">c</span><span class="o">.</span><span class="n">frente</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solo_lectura</span><span class="p">():</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">ColaCircular</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">_lanza</span><span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="nb">setattr</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="s2">"capacidad"</span><span class="p">,</span> <span class="mi">99</span><span class="p">))</span>
+    <span class="n">_probar</span><span class="p">(</span><span class="s2">"ColaCircular"</span><span class="p">,</span> <span class="p">[(</span><span class="s2">"construccion"</span><span class="p">,</span> <span class="n">construccion</span><span class="p">),</span> <span class="p">(</span><span class="s2">"se llena y rechaza"</span><span class="p">,</span> <span class="n">llenado</span><span class="p">),</span>
+                             <span class="p">(</span><span class="s2">"da la vuelta"</span><span class="p">,</span> <span class="n">da_la_vuelta</span><span class="p">),</span> <span class="p">(</span><span class="s2">"capacidad fija"</span><span class="p">,</span> <span class="n">capacidad_fija</span><span class="p">),</span>
+                             <span class="p">(</span><span class="s2">"cola vacia"</span><span class="p">,</span> <span class="n">vacias</span><span class="p">),</span> <span class="p">(</span><span class="s2">"capacidad de solo lectura"</span><span class="p">,</span> <span class="n">solo_lectura</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>4. <code class="docutils literal notranslate"><span class="pre">Pila</span></code><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cuando creas que está lista, ejecuta:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">probar_pila</span><span class="p">(</span><span class="n">Pila</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>5. <code class="docutils literal notranslate"><span class="pre">Cola</span></code><a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cuando creas que está lista, ejecuta:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">probar_cola</span><span class="p">(</span><span class="n">Cola</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="colacircular">
+<h1>6. <code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code><a class="headerlink" href="#colacircular" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cuando creas que está lista, ejecuta:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">probar_cola_circular</span><span class="p">(</span><span class="n">ColaCircular</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ejercicios-aplicados">
+<h1>7. Ejercicios aplicados<a class="headerlink" href="#ejercicios-aplicados" title="Link to this heading">#</a></h1>
+<p>Con las tres clases funcionando, resuelve estos problemas <strong>usándolas</strong>. No vuelvas a <code class="docutils literal notranslate"><span class="pre">list</span></code> ni a
+<code class="docutils literal notranslate"><span class="pre">deque</span></code> directamente: si tu caja de herramientas sirve, esto debe salir con ella.</p>
+<ol class="arabic simple">
+<li><p><strong>Paréntesis balanceados</strong> <em>(Pila)</em> — <code class="docutils literal notranslate"><span class="pre">esta_balanceado(texto)</span></code> que verifique que cada <code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">[</span></code>
+y <code class="docutils literal notranslate"><span class="pre">{</span></code> se cierra con su pareja y en el orden correcto. <code class="docutils literal notranslate"><span class="pre">&quot;({[]})&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;(]&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>Deshacer y rehacer</strong> <em>(dos Pilas)</em> — un editor con <code class="docutils literal notranslate"><span class="pre">escribir(texto)</span></code>, <code class="docutils literal notranslate"><span class="pre">deshacer()</span></code> y
+<code class="docutils literal notranslate"><span class="pre">rehacer()</span></code>. Al escribir algo nuevo después de deshacer, la pila de rehacer se vacía.</p></li>
+<li><p><strong>Invertir una cola</strong> <em>(Pila + Cola)</em> — <code class="docutils literal notranslate"><span class="pre">invertir(cola)</span></code> que le dé la vuelta usando <strong>solo</strong> una
+pila auxiliar. Sin <code class="docutils literal notranslate"><span class="pre">reversed</span></code>, sin rebanadas.</p></li>
+<li><p><strong>Atención de turnos</strong> <em>(Cola)</em> — simula una ventanilla: llegan personas, se atiende una por
+vuelta, y en cada paso imprime a quién se atendió y cuántos quedan esperando.</p></li>
+<li><p><strong>Las últimas N lecturas</strong> <em>(ColaCircular)</em> — <code class="docutils literal notranslate"><span class="pre">registrar(lectura)</span></code> que guarde siempre las
+últimas 5, <strong>pisando la más vieja</strong> cuando se llena. <em>(Pista: la clase lanza <code class="docutils literal notranslate"><span class="pre">OverflowError</span></code>;
+captúralo y desencola antes de reintentar.)</em></p></li>
+<li><p><strong>Round-Robin</strong> <em>(ColaCircular)</em> — tres procesos necesitan 3, 1 y 2 turnos de CPU. Saca el del
+frente, réstale un turno y, si le quedan, vuélvelo a encolar. Imprime el orden de atención.</p></li>
+<li><p><strong>Para pensar (sin código)</strong> — el ejercicio 3 usa una pila para invertir una cola.
+¿Podrías invertir una <strong>pila</strong> usando solo una cola auxiliar? ¿Por qué?</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Guarda este cuaderno con las tres clases resueltas. En la Unidad 2, cuando veamos <em>backtracking</em>,
+te vas a ahorrar escribirlas de nuevo.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Pilas_y_Colas_Avanzadas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Pilas y Colas en Python — Notebook Avanzado</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ManejoDeArchivos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Resumen de la Unidad · Pila, Cola y Cola Circular</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-hace-cada-una">1. Lo que hace cada una</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#los-metodos-lado-a-lado">2. Los métodos, lado a lado</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pila">2.1 Pila</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola">2.2 Cola</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola-circular">2.3 Cola circular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-cuesta-cada-operacion">2.4 Lo que cuesta cada operación</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-encargo">3. El encargo</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#banco-de-pruebas">Banco de pruebas</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4. <code class="docutils literal notranslate"><span class="pre">Pila</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5. <code class="docutils literal notranslate"><span class="pre">Cola</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#colacircular">6. <code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-aplicados">7. Ejercicios aplicados</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Santiago Barrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -248,6 +248,14 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResumenPilasColas.html">Resumen de la Unidad · Pila, Cola y Cola Circular</a></li>
+
+
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
 </ul>
@@ -503,6 +511,16 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-principales">Operaciones principales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilidades-adicionales">Utilidades adicionales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recorrer-y-buscar">Recorrer y buscar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colas-circulares">Colas circulares</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona">Cómo funciona</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-cola">Crear la cola</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consultar-el-estado">Consultar el estado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encolar-y-desencolar">Encolar y desencolar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recorrer">Recorrer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-vuelta-paso-a-paso">La vuelta, paso a paso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-practicar-colas-circulares">Para practicar — colas circulares</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion">Demostración</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-practicar">Para practicar</a></li>
 </ul>
@@ -686,6 +704,268 @@
 </div>
 </div>
 </section>
+<section id="colas-circulares">
+<h2>Colas circulares<a class="headerlink" href="#colas-circulares" title="Link to this heading">#</a></h2>
+<p>La cola que acabamos de escribir tiene un problema: <strong>crece sin límite</strong>. Cada <code class="docutils literal notranslate"><span class="pre">encolar</span></code> agrega un
+espacio nuevo, y si el programa corre horas, la lista corre horas creciendo.</p>
+<p>Muchas veces no quieres eso. Quieres una cola de <strong>tamaño fijo</strong>: un buffer con cupo para <em>N</em>
+elementos y ni uno más. Las últimas 100 lecturas del sensor, los 8 turnos que caben en pantalla,
+el buffer de audio de la tarjeta de sonido. Cuando se llena, se llena.</p>
+<p>La idea de la <strong>cola circular</strong> es reutilizar el espacio que va quedando libre al frente en lugar
+de desperdiciarlo. El arreglo no crece: se le <strong>da la vuelta</strong>.</p>
+<section id="como-funciona">
+<h3>Cómo funciona<a class="headerlink" href="#como-funciona" title="Link to this heading">#</a></h3>
+<p>No guardamos solo los datos: guardamos también <strong>dónde está el frente</strong> y <strong>cuántos elementos hay</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Campo</p></th>
+<th class="head"><p>Para qué</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">datos</span></code></p></td>
+<td><p>el arreglo de tamaño fijo</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">frente</span></code></p></td>
+<td><p>en qué posición <strong>física</strong> está el primer elemento</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tamanio</span></code></p></td>
+<td><p>cuántos elementos hay realmente</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Con esos tres datos, la posición donde toca escribir el siguiente sale de una sola fórmula:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">posicion_libre</span> <span class="o">=</span> <span class="p">(</span><span class="n">frente</span> <span class="o">+</span> <span class="n">tamanio</span><span class="p">)</span> <span class="o">%</span> <span class="n">capacidad</span>
+</pre></div>
+</div>
+<p>Ese <code class="docutils literal notranslate"><span class="pre">%</span></code> (módulo) <strong>es</strong> la circularidad: cuando el índice llega al final del arreglo, el residuo lo
+devuelve al principio.</p>
+</section>
+<section id="crear-la-cola">
+<h3>Crear la cola<a class="headerlink" href="#crear-la-cola" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">crear_cola_circular</span><span class="p">(</span><span class="n">capacidad</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Crea una cola circular vacia con espacio fijo para `capacidad` elementos."""</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"datos"</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">capacidad</span><span class="p">,</span> <span class="s2">"frente"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"tamanio"</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="consultar-el-estado">
+<h3>Consultar el estado<a class="headerlink" href="#consultar-el-estado" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">capacidad_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Cuantos elementos caben en total (no cambia nunca)."""</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tamanio_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Cuantos elementos hay ahora mismo."""</span>
+    <span class="k">return</span> <span class="n">cola</span><span class="p">[</span><span class="s2">"tamanio"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">esta_vacia_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""True si no hay elementos."""</span>
+    <span class="k">return</span> <span class="n">cola</span><span class="p">[</span><span class="s2">"tamanio"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">esta_llena_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""True si ya no cabe ni uno mas."""</span>
+    <span class="k">return</span> <span class="n">cola</span><span class="p">[</span><span class="s2">"tamanio"</span><span class="p">]</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="encolar-y-desencolar">
+<h3>Encolar y desencolar<a class="headerlink" href="#encolar-y-desencolar" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">encolar_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Agrega al final. Retorna False si la cola esta llena (no crece)."""</span>
+    <span class="k">if</span> <span class="n">esta_llena_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="n">posicion</span> <span class="o">=</span> <span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"frente"</span><span class="p">]</span> <span class="o">+</span> <span class="n">cola</span><span class="p">[</span><span class="s2">"tamanio"</span><span class="p">])</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">])</span>   <span class="c1"># &lt;- la formula</span>
+    <span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">][</span><span class="n">posicion</span><span class="p">]</span> <span class="o">=</span> <span class="n">elemento</span>
+    <span class="n">cola</span><span class="p">[</span><span class="s2">"tamanio"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">desencolar_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Saca el elemento del frente y lo retorna. Retorna None si esta vacia."""</span>
+    <span class="k">if</span> <span class="n">esta_vacia_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">elemento</span> <span class="o">=</span> <span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">][</span><span class="n">cola</span><span class="p">[</span><span class="s2">"frente"</span><span class="p">]]</span>
+    <span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">][</span><span class="n">cola</span><span class="p">[</span><span class="s2">"frente"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>                                 <span class="c1"># libera la referencia</span>
+    <span class="n">cola</span><span class="p">[</span><span class="s2">"frente"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"frente"</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">])</span>           <span class="c1"># &lt;- la misma formula</span>
+    <span class="n">cola</span><span class="p">[</span><span class="s2">"tamanio"</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">elemento</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">frente_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Retorna el elemento del frente SIN sacarlo. None si esta vacia."""</span>
+    <span class="k">if</span> <span class="n">esta_vacia_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">][</span><span class="n">cola</span><span class="p">[</span><span class="s2">"frente"</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="recorrer">
+<h3>Recorrer<a class="headerlink" href="#recorrer" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">recorrer_circular</span><span class="p">(</span><span class="n">cola</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Retorna los elementos en su orden LOGICO (del frente hacia el final)."""</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">cola</span><span class="p">[</span><span class="s2">"datos"</span><span class="p">][(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"frente"</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cola</span><span class="p">[</span><span class="s2">"tamanio"</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-vuelta-paso-a-paso">
+<h3>La vuelta, paso a paso<a class="headerlink" href="#la-vuelta-paso-a-paso" title="Link to this heading">#</a></h3>
+<p>Esta es la traza de una cola circular de <strong>capacidad 4</strong>. Fíjate en la última columna frente a la
+segunda: el arreglo físico y el orden lógico <strong>dejan de coincidir</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operación</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">datos</span></code> (físico)</p></th>
+<th class="head text-right"><p><code class="docutils literal notranslate"><span class="pre">frente</span></code></p></th>
+<th class="head text-right"><p><code class="docutils literal notranslate"><span class="pre">tamanio</span></code></p></th>
+<th class="head"><p>Orden lógico</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>(vacía)</em></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[None,</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None]</span></code></p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(A)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">None,</span> <span class="pre">None,</span> <span class="pre">None]</span></code></p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(B)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">None,</span> <span class="pre">None]</span></code></p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(C)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">None]</span></code></p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">'C']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(D)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">'D']</span></code></p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">'D']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(E)</span></code></p></td>
+<td><p><em>rechazado: está llena</em></p></td>
+<td class="text-right"><p>0</p></td>
+<td class="text-right"><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['A',</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">'D']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code> → <code class="docutils literal notranslate"><span class="pre">A</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[None,</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">'D']</span></code></p></td>
+<td class="text-right"><p>1</p></td>
+<td class="text-right"><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['B',</span> <span class="pre">'C',</span> <span class="pre">'D']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code> → <code class="docutils literal notranslate"><span class="pre">B</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[None,</span> <span class="pre">None,</span> <span class="pre">'C',</span> <span class="pre">'D']</span></code></p></td>
+<td class="text-right"><p>2</p></td>
+<td class="text-right"><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['C',</span> <span class="pre">'D']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(E)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['E',</span> <span class="pre">None,</span> <span class="pre">'C',</span> <span class="pre">'D']</span></code></p></td>
+<td class="text-right"><p>2</p></td>
+<td class="text-right"><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['C',</span> <span class="pre">'D',</span> <span class="pre">'E']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(F)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['E',</span> <span class="pre">'F',</span> <span class="pre">'C',</span> <span class="pre">'D']</span></code></p></td>
+<td class="text-right"><p>2</p></td>
+<td class="text-right"><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">['C',</span> <span class="pre">'D',</span> <span class="pre">'E',</span> <span class="pre">'F']</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Mira la última fila. Físicamente el arreglo dice <code class="docutils literal notranslate"><span class="pre">E,</span> <span class="pre">F,</span> <span class="pre">C,</span> <span class="pre">D</span></code>. Lógicamente la cola es
+<code class="docutils literal notranslate"><span class="pre">C,</span> <span class="pre">D,</span> <span class="pre">E,</span> <span class="pre">F</span></code>. <strong><code class="docutils literal notranslate"><span class="pre">E</span></code> y <code class="docutils literal notranslate"><span class="pre">F</span></code> dieron la vuelta</strong> y aterrizaron en el espacio que dejaron libres <code class="docutils literal notranslate"><span class="pre">A</span></code> y <code class="docutils literal notranslate"><span class="pre">B</span></code>.
+Ese hueco reutilizado es toda la gracia de la estructura.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Por qué guardamos <code class="docutils literal notranslate"><span class="pre">tamanio</span></code> y no solo dos índices.</strong> Si guardaras <code class="docutils literal notranslate"><span class="pre">frente</span></code> y <code class="docutils literal notranslate"><span class="pre">final</span></code>, una cola
+vacía y una llena se verían <strong>exactamente igual</strong> (<code class="docutils literal notranslate"><span class="pre">frente</span> <span class="pre">==</span> <span class="pre">final</span></code>) y no podrías distinguirlas.
+Guardar el tamaño resuelve la ambigüedad. Es un problema clásico y la primera pregunta de parcial
+sobre colas circulares.</p>
+</div>
+</section>
+<section id="para-practicar-colas-circulares">
+<h3>Para practicar — colas circulares<a class="headerlink" href="#para-practicar-colas-circulares" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>La traza a mano.</strong> Antes de programar: con una cola circular de capacidad 3, dibuja en papel
+el arreglo, <code class="docutils literal notranslate"><span class="pre">frente</span></code> y <code class="docutils literal notranslate"><span class="pre">tamanio</span></code> después de <code class="docutils literal notranslate"><span class="pre">encolar(1)</span></code>, <code class="docutils literal notranslate"><span class="pre">encolar(2)</span></code>, <code class="docutils literal notranslate"><span class="pre">desencolar()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">encolar(3)</span></code>, <code class="docutils literal notranslate"><span class="pre">encolar(4)</span></code>. ¿En qué posición física quedó el <code class="docutils literal notranslate"><span class="pre">4</span></code>?</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">ultimos_n</span></code>.</strong> Escribe <code class="docutils literal notranslate"><span class="pre">encolar_pisando(cola,</span> <span class="pre">elemento)</span></code>: igual que <code class="docutils literal notranslate"><span class="pre">encolar_circular</span></code>, pero
+cuando la cola está llena <strong>descarta el más viejo</strong> en vez de rechazar el nuevo. Úsala para
+quedarte siempre con las últimas 5 lecturas de un sensor.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">vaciar_circular(cola)</span></code></strong> que deje la cola en el mismo estado que recién creada,
+<strong>sin</strong> crear un arreglo nuevo.</p></li>
+<li><p><strong>Buffer de reproducción.</strong> Simula una emisora con una cola circular de capacidad 4:
+encola 6 canciones y ve desencolando de a una, mostrando en cada paso el arreglo físico y el
+orden lógico. Explica en un comentario en qué momento se dio la vuelta.</p></li>
+<li><p><strong>Round-Robin.</strong> Tres procesos (<code class="docutils literal notranslate"><span class="pre">P1</span></code>, <code class="docutils literal notranslate"><span class="pre">P2</span></code>, <code class="docutils literal notranslate"><span class="pre">P3</span></code>) necesitan 3, 1 y 2 turnos de CPU. Usando una
+cola circular, simula el reparto: saca el proceso del frente, réstale un turno y, si todavía le
+quedan, vuélvelo a encolar. Imprime el orden en que se atienden.</p></li>
+<li><p><strong>Para pensar (sin código).</strong> ¿Qué pasaría si en <code class="docutils literal notranslate"><span class="pre">encolar_circular</span></code> usaras
+<code class="docutils literal notranslate"><span class="pre">(frente</span> <span class="pre">+</span> <span class="pre">tamanio)</span></code> <strong>sin</strong> el <code class="docutils literal notranslate"><span class="pre">%</span> <span class="pre">capacidad</span></code>? ¿En qué momento exacto fallaría?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="demostracion">
 <h2>Demostración<a class="headerlink" href="#demostracion" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -783,6 +1063,16 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operaciones-principales">Operaciones principales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utilidades-adicionales">Utilidades adicionales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recorrer-y-buscar">Recorrer y buscar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colas-circulares">Colas circulares</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona">Cómo funciona</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-cola">Crear la cola</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consultar-el-estado">Consultar el estado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encolar-y-desencolar">Encolar y desencolar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recorrer">Recorrer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-vuelta-paso-a-paso">La vuelta, paso a paso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#para-practicar-colas-circulares">Para practicar — colas circulares</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion">Demostración</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-practicar">Para practicar</a></li>
 </ul>
