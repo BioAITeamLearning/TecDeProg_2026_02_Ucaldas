@@ -13,6 +13,7 @@ chapters:
     - file: "Cola"
     - file: "POO"
     - file: "Pilas_y_Colas_Avanzadas"
+    - file: "ResumenPilasColas"
     - file: "ManejoDeArchivos"
     - file: "ResolucionProblemas"
 - file: Unidad2
