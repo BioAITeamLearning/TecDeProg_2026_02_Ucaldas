@@ -514,7 +514,6 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pila">2.1 Pila</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola">2.2 Cola</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola-circular">2.3 Cola circular</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-cuesta-cada-operacion">2.4 Lo que cuesta cada operación</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-encargo">3. El encargo</a><ul class="pst-show_toc_level nav section-nav flex-column">
@@ -758,51 +757,6 @@ ejercicio desechable: es tu caja de herramientas.</p>
 </table>
 </div>
 </section>
-<section id="lo-que-cuesta-cada-operacion">
-<h2>2.4 Lo que cuesta cada operación<a class="headerlink" href="#lo-que-cuesta-cada-operacion" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Operación</p></th>
-<th class="head"><p>Pila (<code class="docutils literal notranslate"><span class="pre">list</span></code>)</p></th>
-<th class="head"><p>Cola (<code class="docutils literal notranslate"><span class="pre">list</span></code>)</p></th>
-<th class="head"><p>Cola (<code class="docutils literal notranslate"><span class="pre">deque</span></code>)</p></th>
-<th class="head"><p>Cola circular</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Meter</p></td>
-<td><p>O(1)</p></td>
-<td><p>O(1)</p></td>
-<td><p>O(1)</p></td>
-<td><p>O(1)</p></td>
-</tr>
-<tr class="row-odd"><td><p>Sacar</p></td>
-<td><p>O(1)</p></td>
-<td><p><strong>O(n)</strong> ← <code class="docutils literal notranslate"><span class="pre">pop(0)</span></code></p></td>
-<td><p>O(1)</p></td>
-<td><p>O(1)</p></td>
-</tr>
-<tr class="row-even"><td><p>Consultar extremo</p></td>
-<td><p>O(1)</p></td>
-<td><p>O(1)</p></td>
-<td><p>O(1)</p></td>
-<td><p>O(1)</p></td>
-</tr>
-<tr class="row-odd"><td><p>Memoria</p></td>
-<td><p>crece</p></td>
-<td><p>crece</p></td>
-<td><p>crece</p></td>
-<td><p><strong>fija</strong></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>La celda <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> de la segunda columna es la razón por la que tu clase <code class="docutils literal notranslate"><span class="pre">Cola</span></code> <strong>no</strong> debe usar
-<code class="docutils literal notranslate"><span class="pre">lista.pop(0)</span></code>. Es el mismo hallazgo del ejercicio de la ruta del bus.</p>
-</div>
-</section>
 </section>
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="el-encargo">
@@ -818,7 +772,8 @@ Usa <code class="docutils literal notranslate"><span class="pre">IndexError</spa
 <li><p>Implementa los protocolos: <code class="docutils literal notranslate"><span class="pre">__len__</span></code>, <code class="docutils literal notranslate"><span class="pre">__bool__</span></code>, <code class="docutils literal notranslate"><span class="pre">__iter__</span></code>, <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> y, salvo en la
 circular, <code class="docutils literal notranslate"><span class="pre">__contains__</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cima</span></code>, <code class="docutils literal notranslate"><span class="pre">frente</span></code>, <code class="docutils literal notranslate"><span class="pre">final</span></code> y <code class="docutils literal notranslate"><span class="pre">capacidad</span></code> son <strong>propiedades</strong>, no métodos: se usan sin paréntesis.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Cola</span></code> debe usar <code class="docutils literal notranslate"><span class="pre">collections.deque</span></code> por dentro, para que desencolar sea O(1).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cola</span></code> debe usar <code class="docutils literal notranslate"><span class="pre">collections.deque</span></code> por dentro, <strong>no una lista</strong>: sacar del frente de
+una lista obliga a correr de lugar todos los demás elementos, y <code class="docutils literal notranslate"><span class="pre">deque</span></code> no.</p></li>
 </ol>
 <p>Debajo de cada clase hay un <strong>banco de pruebas</strong>. Ejecútalo: te dice exactamente qué falta.</p>
 <hr class="docutils" />
@@ -1101,7 +1056,6 @@ te vas a ahorrar escribirlas de nuevo.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pila">2.1 Pila</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola">2.2 Cola</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola-circular">2.3 Cola circular</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-que-cuesta-cada-operacion">2.4 Lo que cuesta cada operación</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-encargo">3. El encargo</a><ul class="pst-show_toc_level nav section-nav flex-column">
