@@ -257,7 +257,17 @@
 
 
 
+<li class="toctree-l2"><a class="reference internal" href="EstructurasLineales.html">Estructuras lineales — implementación de referencia</a></li>
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TallerUnidad1.html">Taller de preparación — Unidad 1</a></li>
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
 </ul>
 </details></li>
@@ -742,6 +752,12 @@ de desperdiciarlo. El arreglo no crece: se le <strong>da la vuelta</strong>.</p>
 </div>
 <p>Ese <code class="docutils literal notranslate"><span class="pre">%</span></code> (módulo) <strong>es</strong> la circularidad: cuando el índice llega al final del arreglo, el residuo lo
 devuelve al principio.</p>
+<a class="reference internal image-reference" href="_images/cola_circular_anillo.png"><img alt="A la izquierda el arreglo en memoria con los punteros frente y final y la flecha que salta del indice 3 al 0; a la derecha el mismo arreglo dibujado como anillo, donde el orden logico C D E F queda contiguo" class="align-center" src="_images/cola_circular_anillo.png" style="width: 100%;" />
+</a>
+<p>A la izquierda está lo que de verdad hay en memoria: un arreglo plano de cuatro casillas. A la
+derecha, lo mismo pero dibujado como anillo — y ahí se ve por qué la estructura se llama
+<em>circular</em>: el orden lógico <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">→</span> <span class="pre">D</span> <span class="pre">→</span> <span class="pre">E</span> <span class="pre">→</span> <span class="pre">F</span></code> es continuo, aunque en el arreglo <code class="docutils literal notranslate"><span class="pre">E</span></code> y <code class="docutils literal notranslate"><span class="pre">F</span></code> estén
+antes que <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p>
 </section>
 <section id="crear-la-cola">
 <h3>Crear la cola<a class="headerlink" href="#crear-la-cola" title="Link to this heading">#</a></h3>
@@ -854,6 +870,9 @@ devuelve al principio.</p>
 <h3>La vuelta, paso a paso<a class="headerlink" href="#la-vuelta-paso-a-paso" title="Link to this heading">#</a></h3>
 <p>Esta es la traza de una cola circular de <strong>capacidad 4</strong>. Fíjate en la última columna frente a la
 segunda: el arreglo físico y el orden lógico <strong>dejan de coincidir</strong>.</p>
+<a class="reference internal image-reference" href="_images/cola_circular_secuencia.png"><img alt="Cuatro estados de una cola circular de capacidad 4: llena con A B C D, tras desencolar A y B quedan dos casillas libres, encolar E ocupa la casilla 0 dando la vuelta y encolar F ocupa la casilla 1" class="align-center" src="_images/cola_circular_secuencia.png" style="width: 92%;" />
+</a>
+<p>Y la misma secuencia en números:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Operación</p></th>

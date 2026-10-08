@@ -1,0 +1,1269 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Taller de preparación — Unidad 1 &#8212; Técnicas de Programación 2026 - 02</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e8cf666a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'TallerUnidad1';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Taller y Evaluación — Unidad 1" href="ResolucionProblemas.html" />
+    <link rel="prev" title="Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python" href="ManejoDeArchivos.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logosem.png" class="logo__image only-light" alt="Técnicas de Programación 2026 - 02 - Home"/>
+    <img src="_static/logosem.png" class="logo__image only-dark pst-js-only" alt="Técnicas de Programación 2026 - 02 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenida al curso
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad1.html">Unidad 1</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Introduccion.html">Introducción a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ListasTuplasDiccionarios.html">Listas, Tuplas, Diccionarios</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="PilasyColas.html">Pilas y Colas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pila.html">Pilas (Stack) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cola.html">Colas (Queue) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="POO.html">Programación Orientada a Objetos en Python</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResumenPilasColas.html">Resumen de la Unidad · Pila, Cola y Cola Circular</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="EstructurasLineales.html">Estructuras lineales — implementación de referencia</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Taller de preparación — Unidad 1</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="FuerzaBruta.html">Fuerza Bruta y Complejidad Computacional</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Recursividad_Notebook.html">Recursividad en Python — Pila, Cola y Cruzada</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Backtracking.html">Backtracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Backtracking_Notebook.html">Backtracking en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas2.html">Taller y Evaluación — Unidad 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad3.html">Unidad 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Busqueda.html">Búsqueda</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Busqueda_Notebook.html">Algoritmos de búsqueda en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Ordenamiento.html">Ordenamiento</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Ordenamiento_Notebook.html">Algoritmos de ordenamiento en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas3.html">Taller y Evaluación — Unidad 3</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/TecDeProg_2026_02_Ucaldas/blob/main/TallerUnidad1.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/TecDeProg_2026_02_Ucaldas" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/TecDeProg_2026_02_Ucaldas/issues/new?title=Issue%20on%20page%20%2FTallerUnidad1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/TallerUnidad1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Taller de preparación — Unidad 1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Taller de preparación — Unidad 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-a-conceptos">Parte A — Conceptos</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos">Ciclos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listas-tuplas-y-diccionarios">Listas, tuplas y diccionarios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetos">Objetos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructuras-lineales">Estructuras lineales</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-b-trazas">Parte B — Trazas</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b1-pila">B1 · Pila</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b2-cola">B2 · Cola</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-pila-y-cola-a-la-vez">B3 · Pila y cola a la vez</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-cola-circular">B4 · Cola circular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b5-que-imprime">B5 · ¿Qué imprime?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-c-casos-de-la-vida-cotidiana">Parte C — Casos de la vida cotidiana</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c1-el-historial-del-navegador-pila">C1 · El historial del navegador  <em>(pila)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c2-la-fila-de-la-cafeteria-cola">C2 · La fila de la cafetería  <em>(cola)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c3-las-notificaciones-del-celular-cola-circular">C3 · Las notificaciones del celular  <em>(cola circular)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c4-deshacer-y-rehacer-en-un-editor-dos-pilas">C4 · Deshacer y rehacer en un editor  <em>(dos pilas)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c5-turnos-del-laboratorio-cola-circular-rotando">C5 · Turnos del laboratorio  <em>(cola circular, rotando)</em></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-d-programacion">Parte D — Programación</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d1-la-clase-producto">D1 · La clase <code class="docutils literal notranslate"><span class="pre">Producto</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d2-la-clase-pedido">D2 · La clase <code class="docutils literal notranslate"><span class="pre">Pedido</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d3-herencia">D3 · Herencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d4-polimorfismo">D4 · Polimorfismo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d5-parentesis-balanceados-pila">D5 · Paréntesis balanceados  <em>(pila)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d6-invertir-una-cola-pila-cola">D6 · Invertir una cola  <em>(pila + cola)</em></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-repasar-segun-donde-fallaste">Qué repasar según dónde fallaste</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="taller-de-preparacion-unidad-1">
+<h1>Taller de preparación — Unidad 1<a class="headerlink" href="#taller-de-preparacion-unidad-1" title="Link to this heading">#</a></h1>
+<p>Este taller recorre <strong>todo lo que hemos visto</strong>: ciclos, listas, tuplas, diccionarios, funciones,
+objetos y estructuras lineales. Es la preparación para el parcial de la próxima semana.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Las partes A y B se resuelven sin computador.</strong> Papel y lápiz. En el parcial no vas a tener el
+intérprete para salir de dudas, así que acostúmbrate ahora: primero escribes tu respuesta, y
+<strong>después</strong> la verificas ejecutando.</p>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parte</p></th>
+<th class="head"><p>Qué es</p></th>
+<th class="head"><p>Cómo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>A</strong></p></td>
+<td><p>Conceptos</p></td>
+<td><p>respuesta corta, sin computador</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>B</strong></p></td>
+<td><p>Trazas: <em>“¿qué queda?”</em> y <em>“¿qué imprime?”</em></p></td>
+<td><p>a mano, sin computador</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>C</strong></p></td>
+<td><p>Casos de la vida cotidiana</p></td>
+<td><p>código, con pasos dados</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>D</strong></p></td>
+<td><p>Programación</p></td>
+<td><p>código, desde cero</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Para las partes C y D usa las clases <code class="docutils literal notranslate"><span class="pre">Pila</span></code>, <code class="docutils literal notranslate"><span class="pre">Cola</span></code> y <code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code> del cuaderno
+<strong>Estructuras lineales</strong>. Cópialas en la celda de abajo antes de empezar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pega aquí las clases Pila, Cola y ColaCircular</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="parte-a-conceptos">
+<h1>Parte A — Conceptos<a class="headerlink" href="#parte-a-conceptos" title="Link to this heading">#</a></h1>
+<p>Responde en <strong>dos o tres líneas</strong>. No copies definiciones: explica con tus palabras.</p>
+<section id="ciclos">
+<h2>Ciclos<a class="headerlink" href="#ciclos" title="Link to this heading">#</a></h2>
+<p><strong>A1.</strong> ¿Cuándo usarías un <code class="docutils literal notranslate"><span class="pre">for</span></code> y cuándo un <code class="docutils literal notranslate"><span class="pre">while</span></code>? Da un ejemplo de algo que sea incómodo de
+hacer con <code class="docutils literal notranslate"><span class="pre">for</span></code>.</p>
+<p><strong>A2.</strong> Explica la diferencia entre <code class="docutils literal notranslate"><span class="pre">break</span></code>, <code class="docutils literal notranslate"><span class="pre">continue</span></code> y <code class="docutils literal notranslate"><span class="pre">pass</span></code>. ¿Cuál de los tres <strong>no</strong> altera
+el ciclo?</p>
+<p><strong>A3.</strong> ¿Qué imprime <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(2,</span> <span class="pre">9,</span> <span class="pre">3)</span></code>? ¿Y por qué el <code class="docutils literal notranslate"><span class="pre">9</span></code> no aparece?</p>
+</section>
+<section id="listas-tuplas-y-diccionarios">
+<h2>Listas, tuplas y diccionarios<a class="headerlink" href="#listas-tuplas-y-diccionarios" title="Link to this heading">#</a></h2>
+<p><strong>A4.</strong> Una lista y una tupla guardan lo mismo. ¿Por qué usarías una tupla?</p>
+<p><strong>A5.</strong> Una tupla tiene exactamente dos métodos: <code class="docutils literal notranslate"><span class="pre">count()</span></code> e <code class="docutils literal notranslate"><span class="pre">index()</span></code>. ¿Por qué no tiene
+<code class="docutils literal notranslate"><span class="pre">append</span></code> ni <code class="docutils literal notranslate"><span class="pre">sort</span></code>?</p>
+<p><strong>A6.</strong> ¿Qué diferencia hay entre <code class="docutils literal notranslate"><span class="pre">mi_dicc[&quot;telefono&quot;]</span></code> y <code class="docutils literal notranslate"><span class="pre">mi_dicc.get(&quot;telefono&quot;)</span></code> cuando la
+clave <strong>no existe</strong>?</p>
+<p><strong>A7.</strong> Después de <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">a</span></code> sobre una lista, haces <code class="docutils literal notranslate"><span class="pre">b.append(5)</span></code>. ¿Qué le pasa a <code class="docutils literal notranslate"><span class="pre">a</span></code>? ¿Por qué?</p>
+</section>
+<section id="objetos">
+<h2>Objetos<a class="headerlink" href="#objetos" title="Link to this heading">#</a></h2>
+<p><strong>A8.</strong> ¿Qué es <code class="docutils literal notranslate"><span class="pre">self</span></code> y por qué hay que escribirlo?</p>
+<p><strong>A9.</strong> En Python no existe <code class="docutils literal notranslate"><span class="pre">private</span></code>. ¿Qué se usa en su lugar y qué gana realmente quien lee tu
+código?</p>
+<p><strong>A10.</strong> Escribiste <code class="docutils literal notranslate"><span class="pre">__len__</span></code> en tu clase pero nunca un método llamado <code class="docutils literal notranslate"><span class="pre">size</span></code>. Aun así
+<code class="docutils literal notranslate"><span class="pre">len(mi_objeto)</span></code> funciona. ¿Por qué?</p>
+<p><strong>A11.</strong> Dos clases que no comparten superclase ni interfaz funcionan con la misma función.
+¿Cómo se llama eso y por qué funciona en Python?</p>
+</section>
+<section id="estructuras-lineales">
+<h2>Estructuras lineales<a class="headerlink" href="#estructuras-lineales" title="Link to this heading">#</a></h2>
+<p><strong>A12.</strong> Una pila y una cola guardan lo mismo que una lista, pero con menos operaciones.
+¿Qué se gana restringiendo?</p>
+<p><strong>A13.</strong> ¿Para qué sirve una cola <strong>circular</strong> si ya tenemos una cola normal? Da un caso donde
+la circular sea la correcta.</p>
+<p><strong>A14.</strong> En una cola circular de capacidad 4, el arreglo dice <code class="docutils literal notranslate"><span class="pre">['E','F','C','D']</span></code> y <code class="docutils literal notranslate"><span class="pre">frente</span> <span class="pre">=</span> <span class="pre">2</span></code>.
+¿Cuál es el orden en que van a salir los elementos?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># A1 ... A14 — TUS RESPUESTAS ACÁ (como comentarios o en una celda de texto)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="parte-b-trazas">
+<h1>Parte B — Trazas<a class="headerlink" href="#parte-b-trazas" title="Link to this heading">#</a></h1>
+<p>Sin ejecutar nada. Escribe el resultado, y <strong>solo después</strong> comprueba.</p>
+<hr class="docutils" />
+<section id="b1-pila">
+<h2>B1 · Pila<a class="headerlink" href="#b1-pila" title="Link to this heading">#</a></h2>
+<p>Partes de una pila <strong>vacía</strong>. Aplica en orden:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">apilar(&quot;A&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apilar(&quot;B&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apilar(&quot;C&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desapilar()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apilar(&quot;D&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apilar(&quot;E&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desapilar()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desapilar()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">apilar(&quot;F&quot;)</span></code></p></li>
+</ol>
+<p><strong>Responde:</strong></p>
+<ul class="simple">
+<li><p>a) ¿Qué retornó cada uno de los <strong>tres</strong> <code class="docutils literal notranslate"><span class="pre">desapilar()</span></code>?</p></li>
+<li><p>b) ¿Cuál es la <strong>cima</strong> al final?</p></li>
+<li><p>c) ¿Cuántos elementos quedan?</p></li>
+<li><p>d) Escribe la pila final <strong>de la base a la cima</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="b2-cola">
+<h2>B2 · Cola<a class="headerlink" href="#b2-cola" title="Link to this heading">#</a></h2>
+<p>Partes de una cola <strong>vacía</strong>. Aplica en orden:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(10)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(20)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(30)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(40)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(50)</span></code></p></li>
+</ol>
+<p><strong>Responde:</strong></p>
+<ul class="simple">
+<li><p>a) ¿Qué retornó cada <code class="docutils literal notranslate"><span class="pre">desencolar()</span></code>?</p></li>
+<li><p>b) ¿Cuál es el <strong>frente</strong> y cuál el <strong>final</strong> al terminar?</p></li>
+<li><p>c) Escribe la cola final del frente hacia atrás.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="b3-pila-y-cola-a-la-vez">
+<h2>B3 · Pila y cola a la vez<a class="headerlink" href="#b3-pila-y-cola-a-la-vez" title="Link to this heading">#</a></h2>
+<p>Tienes una pila <code class="docutils literal notranslate"><span class="pre">P</span></code> y una cola <code class="docutils literal notranslate"><span class="pre">C</span></code>, las dos vacías. Aplica en orden:</p>
+<ol class="arabic simple">
+<li><p>En <strong>las dos</strong>, mete <code class="docutils literal notranslate"><span class="pre">1</span></code>, luego <code class="docutils literal notranslate"><span class="pre">2</span></code>, luego <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
+<li><p>Saca <strong>uno</strong> de <code class="docutils literal notranslate"><span class="pre">P</span></code> y mételo en <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p></li>
+<li><p>Saca <strong>uno</strong> de <code class="docutils literal notranslate"><span class="pre">C</span></code> y mételo en <code class="docutils literal notranslate"><span class="pre">P</span></code>.</p></li>
+<li><p>Saca <strong>uno</strong> de <code class="docutils literal notranslate"><span class="pre">P</span></code>.</p></li>
+</ol>
+<p><strong>Responde:</strong> ¿qué quedó en <code class="docutils literal notranslate"><span class="pre">P</span></code> y qué quedó en <code class="docutils literal notranslate"><span class="pre">C</span></code>? ¿Qué valor se sacó en el paso 4?</p>
+</section>
+<hr class="docutils" />
+<section id="b4-cola-circular">
+<h2>B4 · Cola circular<a class="headerlink" href="#b4-cola-circular" title="Link to this heading">#</a></h2>
+<p>Una cola circular de <strong>capacidad 4</strong>, vacía. Aplica en orden:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(&quot;L&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(&quot;M&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(&quot;N&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(&quot;O&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(&quot;P&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(&quot;P&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encolar(&quot;Q&quot;)</span></code></p></li>
+</ol>
+<p><strong>Responde:</strong></p>
+<ul class="simple">
+<li><p>a) ¿Qué pasó exactamente en el paso 5?</p></li>
+<li><p>b) Dibuja el <strong>arreglo físico</strong> después del paso 9, con sus índices.</p></li>
+<li><p>c) ¿En qué posición física quedó la <code class="docutils literal notranslate"><span class="pre">&quot;Q&quot;</span></code>?</p></li>
+<li><p>d) ¿Cuál es el <strong>orden lógico</strong> al final?</p></li>
+<li><p>e) ¿Cuánto vale <code class="docutils literal notranslate"><span class="pre">frente</span></code>?</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="b5-que-imprime">
+<h2>B5 · ¿Qué imprime?<a class="headerlink" href="#b5-que-imprime" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>B6 · ¿Qué imprime?</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inventario</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"lapiz"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"cuaderno"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">inventario</span><span class="p">[</span><span class="s2">"borrador"</span><span class="p">]</span> <span class="o">=</span> <span class="n">inventario</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"borrador"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span>
+<span class="n">inventario</span><span class="p">[</span><span class="s2">"lapiz"</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>
+<span class="k">del</span> <span class="n">inventario</span><span class="p">[</span><span class="s2">"cuaderno"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">inventario</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">inventario</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inventario</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cuaderno"</span><span class="p">,</span> <span class="s2">"agotado"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>B7 · ¿Qué imprime?</strong>  <em>(ojo con el valor por defecto)</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Carrito</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">items</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">agregar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Carrito</span><span class="p">()</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Carrito</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">agregar</span><span class="p">(</span><span class="s2">"pan"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">items</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>B8 · ¿Qué imprime?</strong>  <em>(herencia y <code class="docutils literal notranslate"><span class="pre">super()</span></code>)</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Empleado</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nombre</span> <span class="o">=</span> <span class="n">nombre</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">saludo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Soy </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nombre</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Jefe</span><span class="p">(</span><span class="n">Empleado</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">area</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">area</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">saludo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">saludo</span><span class="p">()</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">", jefe de </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">area</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Empleado</span><span class="p">(</span><span class="s2">"Ana"</span><span class="p">)</span><span class="o">.</span><span class="n">saludo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Jefe</span><span class="p">(</span><span class="s2">"Luis"</span><span class="p">,</span> <span class="s2">"Sistemas"</span><span class="p">)</span><span class="o">.</span><span class="n">saludo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">Jefe</span><span class="p">(</span><span class="s2">"Luis"</span><span class="p">,</span> <span class="s2">"Sistemas"</span><span class="p">),</span> <span class="n">Empleado</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>B9 · ¿Qué imprime?</strong>  <em>(protocolos)</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Caja</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cosas</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cosas</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cosas</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cosas</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cosas</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__cosas</span><span class="p">))</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Caja</span><span class="p">([</span><span class="s2">"tuerca"</span><span class="p">,</span> <span class="s2">"tornillo"</span><span class="p">,</span> <span class="s2">"clavo"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"clavo"</span> <span class="ow">in</span> <span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">c</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">Caja</span><span class="p">([])))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># B1 ... B9 — TUS RESPUESTAS ACÁ, antes de ejecutar nada</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="parte-c-casos-de-la-vida-cotidiana">
+<h1>Parte C — Casos de la vida cotidiana<a class="headerlink" href="#parte-c-casos-de-la-vida-cotidiana" title="Link to this heading">#</a></h1>
+<p>Cada caso dice <strong>exactamente qué hacer</strong>. Tradúcelo a código usando <code class="docutils literal notranslate"><span class="pre">Pila</span></code>, <code class="docutils literal notranslate"><span class="pre">Cola</span></code> o
+<code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code>, y al final de cada uno <strong>imprime el estado</strong>.</p>
+<hr class="docutils" />
+<section id="c1-el-historial-del-navegador-pila">
+<h2>C1 · El historial del navegador  <em>(pila)</em><a class="headerlink" href="#c1-el-historial-del-navegador-pila" title="Link to this heading">#</a></h2>
+<p>Estás navegando. Cada página visitada entra al historial; el botón <em>atrás</em> saca la última.</p>
+<ol class="arabic simple">
+<li><p>Visita <code class="docutils literal notranslate"><span class="pre">uni.edu</span></code></p></li>
+<li><p>Visita <code class="docutils literal notranslate"><span class="pre">uni.edu/notas</span></code></p></li>
+<li><p>Visita <code class="docutils literal notranslate"><span class="pre">uni.edu/notas/2026</span></code></p></li>
+<li><p>Imprime en qué página estás (<strong>sin sacarla</strong>)</p></li>
+<li><p>Presiona <em>atrás</em> <strong>dos veces</strong> y muestra a dónde llegaste cada vez</p></li>
+<li><p>Visita <code class="docutils literal notranslate"><span class="pre">uni.edu/horario</span></code></p></li>
+<li><p>Imprime cuántas páginas quedan en el historial y el historial completo</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="c2-la-fila-de-la-cafeteria-cola">
+<h2>C2 · La fila de la cafetería  <em>(cola)</em><a class="headerlink" href="#c2-la-fila-de-la-cafeteria-cola" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Llegan, en este orden: <code class="docutils literal notranslate"><span class="pre">Ana</span></code>, <code class="docutils literal notranslate"><span class="pre">Luis</span></code>, <code class="docutils literal notranslate"><span class="pre">Sara</span></code>, <code class="docutils literal notranslate"><span class="pre">Pedro</span></code></p></li>
+<li><p>Imprime <strong>a quién le toca</strong> y <strong>quién es el último</strong> de la fila</p></li>
+<li><p>Atiende a <strong>dos</strong> personas y muestra el nombre de cada una</p></li>
+<li><p>Llega <code class="docutils literal notranslate"><span class="pre">Camila</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Sara</span></code> se cansa y se va: <strong>retírala sin atenderla</strong> <em>(pista: saca y vuelve a encolar a los demás)</em></p></li>
+<li><p>Imprime la fila final y cuántos faltan</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="c3-las-notificaciones-del-celular-cola-circular">
+<h2>C3 · Las notificaciones del celular  <em>(cola circular)</em><a class="headerlink" href="#c3-las-notificaciones-del-celular-cola-circular" title="Link to this heading">#</a></h2>
+<p>Tu celular solo muestra las <strong>últimas 3</strong> notificaciones. Cuando llega una nueva y no hay espacio,
+la más vieja desaparece.</p>
+<ol class="arabic simple">
+<li><p>Crea la cola circular con capacidad 3</p></li>
+<li><p>Llegan en este orden: <code class="docutils literal notranslate"><span class="pre">&quot;WhatsApp&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Correo&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Calendario&quot;</span></code></p></li>
+<li><p>Imprime las notificaciones visibles</p></li>
+<li><p>Llega <code class="docutils literal notranslate"><span class="pre">&quot;Banco&quot;</span></code> — muestra <strong>cuál desapareció</strong></p></li>
+<li><p>Llega <code class="docutils literal notranslate"><span class="pre">&quot;Instagram&quot;</span></code> — muestra <strong>cuál desapareció</strong></p></li>
+<li><p>Imprime las visibles al final</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="c4-deshacer-y-rehacer-en-un-editor-dos-pilas">
+<h2>C4 · Deshacer y rehacer en un editor  <em>(dos pilas)</em><a class="headerlink" href="#c4-deshacer-y-rehacer-en-un-editor-dos-pilas" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Escribe <code class="docutils literal notranslate"><span class="pre">&quot;Hola&quot;</span></code>, luego <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">mundo&quot;</span></code>, luego <code class="docutils literal notranslate"><span class="pre">&quot;!&quot;</span></code></p></li>
+<li><p>Imprime el texto completo</p></li>
+<li><p>Deshaz <strong>dos veces</strong> e imprime el texto después de cada una</p></li>
+<li><p>Rehaz <strong>una vez</strong> e imprime el texto</p></li>
+<li><p>Escribe <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">clase&quot;</span></code> — y <strong>borra lo que quedaba por rehacer</strong></p></li>
+<li><p>Intenta rehacer: debe avisar que no hay nada</p></li>
+<li><p>Imprime el texto final</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="c5-turnos-del-laboratorio-cola-circular-rotando">
+<h2>C5 · Turnos del laboratorio  <em>(cola circular, rotando)</em><a class="headerlink" href="#c5-turnos-del-laboratorio-cola-circular-rotando" title="Link to this heading">#</a></h2>
+<p>Tres equipos —<code class="docutils literal notranslate"><span class="pre">E1</span></code>, <code class="docutils literal notranslate"><span class="pre">E2</span></code>, <code class="docutils literal notranslate"><span class="pre">E3</span></code>— se turnan el microscopio. Cada equipo necesita turnos distintos:
+<code class="docutils literal notranslate"><span class="pre">E1</span></code> necesita 3, <code class="docutils literal notranslate"><span class="pre">E2</span></code> necesita 1, <code class="docutils literal notranslate"><span class="pre">E3</span></code> necesita 2.</p>
+<ol class="arabic simple">
+<li><p>Encola los tres equipos</p></li>
+<li><p>Mientras quede alguno con turnos pendientes:</p>
+<ul class="simple">
+<li><p>saca el del frente</p></li>
+<li><p>imprime <code class="docutils literal notranslate"><span class="pre">&quot;usa</span> <span class="pre">el</span> <span class="pre">microscopio:</span> <span class="pre">&lt;equipo&gt;&quot;</span></code></p></li>
+<li><p>réstale un turno</p></li>
+<li><p>si todavía le quedan, vuélvelo a encolar al final</p></li>
+</ul>
+</li>
+<li><p>Imprime el <strong>orden completo</strong> en que se usaron los turnos</p></li>
+<li><p>¿Cuántas veces se usó el microscopio en total?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># C1 — El historial del navegador</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># C2 — La fila de la cafetería</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># C3 — Las notificaciones del celular</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># C4 — Deshacer y rehacer</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># C5 — Turnos del laboratorio</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="parte-d-programacion">
+<h1>Parte D — Programación<a class="headerlink" href="#parte-d-programacion" title="Link to this heading">#</a></h1>
+<p>Ahora sin pasos dados: lee el requerimiento y decide tú cómo resolverlo.</p>
+<hr class="docutils" />
+<section id="d1-la-clase-producto">
+<h2>D1 · La clase <code class="docutils literal notranslate"><span class="pre">Producto</span></code><a class="headerlink" href="#d1-la-clase-producto" title="Link to this heading">#</a></h2>
+<p>Crea una clase <code class="docutils literal notranslate"><span class="pre">Producto</span></code> con <code class="docutils literal notranslate"><span class="pre">nombre</span></code>, <code class="docutils literal notranslate"><span class="pre">precio</span></code> y <code class="docutils literal notranslate"><span class="pre">cantidad</span></code>.</p>
+<ul class="simple">
+<li><p>El precio se guarda en <code class="docutils literal notranslate"><span class="pre">__precio</span></code> y se expone con <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code>. <strong>No</strong> puede ser negativo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">valor_total()</span></code> retorna <code class="docutils literal notranslate"><span class="pre">precio</span> <span class="pre">*</span> <span class="pre">cantidad</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__repr__</span></code> muestra algo legible.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">__eq__</span></code>: dos productos son el mismo si tienen el mismo nombre.</p></li>
+</ul>
+<p>Crea tres productos, intenta poner un precio negativo y muestra que falla.</p>
+</section>
+<hr class="docutils" />
+<section id="d2-la-clase-pedido">
+<h2>D2 · La clase <code class="docutils literal notranslate"><span class="pre">Pedido</span></code><a class="headerlink" href="#d2-la-clase-pedido" title="Link to this heading">#</a></h2>
+<p>Crea una clase <code class="docutils literal notranslate"><span class="pre">Pedido</span></code> que guarde varios <code class="docutils literal notranslate"><span class="pre">Producto</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">agregar(producto)</span></code> y <code class="docutils literal notranslate"><span class="pre">retirar(nombre)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total()</span></code> suma el valor de todos.</p></li>
+<li><p>Soporta <code class="docutils literal notranslate"><span class="pre">len(pedido)</span></code>, <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">p</span> <span class="pre">in</span> <span class="pre">pedido</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;arroz&quot;</span> <span class="pre">in</span> <span class="pre">pedido</span></code> y <code class="docutils literal notranslate"><span class="pre">print(pedido)</span></code>.</p></li>
+<li><p>La lista interna <strong>no puede alcanzarse desde fuera</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="d3-herencia">
+<h2>D3 · Herencia<a class="headerlink" href="#d3-herencia" title="Link to this heading">#</a></h2>
+<p>Crea <code class="docutils literal notranslate"><span class="pre">PedidoConDescuento(Pedido)</span></code> que reciba un porcentaje de descuento y <strong>sobrescriba</strong>
+<code class="docutils literal notranslate"><span class="pre">total()</span></code> aplicándolo. Reutiliza el total del padre con <code class="docutils literal notranslate"><span class="pre">super()</span></code>.</p>
+<p>Comprueba que <code class="docutils literal notranslate"><span class="pre">len()</span></code>, <code class="docutils literal notranslate"><span class="pre">in</span></code> y el recorrido <strong>siguen funcionando</strong> sin que los hayas vuelto a escribir.</p>
+</section>
+<hr class="docutils" />
+<section id="d4-polimorfismo">
+<h2>D4 · Polimorfismo<a class="headerlink" href="#d4-polimorfismo" title="Link to this heading">#</a></h2>
+<p>Escribe una función <code class="docutils literal notranslate"><span class="pre">imprimir_factura(pedidos)</span></code> que reciba una lista con pedidos de los dos tipos
+e imprima el total de cada uno, <strong>sin preguntar de qué tipo es</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="d5-parentesis-balanceados-pila">
+<h2>D5 · Paréntesis balanceados  <em>(pila)</em><a class="headerlink" href="#d5-parentesis-balanceados-pila" title="Link to this heading">#</a></h2>
+<p>Escribe <code class="docutils literal notranslate"><span class="pre">esta_balanceado(texto)</span></code> que verifique que cada <code class="docutils literal notranslate"><span class="pre">(</span></code>, <code class="docutils literal notranslate"><span class="pre">[</span></code> y <code class="docutils literal notranslate"><span class="pre">{</span></code> se cierra con su pareja y
+en el orden correcto.</p>
+<p>Pruébalo con: <code class="docutils literal notranslate"><span class="pre">&quot;({[]})&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;(]&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;(((&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</section>
+<hr class="docutils" />
+<section id="d6-invertir-una-cola-pila-cola">
+<h2>D6 · Invertir una cola  <em>(pila + cola)</em><a class="headerlink" href="#d6-invertir-una-cola-pila-cola" title="Link to this heading">#</a></h2>
+<p>Escribe <code class="docutils literal notranslate"><span class="pre">invertir(cola)</span></code> que le dé la vuelta usando <strong>solo una pila auxiliar</strong>.
+Sin <code class="docutils literal notranslate"><span class="pre">reversed</span></code>, sin rebanadas, sin convertir a lista.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># D1 — Producto</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># D2 — Pedido</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># D3 — PedidoConDescuento</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># D4 — imprimir_factura</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># D5 — esta_balanceado</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># D6 — invertir</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="que-repasar-segun-donde-fallaste">
+<h1>Qué repasar según dónde fallaste<a class="headerlink" href="#que-repasar-segun-donde-fallaste" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Si te costó…</p></th>
+<th class="head"><p>Vuelve a</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A1–A3, B5</p></td>
+<td><p><em>Listas, Tuplas, Diccionarios</em> §1 — Ciclos</p></td>
+</tr>
+<tr class="row-odd"><td><p>A4–A7, B6</p></td>
+<td><p><em>Listas, Tuplas, Diccionarios</em> §4, §5, §6</p></td>
+</tr>
+<tr class="row-even"><td><p>A8–A9, B7, D1</p></td>
+<td><p><em>POO</em> §1–§5 — clases, <code class="docutils literal notranslate"><span class="pre">self</span></code>, encapsulamiento</p></td>
+</tr>
+<tr class="row-odd"><td><p>A10, B9, D2</p></td>
+<td><p><em>POO</em> §6 — métodos especiales</p></td>
+</tr>
+<tr class="row-even"><td><p>B8, D3</p></td>
+<td><p><em>POO</em> §7 — herencia</p></td>
+</tr>
+<tr class="row-odd"><td><p>A11, D4</p></td>
+<td><p><em>POO</em> §8 — polimorfismo</p></td>
+</tr>
+<tr class="row-even"><td><p>A12–A14, B1–B4</p></td>
+<td><p><em>Pila</em>, <em>Cola</em> y el resumen de la unidad</p></td>
+</tr>
+<tr class="row-odd"><td><p>C1–C5, D5–D6</p></td>
+<td><p><em>Estructuras lineales</em> + los ejercicios aplicados del resumen</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Si las partes A y B te salieron <strong>sin ejecutar nada</strong>, estás listo para el parcial. Si tuviste que
+correr el código para saber qué pasaba, ese es justamente el tema que hay que repasar.</p>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ManejoDeArchivos.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ResolucionProblemas.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Taller y Evaluación — Unidad 1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Taller de preparación — Unidad 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-a-conceptos">Parte A — Conceptos</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ciclos">Ciclos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listas-tuplas-y-diccionarios">Listas, tuplas y diccionarios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetos">Objetos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructuras-lineales">Estructuras lineales</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-b-trazas">Parte B — Trazas</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b1-pila">B1 · Pila</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b2-cola">B2 · Cola</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b3-pila-y-cola-a-la-vez">B3 · Pila y cola a la vez</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b4-cola-circular">B4 · Cola circular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b5-que-imprime">B5 · ¿Qué imprime?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-c-casos-de-la-vida-cotidiana">Parte C — Casos de la vida cotidiana</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c1-el-historial-del-navegador-pila">C1 · El historial del navegador  <em>(pila)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c2-la-fila-de-la-cafeteria-cola">C2 · La fila de la cafetería  <em>(cola)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c3-las-notificaciones-del-celular-cola-circular">C3 · Las notificaciones del celular  <em>(cola circular)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c4-deshacer-y-rehacer-en-un-editor-dos-pilas">C4 · Deshacer y rehacer en un editor  <em>(dos pilas)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c5-turnos-del-laboratorio-cola-circular-rotando">C5 · Turnos del laboratorio  <em>(cola circular, rotando)</em></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-d-programacion">Parte D — Programación</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d1-la-clase-producto">D1 · La clase <code class="docutils literal notranslate"><span class="pre">Producto</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d2-la-clase-pedido">D2 · La clase <code class="docutils literal notranslate"><span class="pre">Pedido</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d3-herencia">D3 · Herencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d4-polimorfismo">D4 · Polimorfismo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d5-parentesis-balanceados-pila">D5 · Paréntesis balanceados  <em>(pila)</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d6-invertir-una-cola-pila-cola">D6 · Invertir una cola  <em>(pila + cola)</em></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-repasar-segun-donde-fallaste">Qué repasar según dónde fallaste</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Santiago Barrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

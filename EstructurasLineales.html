@@ -1,0 +1,1214 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Estructuras lineales — implementación de referencia &#8212; Técnicas de Programación 2026 - 02</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e8cf666a" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EstructurasLineales';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python" href="ManejoDeArchivos.html" />
+    <link rel="prev" title="Resumen de la Unidad · Pila, Cola y Cola Circular" href="ResumenPilasColas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logosem.png" class="logo__image only-light" alt="Técnicas de Programación 2026 - 02 - Home"/>
+    <img src="_static/logosem.png" class="logo__image only-dark pst-js-only" alt="Técnicas de Programación 2026 - 02 - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Bienvenida al curso
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad1.html">Unidad 1</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Introduccion.html">Introducción a Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ListasTuplasDiccionarios.html">Listas, Tuplas, Diccionarios</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="PilasyColas.html">Pilas y Colas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Pila.html">Pilas (Stack) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Cola.html">Colas (Queue) en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="POO.html">Programación Orientada a Objetos en Python</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="Pilas_y_Colas_Avanzadas.html">Pilas y Colas en Python — Notebook Avanzado</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ResumenPilasColas.html">Resumen de la Unidad · Pila, Cola y Cola Circular</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Estructuras lineales — implementación de referencia</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="ManejoDeArchivos.html">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TallerUnidad1.html">Taller de preparación — Unidad 1</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas.html">Taller y Evaluación — Unidad 1</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="FuerzaBruta.html">Fuerza Bruta y Complejidad Computacional</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Recursividad_Notebook.html">Recursividad en Python — Pila, Cola y Cruzada</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Backtracking.html">Backtracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Backtracking_Notebook.html">Backtracking en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas2.html">Taller y Evaluación — Unidad 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Unidad3.html">Unidad 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Busqueda.html">Búsqueda</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Busqueda_Notebook.html">Algoritmos de búsqueda en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="Ordenamiento.html">Ordenamiento</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Ordenamiento_Notebook.html">Algoritmos de ordenamiento en Python</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="ResolucionProblemas3.html">Taller y Evaluación — Unidad 3</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/BioAITeamLearning/TecDeProg_2026_02_Ucaldas/blob/main/EstructurasLineales.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/TecDeProg_2026_02_Ucaldas" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/BioAITeamLearning/TecDeProg_2026_02_Ucaldas/issues/new?title=Issue%20on%20page%20%2FEstructurasLineales.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/EstructurasLineales.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Estructuras lineales — implementación de referencia</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Estructuras lineales — implementación de referencia</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-trae">Qué trae</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-decision-de-diseno-que-vale-la-pena-explicar">Una decisión de diseño que vale la pena explicar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-aislamiento">El aislamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-unico-que-hay-que-importar">Lo único que hay que importar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pila"><code class="docutils literal notranslate"><span class="pre">Pila</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola"><code class="docutils literal notranslate"><span class="pre">Cola</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colacircular"><code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#como-se-usa">Cómo se usa</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-pila">La pila</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-cola-lineal">La cola lineal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-cola-circular">La cola circular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dos-atajos-que-vas-a-usar">Dos atajos que vas a usar</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-referencia">Tabla de referencia</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">Pila</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola-y-colacircular"><code class="docutils literal notranslate"><span class="pre">Cola</span></code> y <code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#como-reutilizarla">Cómo reutilizarla</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estructuras-lineales-implementacion-de-referencia">
+<h1>Estructuras lineales — implementación de referencia<a class="headerlink" href="#estructuras-lineales-implementacion-de-referencia" title="Link to this heading">#</a></h1>
+<p>Esta es <strong>la implementación que vamos a usar en el resto del curso</strong>. Ustedes están construyendo
+la suya en el taller de la unidad, y está bien que sea distinta: esta es la mía, y es la que
+voy a dar por supuesta de aquí en adelante.</p>
+<p>No es una clase para estudiar línea por línea, es una <strong>herramienta para usar</strong>. Cópiala al
+principio de tus cuadernos y sigue trabajando.</p>
+<section id="que-trae">
+<h2>Qué trae<a class="headerlink" href="#que-trae" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Clase</p></th>
+<th class="head"><p>Para qué</p></th>
+<th class="head"><p>Cómo se crea</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Pila</span></code></p></td>
+<td><p>LIFO</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Pila()</span></code> · <code class="docutils literal notranslate"><span class="pre">Pila([1,2,3])</span></code> · <code class="docutils literal notranslate"><span class="pre">Pila(capacidad=5)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Cola</span></code></p></td>
+<td><p>FIFO, lineal <strong>o</strong> circular</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Cola()</span></code> · <code class="docutils literal notranslate"><span class="pre">Cola([1,2,3])</span></code> · <code class="docutils literal notranslate"><span class="pre">Cola(capacidad=5)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code></p></td>
+<td><p>lo mismo que <code class="docutils literal notranslate"><span class="pre">Cola</span></code> con capacidad, pero el nombre lo dice</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ColaCircular(5)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="una-decision-de-diseno-que-vale-la-pena-explicar">
+<h2>Una decisión de diseño que vale la pena explicar<a class="headerlink" href="#una-decision-de-diseno-que-vale-la-pena-explicar" title="Link to this heading">#</a></h2>
+<p>En el taller les pedí <strong>tres</strong> clases separadas. Acá hay <strong>dos y media</strong>, y a propósito.</p>
+<p>Una cola circular no es una estructura distinta de una cola: es <strong>una cola con cupo fijo</strong>. Todo
+lo demás —FIFO, <code class="docutils literal notranslate"><span class="pre">encolar</span></code>, <code class="docutils literal notranslate"><span class="pre">desencolar</span></code>, <code class="docutils literal notranslate"><span class="pre">frente</span></code>— es idéntico. Entonces en vez de escribir dos
+veces el mismo código, <code class="docutils literal notranslate"><span class="pre">Cola</span></code> recibe una <code class="docutils literal notranslate"><span class="pre">capacidad</span></code> opcional:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Cola()</span></code> → <strong>lineal</strong>: crece sin límite.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Cola(capacidad=4)</span></code> → <strong>circular</strong>: cupo fijo, y <code class="docutils literal notranslate"><span class="pre">encolar</span></code> lanza <code class="docutils literal notranslate"><span class="pre">OverflowError</span></code> cuando se llena.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code> existe igual, pero son tres líneas: una subclase que vuelve obligatoria la
+capacidad. Así el nombre dice lo que es cuando lo necesitas.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Las dos formas —tres clases separadas o una con parámetro— son correctas. La suya enseña mejor
+<em>cómo funciona</em> la circularidad por dentro; esta se escribe y se mantiene con menos código. Elegir
+entre las dos <strong>es</strong> diseño de software, y es parte de lo que se evalúa.</p>
+</div>
+</section>
+<section id="el-aislamiento">
+<h2>El aislamiento<a class="headerlink" href="#el-aislamiento" title="Link to this heading">#</a></h2>
+<p>Las dos clases guardan sus datos en <code class="docutils literal notranslate"><span class="pre">__datos</span></code>, con doble guion bajo. Desde fuera <strong>no hay forma
+cómoda de llegar a la colección</strong>: no hay atributos públicos, ninguna propiedad entrega la
+estructura viva, y <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> recorre una <strong>copia</strong>. Si intentas <code class="docutils literal notranslate"><span class="pre">mi_pila.datos.append(9)</span></code>, falla.</p>
+</section>
+<hr class="docutils" />
+<section id="lo-unico-que-hay-que-importar">
+<h2>Lo único que hay que importar<a class="headerlink" href="#lo-unico-que-hay-que-importar" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pila">
+<h2><code class="docutils literal notranslate"><span class="pre">Pila</span></code><a class="headerlink" href="#pila" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Pila</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Pila LIFO: el ultimo en entrar es el primero en salir.</span>
+
+<span class="sd">    Pila()            -&gt; pila que crece sin limite</span>
+<span class="sd">    Pila(capacidad=3) -&gt; pila con cupo fijo: apilar lanza OverflowError si esta llena</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">capacidad</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">capacidad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">capacidad</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"la capacidad debe ser al menos 1"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span> <span class="o">=</span> <span class="n">capacidad</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="p">(</span><span class="n">iterable</span> <span class="ow">or</span> <span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
+
+    <span class="c1"># --- estado ---</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">capacidad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Cupo maximo, o None si la pila crece sin limite."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">esta_vacia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">esta_llena</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span>
+
+    <span class="c1"># --- operaciones ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apilar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Pone un elemento en la cima."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">esta_llena</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">OverflowError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"la pila esta llena (capacidad </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">desapilar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Saca y retorna el elemento de la cima."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">esta_vacia</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">"desapilar de una pila vacia"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cima</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""El elemento de la cima, sin sacarlo."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">esta_vacia</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">"cima de una pila vacia"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">vaciar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Deja la pila sin elementos."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="c1"># --- protocolos ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Recorre de la cima hacia la base, sobre una copia."""</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tope</span> <span class="o">=</span> <span class="s2">""</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">", capacidad=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Pila(</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span><span class="si">!r}{</span><span class="n">tope</span><span class="si">}</span><span class="s2">)"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cola">
+<h2><code class="docutils literal notranslate"><span class="pre">Cola</span></code><a class="headerlink" href="#cola" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Cola</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Cola FIFO: el primero en entrar es el primero en salir.</span>
+
+<span class="sd">    Cola()            -&gt; cola lineal: crece sin limite</span>
+<span class="sd">    Cola(capacidad=3) -&gt; cola CIRCULAR: cupo fijo, reutiliza el espacio que se libera</span>
+<span class="sd">                         al frente. encolar lanza OverflowError si esta llena.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">capacidad</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">capacidad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">capacidad</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"la capacidad debe ser al menos 1"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span> <span class="o">=</span> <span class="n">capacidad</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="p">(</span><span class="n">iterable</span> <span class="ow">or</span> <span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
+
+    <span class="c1"># --- estado ---</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">capacidad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Cupo maximo, o None si la cola crece sin limite."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">es_circular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""True si tiene cupo fijo."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">esta_vacia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">esta_llena</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span>
+
+    <span class="c1"># --- operaciones ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encolar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Pone un elemento al final."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">esta_llena</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">OverflowError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"la cola esta llena (capacidad </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">encolar_pisando</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Encola y, si esta llena, descarta el mas viejo. Retorna lo descartado o None."""</span>
+        <span class="n">descartado</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">esta_llena</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">descartado</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">desencolar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Saca y retorna el elemento del frente."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">esta_vacia</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">"desencolar de una cola vacia"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">frente</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""El elemento del frente, sin sacarlo."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">esta_vacia</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">"frente de una cola vacia"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">final</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""El ultimo elemento, sin sacarlo."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">esta_vacia</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">"final de una cola vacia"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">rotar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Manda el del frente al final y lo retorna. Util para Round-Robin."""</span>
+        <span class="n">elemento</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">elemento</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">vaciar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Deja la cola sin elementos."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="c1"># --- protocolos ---</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">elemento</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__datos</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Recorre del frente hacia el final, sobre una copia."""</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tipo</span> <span class="o">=</span> <span class="s2">"circular"</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">es_circular</span> <span class="k">else</span> <span class="s2">"lineal"</span>
+        <span class="n">tope</span> <span class="o">=</span> <span class="s2">""</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">", capacidad=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__capacidad</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Cola(</span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__datos</span><span class="p">)</span><span class="si">!r}{</span><span class="n">tope</span><span class="si">}</span><span class="s2">)  # </span><span class="si">{</span><span class="n">tipo</span><span class="si">}</span><span class="s2">"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="colacircular">
+<h2><code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code><a class="headerlink" href="#colacircular" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ColaCircular</span><span class="p">(</span><span class="n">Cola</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Una Cola con capacidad obligatoria. Existe para que el nombre diga lo que es."""</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacidad</span><span class="p">,</span> <span class="n">iterable</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">capacidad</span><span class="o">=</span><span class="n">capacidad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="como-se-usa">
+<h1>Cómo se usa<a class="headerlink" href="#como-se-usa" title="Link to this heading">#</a></h1>
+<section id="la-pila">
+<h2>La pila<a class="headerlink" href="#la-pila" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Pila</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="s2">"C"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"cima      :"</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">cima</span><span class="p">)</span>        <span class="c1"># sin sacarlo, y sin parentesis</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"desapilar :"</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">desapilar</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"quedan    :"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recorre de la CIMA hacia la base</span>
+<span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">" -"</span><span class="p">,</span> <span class="n">elemento</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Una pila con tope</span>
+<span class="n">limitada</span> <span class="o">=</span> <span class="n">Pila</span><span class="p">(</span><span class="n">capacidad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">limitada</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">limitada</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">limitada</span><span class="o">.</span><span class="n">apilar</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">OverflowError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Error:"</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-cola-lineal">
+<h2>La cola lineal<a class="headerlink" href="#la-cola-lineal" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">Cola</span><span class="p">([</span><span class="s2">"Ana"</span><span class="p">,</span> <span class="s2">"Luis"</span><span class="p">,</span> <span class="s2">"Sara"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"frente:"</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">frente</span><span class="p">,</span> <span class="s2">"| final:"</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">final</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"se atiende:"</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">desencolar</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"quedan    :"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-cola-circular">
+<h2>La cola circular<a class="headerlink" href="#la-cola-circular" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cc</span> <span class="o">=</span> <span class="n">Cola</span><span class="p">(</span><span class="n">capacidad</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">letra</span> <span class="ow">in</span> <span class="s2">"ABCD"</span><span class="p">:</span>
+    <span class="n">cc</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="n">letra</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"llena:"</span><span class="p">,</span> <span class="n">cc</span><span class="o">.</span><span class="n">esta_llena</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">cc</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"E"</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">OverflowError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Error:"</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Liberamos dos espacios y volvemos a encolar: los nuevos dan la vuelta</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">desencolar</span><span class="p">()</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"E"</span><span class="p">)</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">encolar</span><span class="p">(</span><span class="s2">"F"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">cc</span><span class="p">))</span>     <span class="c1"># ['C', 'D', 'E', 'F']</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dos-atajos-que-vas-a-usar">
+<h2>Dos atajos que vas a usar<a class="headerlink" href="#dos-atajos-que-vas-a-usar" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">encolar_pisando</span></code> descarta el más viejo cuando está llena, en vez de rechazar. Es lo que
+necesitas para <em>“las últimas N lecturas”</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ultimas</span> <span class="o">=</span> <span class="n">Cola</span><span class="p">(</span><span class="n">capacidad</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">lectura</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">22.1</span><span class="p">,</span> <span class="mf">22.5</span><span class="p">,</span> <span class="mf">22.3</span><span class="p">,</span> <span class="mf">22.8</span><span class="p">,</span> <span class="mf">23.0</span><span class="p">]:</span>
+    <span class="n">descartada</span> <span class="o">=</span> <span class="n">ultimas</span><span class="o">.</span><span class="n">encolar_pisando</span><span class="p">(</span><span class="n">lectura</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  entra </span><span class="si">{</span><span class="n">lectura</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">ultimas</span><span class="p">)</span><span class="si">}</span><span class="s2">   descartada: </span><span class="si">{</span><span class="n">descartada</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rotar</span></code> manda el del frente al final. Es Round-Robin en una línea.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">turnos</span> <span class="o">=</span> <span class="n">Cola</span><span class="p">([</span><span class="s2">"P1"</span><span class="p">,</span> <span class="s2">"P2"</span><span class="p">,</span> <span class="s2">"P3"</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"  atiende a"</span><span class="p">,</span> <span class="n">turnos</span><span class="o">.</span><span class="n">rotar</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="tabla-de-referencia">
+<h1>Tabla de referencia<a class="headerlink" href="#tabla-de-referencia" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2><code class="docutils literal notranslate"><span class="pre">Pila</span></code><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Qué hace</p></th>
+<th class="head"><p>Si está vacía / llena</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">apilar(x)</span></code></p></td>
+<td><p>pone <code class="docutils literal notranslate"><span class="pre">x</span></code> en la cima</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OverflowError</span></code> si tiene capacidad y está llena</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">desapilar()</span></code></p></td>
+<td><p>saca y retorna el de la cima</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cima</span></code></p></td>
+<td><p>el de la cima, sin sacarlo</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">esta_vacia()</span></code> / <code class="docutils literal notranslate"><span class="pre">esta_llena()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> / <code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">capacidad</span></code></p></td>
+<td><p>el cupo, o <code class="docutils literal notranslate"><span class="pre">None</span></code> si crece</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vaciar()</span></code></p></td>
+<td><p>la deja sin elementos</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">len(p)</span></code> · <code class="docutils literal notranslate"><span class="pre">bool(p)</span></code> · <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">p</span></code> · <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">p</span></code> · <code class="docutils literal notranslate"><span class="pre">print(p)</span></code></p></td>
+<td><p>protocolos</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span></code> va de la cima a la base</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="cola-y-colacircular">
+<h2><code class="docutils literal notranslate"><span class="pre">Cola</span></code> y <code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code><a class="headerlink" href="#cola-y-colacircular" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Qué hace</p></th>
+<th class="head"><p>Si está vacía / llena</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">encolar(x)</span></code></p></td>
+<td><p>pone <code class="docutils literal notranslate"><span class="pre">x</span></code> al final</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">OverflowError</span></code> si es circular y está llena</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">encolar_pisando(x)</span></code></p></td>
+<td><p>encola descartando el más viejo; retorna lo descartado</p></td>
+<td><p>nunca falla</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">desencolar()</span></code></p></td>
+<td><p>saca y retorna el del frente</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">frente</span></code> / <code class="docutils literal notranslate"><span class="pre">final</span></code></p></td>
+<td><p>los extremos, sin sacarlos</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rotar()</span></code></p></td>
+<td><p>manda el del frente al final y lo retorna</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">IndexError</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">esta_vacia()</span></code> / <code class="docutils literal notranslate"><span class="pre">esta_llena()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code> / <code class="docutils literal notranslate"><span class="pre">False</span></code></p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">capacidad</span></code> / <code class="docutils literal notranslate"><span class="pre">es_circular</span></code></p></td>
+<td><p>el cupo y si lo tiene</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">vaciar()</span></code></p></td>
+<td><p>la deja sin elementos</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">len(c)</span></code> · <code class="docutils literal notranslate"><span class="pre">bool(c)</span></code> · <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">c</span></code> · <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">c</span></code> · <code class="docutils literal notranslate"><span class="pre">print(c)</span></code></p></td>
+<td><p>protocolos</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span></code> va del frente al final</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="como-reutilizarla">
+<h1>Cómo reutilizarla<a class="headerlink" href="#como-reutilizarla" title="Link to this heading">#</a></h1>
+<p>Lo más simple: <strong>copia las cuatro celdas de código</strong> (el <code class="docutils literal notranslate"><span class="pre">import</span></code> y las tres clases) al
+principio de tu cuaderno.</p>
+<p>Si prefieres no repetirlas, guárdalas en un archivo <code class="docutils literal notranslate"><span class="pre">estructuras.py</span></code> junto a tu notebook y escribe:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">estructuras</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pila</span><span class="p">,</span> <span class="n">Cola</span><span class="p">,</span> <span class="n">ColaCircular</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>De aquí en adelante, cuando un enunciado diga <em>“usa una pila”</em>, se refiere a esta. En la Unidad 2
+la vas a necesitar para <em>backtracking</em>, y en la Unidad 3 la cola aparece en los recorridos.</p>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ResumenPilasColas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Resumen de la Unidad · Pila, Cola y Cola Circular</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ManejoDeArchivos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Manejo de Archivos: Lectura/Escritura de archivos y Operaciones con Cadenas en Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Estructuras lineales — implementación de referencia</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-trae">Qué trae</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#una-decision-de-diseno-que-vale-la-pena-explicar">Una decisión de diseño que vale la pena explicar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-aislamiento">El aislamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-unico-que-hay-que-importar">Lo único que hay que importar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pila"><code class="docutils literal notranslate"><span class="pre">Pila</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola"><code class="docutils literal notranslate"><span class="pre">Cola</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#colacircular"><code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#como-se-usa">Cómo se usa</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-pila">La pila</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-cola-lineal">La cola lineal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-cola-circular">La cola circular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dos-atajos-que-vas-a-usar">Dos atajos que vas a usar</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tabla-de-referencia">Tabla de referencia</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">Pila</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cola-y-colacircular"><code class="docutils literal notranslate"><span class="pre">Cola</span></code> y <code class="docutils literal notranslate"><span class="pre">ColaCircular</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#como-reutilizarla">Cómo reutilizarla</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Santiago Barrero
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
