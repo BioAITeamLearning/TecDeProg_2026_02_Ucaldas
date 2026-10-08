@@ -14,7 +14,9 @@ chapters:
     - file: "POO"
     - file: "Pilas_y_Colas_Avanzadas"
     - file: "ResumenPilasColas"
+    - file: "EstructurasLineales"
     - file: "ManejoDeArchivos"
+    - file: "TallerUnidad1"
     - file: "ResolucionProblemas"
 - file: Unidad2
   sections:
