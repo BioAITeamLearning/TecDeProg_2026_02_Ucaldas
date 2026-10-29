@@ -1,0 +1,210 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Comparador de complejidades</title>
+<style>
+  :root{
+    --papel:#ffffff; --tinta:#1d2330; --suave:#6d7a8a; --linea:#e3e8ee;
+    --panel:#f5f7f9; --borde:#dde3ea;
+  }
+  :root[data-theme="dark"]{
+      --papel:#14181f; --tinta:#e2e7ef; --suave:#97a2b1; --linea:#2b323c;
+      --panel:#1b212a; --borde:#2b323c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --papel:#14181f; --tinta:#e2e7ef; --suave:#97a2b1; --linea:#2b323c;
+      --panel:#1b212a; --borde:#2b323c;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:var(--tinta);
+       font:14px/1.5 -apple-system,"Helvetica Neue",Arial,sans-serif}
+  .caja{padding:10px 12px 14px}
+  h2{margin:0 0 2px;font-size:15px;letter-spacing:-.01em}
+  .sub{color:var(--suave);font-size:12.5px;margin:0 0 10px}
+  .leyenda{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .chip{display:inline-flex;align-items:center;gap:6px;cursor:pointer;user-select:none;
+        border:1px solid var(--borde);background:var(--panel);border-radius:999px;
+        padding:4px 11px 4px 8px;font-size:12.5px;font-weight:600;color:var(--tinta);
+        transition:opacity .15s, filter .15s}
+  .chip .punto{width:11px;height:11px;border-radius:3px;flex:none}
+  .chip[aria-pressed="false"]{opacity:.38;filter:grayscale(1)}
+  .chip:focus-visible{outline:2px solid #2f5484;outline-offset:2px}
+  .controles{display:flex;align-items:center;gap:9px;margin:2px 0 6px;
+             font-size:12.5px;color:var(--suave)}
+  .controles input[type=range]{flex:1;max-width:230px;accent-color:#2f5484}
+  .nmax{font-variant-numeric:tabular-nums;font-weight:700;color:var(--tinta);min-width:26px}
+  svg{width:100%;height:auto;display:block;touch-action:none}
+  .rejilla{stroke:var(--linea);stroke-width:1}
+  .eje{stroke:var(--suave);stroke-width:1.2}
+  .rot{fill:var(--suave);font-size:10.5px}
+  .rotEje{fill:var(--suave);font-size:11px}
+  .curva{fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .guia{stroke:var(--suave);stroke-dasharray:3 3;stroke-width:1}
+  .lectura{background:var(--panel);border:1px solid var(--borde);border-radius:6px;
+           padding:7px 10px;margin-top:8px;font-size:12.5px;min-height:34px}
+  .lectura b{font-variant-numeric:tabular-nums}
+  .lectura .fila{display:inline-block;margin-right:14px;white-space:nowrap}
+  .vacio{color:var(--suave)}
+</style>
+
+<div class="caja">
+  <h2>Comparador de complejidades</h2>
+  <p class="sub">Haz clic en una etiqueta para <b>ocultarla</b>. Los ejes se reajustan a lo que quede visible.</p>
+
+  <div class="leyenda" id="leyenda"></div>
+
+  <div class="controles">
+    <label for="rango">n máximo</label>
+    <input id="rango" type="range" min="8" max="60" value="30" step="1">
+    <span class="nmax" id="nmax">30</span>
+  </div>
+
+  <svg id="grafico" viewBox="0 0 760 360" preserveAspectRatio="xMidYMid meet" role="img"
+       aria-label="Gráfico comparativo del crecimiento de las complejidades"></svg>
+
+  <div class="lectura" id="lectura"><span class="vacio">Pasa el cursor sobre el gráfico para ver los valores.</span></div>
+</div>
+
+<script>
+// El libro tiene su propio conmutador claro/oscuro. Como el iframe es del mismo
+// origen, podemos leer el tema del padre y seguirlo. Si falla, queda el
+// prefers-color-scheme del sistema como respaldo.
+(function sincronizarTema(){
+  try{
+    const raiz = window.parent.document.documentElement;
+    const aplicar = () => {
+      const t = raiz.dataset.theme || raiz.dataset.mode;
+      if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+      else document.documentElement.removeAttribute("data-theme");
+    };
+    aplicar();
+    new MutationObserver(aplicar).observe(raiz, {attributes:true,
+      attributeFilter:["data-theme","data-mode"]});
+  }catch(e){ /* distinto origen: se usa el tema del sistema */ }
+})();
+
+const CURVAS = [
+  {id:"c1",  etq:"O(1)",        col:"#6d7a8a", f:n=>1},
+  {id:"log", etq:"O(log n)",    col:"#2c7156", f:n=>Math.log2(n)},
+  {id:"n",   etq:"O(n)",        col:"#2f5484", f:n=>n},
+  {id:"nlog",etq:"O(n log n)",  col:"#7a5ea8", f:n=>n*Math.log2(n)},
+  {id:"n2",  etq:"O(n²)",       col:"#b3781a", f:n=>n*n},
+  {id:"exp", etq:"O(2ⁿ)",       col:"#b3392f", f:n=>Math.pow(2,n)},
+];
+const visible = Object.fromEntries(CURVAS.map(c=>[c.id,true]));
+const svg = document.getElementById("grafico");
+const NS = "http://www.w3.org/2000/svg";
+const W=760,H=360, M={t:14,r:96,b:42,l:62};
+const rango = document.getElementById("rango");
+const salidaN = document.getElementById("nmax");
+const lectura = document.getElementById("lectura");
+let nMax = +rango.value, hoverN = null;
+
+function el(t,a){const e=document.createElementNS(NS,t);
+  for(const k in a) e.setAttribute(k,a[k]); return e;}
+
+function techoBonito(v){
+  if(v<=10) return 10;
+  const p = Math.pow(10, Math.floor(Math.log10(v)));
+  for(const m of [1,1.5,2,2.5,3,4,5,7.5,10]) if(m*p>=v) return m*p;
+  return 10*p;
+}
+function fmt(v){
+  if(v>=1e9) return (v/1e9).toFixed(v<1e10?1:0)+" mil M";
+  if(v>=1e6) return (v/1e6).toFixed(v<1e7?1:0)+" M";
+  if(v>=1000) return Math.round(v).toLocaleString("es");
+  if(v>=10) return Math.round(v).toString();
+  return (Math.round(v*10)/10).toString();
+}
+
+function dibujar(){
+  svg.textContent = "";
+  const activas = CURVAS.filter(c=>visible[c.id]);
+  // el eje Y se ajusta SOLO a las curvas visibles
+  const maxY = activas.length ? techoBonito(Math.max(...activas.map(c=>c.f(nMax)))) : 10;
+  const px = n => M.l + (n-1)/(nMax-1) * (W-M.l-M.r);
+  const py = v => H-M.b - Math.min(v,maxY)/maxY * (H-M.t-M.b);
+
+  // rejilla y eje Y
+  for(let i=0;i<=5;i++){
+    const v = maxY*i/5, y = py(v);
+    svg.appendChild(el("line",{x1:M.l,y1:y,x2:W-M.r,y2:y,class:"rejilla"}));
+    const t = el("text",{x:M.l-8,y:y+3.5,"text-anchor":"end",class:"rot"});
+    t.textContent = fmt(v); svg.appendChild(t);
+  }
+  // eje X
+  const pasoX = nMax<=15?2:(nMax<=30?5:10);
+  for(let n=1;n<=nMax;n+=pasoX){
+    const t = el("text",{x:px(n),y:H-M.b+17,"text-anchor":"middle",class:"rot"});
+    t.textContent = n; svg.appendChild(t);
+  }
+  svg.appendChild(el("line",{x1:M.l,y1:H-M.b,x2:W-M.r,y2:H-M.b,class:"eje"}));
+  svg.appendChild(el("line",{x1:M.l,y1:M.t,x2:M.l,y2:H-M.b,class:"eje"}));
+  let tx = el("text",{x:(M.l+W-M.r)/2,y:H-6,"text-anchor":"middle",class:"rotEje"});
+  tx.textContent = "tamaño de la entrada  (n)"; svg.appendChild(tx);
+  let ty = el("text",{x:14,y:(M.t+H-M.b)/2,"text-anchor":"middle",class:"rotEje",
+                      transform:`rotate(-90 14 ${(M.t+H-M.b)/2})`});
+  ty.textContent = "operaciones"; svg.appendChild(ty);
+
+  // curvas
+  const etiquetas = [];
+  for(const c of activas){
+    let d = "", dentro = false;
+    for(let i=0;i<=240;i++){
+      const n = 1 + i/240*(nMax-1), v = c.f(n);
+      if(v>maxY){ dentro=false; continue; }
+      d += (dentro?"L":"M") + px(n).toFixed(1) + " " + py(v).toFixed(1) + " ";
+      dentro = true;
+    }
+    if(d) svg.appendChild(el("path",{d,class:"curva",stroke:c.col}));
+    const vf = c.f(nMax);
+    etiquetas.push({y: Math.min(py(vf), H-M.b), etq:c.etq+(vf>maxY?" ↑":""), col:c.col});
+  }
+  // separar etiquetas que se encimen
+  etiquetas.sort((a,b)=>a.y-b.y);
+  for(let i=1;i<etiquetas.length;i++)
+    if(etiquetas[i].y - etiquetas[i-1].y < 15) etiquetas[i].y = etiquetas[i-1].y + 15;
+  for(const e of etiquetas){
+    const t = el("text",{x:W-M.r+9,y:e.y+4,class:"rot",fill:e.col,
+                         style:"font-weight:700;font-size:11.5px"});
+    t.textContent = e.etq; svg.appendChild(t);
+  }
+
+  // guia del cursor
+  if(hoverN!==null && activas.length){
+    const x = px(hoverN);
+    svg.appendChild(el("line",{x1:x,y1:M.t,x2:x,y2:H-M.b,class:"guia"}));
+    for(const c of activas){
+      const v=c.f(hoverN);
+      if(v<=maxY) svg.appendChild(el("circle",{cx:x,cy:py(v),r:3.6,fill:c.col}));
+    }
+    lectura.innerHTML = `<b>n = ${Math.round(hoverN)}</b> &nbsp;&nbsp;` + activas.map(c=>
+      `<span class="fila" style="color:${c.col}"><b>${c.etq}</b> ${fmt(c.f(hoverN))}</span>`).join("");
+  }else if(!activas.length){
+    lectura.innerHTML = `<span class="vacio">No hay curvas visibles. Vuelve a activar alguna etiqueta.</span>`;
+  }
+}
+
+// leyenda
+const cajaLeyenda = document.getElementById("leyenda");
+for(const c of CURVAS){
+  const b = document.createElement("button");
+  b.className="chip"; b.type="button"; b.setAttribute("aria-pressed","true");
+  b.innerHTML = `<span class="punto" style="background:${c.col}"></span>${c.etq}`;
+  b.onclick = ()=>{ visible[c.id]=!visible[c.id];
+                    b.setAttribute("aria-pressed", visible[c.id]); dibujar(); };
+  cajaLeyenda.appendChild(b);
+}
+rango.oninput = ()=>{ nMax=+rango.value; salidaN.textContent=nMax; dibujar(); };
+svg.addEventListener("pointermove", ev=>{
+  const r = svg.getBoundingClientRect();
+  const x = (ev.clientX-r.left)/r.width*W;
+  if(x<M.l||x>W-M.r){ hoverN=null; }
+  else hoverN = 1 + (x-M.l)/(W-M.l-M.r)*(nMax-1);
+  dibujar();
+});
+svg.addEventListener("pointerleave", ()=>{ hoverN=null; dibujar();
+  lectura.innerHTML = `<span class="vacio">Pasa el cursor sobre el gráfico para ver los valores.</span>`;});
+dibujar();
+</script>
