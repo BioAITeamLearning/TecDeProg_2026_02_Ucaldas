@@ -1237,10 +1237,15 @@ constantes: <span class="math notranslate nohighlight">\(O(5n)\)</span> y <span 
 <hr class="docutils" />
 <section class="tex2jax_ignore mathjax_ignore" id="las-clases-de-complejidad">
 <h1>9. Las clases de complejidad<a class="headerlink" href="#las-clases-de-complejidad" title="Link to this heading">#</a></h1>
-<a class="reference internal image-reference" href="_images/crecimiento.gif"><img alt="Grafica animada donde las curvas O(1), O(log n), O(n), O(n log n), O(n cuadrado) y O(2 elevado a n) van creciendo a medida que n aumenta; la exponencial se dispara mucho antes que las demas" class="align-center" src="_images/crecimiento.gif" style="width: 88%;" />
-</a>
-<p>Mira la animación completa antes de seguir. Lo importante no son las curvas: es <strong>el orden en que
-se disparan</strong>. La roja —<span class="math notranslate nohighlight">\(O(2^n)\)</span>— se sale del gráfico cuando <code class="docutils literal notranslate"><span class="pre">n</span></code> apenas vale 10.</p>
+<iframe src="_static/unidad2/fuerzabruta/complejidades.html"
+        title="Comparador interactivo de complejidades"
+        style="width:100%; height:560px; border:1px solid #dde3ea; border-radius:6px;"
+        loading="lazy"></iframe>
+<p><strong>Juega con este gráfico antes de seguir.</strong> Al principio solo se ve la roja, <span class="math notranslate nohighlight">\(O(2^n)\)</span>: crece tanto
+que aplasta a todas las demás contra el eje. Haz clic en su etiqueta para <strong>ocultarla</strong> y mira lo
+que pasa — el eje se reajusta y aparecen las otras. Quita también <span class="math notranslate nohighlight">\(O(n^2)\)</span> y vuelve a mirar.</p>
+<p>Esa es justamente la idea: <strong>cada complejidad aplasta a la anterior</strong>. Para ver el detalle de las
+pequeñas hay que sacar a las grandes del gráfico.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Complejidad</p></th>
