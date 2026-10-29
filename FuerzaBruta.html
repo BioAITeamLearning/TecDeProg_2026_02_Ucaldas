@@ -899,6 +899,10 @@ divisores(97) = [1, 97]  &lt;- es primo
 </div>
 </div>
 </div>
+<a class="reference internal image-reference" href="_images/divisores.png"><img alt="Doce casillas, una por cada divisor probado del 1 al 12; en verde las que dividen exacto (1, 2, 3, 4, 6 y 12) y en rojo las que dejan decimales" class="align-center" src="_images/divisores.png" style="width: 96%;" />
+</a>
+<p>Así se ve el trabajo completo para <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">12</span></code>: <strong>doce divisiones</strong>, una por cada candidato, y solo
+seis resultaron ser divisores. La fuerza bruta no puede saber de antemano cuáles van a servir.</p>
 <section id="el-detalle-que-hay-que-notar">
 <h2>El detalle que hay que notar<a class="headerlink" href="#el-detalle-que-hay-que-notar" title="Link to this heading">#</a></h2>
 <p>Para <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">4</span></code> hicimos <strong>4 divisiones</strong>. Para <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">97</span></code> hicimos <strong>97</strong>. Ahora mira qué pasa cuando el
@@ -978,6 +982,11 @@ Ternas evaluadas: 56
 </div>
 </div>
 </div>
+<a class="reference internal image-reference" href="_images/tres_mayores.png"><img alt="La lista de ocho numeros con sus indices y, debajo, tres ternas de ejemplo resaltadas con su suma; la ultima en verde es la mayor" class="align-center" src="_images/tres_mayores.png" style="width: 96%;" />
+</a>
+<p>Cada fila de abajo es <strong>una terna candidata</strong>. Los tres ciclos anidados las van generando todas —
+<code class="docutils literal notranslate"><span class="pre">(0,1,2)</span></code>, <code class="docutils literal notranslate"><span class="pre">(0,1,3)</span></code>, <code class="docutils literal notranslate"><span class="pre">(0,1,4)</span></code>… — y se quedan con la de mayor suma. Con ocho elementos son 56
+ternas; el algoritmo las mira <strong>todas</strong>, incluso después de haber encontrado la buena.</p>
 <p><strong>Tres ciclos anidados.</strong> Ese es el síntoma: por cada elemento, recorremos los demás, y por cada
 par, recorremos los demás otra vez. Veamos cómo escala:</p>
 <div class="cell docutils container">
@@ -1020,6 +1029,11 @@ fuerza bruta no sabe eso; solo prueba.</p>
 Una reina ataca en su fila, en su columna y en las dos diagonales.</p>
 <p>Por fuerza bruta pura: probar <strong>todas las formas de elegir 8 casillas entre 64</strong> y revisar cada
 una. ¿Cuántas son?</p>
+<a class="reference internal image-reference" href="_images/ocho_reinas.png"><img alt="A la izquierda un tablero donde se resaltan las casillas que ataca una reina en su fila, columna y diagonales; a la derecha ocho reinas colocadas sin atacarse" class="align-center" src="_images/ocho_reinas.png" style="width: 97%;" />
+</a>
+<p>A la izquierda, por qué el problema es difícil: <strong>una sola reina domina su fila, su columna y las
+dos diagonales</strong>. A la derecha, una colocación que sí funciona — hay 92 en total.</p>
+<p>El trabajo de la fuerza bruta es encontrar esas 92 <strong>probando todas las colocaciones posibles</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">comb</span>
