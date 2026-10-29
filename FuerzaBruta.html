@@ -1542,6 +1542,11 @@ línea</strong> qué regla aplicaste.</p>
 <section id="ejercicio-2-el-numero-perdido">
 <h3>Ejercicio 2 — El número perdido<a class="headerlink" href="#ejercicio-2-el-numero-perdido" title="Link to this heading">#</a></h3>
 <p>Te dan una lista con los números del 1 al <code class="docutils literal notranslate"><span class="pre">n</span></code>, <strong>en desorden y con uno faltante</strong>.</p>
+<a class="reference internal image-reference" href="_images/ej2_numero_perdido.gif"><img alt="Un candidato a la izquierda y la lista a la derecha; por cada candidato el puntero recorre la lista buscandolo, hasta que uno no aparece en ninguna posicion" class="align-center" src="_images/ej2_numero_perdido.gif" style="width: 92%;" />
+</a>
+<p>Así se ve el algoritmo: por <strong>cada</strong> candidato del 1 al <code class="docutils literal notranslate"><span class="pre">n</span></code>, recorrer la lista entera buscándolo.
+El que llegue al final <strong>sin aparecer</strong> es el que falta. Fíjate en que son <strong>dos ciclos, uno
+dentro del otro</strong> — por eso no puedes usar el operador <code class="docutils literal notranslate"><span class="pre">in</span></code>, que haría el ciclo interno por ti.</p>
 <ol class="arabic simple">
 <li><p>Escribe <code class="docutils literal notranslate"><span class="pre">buscar_faltante_fuerza_bruta(lista,</span> <span class="pre">n)</span></code> que, para cada número del 1 al <code class="docutils literal notranslate"><span class="pre">n</span></code>, revise si
 está en la lista. Usa dos ciclos anidados: <strong>no uses el operador <code class="docutils literal notranslate"><span class="pre">in</span></code></strong>.</p></li>
@@ -1565,6 +1570,11 @@ está en la lista. Usa dos ciclos anidados: <strong>no uses el operador <code cl
 <h3>Ejercicio 3 — El par que suma<a class="headerlink" href="#ejercicio-3-el-par-que-suma" title="Link to this heading">#</a></h3>
 <p>Dada una lista de números y un objetivo, encontrar <strong>si existen dos números de la lista que sumen
 el objetivo</strong>.</p>
+<a class="reference internal image-reference" href="_images/ej3_par_suma.gif"><img alt="La lista con dos casillas resaltadas a la vez; se van probando todos los pares posibles y debajo aparece la suma de cada uno hasta dar con la que vale 10" class="align-center" src="_images/ej3_par_suma.gif" style="width: 92%;" />
+</a>
+<p>Cada cuadro prueba <strong>un par distinto</strong>. Se recorren todas las parejas posibles —sin repetir y sin
+comparar un número consigo mismo— hasta que una suma da el objetivo. El contador de arriba a la
+derecha lleva la cuenta de cuántos pares llevas probados.</p>
 <ol class="arabic simple">
 <li><p>Resuélvelo por <strong>fuerza bruta</strong>: probar todos los pares posibles. Retorna la pareja y el número
 de pares evaluados.</p></li>
@@ -1577,6 +1587,11 @@ hacerlo con menos trabajo? Descríbela en palabras.</p></li>
 <section id="ejercicio-4-la-contrasena-corta">
 <h3>Ejercicio 4 — La contraseña corta<a class="headerlink" href="#ejercicio-4-la-contrasena-corta" title="Link to this heading">#</a></h3>
 <p>Un candado tiene una clave de <code class="docutils literal notranslate"><span class="pre">k</span></code> dígitos (cada uno del 0 al 9).</p>
+<a class="reference internal image-reference" href="_images/ej4_contrasena.gif"><img alt="Tres ruedas de digitos que van pasando por 000, 001, 002 y siguientes hasta llegar a 999, el ultimo intento posible" class="align-center" src="_images/ej4_contrasena.gif" style="width: 80%;" />
+</a>
+<p>El candado se prueba <strong>en orden, sin saltarse ninguna combinación</strong>. Con 3 dígitos hay 1000
+claves, y si la correcta es la última hay que probarlas <strong>todas</strong>: ese es el peor caso que te
+pide el punto 2.</p>
 <ol class="arabic simple">
 <li><p>Escribe una función que, por fuerza bruta, pruebe <strong>todas las claves posibles</strong> hasta dar con
 una clave objetivo. Retorna cuántos intentos hizo.
@@ -1592,6 +1607,11 @@ Calcúlalo con código y exprésalo en días.</p></li>
 <h3>Ejercicio 5 — Ordenar por fuerza bruta<a class="headerlink" href="#ejercicio-5-ordenar-por-fuerza-bruta" title="Link to this heading">#</a></h3>
 <p>El <em>selection sort</em> es fuerza bruta: para cada posición, <strong>busca el menor de todo lo que queda</strong> y
 lo pone ahí.</p>
+<a class="reference internal image-reference" href="_images/ej5_selection_sort.gif"><img alt="Una lista de siete numeros donde en cada pasada se recorre la parte no ordenada comparando para hallar el menor, que luego se coloca en su posicion y queda marcado en verde" class="align-center" src="_images/ej5_selection_sort.gif" style="width: 92%;" />
+</a>
+<p>En <strong>naranja</strong> el menor encontrado hasta ahora, en <strong>azul</strong> el que se está comparando, y en
+<strong>verde</strong> la parte que ya quedó ordenada. Cada pasada recorre todo lo que queda a la derecha:
+ahí están las comparaciones que te pide contar el punto 1.</p>
 <ol class="arabic simple">
 <li><p>Impleméntalo, contando <strong>cuántas comparaciones</strong> hace.</p></li>
 <li><p>Pruébalo con listas de 50, 100 y 200 elementos al azar e imprime las comparaciones.</p></li>
