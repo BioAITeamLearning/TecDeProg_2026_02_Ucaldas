@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fuerza Bruta y Complejidad Computacional &#8212; Técnicas de Programación 2026 - 02</title>
+    <title>Fuerza bruta y complejidad &#8212; Técnicas de Programación 2026 - 02</title>
   
   
   
@@ -61,6 +61,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'FuerzaBruta';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -280,7 +282,19 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Unidad2.html">Unidad 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Fuerza Bruta y Complejidad Computacional</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Fuerza bruta y complejidad</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
 <li class="toctree-l2 has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="Recursividad_Notebook.html">Recursividad en Python — Pila, Cola y Cruzada</a></li>
 </ul>
@@ -517,7 +531,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Fuerza Bruta y Complejidad Computacional</h1>
+    <h1>Fuerza bruta y complejidad</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -527,31 +541,57 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">Objetivos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-algoritmo-de-fuerza-bruta">1. ¿Qué es un algoritmo de fuerza bruta?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rasgos-clave">Rasgos clave</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Fuerza bruta y complejidad</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-acertijo-de-las-cajas">1. El acertijo de las cajas</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuantas-cajas-abro">¿Cuántas cajas abro?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-en-contexto">2. Complejidad computacional en contexto</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-costo">2.1 Modelo de costo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notacion-asintotica">2.2 Notación asintótica</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#casos-de-analisis">2.3 Casos de análisis</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clases-de-complejidad-vision-de-alto-nivel">2.4 Clases de complejidad (visión de alto nivel)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-fuerza-bruta">2. Qué es la fuerza bruta</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-bueno">Lo bueno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-malo">Lo malo</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-crecen-los-tiempos">3. ¿Cómo crecen los tiempos?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patrones-y-familias-de-fuerza-bruta">4. Patrones y familias de fuerza bruta</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-busqueda-lineal-vs-binaria">5. Ejemplo 1 — Búsqueda lineal vs. binaria</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-busqueda-de-patron-metodo-ingenuo-vs-optimizado">6. Ejemplo 2 — Búsqueda de patrón: método ingenuo vs. optimizado</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-explosion-combinatoria-ataque-por-diccionario">7. Ejemplo 3 — Explosión combinatoria: ataque por diccionario</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-subset-sum-fuerza-bruta-vs-una-primera-poda">8. Ejemplo 4 — Subset Sum: fuerza bruta vs. una primera poda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-el-problema-del-viajante-tsp-por-fuerza-bruta">9. Ejemplo 5 — El problema del viajante (TSP) por fuerza bruta</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-espacial-trade-offs-y-paralelizacion">10. Complejidad espacial, trade-offs y paralelización</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-si-usar-fuerza-bruta">11. ¿Cuándo sí usar fuerza bruta?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retos-y-ejercicios">12. Retos y ejercicios</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-notas-de-implementacion-en-python">Apéndice — Notas de implementación en Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-y-lecturas-sugeridas">Referencias y lecturas sugeridas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#la-anatomia-sus-cuatro-partes">3. La anatomía: sus cuatro partes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-los-divisores-de-un-numero">4. Ejemplo: los divisores de un número</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-detalle-que-hay-que-notar">El detalle que hay que notar</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-los-tres-mayores-de-una-lista">5. Ejemplo: los tres mayores de una lista</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-las-8-reinas">6. Ejemplo: las 8 reinas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-momento-incomodo">7. El momento incómodo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#medir-sin-cronometro-la-notacion-big-o">8. Medir sin cronómetro: la notación Big O</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-analogia-de-los-libros">La analogía de los libros</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#las-clases-de-complejidad">9. Las clases de complejidad</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seis-reglas-para-calcular-la-complejidad">10. Seis reglas para calcular la complejidad</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-1-una-instruccion-simple-es-o-1">Regla 1 · Una instrucción simple es <span class="math notranslate nohighlight">\(O(1)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-2-un-ciclo-que-recorre-la-entrada-es-o-n">Regla 2 · Un ciclo que recorre la entrada es <span class="math notranslate nohighlight">\(O(n)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-3-los-ciclos-anidados-se-multiplican">Regla 3 · Los ciclos anidados se <strong>multiplican</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-4-si-la-variable-se-multiplica-o-divide-es-o-log-n">Regla 4 · Si la variable se <strong>multiplica o divide</strong>, es <span class="math notranslate nohighlight">\(O(\log n)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-5-en-un-if-se-toma-la-peor-rama">Regla 5 · En un <code class="docutils literal notranslate"><span class="pre">if</span></code>, se toma la <strong>peor</strong> rama</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-6-al-final-se-simplifica">Regla 6 · Al final se <strong>simplifica</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analicemos-este-codigo-juntos">Analicemos este código juntos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comprobarlo-midiendo">11. Comprobarlo midiendo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios">12. Ejercicios</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#en-clase">En clase</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-1-cual-es-la-complejidad">Ejercicio 1 — ¿Cuál es la complejidad?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-2-el-numero-perdido">Ejercicio 2 — El número perdido</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-la-casa">Para la casa</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-3-el-par-que-suma">Ejercicio 3 — El par que suma</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-4-la-contrasena-corta">Ejercicio 4 — La contraseña corta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-5-ordenar-por-fuerza-bruta">Ejercicio 5 — Ordenar por fuerza bruta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-cerrar">Para cerrar</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -562,532 +602,1019 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fuerza-bruta-y-complejidad-computacional">
-<h1>Fuerza Bruta y Complejidad Computacional<a class="headerlink" href="#fuerza-bruta-y-complejidad-computacional" title="Link to this heading">#</a></h1>
-<p><strong>Propósito:</strong> comprender, desde la teoría y la práctica, qué son los algoritmos de <strong>fuerza bruta</strong>, cómo se analizan en tiempo y espacio, y cómo se relacionan con la <strong>complejidad computacional</strong> (clases P y NP), con experimentos reproducibles en Python.</p>
-<section id="objetivos">
-<h2>Objetivos<a class="headerlink" href="#objetivos" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="fuerza-bruta-y-complejidad">
+<h1>Fuerza bruta y complejidad<a class="headerlink" href="#fuerza-bruta-y-complejidad" title="Link to this heading">#</a></h1>
+<p>Imagina <strong>100 cajas cerradas</strong>. Cada una tiene adentro un número que no conoces. Te pido que
+encuentres la que contiene el <strong>7</strong>.</p>
+<p>¿Qué harías? Casi seguro pensaste lo mismo que todo el mundo: <strong>abrirlas una por una</strong> hasta
+encontrarlo. Y si llegas al final sin verlo, es que no estaba.</p>
+<p>Esa estrategia tiene nombre, tiene ventajas, tiene un costo que se puede calcular, y es el punto de
+partida de toda la Unidad 2.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Tema</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>1</strong></p></td>
+<td><p>El acertijo de las cajas</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>2</strong></p></td>
+<td><p>Qué es la fuerza bruta</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>3</strong></p></td>
+<td><p>La anatomía: sus cuatro partes</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>4</strong></p></td>
+<td><p>Ejemplo: los divisores de un número</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>5</strong></p></td>
+<td><p>Ejemplo: los tres mayores de una lista</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>6</strong></p></td>
+<td><p>Ejemplo: las 8 reinas</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>7</strong></p></td>
+<td><p>El momento incómodo: lo que la fuerza bruta no aprovecha</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>8</strong></p></td>
+<td><p>Medir sin cronómetro: la notación Big O</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>9</strong></p></td>
+<td><p>Las clases de complejidad</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>10</strong></p></td>
+<td><p>Seis reglas para calcular la complejidad de un código</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>11</strong></p></td>
+<td><p>Comprobarlo midiendo</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>12</strong></p></td>
+<td><p>Ejercicios</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="el-acertijo-de-las-cajas">
+<h1>1. El acertijo de las cajas<a class="headerlink" href="#el-acertijo-de-las-cajas" title="Link to this heading">#</a></h1>
+<a class="reference internal image-reference" href="_images/busqueda_secuencial.gif"><img alt="Doce cajas cerradas que se van abriendo una por una de izquierda a derecha hasta encontrar el numero 7 en la novena" class="align-center" src="_images/busqueda_secuencial.gif" style="width: 92%;" />
+</a>
+<p>Fíjate en tres cosas de esa animación:</p>
 <ol class="arabic simple">
-<li><p>Definir y caracterizar el enfoque de fuerza bruta y sus variantes (enumeración exhaustiva, generate-and-test, búsqueda ciega).</p></li>
-<li><p>Repasar la notación asintótica (O, Θ, Ω), los casos peor/mejor/promedio, y las clases P / NP.</p></li>
-<li><p>Explorar la explosión combinatoria con ejemplos clásicos: búsqueda lineal, ataque por diccionario, búsqueda de patrón, subset-sum y TSP.</p></li>
-<li><p>Medir tiempos empíricamente y visualizar tasas de crecimiento (log, lineal, cuadrática, exponencial, factorial).</p></li>
-<li><p>Comparar fuerza bruta pura contra una primera poda (branch-and-bound), como puente hacia el backtracking.</p></li>
-<li><p>Discutir cuándo un método de fuerza bruta es aceptable, y qué alternativas existen.</p></li>
+<li><p><strong>No se salta ninguna caja.</strong> Va en orden, sin atajos.</p></li>
+<li><p><strong>Se detiene apenas encuentra el 7</strong>, pero pudo haber tenido que abrirlas todas.</p></li>
+<li><p><strong>Si el 7 no estuviera</strong>, habría que abrir las 12 para poder afirmarlo.</p></li>
 </ol>
-<blockquote>
-<div><p>📎 <strong>Material de apoyo (diapositivas):</strong> <a class="reference download internal" download="" href="_downloads/d9456acd42ee1fa868683cf21cdabc23/FuerzaBruta_Slides.pdf"><span class="xref download myst">Algoritmos de Fuerza Bruta — Fundamentos, Análisis y Aplicaciones (PDF)</span></a></p>
-</div></blockquote>
-</section>
-<section id="que-es-un-algoritmo-de-fuerza-bruta">
-<h2>1. ¿Qué es un algoritmo de fuerza bruta?<a class="headerlink" href="#que-es-un-algoritmo-de-fuerza-bruta" title="Link to this heading">#</a></h2>
-<p>Un <strong>algoritmo de fuerza bruta</strong> intenta resolver un problema <strong>probando sistemáticamente</strong> todas las posibilidades o construyendo todas las soluciones candidatas y verificándolas con un <strong>test</strong>. Es directo, fácil de implementar y <strong>correcto</strong> si explora el espacio completo, pero suele ser <strong>ineficiente</strong> cuando el número de combinaciones crece rápidamente.</p>
-<section id="rasgos-clave">
-<h3>Rasgos clave<a class="headerlink" href="#rasgos-clave" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Enumeración exhaustiva</strong>: lista o genera todas las configuraciones posibles.</p></li>
-<li><p><strong>Generate &amp; Test</strong>: para cada candidato, evalúa si cumple la condición.</p></li>
-<li><p><strong>Ceguera</strong>: carece de conocimiento específico del problema que guíe la búsqueda (a diferencia de heurísticas, poda o programación dinámica).</p></li>
-<li><p><strong>Complejidad alta</strong>: a menudo exponencial o factorial en el tamaño de la entrada.</p></li>
-<li><p><strong>Ventajas</strong>: simplicidad, facilidad de verificar correctitud, útil como línea base o cuando el espacio es pequeño (n ≤ 20).</p></li>
-<li><p><strong>Desventajas</strong>: escala muy mal; puede ser inviable incluso para entradas moderadas.</p></li>
-</ul>
-<blockquote>
-<div><p>Regla mental: si el problema requiere <strong>probar todas las combinaciones</strong> y <strong>no hay</strong> estructura que aprovechar, probablemente sea fuerza bruta.</p>
-</div></blockquote>
-</section>
-</section>
-<section id="complejidad-computacional-en-contexto">
-<h2>2. Complejidad computacional en contexto<a class="headerlink" href="#complejidad-computacional-en-contexto" title="Link to this heading">#</a></h2>
-<section id="modelo-de-costo">
-<h3>2.1 Modelo de costo<a class="headerlink" href="#modelo-de-costo" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Operación básica</strong>: asumimos costo constante para acceso a arreglo, comparaciones simples, suma/resta, etc.</p></li>
-<li><p><strong>Abstracciones</strong>: ignoramos constantes y detalles de hardware para enfocarnos en cómo <em>crece</em> el tiempo/espacio con el tamaño de entrada <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
-</ul>
-</section>
-<section id="notacion-asintotica">
-<h3>2.2 Notación asintótica<a class="headerlink" href="#notacion-asintotica" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>O(f(n))</strong> (cota superior): el algoritmo no tarda más que una constante por <code class="docutils literal notranslate"><span class="pre">f(n)</span></code> para <code class="docutils literal notranslate"><span class="pre">n</span></code> suficientemente grande.</p></li>
-<li><p><strong>Ω(f(n))</strong> (cota inferior): el algoritmo tarda al menos una constante por <code class="docutils literal notranslate"><span class="pre">f(n)</span></code>.</p></li>
-<li><p><strong>Θ(f(n))</strong> (cota ajustada): acotado superior e inferior por <code class="docutils literal notranslate"><span class="pre">f(n)</span></code>.</p></li>
-</ul>
-</section>
-<section id="casos-de-analisis">
-<h3>2.3 Casos de análisis<a class="headerlink" href="#casos-de-analisis" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Peor caso</strong>: garantiza rendimiento en el escenario más desfavorable.</p></li>
-<li><p><strong>Mejor caso</strong>: útil para entender límites inferiores, rara vez suficiente por sí solo.</p></li>
-<li><p><strong>Caso promedio</strong>: requiere un modelo probabilístico de entradas.</p></li>
-</ul>
-</section>
-<section id="clases-de-complejidad-vision-de-alto-nivel">
-<h3>2.4 Clases de complejidad (visión de alto nivel)<a class="headerlink" href="#clases-de-complejidad-vision-de-alto-nivel" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>P</strong>: problemas resolubles en tiempo polinomial (≈ “eficientes”).</p></li>
-<li><p><strong>NP</strong>: soluciones verificables en tiempo polinomial (no necesariamente encontrables rápido).</p></li>
-<li><p><strong>NP-completo</strong>: los problemas más “difíciles” de NP; si resuelves uno en P, entonces P = NP.</p></li>
-<li><p><strong>Exponencial / Factorial</strong>: tiempos del tipo <code class="docutils literal notranslate"><span class="pre">c^n</span></code> o <code class="docutils literal notranslate"><span class="pre">n!</span></code>, típicos de fuerza bruta pura.</p></li>
-</ul>
+<p>Esa última es la clave: para decir <em>“no está”</em> con seguridad, <strong>hay que haber mirado todo</strong>.</p>
+<p>Esto se llama <strong>búsqueda secuencial</strong>, y es el ejemplo más puro de un algoritmo de <strong>fuerza bruta</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utilidades compartidas para medir y graficar tiempos (se usan en todos los ejemplos de este notebook)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">timeit</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Ejecuta f(*args, **kwargs) y devuelve (tiempo_en_segundos, resultado)."""</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="n">out</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_growth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s2">"Tiempo (s)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Escalado empírico"</span><span class="p">,</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Grafica una o varias series (ys puede ser una lista de listas) contra x."""</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
-        <span class="k">for</span> <span class="n">serie</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">or</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">ys</span><span class="p">)):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">serie</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">logy</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="como-crecen-los-tiempos">
-<h2>3. ¿Cómo crecen los tiempos?<a class="headerlink" href="#como-crecen-los-tiempos" title="Link to this heading">#</a></h2>
-<p>Comparamos funciones típicas de complejidad: <code class="docutils literal notranslate"><span class="pre">log</span> <span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">log</span> <span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">n^2</span></code>, <code class="docutils literal notranslate"><span class="pre">2^n</span></code>, <code class="docutils literal notranslate"><span class="pre">n!</span></code>. Observa cómo las exponenciales/factoriales <strong>dominan</strong> rápidamente.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">buscar_secuencial</span><span class="p">(</span><span class="n">cajas</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Abre las cajas una por una. Retorna la posicion, o -1 si no esta."""</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cajas</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">cajas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
 
-<span class="n">ns</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>  <span class="c1"># n pequeño para que n! no desborde</span>
-<span class="n">logn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">ns</span>
-<span class="n">nlogn</span> <span class="o">=</span> <span class="n">ns</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span>
-<span class="n">n2</span> <span class="o">=</span> <span class="n">ns</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">two_n</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">ns</span>
-<span class="n">fact</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">])</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">logn</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'log n (base 2)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'n'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">nlogn</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'n log n'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'n^2'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">two_n</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'2^n'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">fact</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'n!'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">'log'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'n'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'f(n)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Comparación de tasas de crecimiento (escala log en eje Y)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">cajas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"El 7 esta en la posicion:"</span><span class="p">,</span> <span class="n">buscar_secuencial</span><span class="p">(</span><span class="n">cajas</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"El 99 esta en la posicion:"</span><span class="p">,</span> <span class="n">buscar_secuencial</span><span class="p">(</span><span class="n">cajas</span><span class="p">,</span> <span class="mi">99</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fdc789be260197e14994f0557a710eeb4c13580cb984a005224449f4eafca97d.png" src="_images/fdc789be260197e14994f0557a710eeb4c13580cb984a005224449f4eafca97d.png" />
-</div>
-</div>
-</section>
-<section id="patrones-y-familias-de-fuerza-bruta">
-<h2>4. Patrones y familias de fuerza bruta<a class="headerlink" href="#patrones-y-familias-de-fuerza-bruta" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Búsqueda lineal (secuencial)</strong> sobre una lista: prueba cada elemento hasta encontrar la coincidencia. <code class="docutils literal notranslate"><span class="pre">Θ(n)</span></code>.</p></li>
-<li><p><strong>Enumeración de combinaciones/permutaciones</strong> con <code class="docutils literal notranslate"><span class="pre">itertools</span></code>: tamaño del espacio ≈ <code class="docutils literal notranslate"><span class="pre">C(n,k)</span></code> o <code class="docutils literal notranslate"><span class="pre">n!</span></code>.</p></li>
-<li><p><strong>Generate-and-test</strong>: genera candidatos y valida con un predicado.</p></li>
-<li><p><strong>Búsqueda ciega en grafos</strong> (BFS/DFS sin heurística específica). <em>Nota:</em> BFS/DFS no son “fuerza bruta” per se, pero si exploran exhaustivamente sin poda, se comportan como tal.</p></li>
-<li><p><strong>Backtracking sin poda</strong> ≈ fuerza bruta; con poda ya introduce inteligencia (no es “pura”) — lo verás en la siguiente sección de esta unidad.</p></li>
-</ol>
-</section>
-<section id="ejemplo-1-busqueda-lineal-vs-binaria">
-<h2>5. Ejemplo 1 — Búsqueda lineal vs. binaria<a class="headerlink" href="#ejemplo-1-busqueda-lineal-vs-binaria" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Lineal (fuerza bruta)</strong>: recorre todos los elementos hasta hallar el objetivo. <code class="docutils literal notranslate"><span class="pre">Θ(n)</span></code> en peor caso.</p></li>
-<li><p><strong>Binaria (optimizada)</strong>: requiere datos ordenados; divide y vencerás. <code class="docutils literal notranslate"><span class="pre">Θ(log</span> <span class="pre">n)</span></code>.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">linear_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">i</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El 7 esta en la posicion: 8
+El 99 esta en la posicion: -1
 </pre></div>
 </div>
 </div>
 </div>
+<section id="cuantas-cajas-abro">
+<h2>¿Cuántas cajas abro?<a class="headerlink" href="#cuantas-cajas-abro" title="Link to this heading">#</a></h2>
+<p>Depende de la suerte. Los tres escenarios tienen nombre:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Caso</p></th>
+<th class="head"><p>Dónde está el objetivo</p></th>
+<th class="head"><p>Cajas abiertas</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Mejor caso</strong></p></td>
+<td><p>en la primera</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Caso promedio</strong></p></td>
+<td><p>por la mitad</p></td>
+<td><p><span class="math notranslate nohighlight">\(n/2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Peor caso</strong></p></td>
+<td><p>en la última, <strong>o no está</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Cuando analizamos algoritmos nos quedamos casi siempre con el <strong>peor caso</strong>. ¿Por qué? Porque es
+el único que nos da una <strong>garantía</strong>. Saber que “a veces es rápido” no sirve para prometerle nada
+a nadie.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">binary_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">buscar_contando</span><span class="p">(</span><span class="n">cajas</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Igual que antes, pero ademas reporta cuantas cajas abrio."""</span>
+    <span class="n">abiertas</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cajas</span><span class="p">)):</span>
+        <span class="n">abiertas</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">cajas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span><span class="p">,</span> <span class="n">abiertas</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">abiertas</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"objetivo 4  (primera) -&gt;"</span><span class="p">,</span> <span class="n">buscar_contando</span><span class="p">(</span><span class="n">cajas</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"objetivo 10 (ultima)  -&gt;"</span><span class="p">,</span> <span class="n">buscar_contando</span><span class="p">(</span><span class="n">cajas</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"objetivo 99 (no esta) -&gt;"</span><span class="p">,</span> <span class="n">buscar_contando</span><span class="p">(</span><span class="n">cajas</span><span class="p">,</span> <span class="mi">99</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>objetivo 4  (primera) -&gt; (0, 1)
+objetivo 10 (ultima)  -&gt; (11, 12)
+objetivo 99 (no esta) -&gt; (-1, 12)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="que-es-la-fuerza-bruta">
+<h1>2. Qué es la fuerza bruta<a class="headerlink" href="#que-es-la-fuerza-bruta" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>Un algoritmo de <strong>fuerza bruta</strong> resuelve un problema <strong>probando todas las posibilidades</strong>, una
+por una, hasta encontrar la que sirve.</p>
+</div></blockquote>
+<p>Suele ser la <strong>traducción literal del enunciado</strong> a código. Si el problema dice <em>“encuentra el
+mayor”</em>, el algoritmo de fuerza bruta <strong>mira todos</strong> y se queda con el mayor. Nada más.</p>
+<section id="lo-bueno">
+<h2>Lo bueno<a class="headerlink" href="#lo-bueno" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Siempre encuentra la respuesta</strong></p></td>
+<td><p>Si la solución existe, la va a hallar. Probó todas.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Es fácil de escribir</strong></p></td>
+<td><p>No hay que ser ingenioso. Se programa casi dictándolo.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Sirve de punto de partida</strong></p></td>
+<td><p>Te obliga a entender el problema y a ver qué se repite.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="lo-malo">
+<h2>Lo malo<a class="headerlink" href="#lo-malo" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Es ingenua</strong></p></td>
+<td><p>No aprovecha información que podría ahorrarle trabajo.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Puede ser lentísima</strong></p></td>
+<td><p>Si hay mil millones de posibilidades, las prueba todas.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Fuerza bruta no significa “mal programado”.</strong> Significa <em>“probar todo”</em>. Para problemas
+pequeños suele ser la decisión <strong>correcta</strong>: es más fácil de escribir, más fácil de leer y más
+difícil de equivocarse. El problema aparece cuando el número de posibilidades crece.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="la-anatomia-sus-cuatro-partes">
+<h1>3. La anatomía: sus cuatro partes<a class="headerlink" href="#la-anatomia-sus-cuatro-partes" title="Link to this heading">#</a></h1>
+<p>Todo algoritmo de fuerza bruta, por distinto que parezca, tiene las mismas cuatro piezas:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pieza</p></th>
+<th class="head"><p>Qué es</p></th>
+<th class="head"><p>En el acertijo de las cajas</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Candidatos</strong></p></td>
+<td><p>todas las posibilidades a probar</p></td>
+<td><p>las 12 cajas</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Función siguiente</strong></p></td>
+<td><p>cómo paso al próximo candidato</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(len(cajas))</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Función válido</strong></p></td>
+<td><p>cómo sé si este candidato sirve</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">cajas[i]</span> <span class="pre">==</span> <span class="pre">objetivo</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Conjunto solución</strong></p></td>
+<td><p>dónde guardo lo que encontré</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">i</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Reconocer estas cuatro piezas te sirve para <strong>escribir</strong> un algoritmo de fuerza bruta desde cero:
+si puedes responder las cuatro preguntas, ya lo tienes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># La plantilla, con las cuatro piezas marcadas</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fuerza_bruta</span><span class="p">(</span><span class="n">candidatos</span><span class="p">,</span> <span class="n">es_valido</span><span class="p">):</span>
+    <span class="n">solucion</span> <span class="o">=</span> <span class="p">[]</span>                      <span class="c1"># 4) conjunto solucion</span>
+    <span class="k">for</span> <span class="n">candidato</span> <span class="ow">in</span> <span class="n">candidatos</span><span class="p">:</span>       <span class="c1"># 2) funcion siguiente</span>
+        <span class="k">if</span> <span class="n">es_valido</span><span class="p">(</span><span class="n">candidato</span><span class="p">):</span>       <span class="c1"># 3) funcion valido</span>
+            <span class="n">solucion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidato</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">solucion</span>
+
+
+<span class="n">numeros</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>                                    <span class="c1"># 1) candidatos</span>
+<span class="n">multiplos</span> <span class="o">=</span> <span class="n">fuerza_bruta</span><span class="p">(</span><span class="n">numeros</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Multiplos de 7 entre 1 y 30:"</span><span class="p">,</span> <span class="n">multiplos</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Se evaluaron"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">numeros</span><span class="p">)),</span> <span class="s2">"candidatos para encontrar"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">multiplos</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiplos de 7 entre 1 y 30: [7, 14, 21, 28]
+Se evaluaron 30 candidatos para encontrar 4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ejemplo-los-divisores-de-un-numero">
+<h1>4. Ejemplo: los divisores de un número<a class="headerlink" href="#ejemplo-los-divisores-de-un-numero" title="Link to this heading">#</a></h1>
+<p>Encontrar todos los divisores de un número <code class="docutils literal notranslate"><span class="pre">n</span></code>. La traducción literal: <strong>probar todos los números
+del 1 al n</strong> y quedarse con los que dividen exacto.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">divisores</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Fuerza bruta: probar TODOS los numeros del 1 al n."""</span>
+    <span class="n">encontrados</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">encontrados</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">encontrados</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"divisores(4)  ="</span><span class="p">,</span> <span class="n">divisores</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"divisores(12) ="</span><span class="p">,</span> <span class="n">divisores</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"divisores(97) ="</span><span class="p">,</span> <span class="n">divisores</span><span class="p">(</span><span class="mi">97</span><span class="p">),</span> <span class="s2">" &lt;- es primo"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>divisores(4)  = [1, 2, 4]
+divisores(12) = [1, 2, 3, 4, 6, 12]
+divisores(97) = [1, 97]  &lt;- es primo
+</pre></div>
+</div>
+</div>
+</div>
+<section id="el-detalle-que-hay-que-notar">
+<h2>El detalle que hay que notar<a class="headerlink" href="#el-detalle-que-hay-que-notar" title="Link to this heading">#</a></h2>
+<p>Para <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">4</span></code> hicimos <strong>4 divisiones</strong>. Para <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">97</span></code> hicimos <strong>97</strong>. Ahora mira qué pasa cuando el
+número crece de a un dígito:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">digitos</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">digitos</span> <span class="o">-</span> <span class="mi">1</span>          <span class="c1"># 9, 99, 999, 9999, ...</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">digitos</span><span class="si">}</span><span class="s2"> digitos -&gt; el peor numero es </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;9,</span><span class="si">}</span><span class="s2">  -&gt;  </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;9,</span><span class="si">}</span><span class="s2"> divisiones"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 digitos -&gt; el peor numero es         9  -&gt;          9 divisiones
+2 digitos -&gt; el peor numero es        99  -&gt;         99 divisiones
+3 digitos -&gt; el peor numero es       999  -&gt;        999 divisiones
+4 digitos -&gt; el peor numero es     9,999  -&gt;      9,999 divisiones
+5 digitos -&gt; el peor numero es    99,999  -&gt;     99,999 divisiones
+6 digitos -&gt; el peor numero es   999,999  -&gt;    999,999 divisiones
+7 digitos -&gt; el peor numero es 9,999,999  -&gt;  9,999,999 divisiones
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Agregar un solo dígito multiplica el trabajo por diez.</strong> No lo aumenta un poquito: lo multiplica.</p>
+<p>Con 7 dígitos ya son casi diez millones de divisiones para un solo número. Con 15 dígitos, el
+programa no termina nunca en tu vida.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Este algoritmo <strong>sí se puede mejorar</strong>: basta probar hasta la raíz cuadrada de <code class="docutils literal notranslate"><span class="pre">n</span></code>, porque los
+divisores vienen en parejas. Pero eso ya <strong>no es fuerza bruta</strong>: es usar información sobre el
+problema. Volveremos a esta idea en la sección 7.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ejemplo-los-tres-mayores-de-una-lista">
+<h1>5. Ejemplo: los tres mayores de una lista<a class="headerlink" href="#ejemplo-los-tres-mayores-de-una-lista" title="Link to this heading">#</a></h1>
+<p>Dada una lista de números, encontrar <strong>los tres más grandes</strong>. Resolvámoslo por fuerza bruta pura:
+probar <strong>todas las combinaciones posibles de tres posiciones</strong> y quedarse con la que sume más.</p>
+<p>Para arrancar usamos una técnica con nombre propio: <strong>“mi peor es nada”</strong>. Antes de mirar nada,
+declaramos que los tres mayores son los tres primeros. Es casi seguro que está mal, pero nos da
+algo con qué comparar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tres_mayores</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Fuerza bruta: probar TODAS las ternas posibles. Tres ciclos anidados."""</span>
+    <span class="n">mejor</span> <span class="o">=</span> <span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>        <span class="c1"># "mi peor es nada"</span>
+    <span class="n">suma_mejor</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mejor</span><span class="p">)</span>
+    <span class="n">comparaciones</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+                <span class="n">comparaciones</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">terna</span> <span class="o">=</span> <span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span>
+                <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terna</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">suma_mejor</span><span class="p">:</span>
+                    <span class="n">mejor</span><span class="p">,</span> <span class="n">suma_mejor</span> <span class="o">=</span> <span class="n">terna</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">terna</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mejor</span><span class="p">,</span> <span class="n">comparaciones</span>
+
+
+<span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">31</span><span class="p">]</span>
+<span class="n">resultado</span><span class="p">,</span> <span class="n">comps</span> <span class="o">=</span> <span class="n">tres_mayores</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lista:"</span><span class="p">,</span> <span class="n">datos</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Los tres mayores:"</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">resultado</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Ternas evaluadas:"</span><span class="p">,</span> <span class="n">comps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lista: [10, 50, 23, 12, 84, 7, 56, 31]
+Los tres mayores: [84, 56, 50]
+Ternas evaluadas: 56
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Tres ciclos anidados.</strong> Ese es el síntoma: por cada elemento, recorremos los demás, y por cada
+par, recorremos los demás otra vez. Veamos cómo escala:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'ternas evaluadas'</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'n al cubo'</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">]:</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">comps</span> <span class="o">=</span> <span class="n">tres_mayores</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">comps</span><span class="si">:</span><span class="s2">&gt;18,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">n</span><span class="o">**</span><span class="mi">3</span><span class="si">:</span><span class="s2">&gt;14,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    n   ternas evaluadas      n al cubo
+    8                 56            512
+   16                560          4,096
+   32              4,960         32,768
+   64             41,664        262,144
+  128            341,376      2,097,152
+</pre></div>
+</div>
+</div>
+</div>
+<p>El número de ternas crece <strong>como el cubo de n</strong>. Duplicar la lista no duplica el trabajo: lo
+multiplica por ocho.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>¿Cómo lo resolverías <strong>sin</strong> fuerza bruta? Ordenando la lista y tomando los tres últimos. Mucho
+más rápido. Pero fíjate en lo que tuvimos que saber para llegar ahí: que <strong>ordenar ayuda</strong>. La
+fuerza bruta no sabe eso; solo prueba.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ejemplo-las-8-reinas">
+<h1>6. Ejemplo: las 8 reinas<a class="headerlink" href="#ejemplo-las-8-reinas" title="Link to this heading">#</a></h1>
+<p>Este es el clásico, y es donde la fuerza bruta se rompe.</p>
+<p>En un tablero de ajedrez de 8×8 hay que poner <strong>8 reinas</strong> de forma que <strong>ninguna ataque a otra</strong>.
+Una reina ataca en su fila, en su columna y en las dos diagonales.</p>
+<p>Por fuerza bruta pura: probar <strong>todas las formas de elegir 8 casillas entre 64</strong> y revisar cada
+una. ¿Cuántas son?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">comb</span>
+
+<span class="n">combinaciones</span> <span class="o">=</span> <span class="n">comb</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>       <span class="c1"># elegir 8 casillas de 64</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Formas de poner 8 reinas en 64 casillas: </span><span class="si">{</span><span class="n">combinaciones</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="c1"># Suponiendo una computadora que revise un millon de tableros por segundo</span>
+<span class="n">por_segundo</span> <span class="o">=</span> <span class="mi">1_000_000</span>
+<span class="n">segundos</span> <span class="o">=</span> <span class="n">combinaciones</span> <span class="o">/</span> <span class="n">por_segundo</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"A un millon de tableros por segundo: </span><span class="si">{</span><span class="n">segundos</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2"> segundos"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Es decir, </span><span class="si">{</span><span class="n">segundos</span><span class="o">/</span><span class="mi">60</span><span class="si">:</span><span class="s2">,.1f</span><span class="si">}</span><span class="s2"> minutos  (</span><span class="si">{</span><span class="n">segundos</span><span class="o">/</span><span class="mi">3600</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2"> horas)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Formas de poner 8 reinas en 64 casillas: 4,426,165,368
+
+A un millon de tableros por segundo: 4,426 segundos
+Es decir, 73.8 minutos  (1.23 horas)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Cuatro mil cuatrocientos millones de tableros</strong> para un problema que cabe en una hoja.</p>
+<p>Y eso es solo con 8 reinas en un tablero de 8×8. Mira qué pasa si el tablero crece:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">comb</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'tablero'</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'casillas'</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'reinas'</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'combinaciones'</span><span class="si">:</span><span class="s2">&gt;24</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">lado</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">]:</span>
+    <span class="n">casillas</span> <span class="o">=</span> <span class="n">lado</span> <span class="o">*</span> <span class="n">lado</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">lado</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">lado</span><span class="si">:</span><span class="s2">&lt;7</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">casillas</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">lado</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">comb</span><span class="p">(</span><span class="n">casillas</span><span class="p">,</span><span class="w"> </span><span class="n">lado</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;24,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   tablero   casillas   reinas            combinaciones
+4x4               16        4                    1,820
+6x6               36        6                1,947,792
+8x8               64        8            4,426,165,368
+10x10             100       10       17,310,309,456,440
+12x12             144       12  103,619,293,824,707,388
+</pre></div>
+</div>
+</div>
+</div>
+<p>En un tablero de 12×12 son <strong>más de mil billones</strong> de combinaciones. Ninguna computadora del mundo
+termina eso.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Este es el límite de la fuerza bruta.</strong> No es que esté mal escrita: es que el número de
+posibilidades crece más rápido de lo que cualquier máquina puede recorrer. Cuando llegues a este
+punto, el camino no es comprar un computador más rápido — es <strong>cambiar de técnica</strong>.</p>
+<p>Ese cambio de técnica se llama <em>backtracking</em>, y es el tema que sigue en la unidad. Con él, las
+8 reinas se resuelven en milisegundos.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="el-momento-incomodo">
+<h1>7. El momento incómodo<a class="headerlink" href="#el-momento-incomodo" title="Link to this heading">#</a></h1>
+<p>Volvamos a las cajas. Pero ahora te doy <strong>un dato extra</strong>: los números están <strong>ordenados</strong> de menor
+a mayor.</p>
+<p>¿Sigues abriendo una por una?</p>
+<a class="reference internal image-reference" href="_images/lineal_vs_binaria.gif"><img alt="Arriba la busqueda secuencial abre las cajas una por una; abajo la busqueda binaria descarta la mitad del arreglo en cada paso y encuentra el objetivo en muy pocos pasos" class="align-center" src="_images/lineal_vs_binaria.gif" style="width: 95%;" />
+</a>
+<p>Arriba, la fuerza bruta: caja 1, caja 2, caja 3… Abajo, otra estrategia: <strong>abrir la del medio</strong>.
+Si el número buscado es mayor, <strong>toda la mitad izquierda se descarta de un golpe</strong>. Y se repite.</p>
+<p><strong>Esa es la diferencia.</strong> La fuerza bruta <strong>no usa</strong> el dato de que están ordenados. Es <em>ingenua</em>
+—en inglés se dice <em>naive</em>— no porque sea tonta, sino porque <strong>ignora información disponible</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">busqueda_lineal</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">):</span>
+    <span class="n">pasos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">pasos</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">i</span><span class="p">,</span> <span class="n">pasos</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">pasos</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">busqueda_binaria</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">objetivo</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Aprovecha que la lista esta ORDENADA: descarta la mitad en cada paso."""</span>
+    <span class="n">pasos</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="p">:</span>
-        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">mid</span>
-        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">:</span>
-            <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">pasos</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">medio</span> <span class="o">=</span> <span class="p">(</span><span class="n">lo</span> <span class="o">+</span> <span class="n">hi</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">medio</span><span class="p">]</span> <span class="o">==</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">medio</span><span class="p">,</span> <span class="n">pasos</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">medio</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">objetivo</span><span class="p">:</span>
+            <span class="n">lo</span> <span class="o">=</span> <span class="n">medio</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">,</span> <span class="mi">500_000</span><span class="p">]:</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># peor caso para la lineal (el ultimo elemento)</span>
-    <span class="n">t_lineal</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">linear_search</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">t_binaria</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">binary_search</span><span class="p">,</span> <span class="n">arr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2"> | lineal ~</span><span class="si">{</span><span class="n">t_lineal</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s | binaria ~</span><span class="si">{</span><span class="n">t_binaria</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-2-busqueda-de-patron-metodo-ingenuo-vs-optimizado">
-<h2>6. Ejemplo 2 — Búsqueda de patrón: método ingenuo vs. optimizado<a class="headerlink" href="#ejemplo-2-busqueda-de-patron-metodo-ingenuo-vs-optimizado" title="Link to this heading">#</a></h2>
-<p>El método <strong>naive</strong> compara el patrón <code class="docutils literal notranslate"><span class="pre">P</span></code> (longitud <code class="docutils literal notranslate"><span class="pre">m</span></code>) en cada posición del texto <code class="docutils literal notranslate"><span class="pre">T</span></code> (longitud <code class="docutils literal notranslate"><span class="pre">n</span></code>), con salida temprana en cuanto un carácter no coincide ⇒ <code class="docutils literal notranslate"><span class="pre">O(n·m)</span></code> en el peor caso. Lo comparamos contra <code class="docutils literal notranslate"><span class="pre">str.find</span></code> (que internamente usa un algoritmo más eficiente).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="w"> </span><span class="nn">string</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">naive_find</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">m</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">i</span>
-    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bench_pattern</span><span class="p">(</span><span class="n">n_text</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_pat</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_text</span><span class="p">))</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pat</span><span class="p">))</span>
-    <span class="n">t_naive</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">naive_find</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
-    <span class="n">t_builtin</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">find</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">t_naive</span><span class="p">,</span> <span class="n">t_builtin</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">20_000</span><span class="p">,</span> <span class="mi">40_000</span><span class="p">,</span> <span class="mi">80_000</span><span class="p">]</span>
-<span class="n">naive_t</span><span class="p">,</span> <span class="n">builtin_t</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sizes</span><span class="p">:</span>
-    <span class="n">t_na</span><span class="p">,</span> <span class="n">t_bi</span> <span class="o">=</span> <span class="n">bench_pattern</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-    <span class="n">naive_t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_na</span><span class="p">)</span>
-    <span class="n">builtin_t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_bi</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2"> | naive=</span><span class="si">{</span><span class="n">t_na</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s  str.find=</span><span class="si">{</span><span class="n">t_bi</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
+            <span class="n">hi</span> <span class="o">=</span> <span class="n">medio</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">pasos</span>
 
-<span class="n">plot_growth</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="p">[</span><span class="n">naive_t</span><span class="p">,</span> <span class="n">builtin_t</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"naive_find (fuerza bruta)"</span><span class="p">,</span> <span class="s2">"str.find (optimizado)"</span><span class="p">],</span>
-            <span class="n">x_label</span><span class="o">=</span><span class="s2">"Tamaño del texto (n)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Busqueda de patron: ingenuo vs. optimizado"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-3-explosion-combinatoria-ataque-por-diccionario">
-<h2>7. Ejemplo 3 — Explosión combinatoria: ataque por diccionario<a class="headerlink" href="#ejemplo-3-explosion-combinatoria-ataque-por-diccionario" title="Link to this heading">#</a></h2>
-<p>Dado un alfabeto de tamaño <code class="docutils literal notranslate"><span class="pre">k</span></code> y una longitud objetivo <code class="docutils literal notranslate"><span class="pre">n</span></code>, existen <code class="docutils literal notranslate"><span class="pre">k^n</span></code> cadenas posibles. Probamos <strong>todas</strong> las combinaciones hasta encontrar el objetivo, y medimos cómo crece el tiempo con <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">brute_force_match</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Prueba cadenas en orden lexicografico. Devuelve (intentos, cadena_encontrada)."""</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-    <span class="n">attempts</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">alphabet</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">attempts</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">cand</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">cand</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">attempts</span><span class="p">,</span> <span class="n">cand</span>
-    <span class="k">return</span> <span class="n">attempts</span><span class="p">,</span> <span class="s2">""</span>
 
-<span class="c1"># Prueba rapida</span>
-<span class="n">alphabet</span> <span class="o">=</span> <span class="s2">"abcd"</span>
-<span class="n">target</span> <span class="o">=</span> <span class="s2">"cab"</span>
-<span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="n">attempts</span><span class="p">,</span> <span class="n">encontrada</span><span class="p">)</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">brute_force_match</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"target='</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">' -&gt; encontrada='</span><span class="si">{</span><span class="n">encontrada</span><span class="si">}</span><span class="s2">', intentos=</span><span class="si">{</span><span class="n">attempts</span><span class="si">}</span><span class="s2">, tiempo=</span><span class="si">{</span><span class="n">dt</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Crecimiento con la longitud n (alfabeto fijo de 5 letras: k=5)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">runner_len</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="n">alpha</span> <span class="o">=</span> <span class="s2">"abcde"</span>
-    <span class="n">obj</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="n">dt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">brute_force_match</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>  <span class="c1"># k^n con k=5: hasta 5^6 = 15625</span>
-<span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="n">runner_len</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">lens</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lens</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s  (espacio de busqueda = 5^</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="mi">5</span><span class="o">**</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="c1"># Comprobamos primero que las dos encuentran lo mismo</span>
+<span class="n">pequena</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"lineal :"</span><span class="p">,</span> <span class="n">busqueda_lineal</span><span class="p">(</span><span class="n">pequena</span><span class="p">,</span> <span class="mi">99</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"binaria:"</span><span class="p">,</span> <span class="n">busqueda_binaria</span><span class="p">(</span><span class="n">pequena</span><span class="p">,</span> <span class="mi">99</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
 
-<span class="n">plot_growth</span><span class="p">(</span><span class="n">lens</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">"Longitud objetivo (n)"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Fuerza bruta sobre cadenas (k^n, k=5)"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="ejemplo-4-subset-sum-fuerza-bruta-vs-una-primera-poda">
-<h2>8. Ejemplo 4 — Subset Sum: fuerza bruta vs. una primera poda<a class="headerlink" href="#ejemplo-4-subset-sum-fuerza-bruta-vs-una-primera-poda" title="Link to this heading">#</a></h2>
-<p><strong>Subset Sum</strong>: dado un conjunto de enteros y un objetivo <code class="docutils literal notranslate"><span class="pre">T</span></code>, ¿existe un subconjunto que sume exactamente <code class="docutils literal notranslate"><span class="pre">T</span></code>?</p>
-<ul class="simple">
-<li><p><strong>Fuerza bruta</strong>: prueba las <code class="docutils literal notranslate"><span class="pre">2^n</span></code> máscaras de bits posibles.</p></li>
-<li><p><strong>Con poda (branch-and-bound)</strong>: si la suma parcial ya supera <code class="docutils literal notranslate"><span class="pre">T</span></code> (con números no negativos), se corta esa rama sin seguir explorando — es, en esencia, un backtracking con una condición de poda. Esta comparación es el puente hacia la sección de <strong>Backtracking</strong> de esta unidad.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">subset_sum_bruteforce</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">):</span>
-                <span class="n">s</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="kc">False</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">subset_sum_bnb</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
-    <span class="n">arr_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr_sorted</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">current</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">current</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">if</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">:</span>      <span class="c1"># &lt;- poda: ya nos pasamos, no seguimos por esta rama</span>
-            <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">current</span> <span class="o">+</span> <span class="n">arr_sorted</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
-            <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">current</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dfs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correctitud</span>
-<span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">T</span> <span class="o">=</span> <span class="mi">9</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Fuerza bruta:"</span><span class="p">,</span> <span class="n">subset_sum_bruteforce</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Con poda    :"</span><span class="p">,</span> <span class="n">subset_sum_bnb</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_instance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
-    <span class="n">rnd</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="n">rnd</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-    <span class="n">target</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">nums</span><span class="p">,</span> <span class="n">target</span>
-
-<span class="n">ns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># 2^22 ya es notable para la fuerza bruta pura</span>
-<span class="n">t_brute</span><span class="p">,</span> <span class="n">t_bnb</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
-    <span class="n">nums</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">make_instance</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">dt1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">subset_sum_bruteforce</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
-    <span class="n">dt2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">subset_sum_bnb</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
-    <span class="n">t_brute</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dt1</span><span class="p">)</span>
-    <span class="n">t_bnb</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dt2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;2</span><span class="si">}</span><span class="s2"> | fuerza bruta=</span><span class="si">{</span><span class="n">dt1</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s | con poda=</span><span class="si">{</span><span class="n">dt2</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
-
-<span class="n">plot_growth</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="p">[</span><span class="n">t_brute</span><span class="p">,</span> <span class="n">t_bnb</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"fuerza bruta (2^n)"</span><span class="p">,</span> <span class="s2">"con poda (branch-and-bound)"</span><span class="p">],</span>
-            <span class="n">x_label</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Subset Sum: fuerza bruta vs. poda"</span><span class="p">)</span>
+<span class="c1"># Para los tamanos grandes usamos range(n), que NO ocupa memoria:</span>
+<span class="c1"># se puede indexar igual que una lista. El peor caso de la lineal es</span>
+<span class="c1"># abrir las n cajas, asi que no hace falta ejecutarla para saberlo.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'lineal (peor caso)'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'binaria'</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">1_000_000</span><span class="p">,</span> <span class="mi">100_000_000</span><span class="p">]:</span>
+    <span class="n">ordenada</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">pasos_bin</span> <span class="o">=</span> <span class="n">busqueda_binaria</span><span class="p">(</span><span class="n">ordenada</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;14,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;20,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pasos_bin</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=10 | fuerza bruta=0.000054s | con poda=0.000006s
-n=12 | fuerza bruta=0.000097s | con poda=0.000004s
-n=14 | fuerza bruta=0.000175s | con poda=0.000008s
-n=16 | fuerza bruta=0.000164s | con poda=0.000002s
-n=18 | fuerza bruta=0.000912s | con poda=0.000004s
-n=20 | fuerza bruta=0.000332s | con poda=0.000003s
-n=22 | fuerza bruta=0.002909s | con poda=0.000007s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lineal : (99, 100)
+binaria: (99, 7)
+
+             n   lineal (peor caso)    binaria
+           100                  100          7
+        10,000               10,000         14
+     1,000,000            1,000,000         20
+   100,000,000          100,000,000         27
 </pre></div>
 </div>
-<img alt="_images/f33eb7b50e74edae6db9a31c8612c36e1b2d1d49eee6aea5d3024a1b12a74062.png" src="_images/f33eb7b50e74edae6db9a31c8612c36e1b2d1d49eee6aea5d3024a1b12a74062.png" />
+</div>
+</div>
+<p>Con cien millones de cajas ordenadas, la fuerza bruta tendría que abrir <strong>cien millones</strong>.
+La binaria abre <strong>27</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pero ojo: la binaria <strong>solo funciona si están ordenadas</strong>. Si no lo están, la fuerza bruta es la
+única opción. Por eso no se trata de que una sea “mejor”: se trata de <strong>qué información tienes</strong>.
+La fuerza bruta es la que funciona <strong>cuando no sabes nada</strong>.</p>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="medir-sin-cronometro-la-notacion-big-o">
+<h1>8. Medir sin cronómetro: la notación Big O<a class="headerlink" href="#medir-sin-cronometro-la-notacion-big-o" title="Link to this heading">#</a></h1>
+<p>Hasta aquí hemos contado pasos a mano. Necesitamos una forma de hablar de esto que <strong>no dependa
+del computador</strong> en el que corras el programa.</p>
+<section id="la-analogia-de-los-libros">
+<h2>La analogía de los libros<a class="headerlink" href="#la-analogia-de-los-libros" title="Link to this heading">#</a></h2>
+<p>Tienes que llevarle libros a un amigo que vive a una cuadra. Dos métodos:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>1 libro</p></th>
+<th class="head"><p>10 libros</p></th>
+<th class="head"><p>100 libros</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>En carro:</strong> los metes todos y manejas</p></td>
+<td><p>5 min</p></td>
+<td><p>5 min</p></td>
+<td><p>5 min</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Corriendo:</strong> un libro por viaje</p></td>
+<td><p>3 min</p></td>
+<td><p>30 min</p></td>
+<td><p>300 min</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El carro <strong>no cambia</strong> con la cantidad: siempre 5 minutos. Eso es <strong>tiempo constante</strong>.
+Corriendo, el tiempo <strong>crece en proporción</strong> a los libros. Eso es <strong>tiempo lineal</strong>.</p>
+<p>Fíjate en que la pregunta no es <em>“¿cuántos minutos?”</em> sino <strong>“¿cómo cambia cuando la entrada
+crece?”</strong>. Esa es exactamente la pregunta que responde la notación <strong>Big O</strong>.</p>
+<blockquote>
+<div><p><strong>Big O</strong> describe cómo crece el trabajo de un algoritmo cuando la entrada se hace grande,
+<strong>en el peor de los casos</strong>.</p>
+</div></blockquote>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>En Big O</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>En carro</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Corriendo</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Big O <strong>ignora los detalles</strong>: no le importa si el carro tarda 5 minutos o 50, ni si tu computador
+es más rápido que el mío. Solo le importa la <strong>forma</strong> en que crece. Por eso se descartan las
+constantes: <span class="math notranslate nohighlight">\(O(5n)\)</span> y <span class="math notranslate nohighlight">\(O(n)\)</span> son lo mismo.</p>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="las-clases-de-complejidad">
+<h1>9. Las clases de complejidad<a class="headerlink" href="#las-clases-de-complejidad" title="Link to this heading">#</a></h1>
+<a class="reference internal image-reference" href="_images/crecimiento.gif"><img alt="Grafica animada donde las curvas O(1), O(log n), O(n), O(n log n), O(n cuadrado) y O(2 elevado a n) van creciendo a medida que n aumenta; la exponencial se dispara mucho antes que las demas" class="align-center" src="_images/crecimiento.gif" style="width: 88%;" />
+</a>
+<p>Mira la animación completa antes de seguir. Lo importante no son las curvas: es <strong>el orden en que
+se disparan</strong>. La roja —<span class="math notranslate nohighlight">\(O(2^n)\)</span>— se sale del gráfico cuando <code class="docutils literal notranslate"><span class="pre">n</span></code> apenas vale 10.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Complejidad</p></th>
+<th class="head"><p>Nombre</p></th>
+<th class="head"><p>Típicamente aparece en</p></th>
+<th class="head"><p>Con n = 1000</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(O(1)\)</span></p></td>
+<td><p>constante</p></td>
+<td><p>acceder a <code class="docutils literal notranslate"><span class="pre">lista[5]</span></code>, sumar dos números</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(O(\log n)\)</span></p></td>
+<td><p>logarítmica</p></td>
+<td><p>búsqueda binaria</p></td>
+<td><p>~10</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(O(n)\)</span></p></td>
+<td><p>lineal</p></td>
+<td><p><strong>un</strong> ciclo que recorre la entrada</p></td>
+<td><p>1 000</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(O(n \log n)\)</span></p></td>
+<td><p>cuasilineal</p></td>
+<td><p>los buenos algoritmos de ordenamiento</p></td>
+<td><p>~10 000</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(O(n^2)\)</span></p></td>
+<td><p>cuadrática</p></td>
+<td><p><strong>dos</strong> ciclos anidados</p></td>
+<td><p>1 000 000</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(O(n^3)\)</span></p></td>
+<td><p>cúbica</p></td>
+<td><p><strong>tres</strong> ciclos anidados</p></td>
+<td><p>1 000 000 000</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(O(2^n)\)</span></p></td>
+<td><p>exponencial</p></td>
+<td><p>probar todos los subconjuntos</p></td>
+<td><p>un número de 302 cifras</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>La última fila no es una exageración. Vamos a verla:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">tabla</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"O(1)"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"O(log n)"</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="p">(</span><span class="s2">"O(n)"</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span>
+         <span class="p">(</span><span class="s2">"O(n log n)"</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="p">(</span><span class="s2">"O(n^2)"</span><span class="p">,</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s2">"O(n^3)"</span><span class="p">,</span> <span class="n">n</span><span class="o">**</span><span class="mi">3</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">etiqueta</span><span class="p">,</span> <span class="n">valor</span> <span class="ow">in</span> <span class="n">tabla</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">etiqueta</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  -&gt;  </span><span class="si">{</span><span class="n">valor</span><span class="si">:</span><span class="s2">&gt;20,.0f</span><span class="si">}</span><span class="s2"> operaciones"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'O(2^n)'</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">  -&gt;  un numero de </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n</span><span class="p">))</span><span class="si">}</span><span class="s2"> cifras"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        O(1)  -&gt;                     1 operaciones
+    O(log n)  -&gt;                    10 operaciones
+        O(n)  -&gt;                 1,000 operaciones
+  O(n log n)  -&gt;                 9,966 operaciones
+      O(n^2)  -&gt;             1,000,000 operaciones
+      O(n^3)  -&gt;         1,000,000,000 operaciones
+      O(2^n)  -&gt;  un numero de 302 cifras
+</pre></div>
+</div>
 </div>
 </div>
 </section>
-<section id="ejemplo-5-el-problema-del-viajante-tsp-por-fuerza-bruta">
-<h2>9. Ejemplo 5 — El problema del viajante (TSP) por fuerza bruta<a class="headerlink" href="#ejemplo-5-el-problema-del-viajante-tsp-por-fuerza-bruta" title="Link to this heading">#</a></h2>
-<p>Para <code class="docutils literal notranslate"><span class="pre">n</span></code> ciudades, fijando una ciudad de inicio, hay <code class="docutils literal notranslate"><span class="pre">(n-1)!</span></code> rutas posibles a explorar. Probamos todas para <code class="docutils literal notranslate"><span class="pre">n</span></code> pequeño y medimos el tiempo — el crecimiento factorial se nota de inmediato.</p>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="seis-reglas-para-calcular-la-complejidad">
+<h1>10. Seis reglas para calcular la complejidad<a class="headerlink" href="#seis-reglas-para-calcular-la-complejidad" title="Link to this heading">#</a></h1>
+<p>Para analizar un código no hay que ejecutarlo. Se lee, y se aplican estas seis reglas.</p>
+<section id="regla-1-una-instruccion-simple-es-o-1">
+<h2>Regla 1 · Una instrucción simple es <span class="math notranslate nohighlight">\(O(1)\)</span><a class="headerlink" href="#regla-1-una-instruccion-simple-es-o-1" title="Link to this heading">#</a></h2>
+<p>Asignar, sumar, comparar, imprimir, acceder a <code class="docutils literal notranslate"><span class="pre">lista[i]</span></code>. Da igual cuánto valga <code class="docutils literal notranslate"><span class="pre">n</span></code>: siempre cuesta
+lo mismo.</p>
+</section>
+<section id="regla-2-un-ciclo-que-recorre-la-entrada-es-o-n">
+<h2>Regla 2 · Un ciclo que recorre la entrada es <span class="math notranslate nohighlight">\(O(n)\)</span><a class="headerlink" href="#regla-2-un-ciclo-que-recorre-la-entrada-es-o-n" title="Link to this heading">#</a></h2>
+<p>Si avanza de a pasos constantes —de 1 en 1, de 2 en 2— y recorre los <code class="docutils literal notranslate"><span class="pre">n</span></code> elementos.</p>
+</section>
+<section id="regla-3-los-ciclos-anidados-se-multiplican">
+<h2>Regla 3 · Los ciclos anidados se <strong>multiplican</strong><a class="headerlink" href="#regla-3-los-ciclos-anidados-se-multiplican" title="Link to this heading">#</a></h2>
+<p>Dos ciclos anidados sobre la entrada dan <span class="math notranslate nohighlight">\(O(n \times n) = O(n^2)\)</span>. Tres dan <span class="math notranslate nohighlight">\(O(n^3)\)</span>.</p>
+</section>
+<section id="regla-4-si-la-variable-se-multiplica-o-divide-es-o-log-n">
+<h2>Regla 4 · Si la variable se <strong>multiplica o divide</strong>, es <span class="math notranslate nohighlight">\(O(\log n)\)</span><a class="headerlink" href="#regla-4-si-la-variable-se-multiplica-o-divide-es-o-log-n" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">2</span></code> no recorre <code class="docutils literal notranslate"><span class="pre">n</span></code> valores: recorre los que caben duplicando. Para llegar a 1000 desde 1
+duplicando solo hacen falta 10 pasos.</p>
+</section>
+<section id="regla-5-en-un-if-se-toma-la-peor-rama">
+<h2>Regla 5 · En un <code class="docutils literal notranslate"><span class="pre">if</span></code>, se toma la <strong>peor</strong> rama<a class="headerlink" href="#regla-5-en-un-if-se-toma-la-peor-rama" title="Link to this heading">#</a></h2>
+<p>Big O mide el peor caso. Si una rama hace más trabajo que la otra, esa es la que cuenta.</p>
+</section>
+<section id="regla-6-al-final-se-simplifica">
+<h2>Regla 6 · Al final se <strong>simplifica</strong><a class="headerlink" href="#regla-6-al-final-se-simplifica" title="Link to this heading">#</a></h2>
+<p>Se suma todo, se <strong>descartan las constantes</strong> y se deja <strong>solo el término que más crece</strong>:</p>
+<div class="math notranslate nohighlight">
+\[O(n^2 + 5n + 10) \;\longrightarrow\; O(n^2)\]</div>
+<p>¿Por qué? Porque cuando <code class="docutils literal notranslate"><span class="pre">n</span></code> es grande, <span class="math notranslate nohighlight">\(n^2\)</span> aplasta a todo lo demás. Con <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">1000</span></code>:
+<span class="math notranslate nohighlight">\(n^2 = 1\,000\,000\)</span> y <span class="math notranslate nohighlight">\(5n + 10 = 5\,010\)</span>. El segundo ni se nota.</p>
+</section>
+<section id="analicemos-este-codigo-juntos">
+<h2>Analicemos este código juntos<a class="headerlink" href="#analicemos-este-codigo-juntos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutations</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ejemplo</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>                            <span class="c1"># 1 vez          -&gt; O(1)</span>
+
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>                      <span class="c1"># n veces        -&gt; O(n)</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span>                       <span class="c1">#   dentro: O(1)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datos</span><span class="p">)):</span>          <span class="c1"># n veces</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datos</span><span class="p">)):</span>      <span class="c1">#   n veces cada una</span>
+            <span class="k">if</span> <span class="n">datos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">datos</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>     <span class="c1">#     dentro: O(1)</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>               <span class="c1">#   -&gt; en total O(n * n) = O(n^2)</span>
+
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>                <span class="c1"># se duplica     -&gt; O(log n)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+
+    <span class="k">return</span> <span class="n">total</span>                         <span class="c1"># 1 vez          -&gt; O(1)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Sumamos lo que encontramos:</p>
+<div class="math notranslate nohighlight">
+\[O(1) + O(n) + O(n^2) + O(\log n) + O(1)\]</div>
+<p>Aplicamos la regla 6: nos quedamos con el término que más crece. El ganador es <span class="math notranslate nohighlight">\(n^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\boxed{O(n^2)}\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>El error más común es <strong>sumar</strong> los ciclos anidados en vez de multiplicarlos. Dos ciclos
+<strong>uno después del otro</strong> se suman: <span class="math notranslate nohighlight">\(O(n) + O(n) = O(2n) = O(n)\)</span>. Dos ciclos <strong>uno dentro del
+otro</strong> se multiplican: <span class="math notranslate nohighlight">\(O(n \times n) = O(n^2)\)</span>. La indentación es la que decide.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">tsp_bruteforce</span><span class="p">(</span><span class="n">dist</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">best_cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span>
-    <span class="n">best_path</span> <span class="o">=</span> <span class="p">()</span>
-    <span class="n">nodes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>  <span class="c1"># fijamos la ciudad 0 como origen</span>
-    <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="n">nodes</span><span class="p">):</span>
-        <span class="n">cost</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="n">prev</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">:</span>
-            <span class="n">cost</span> <span class="o">+=</span> <span class="n">dist</span><span class="p">[</span><span class="n">prev</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span>
-            <span class="n">prev</span> <span class="o">=</span> <span class="n">v</span>
-        <span class="n">cost</span> <span class="o">+=</span> <span class="n">dist</span><span class="p">[</span><span class="n">prev</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># cerrar el ciclo</span>
-        <span class="k">if</span> <span class="n">cost</span> <span class="o">&lt;</span> <span class="n">best_cost</span><span class="p">:</span>
-            <span class="n">best_cost</span> <span class="o">=</span> <span class="n">cost</span>
-            <span class="n">best_path</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span> <span class="o">+</span> <span class="n">perm</span> <span class="o">+</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span>
-    <span class="k">return</span> <span class="n">best_cost</span><span class="p">,</span> <span class="n">best_path</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dos ciclos SEGUIDOS -&gt; O(n) + O(n) = O(n)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">seguidos</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+    <span class="n">pasos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+        <span class="n">pasos</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+        <span class="n">pasos</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">pasos</span>
+
+
+<span class="c1"># Dos ciclos ANIDADOS -&gt; O(n) * O(n) = O(n^2)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">anidados</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+    <span class="n">pasos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+            <span class="n">pasos</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">pasos</span>
+
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]:</span>
+    <span class="n">datos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">   seguidos: </span><span class="si">{</span><span class="n">seguidos</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2">   anidados: </span><span class="si">{</span><span class="n">anidados</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_tsp</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
-    <span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">pts</span> <span class="o">=</span> <span class="n">rnd</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">pts</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">pts</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">dist</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]:</span>  <span class="c1"># 5!=120, 6!=720, 7!=5040 rutas</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="n">make_tsp</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">dt</span><span class="p">,</span> <span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">=</span> <span class="n">timeit</span><span class="p">(</span><span class="n">tsp_bruteforce</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> | tiempo=</span><span class="si">{</span><span class="n">dt</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s | costo=</span><span class="si">{</span><span class="n">cost</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | ruta=</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n=   10   seguidos:         20   anidados:        100
+n=  100   seguidos:        200   anidados:     10,000
+n= 1000   seguidos:      2,000   anidados:  1,000,000
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="complejidad-espacial-trade-offs-y-paralelizacion">
-<h2>10. Complejidad espacial, trade-offs y paralelización<a class="headerlink" href="#complejidad-espacial-trade-offs-y-paralelizacion" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Espacio</strong>: la fuerza bruta suele usar poco espacio (se puede generar <em>on-the-fly</em> con iteradores), aunque puede crecer si memorizamos estados.</p></li>
-<li><p><strong>Tiempo vs. espacio</strong>: a veces conviene gastar memoria para evitar repetir trabajo (tabulación, <em>caching</em>) — pero entonces deja de ser fuerza bruta pura.</p></li>
-<li><p><strong>Paralelización</strong>: como cada candidato se evalúa de forma independiente, la fuerza bruta paraleliza bien (CPU/GPU/clúster). Aun así, la explosión combinatoria puede dominar igual.</p></li>
-<li><p><strong>Heurísticas y poda</strong>: podar ramas imposibles o poco prometedoras, <em>branch &amp; bound</em>, búsqueda informada — mejoran lo práctico, pero ya no es fuerza bruta “pura” (así empieza el backtracking).</p></li>
-<li><p><strong>Aleatoriedad</strong>: <em>random restarts</em>, Monte Carlo, Las Vegas — reducen tiempos esperados, sin garantías deterministas de peor caso.</p></li>
-</ul>
 </section>
-<section id="cuando-si-usar-fuerza-bruta">
-<h2>11. ¿Cuándo sí usar fuerza bruta?<a class="headerlink" href="#cuando-si-usar-fuerza-bruta" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>El espacio de búsqueda es pequeño (o está acotado por requisitos de negocio).</p></li>
-<li><p>Necesitas una <strong>línea base</strong> para comparar contra optimizaciones más avanzadas.</p></li>
-<li><p>Requieres soluciones exactas y no hay métodos mejores para tu tamaño de <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></li>
-<li><p>Tienes recursos de cómputo masivos o ventanas de cálculo “offline”.</p></li>
-<li><p>Forma parte de una solución híbrida (ej. fuerza bruta en la frontera de un algoritmo de divide y vencerás).</p></li>
-</ul>
-<p><strong>Cuándo evitarla:</strong> cuando <code class="docutils literal notranslate"><span class="pre">n</span></code> o el espacio de búsqueda crecen de forma que ningún multiplicador razonable de hardware alcanza (exponencial/factorial).</p>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="comprobarlo-midiendo">
+<h1>11. Comprobarlo midiendo<a class="headerlink" href="#comprobarlo-midiendo" title="Link to this heading">#</a></h1>
+<p>La teoría dice que si duplicas <code class="docutils literal notranslate"><span class="pre">n</span></code>, un algoritmo <span class="math notranslate nohighlight">\(O(n)\)</span> tarda <strong>el doble</strong> y uno <span class="math notranslate nohighlight">\(O(n^2)\)</span> tarda
+<strong>cuatro veces</strong> más. Vamos a verificarlo con un cronómetro de verdad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">medir</span><span class="p">(</span><span class="n">funcion</span><span class="p">,</span> <span class="n">datos</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Mide cuanto tarda una funcion, en milisegundos."""</span>
+    <span class="n">inicio</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">funcion</span><span class="p">(</span><span class="n">datos</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">inicio</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n'</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'O(n) ms'</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'factor'</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="s1">'O(n^2) ms'</span><span class="si">:</span><span class="s2">&gt;11</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'factor'</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">anterior_lineal</span> <span class="o">=</span> <span class="n">anterior_cuad</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">4000</span><span class="p">]:</span>
+    <span class="n">datos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">t_lineal</span> <span class="o">=</span> <span class="n">medir</span><span class="p">(</span><span class="n">seguidos</span><span class="p">,</span> <span class="n">datos</span><span class="p">)</span>
+    <span class="n">t_cuad</span> <span class="o">=</span> <span class="n">medir</span><span class="p">(</span><span class="n">anidados</span><span class="p">,</span> <span class="n">datos</span><span class="p">)</span>
+
+    <span class="n">f1</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">t_lineal</span><span class="o">/</span><span class="n">anterior_lineal</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x"</span> <span class="k">if</span> <span class="n">anterior_lineal</span> <span class="k">else</span> <span class="s2">"-"</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">t_cuad</span><span class="o">/</span><span class="n">anterior_cuad</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x"</span> <span class="k">if</span> <span class="n">anterior_cuad</span> <span class="k">else</span> <span class="s2">"-"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">t_lineal</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">   </span><span class="si">{</span><span class="n">t_cuad</span><span class="si">:</span><span class="s2">&gt;11.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">f2</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="n">anterior_lineal</span><span class="p">,</span> <span class="n">anterior_cuad</span> <span class="o">=</span> <span class="n">t_lineal</span><span class="p">,</span> <span class="n">t_cuad</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      n    O(n) ms   factor     O(n^2) ms   factor
+    500       0.01        -          2.43        -
+   1000       0.02     2.0x         10.80     4.4x
+   2000       0.04     2.1x         36.99     3.4x
+   4000       0.07     1.8x        150.77     4.1x
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mira la columna <strong>factor</strong>: cada vez que <code class="docutils literal notranslate"><span class="pre">n</span></code> se duplica, el lineal tarda alrededor de <strong>2 veces</strong>
+más y el cuadrático alrededor de <strong>4 veces</strong> más. Exactamente lo que predice la teoría.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Los tiempos exactos cambian en cada computador y en cada corrida. Lo que <strong>no cambia</strong> son los
+factores: 2× y 4×. Por eso Big O habla de <strong>cómo crece</strong>, no de cuántos milisegundos tarda.</p>
+</div>
 </section>
-<section id="retos-y-ejercicios">
-<h2>12. Retos y ejercicios<a class="headerlink" href="#retos-y-ejercicios" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="ejercicios">
+<h1>12. Ejercicios<a class="headerlink" href="#ejercicios" title="Link to this heading">#</a></h1>
+<section id="en-clase">
+<h2>En clase<a class="headerlink" href="#en-clase" title="Link to this heading">#</a></h2>
+<section id="ejercicio-1-cual-es-la-complejidad">
+<h3>Ejercicio 1 — ¿Cuál es la complejidad?<a class="headerlink" href="#ejercicio-1-cual-es-la-complejidad" title="Link to this heading">#</a></h3>
+<p>Para cada función, <strong>sin ejecutarla</strong>, di su complejidad en notación Big O y <strong>justifica en una
+línea</strong> qué regla aplicaste.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># a)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">a</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">datos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">datos</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># b)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">b</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="c1"># c)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+    <span class="n">pares</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+            <span class="n">pares</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pares</span>
+
+<span class="c1"># d)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">d</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">pasos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="n">pasos</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">pasos</span>
+
+<span class="c1"># e)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">e</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">datos</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datos</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datos</span><span class="p">)):</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">total</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TUS RESPUESTAS ACÁ (a, b, c, d, e con su justificación)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-2-el-numero-perdido">
+<h3>Ejercicio 2 — El número perdido<a class="headerlink" href="#ejercicio-2-el-numero-perdido" title="Link to this heading">#</a></h3>
+<p>Te dan una lista con los números del 1 al <code class="docutils literal notranslate"><span class="pre">n</span></code>, <strong>en desorden y con uno faltante</strong>.</p>
 <ol class="arabic simple">
-<li><p><strong>Ataque por diccionario</strong>: calcula el tiempo esperado de probar <code class="docutils literal notranslate"><span class="pre">A^L</span></code> combinaciones dado <code class="docutils literal notranslate"><span class="pre">X</span></code> intentos por segundo.</p></li>
-<li><p><strong>Más poda en Subset Sum</strong>: ordena por valor absoluto y corta ramas cuando la suma parcial ya excede el objetivo (con negativos incluidos).</p></li>
-<li><p><strong>Naive vs. KMP</strong>: implementa Knuth-Morris-Pratt y compáralo con <code class="docutils literal notranslate"><span class="pre">naive_find</span></code> en casos adversos (ver las diapositivas para la idea del algoritmo).</p></li>
-<li><p><strong>TSP con <code class="docutils literal notranslate"><span class="pre">n=9..11</span></code></strong>: mide el tiempo y grafica <code class="docutils literal notranslate"><span class="pre">n</span></code> vs. tiempo. ¿Qué curva emerge?</p></li>
-<li><p><strong>Paralelización</strong>: usa <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> para repartir el espacio de búsqueda de <em>subset-sum</em> entre varios procesos.</p></li>
-<li><p><strong>Meet-in-the-middle</strong>: guarda las sumas de la mitad del conjunto y compáralas contra la fuerza bruta pura — ¿cuánto mejora?</p></li>
+<li><p>Escribe <code class="docutils literal notranslate"><span class="pre">buscar_faltante_fuerza_bruta(lista,</span> <span class="pre">n)</span></code> que, para cada número del 1 al <code class="docutils literal notranslate"><span class="pre">n</span></code>, revise si
+está en la lista. Usa dos ciclos anidados: <strong>no uses el operador <code class="docutils literal notranslate"><span class="pre">in</span></code></strong>.</p></li>
+<li><p>Haz que además cuente y retorne <strong>cuántas comparaciones</strong> hizo.</p></li>
+<li><p>Pruébala con <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">100</span></code> y <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">=</span> <span class="pre">200</span></code>, e imprime las comparaciones de cada una.</p></li>
+<li><p>Di cuál es su complejidad y <strong>comprueba con los números</strong> si el crecimiento corresponde.</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="apendice-notas-de-implementacion-en-python">
-<h2>Apéndice — Notas de implementación en Python<a class="headerlink" href="#apendice-notas-de-implementacion-en-python" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">itertools.product</span></code>, <code class="docutils literal notranslate"><span class="pre">combinations</span></code>, <code class="docutils literal notranslate"><span class="pre">permutations</span></code> generan secuencias sin materializarlas (bueno en memoria).</p></li>
-<li><p>Usa <code class="docutils literal notranslate"><span class="pre">time.perf_counter()</span></code> para mediciones finas.</p></li>
-<li><p>Evita imprimir dentro de bucles de medición (afecta los tiempos).</p></li>
-<li><p>Para reproducibilidad, fija semillas de <code class="docutils literal notranslate"><span class="pre">random</span></code>.</p></li>
-</ul>
 </section>
-<section id="referencias-y-lecturas-sugeridas">
-<h2>Referencias y lecturas sugeridas<a class="headerlink" href="#referencias-y-lecturas-sugeridas" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Cormen, Leiserson, Rivest, Stein. <em>Introduction to Algorithms</em> (CLRS) — capítulos de complejidad y problemas NP-completos.</p></li>
-<li><p>Kleinberg, Tardos. <em>Algorithm Design</em> — secciones sobre <em>brute force</em> y técnicas de diseño.</p></li>
-<li><p>Sipser. <em>Introduction to the Theory of Computation</em> — clases P y NP.</p></li>
-<li><p>Skiena. <em>The Algorithm Design Manual</em> — catálogo de problemas y enfoques prácticos.</p></li>
-<li><p>Garey, Johnson. <em>Computers and Intractability: A Guide to the Theory of NP-Completeness</em>.</p></li>
-<li><p>Dasgupta, Papadimitriou, Vazirani. <em>Algorithms</em>.</p></li>
-</ul>
+<hr class="docutils" />
+<section id="para-la-casa">
+<h2>Para la casa<a class="headerlink" href="#para-la-casa" title="Link to this heading">#</a></h2>
+<section id="ejercicio-3-el-par-que-suma">
+<h3>Ejercicio 3 — El par que suma<a class="headerlink" href="#ejercicio-3-el-par-que-suma" title="Link to this heading">#</a></h3>
+<p>Dada una lista de números y un objetivo, encontrar <strong>si existen dos números de la lista que sumen
+el objetivo</strong>.</p>
+<ol class="arabic simple">
+<li><p>Resuélvelo por <strong>fuerza bruta</strong>: probar todos los pares posibles. Retorna la pareja y el número
+de pares evaluados.</p></li>
+<li><p>Pruébalo con <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">8,</span> <span class="pre">1,</span> <span class="pre">6,</span> <span class="pre">9,</span> <span class="pre">4]</span></code> y objetivo <code class="docutils literal notranslate"><span class="pre">10</span></code>, y con una lista de 200 números al azar.</p></li>
+<li><p>Di cuál es su complejidad y explica por qué, mencionando la regla que usaste.</p></li>
+<li><p><strong>Para pensar, sin programar:</strong> si la lista estuviera <strong>ordenada</strong>, ¿se te ocurre una forma de
+hacerlo con menos trabajo? Descríbela en palabras.</p></li>
+</ol>
+</section>
+<section id="ejercicio-4-la-contrasena-corta">
+<h3>Ejercicio 4 — La contraseña corta<a class="headerlink" href="#ejercicio-4-la-contrasena-corta" title="Link to this heading">#</a></h3>
+<p>Un candado tiene una clave de <code class="docutils literal notranslate"><span class="pre">k</span></code> dígitos (cada uno del 0 al 9).</p>
+<ol class="arabic simple">
+<li><p>Escribe una función que, por fuerza bruta, pruebe <strong>todas las claves posibles</strong> hasta dar con
+una clave objetivo. Retorna cuántos intentos hizo.
+<em>Pista: <code class="docutils literal notranslate"><span class="pre">itertools.product(&quot;0123456789&quot;,</span> <span class="pre">repeat=k)</span></code> genera todas las combinaciones.</em></p></li>
+<li><p>Pruébala con <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4</span></code> usando como objetivo la <strong>última</strong> clave posible (el peor caso) e
+imprime los intentos de cada una.</p></li>
+<li><p>¿Cuántos intentos hay en el peor caso para <code class="docutils literal notranslate"><span class="pre">k</span></code> dígitos? Escribe la fórmula.</p></li>
+<li><p>Si cada intento tardara <strong>1 milisegundo</strong>, ¿cuánto tardaría romper una clave de 8 dígitos?
+Calcúlalo con código y exprésalo en días.</p></li>
+</ol>
+</section>
+<section id="ejercicio-5-ordenar-por-fuerza-bruta">
+<h3>Ejercicio 5 — Ordenar por fuerza bruta<a class="headerlink" href="#ejercicio-5-ordenar-por-fuerza-bruta" title="Link to this heading">#</a></h3>
+<p>El <em>selection sort</em> es fuerza bruta: para cada posición, <strong>busca el menor de todo lo que queda</strong> y
+lo pone ahí.</p>
+<ol class="arabic simple">
+<li><p>Impleméntalo, contando <strong>cuántas comparaciones</strong> hace.</p></li>
+<li><p>Pruébalo con listas de 50, 100 y 200 elementos al azar e imprime las comparaciones.</p></li>
+<li><p>Verifica que el resultado coincide con <code class="docutils literal notranslate"><span class="pre">sorted(lista)</span></code>.</p></li>
+<li><p>Di cuál es su complejidad. Luego <strong>compara los números medidos</strong> con <span class="math notranslate nohighlight">\(n^2/2\)</span> y explica por qué
+se parecen tanto.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># EJERCICIO 3 — TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># EJERCICIO 4 — TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># EJERCICIO 5 — TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="para-cerrar">
+<h2>Para cerrar<a class="headerlink" href="#para-cerrar" title="Link to this heading">#</a></h2>
+<p>Tres ideas para llevarse:</p>
+<ol class="arabic simple">
+<li><p><strong>La fuerza bruta prueba todo.</strong> Siempre encuentra la respuesta y es fácil de escribir. Es un
+punto de partida legítimo, no un error.</p></li>
+<li><p><strong>Su costo se puede calcular leyendo el código.</strong> Un ciclo es <span class="math notranslate nohighlight">\(O(n)\)</span>; dos anidados, <span class="math notranslate nohighlight">\(O(n^2)\)</span>;
+probar todas las combinaciones, exponencial.</p></li>
+<li><p><strong>Deja de servir cuando las posibilidades explotan.</strong> Ahí no se cambia de computador: se cambia
+de técnica. Eso es lo que viene en la unidad.</p></li>
+</ol>
 </section>
 </section>
 
@@ -1157,31 +1684,57 @@ n=22 | fuerza bruta=0.002909s | con poda=0.000007s
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">Objetivos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-un-algoritmo-de-fuerza-bruta">1. ¿Qué es un algoritmo de fuerza bruta?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rasgos-clave">Rasgos clave</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Fuerza bruta y complejidad</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-acertijo-de-las-cajas">1. El acertijo de las cajas</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuantas-cajas-abro">¿Cuántas cajas abro?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-en-contexto">2. Complejidad computacional en contexto</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-costo">2.1 Modelo de costo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notacion-asintotica">2.2 Notación asintótica</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#casos-de-analisis">2.3 Casos de análisis</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clases-de-complejidad-vision-de-alto-nivel">2.4 Clases de complejidad (visión de alto nivel)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-fuerza-bruta">2. Qué es la fuerza bruta</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-bueno">Lo bueno</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lo-malo">Lo malo</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-crecen-los-tiempos">3. ¿Cómo crecen los tiempos?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#patrones-y-familias-de-fuerza-bruta">4. Patrones y familias de fuerza bruta</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-busqueda-lineal-vs-binaria">5. Ejemplo 1 — Búsqueda lineal vs. binaria</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-busqueda-de-patron-metodo-ingenuo-vs-optimizado">6. Ejemplo 2 — Búsqueda de patrón: método ingenuo vs. optimizado</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-explosion-combinatoria-ataque-por-diccionario">7. Ejemplo 3 — Explosión combinatoria: ataque por diccionario</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-subset-sum-fuerza-bruta-vs-una-primera-poda">8. Ejemplo 4 — Subset Sum: fuerza bruta vs. una primera poda</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-el-problema-del-viajante-tsp-por-fuerza-bruta">9. Ejemplo 5 — El problema del viajante (TSP) por fuerza bruta</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-espacial-trade-offs-y-paralelizacion">10. Complejidad espacial, trade-offs y paralelización</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuando-si-usar-fuerza-bruta">11. ¿Cuándo sí usar fuerza bruta?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retos-y-ejercicios">12. Retos y ejercicios</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-notas-de-implementacion-en-python">Apéndice — Notas de implementación en Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencias-y-lecturas-sugeridas">Referencias y lecturas sugeridas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#la-anatomia-sus-cuatro-partes">3. La anatomía: sus cuatro partes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-los-divisores-de-un-numero">4. Ejemplo: los divisores de un número</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-detalle-que-hay-que-notar">El detalle que hay que notar</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-los-tres-mayores-de-una-lista">5. Ejemplo: los tres mayores de una lista</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-las-8-reinas">6. Ejemplo: las 8 reinas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-momento-incomodo">7. El momento incómodo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#medir-sin-cronometro-la-notacion-big-o">8. Medir sin cronómetro: la notación Big O</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-analogia-de-los-libros">La analogía de los libros</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#las-clases-de-complejidad">9. Las clases de complejidad</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seis-reglas-para-calcular-la-complejidad">10. Seis reglas para calcular la complejidad</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-1-una-instruccion-simple-es-o-1">Regla 1 · Una instrucción simple es <span class="math notranslate nohighlight">\(O(1)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-2-un-ciclo-que-recorre-la-entrada-es-o-n">Regla 2 · Un ciclo que recorre la entrada es <span class="math notranslate nohighlight">\(O(n)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-3-los-ciclos-anidados-se-multiplican">Regla 3 · Los ciclos anidados se <strong>multiplican</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-4-si-la-variable-se-multiplica-o-divide-es-o-log-n">Regla 4 · Si la variable se <strong>multiplica o divide</strong>, es <span class="math notranslate nohighlight">\(O(\log n)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-5-en-un-if-se-toma-la-peor-rama">Regla 5 · En un <code class="docutils literal notranslate"><span class="pre">if</span></code>, se toma la <strong>peor</strong> rama</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regla-6-al-final-se-simplifica">Regla 6 · Al final se <strong>simplifica</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analicemos-este-codigo-juntos">Analicemos este código juntos</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comprobarlo-midiendo">11. Comprobarlo midiendo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios">12. Ejercicios</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#en-clase">En clase</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-1-cual-es-la-complejidad">Ejercicio 1 — ¿Cuál es la complejidad?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-2-el-numero-perdido">Ejercicio 2 — El número perdido</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-la-casa">Para la casa</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-3-el-par-que-suma">Ejercicio 3 — El par que suma</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-4-la-contrasena-corta">Ejercicio 4 — La contraseña corta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-5-ordenar-por-fuerza-bruta">Ejercicio 5 — Ordenar por fuerza bruta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#para-cerrar">Para cerrar</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
