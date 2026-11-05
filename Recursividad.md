@@ -61,6 +61,14 @@ Teoría, ejemplos y plantillas en blanco 📎 [Introducción a la recursividad (
 
 ## Manos a la obra! 💪🐍
 
-El notebook de esta sección desarrolla en código todo lo anterior: factorial y suma de lista (pila vs. cola), la transformación paso a paso de pila a cola, `es_par`/`es_impar` (cruzada), potencia rápida (divide y vencerás), recorridos de árboles, memoización vs. programación dinámica Bottom-Up, y un decorador para visualizar tú mismo el árbol de llamadas de cualquier función recursiva.
+El notebook de esta sección es la clase completa, escena por escena, con **animaciones
+interactivas** que puedes pausar, avanzar paso a paso y reiniciar: la fila que pregunta hacia
+adelante, las muñecas rusas del factorial, la pila de llamadas de Python, los tres errores que
+producen un `RecursionError`, el árbol de Fibonacci con y sin memoria, y las Torres de Hanoi.
 
-1. {doc}`Recursividad_Notebook` — recursión de pila, de cola y cruzada, con ejemplos ejecutables y ejercicios propuestos.
+El eje es el **método C.A.S.O.** —**C**aso base, **A**chicar, **S**uponer, **O**perar—: cuatro
+preguntas que, respondidas en orden, escriben la función por ti sin que tengas que imaginar la
+pila entera en la cabeza.
+
+1. {doc}`Recursividad_Notebook` — la clase en movimiento, con el taller guiado y los siete retos
+   para entregar.
