@@ -313,6 +313,9 @@ html,body{background:var(--paper)}
 .scene-head,.ask{display:none}
 /* El salto de fe y la lista de verificacion tambien estan en el notebook. */
 #caso .leap,#caso .verify{display:none}
+/* El C.A.S.O. de Hanoi tambien esta en el notebook, y a cuatro columnas en el
+   ancho del libro queda ilegible. */
+#hanoi .caso{display:none}
 #caso .grid2{grid-template-columns:minmax(0,1fr)}
 .wrap{padding-left:14px;padding-right:14px}
 </style>
@@ -365,7 +368,10 @@ html,body{background:var(--paper)}
   const marco = window.frameElement;
   if(!marco) return;                       // abierta directamente, no embebida
   const medir = () => {
-    const h = Math.ceil(document.documentElement.scrollHeight);
+    // Se mide el <body>, no documentElement.scrollHeight: ese ultimo nunca baja
+    // del alto del propio marco, asi que el iframe podria crecer pero nunca
+    // encoger.
+    const h = Math.ceil(document.body.getBoundingClientRect().height);
     if (Math.abs(parseInt(marco.style.height || 0, 10) - h) > 2)
       marco.style.height = h + "px";
   };
@@ -374,7 +380,11 @@ html,body{background:var(--paper)}
   new ResizeObserver(medir).observe(document.body);
   new MutationObserver(medir).observe(document.body,
     {subtree:true, childList:true, attributes:true});
-  medir();
+  // Algunos navegadores congelan los observadores de un iframe fuera de
+  // pantalla; estas pasadas sueltas lo corrigen igual cuando entra en vista.
+  [0, 250, 800, 2000].forEach(ms => setTimeout(medir, ms));
+  new IntersectionObserver(es => es.forEach(e => e.isIntersecting && medir()))
+    .observe(document.body);
 })();
 
 (function sincronizarTema(){
