@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Recursividad — la clase en movimiento &#8212; Técnicas de Programación 2026 - 02</title>
+    <title>Recursividad — cuaderno de clase &#8212; Técnicas de Programación 2026 - 02</title>
   
   
   
@@ -296,7 +296,7 @@
 
 
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Recursividad — la clase en movimiento</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Recursividad — cuaderno de clase</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="Backtracking.html">Backtracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -531,7 +531,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Recursividad — la clase en movimiento</h1>
+    <h1>Recursividad — cuaderno de clase</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -581,16 +581,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="recursividad-la-clase-en-movimiento">
-<h1>Recursividad — la clase en movimiento<a class="headerlink" href="#recursividad-la-clase-en-movimiento" title="Link to this heading">#</a></h1>
-<p><strong>Curso:</strong> Técnicas de Programación · Unidad 2
-<strong>Tema:</strong> Recursividad y el método C.A.S.O.</p>
-<blockquote>
-<div><p>Una función <strong>recursiva</strong> se llama a sí misma para resolver un problema que contiene una copia
-más pequeña de sí mismo. Este notebook sigue la clase escena por escena: cada concepto trae una
-<strong>animación interactiva</strong> que puedes <strong>pausar, avanzar paso a paso y reiniciar</strong>, y después el
-código que le corresponde.</p>
-</div></blockquote>
+  <section class="tex2jax_ignore mathjax_ignore" id="recursividad-cuaderno-de-clase">
+<h1>Recursividad — cuaderno de clase<a class="headerlink" href="#recursividad-cuaderno-de-clase" title="Link to this heading">#</a></h1>
+<div class="important admonition">
+<p class="admonition-title">Este cuaderno lo completas tú</p>
+<p>Las celdas de código están <strong>en blanco a propósito</strong>, también las de los ejemplos: ve
+escribiéndolas a medida que las desarrollamos en clase y ejecútalas para ver qué sale. Las únicas
+que vienen escritas son los ejercicios 1 y 2, que quedan como modelo de lo que se espera.</p>
+<p>Al final te queda <strong>tu</strong> cuaderno de la clase, con tu código y tus propias salidas.</p>
+</div>
 <div class="tip admonition">
 <p class="admonition-title">Cómo usar las animaciones</p>
 <p>Cada escena trae los botones <strong>Reproducir</strong>, <strong>Paso →</strong>, <strong>Reiniciar</strong> y un control de
@@ -706,29 +705,19 @@ n \times (n-1)! &amp; \text{si } n &gt; 0
 </tbody>
 </table>
 </div>
-<p>Traducida a Python, esa definición se lee casi igual:</p>
+<p>Tradúcela a Python: se lee casi igual.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>              <span class="c1"># caso base: no se abre más</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># caso recursivo: una muñeca más pequeña</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># factorial(n) recursivo: el caso base y el caso recursivo</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-24
-3628800
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruébalo con 0, 4 y 10</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
@@ -764,42 +753,21 @@ pausa todavía tienen una multiplicación pendiente.</p></li>
 <li><p><strong>La pila tiene un tamaño máximo.</strong> Por eso una recursión mal escrita no se cuelga para
 siempre: se rompe. Lo vemos en la escena 6.</p></li>
 </ol>
-<p>Puedes ver la ida y la vuelta tú mismo, imprimiendo con sangría según la profundidad:</p>
+<p>Para ver la ida y la vuelta, escribe una versión que avise en cada entrada y en cada
+salida, con una sangría que crezca con la profundidad:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_hablador</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">profundidad</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="n">sangria</span> <span class="o">=</span> <span class="s2">"│  "</span> <span class="o">*</span> <span class="n">profundidad</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sangria</span><span class="si">}</span><span class="s2">├─ entro a factorial(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sangria</span><span class="si">}</span><span class="s2">│  caso base: devuelvo 1"</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="n">resultado</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial_hablador</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">profundidad</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sangria</span><span class="si">}</span><span class="s2">└─ salgo de factorial(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) devolviendo </span><span class="si">{</span><span class="n">resultado</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">resultado</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># La misma función, pero avisando cuándo entra y cuándo sale de cada llamada.</span>
+<span class="c1"># Lleva un parámetro extra, profundidad, para saber cuánta sangría imprimir.</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">factorial_hablador</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>├─ entro a factorial(4)
-│  ├─ entro a factorial(3)
-│  │  ├─ entro a factorial(2)
-│  │  │  ├─ entro a factorial(1)
-│  │  │  │  ├─ entro a factorial(0)
-│  │  │  │  │  caso base: devuelvo 1
-│  │  │  └─ salgo de factorial(1) devolviendo 1
-│  │  └─ salgo de factorial(2) devolviendo 2
-│  └─ salgo de factorial(3) devolviendo 6
-└─ salgo de factorial(4) devolviendo 24
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Llámala con 4 y lee la salida de arriba abajo</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
@@ -929,13 +897,6 @@ enunciado y de intentar la respuesta por tu cuenta:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
-22
-1
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="ejercicio-2-invertir-roma-resuelto">
@@ -984,13 +945,6 @@ enunciado y de intentar la respuesta por tu cuenta:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">invertir</span><span class="p">(</span><span class="s2">"ROMA"</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">invertir</span><span class="p">(</span><span class="s2">"a"</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">invertir</span><span class="p">(</span><span class="s2">"recursividad"</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AMOR
-a
-dadivisrucer
 </pre></div>
 </div>
 </div>
@@ -1159,17 +1113,11 @@ marcos se apilan hasta romper ese límite.</p>
 <p>El tercero es el más traicionero, porque <em>parece</em> correcto. La lección: <strong>el caso base y la forma
 de achicar tienen que encajar</strong>. Si achicas de 2 en 2 desde un impar, nunca vas a aterrizar justo
 en 0.</p>
-<p>Así puedes consultar el límite de tu intérprete:</p>
+<p>Consulta el límite de tu intérprete:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Marcos permitidos en la pila:"</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Marcos permitidos en la pila: 1000
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Consulta el límite con sys.getrecursionlimit()</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
@@ -1192,68 +1140,37 @@ casilla <strong>Con memoria</strong> en la animación y mira cómo se <strong>po
         title="El árbol de llamadas de Fibonacci, con y sin memoria"
         style="width:100%; height:700px; border:1px solid #dde3ea;
                border-radius:8px; display:block; margin:1.2em 0;"
-        loading="lazy"></iframe><p>La versión directa es la traducción literal de la fórmula:</p>
+        loading="lazy"></iframe><p>Escribe la traducción literal de la fórmula:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>              <span class="c1"># C — fib(0) = 0 y fib(1) = 1</span>
-        <span class="k">return</span> <span class="n">n</span>
-    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># dos llamadas, dos ramas</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 -&gt; 0
-1 -&gt; 1
-2 -&gt; 1
-3 -&gt; 2
-4 -&gt; 3
-5 -&gt; 5
-6 -&gt; 8
-7 -&gt; 13
-8 -&gt; 21
-9 -&gt; 34
-</pre></div>
-</div>
-</div>
-</div>
-<p>Funciona, pero es <strong>desastrosa</strong>. Contemos cuántas veces se llama a sí misma:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llamadas</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">fib_contado</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">llamadas</span>
-    <span class="n">llamadas</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">n</span>
-    <span class="k">return</span> <span class="n">fib_contado</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_contado</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fib(n) tal cual la fórmula: dos llamadas, dos ramas</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
-    <span class="n">llamadas</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">resultado</span> <span class="o">=</span> <span class="n">fib_contado</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"fib(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">resultado</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> se llamó </span><span class="si">{</span><span class="n">llamadas</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2"> veces"</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imprime fib(n) para n de 0 a 9</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fib(5) = 5      se llamó      15 veces
-fib(10) = 55     se llamó     177 veces
-fib(20) = 6765   se llamó   21891 veces
-fib(25) = 75025  se llamó  242785 veces
+</div>
+<p>Funciona, pero es <strong>desastrosa</strong>. Cuenta cuántas veces se llama a sí misma:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># La misma fib, pero sumando 1 a un contador global en cada llamada</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Para n = 5, 10, 20 y 25: pon el contador en 0, calcula, e imprime</span>
+<span class="c1"># cuántas llamadas costó</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
@@ -1265,29 +1182,17 @@ distintas, desde cero, cada vez.</p>
 función ya fue llamada con ese argumento, devuelve el resultado guardado sin volver a entrar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-
-<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">n</span>
-    <span class="k">return</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># La misma fib de antes, sin cambiar la lógica: solo se le pone encima el</span>
+<span class="c1"># decorador @lru_cache(maxsize=None), que hay que importar de functools</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fib_memo</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fib_memo</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">fib_memo</span><span class="p">(</span><span class="mi">300</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75025
-354224848179261915075
-222232244629420445529739893461909967206666939096499764990979600
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruébala con 25, 100 y 300</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
@@ -1335,34 +1240,21 @@ cabeza en el tercero. Pensarlo con el método es simple:</p>
         title="Torres de Hanoi resueltas con el método C.A.S.O."
         style="width:100%; height:700px; border:1px solid #dde3ea;
                border-radius:8px; display:block; margin:1.2em 0;"
-        loading="lazy"></iframe><p>Esas cuatro respuestas, traducidas, son el programa completo:</p>
+        loading="lazy"></iframe><p>Traduce esas cuatro respuestas: son el programa completo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">origen</span><span class="p">,</span> <span class="n">destino</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>                                   <span class="c1"># C</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mueve el disco 1: </span><span class="si">{</span><span class="n">origen</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">destino</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="k">return</span>
-    <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">origen</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">,</span> <span class="n">destino</span><span class="p">)</span>      <span class="c1"># O — los de arriba, a la auxiliar</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mueve el disco </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">origen</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">destino</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>   <span class="c1"># el grande, al destino</span>
-    <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">,</span> <span class="n">destino</span><span class="p">,</span> <span class="n">origen</span><span class="p">)</span>      <span class="c1"># O — y encima otra vez</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hanoi(n, origen, destino, auxiliar): las cuatro respuestas de la tabla,</span>
+<span class="c1"># traducidas. Ojo con el orden de los argumentos en las dos llamadas: los</span>
+<span class="c1"># papeles de las torres rotan.</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hanoi</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mueve el disco 1: A -&gt; C
-mueve el disco 2: A -&gt; B
-mueve el disco 1: C -&gt; B
-mueve el disco 3: A -&gt; C
-mueve el disco 1: B -&gt; A
-mueve el disco 2: B -&gt; C
-mueve el disco 1: A -&gt; C
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resuélvelo con 3 discos, de A a C</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
@@ -1375,35 +1267,20 @@ los 7 movimientos aparecieron solos, en el orden correcto.</p>
 <p>Eso es lo que compras con la recursividad: describes <strong>la estructura</strong> del problema, no la
 secuencia de pasos.</p>
 </div>
-<p>Cuenta cuántos movimientos hacen falta:</p>
+<p>Ahora cuenta cuántos movimientos hacen falta:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">movimientos_hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">movimientos_hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ¿Cuántos movimientos hacen falta? Son los dos subproblemas más el del</span>
+<span class="c1"># disco grande: 2 * (lo de n-1) + 1</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;2</span><span class="si">}</span><span class="s2"> discos -&gt; </span><span class="si">{</span><span class="n">movimientos_hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> movimientos"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1 discos -&gt;     1 movimientos
- 2 discos -&gt;     3 movimientos
- 3 discos -&gt;     7 movimientos
- 4 discos -&gt;    15 movimientos
- 5 discos -&gt;    31 movimientos
- 6 discos -&gt;    63 movimientos
- 7 discos -&gt;   127 movimientos
- 8 discos -&gt;   255 movimientos
- 9 discos -&gt;   511 movimientos
-10 discos -&gt;  1023 movimientos
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imprímelo para 1 a 10 discos</span>
+<span class="c1"># TU CÓDIGO VA ACÁ</span>
 </pre></div>
 </div>
 </div>
