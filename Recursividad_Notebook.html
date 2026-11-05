@@ -555,7 +555,12 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursionerror-cuando-la-pila-se-desborda">6. <code class="docutils literal notranslate"><span class="pre">RecursionError</span></code>: cuando la pila se desborda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-arbol-de-fibonacci">7. El árbol de Fibonacci</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#torres-de-hanoi">8. Torres de Hanoi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#torres-de-hanoi">8. Torres de Hanoi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-a-s-o-para-mover-3-discos-de-a-a-c">C.A.S.O. para mover 3 discos de A a C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-codigo">El código</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-a-b-y-c-se-intercambian-los-papeles">Por qué A, B y C se intercambian los papeles</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-retos-tu-taller">9. Los retos: tu taller</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-1-contar-digitos-n-nivel-1">Reto 1 — <code class="docutils literal notranslate"><span class="pre">contar_digitos(n)</span></code> · Nivel 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-2-suma-lista-lista-nivel-1">Reto 2 — <code class="docutils literal notranslate"><span class="pre">suma_lista(lista)</span></code> · Nivel 1</a></li>
@@ -1210,10 +1215,14 @@ problema sin tocar ni una letra de la lógica.</p>
 </section>
 <section id="torres-de-hanoi">
 <span id="esc-hanoi"></span><h2>8. Torres de Hanoi<a class="headerlink" href="#torres-de-hanoi" title="Link to this heading">#</a></h2>
-<p>Mueve todos los discos de <strong>A</strong> a <strong>C</strong>. Solo un disco a la vez, y <strong>nunca</strong> uno grande sobre uno
-pequeño.</p>
+<p>Tres torres: <strong>A</strong>, <strong>B</strong> y <strong>C</strong>. Los tres discos empiezan en <strong>A</strong> y tienen que terminar en
+<strong>C</strong>. Solo se mueve un disco a la vez, y <strong>nunca</strong> uno grande encima de uno pequeño.</p>
 <p>Pensarlo movimiento a movimiento es agotador — con 5 discos son 31 movimientos y se te enreda la
-cabeza en el tercero. Pensarlo con el método es simple:</p>
+cabeza en el tercero. Pensarlo con el método es simple.</p>
+<section id="c-a-s-o-para-mover-3-discos-de-a-a-c">
+<h3>C.A.S.O. para mover 3 discos de A a C<a class="headerlink" href="#c-a-s-o-para-mover-3-discos-de-a-a-c" title="Link to this heading">#</a></h3>
+<p>Mira <strong>solo el disco de abajo</strong>, el más grande. Para que pueda pasar de <strong>A</strong> a <strong>C</strong>, los otros
+dos tienen que estar fuera del camino, y el único sitio donde no estorban es <strong>B</strong>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Letra</p></th>
@@ -1222,16 +1231,16 @@ cabeza en el tercero. Pensarlo con el método es simple:</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>C</strong></p></td>
-<td><p>Con <strong>1 disco</strong>: muévelo directo al destino.</p></td>
+<td><p>Con <strong>1 disco</strong> no hay nada que pensar: de A a C, directo.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>A</strong></p></td>
-<td><p>El problema pequeño: mover <strong>n − 1 discos</strong>.</p></td>
+<td><p>El problema pequeño: mover <strong>2 discos</strong> en vez de 3.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>S</strong></p></td>
-<td><p>Supón que <strong>ya sabes</strong> mover n − 1 discos de cualquier torre a cualquier otra.</p></td>
+<td><p>Supongo que <strong>ya sé</strong> mover 2 discos de cualquier torre a cualquier otra.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>O</strong></p></td>
-<td><p>n − 1 a la auxiliar, el grande al destino, n − 1 encima.</p></td>
+<td><p>Los 2 de arriba a <strong>B</strong>, el grande de <strong>A</strong> a <strong>C</strong>, y los 2 de <strong>B</strong> a <strong>C</strong>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1240,30 +1249,96 @@ cabeza en el tercero. Pensarlo con el método es simple:</p>
         title="Torres de Hanoi resueltas con el método C.A.S.O."
         style="width:100%; height:700px; border:1px solid #dde3ea;
                border-radius:8px; display:block; margin:1.2em 0;"
-        loading="lazy"></iframe><p>Traduce esas cuatro respuestas: son el programa completo.</p>
+        loading="lazy"></iframe></section>
+<section id="el-codigo">
+<h3>El código<a class="headerlink" href="#el-codigo" title="Link to this heading">#</a></h3>
+<p>Esas cuatro respuestas, traducidas, son el programa completo:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hanoi(n, origen, destino, auxiliar): las cuatro respuestas de la tabla,</span>
-<span class="c1"># traducidas. Ojo con el orden de los argumentos en las dos llamadas: los</span>
-<span class="c1"># papeles de las torres rotan.</span>
-<span class="c1"># TU CÓDIGO VA ACÁ</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">origen</span><span class="p">,</span> <span class="n">destino</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>                                           <span class="c1"># C</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mueve el disco 1: </span><span class="si">{</span><span class="n">origen</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">destino</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">origen</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">,</span> <span class="n">destino</span><span class="p">)</span>              <span class="c1"># paso 1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mueve el disco </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">origen</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">destino</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># paso 2</span>
+    <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">,</span> <span class="n">destino</span><span class="p">,</span> <span class="n">origen</span><span class="p">)</span>              <span class="c1"># paso 3</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resuélvelo con 3 discos, de A a C</span>
-<span class="c1"># TU CÓDIGO VA ACÁ</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hanoi</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">origen</span><span class="o">=</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">destino</span><span class="o">=</span><span class="s2">"C"</span><span class="p">,</span> <span class="n">auxiliar</span><span class="o">=</span><span class="s2">"B"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
+</section>
+<section id="por-que-a-b-y-c-se-intercambian-los-papeles">
+<h3>Por qué A, B y C se intercambian los papeles<a class="headerlink" href="#por-que-a-b-y-c-se-intercambian-los-papeles" title="Link to this heading">#</a></h3>
+<p>Esta es la parte que confunde a todo el mundo, y vale la pena detenerse. <code class="docutils literal notranslate"><span class="pre">origen</span></code>, <code class="docutils literal notranslate"><span class="pre">destino</span></code> y
+<code class="docutils literal notranslate"><span class="pre">auxiliar</span></code> <strong>no son nombres de torres</strong>: son <strong>papeles</strong>. En la llamada de más afuera los papeles
+se reparten así:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hanoi</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">origen</span><span class="o">=</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">destino</span><span class="o">=</span><span class="s2">"C"</span><span class="p">,</span> <span class="n">auxiliar</span><span class="o">=</span><span class="s2">"B"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pero dentro, cada paso <strong>vuelve a repartirlos</strong>. Sustituyendo <code class="docutils literal notranslate"><span class="pre">origen=&quot;A&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">destino=&quot;C&quot;</span></code> y
+<code class="docutils literal notranslate"><span class="pre">auxiliar=&quot;B&quot;</span></code> en las dos líneas recursivas:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>La línea tal como está escrita</p></th>
+<th class="head"><p>Con A, B y C puestos</p></th>
+<th class="head"><p>Qué hace</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Paso 1</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hanoi(n-1,</span> <span class="pre">origen,</span> <span class="pre">auxiliar,</span> <span class="pre">destino)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hanoi(2,</span> <span class="pre">origen=&quot;A&quot;,</span> <span class="pre">destino=&quot;B&quot;,</span> <span class="pre">auxiliar=&quot;C&quot;)</span></code></p></td>
+<td><p>lleva 2 discos de <strong>A</strong> a <strong>B</strong>, apoyándose en <strong>C</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Paso 2</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">print(...</span> <span class="pre">{origen}</span> <span class="pre">-&gt;</span> <span class="pre">{destino})</span></code></p></td>
+<td><p>mueve el disco 3 de <strong>A</strong> a <strong>C</strong></p></td>
+<td><p>el grande, que ya quedó solo</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Paso 3</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hanoi(n-1,</span> <span class="pre">auxiliar,</span> <span class="pre">destino,</span> <span class="pre">origen)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hanoi(2,</span> <span class="pre">origen=&quot;B&quot;,</span> <span class="pre">destino=&quot;C&quot;,</span> <span class="pre">auxiliar=&quot;A&quot;)</span></code></p></td>
+<td><p>trae los 2 de <strong>B</strong> a <strong>C</strong>, apoyándose en <strong>A</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Fíjate en la columna del medio y compárala con la llamada de arriba:</p>
+<ul class="simple">
+<li><p>En el <strong>paso 1</strong>, <strong>C</strong> todavía está vacía — todavía no es hora de usarla como destino — así
+que hace de <strong>apoyo</strong>, y la que recibe los discos es <strong>B</strong>.</p></li>
+<li><p>En el <strong>paso 2</strong> el grande pasa de <strong>A</strong> a <strong>C</strong> sin problema, porque el paso 1 dejó las dos
+torres despejadas: en <strong>A</strong> solo queda él, y <strong>C</strong> está vacía. Esa garantía no la programó
+nadie; sale de que el paso 1 hizo su trabajo.</p></li>
+<li><p>En el <strong>paso 3</strong>, <strong>A</strong> ya quedó vacía, así que ahora <strong>ella</strong> es la de apoyo, y los discos
+viajan de <strong>B</strong> a <strong>C</strong>.</p></li>
+</ul>
+<p>La regla, en una frase: <strong>la torre de apoyo es siempre la que no es ni de donde salgo ni a donde
+voy</strong> — y por eso cambia entre un paso y el otro.</p>
+<div class="warning admonition">
+<p class="admonition-title">El error típico</p>
+<p>Escribir las dos llamadas con los argumentos en el mismo orden, así:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">origen</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">,</span> <span class="n">destino</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">origen</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">,</span> <span class="n">destino</span><span class="p">)</span>   <span class="c1"># ← mal: repite el paso 1</span>
+</pre></div>
+</div>
+<p>Si te pasa, la pregunta que lo desatasca es: <strong>en este paso, ¿de dónde salgo, a dónde voy, y cuál
+me queda libre?</strong> Las tres respuestas, en ese orden, son los tres argumentos.</p>
 </div>
 <div class="important admonition">
 <p class="admonition-title">Este es el momento del “ahá”</p>
-<p>Cuatro líneas resuelven un problema que a mano es un dolor de cabeza. Y fíjate en algo: <strong>nadie
-escribió el orden de los movimientos</strong>. Nosotros solo dijimos <em>qué</em> significa mover n discos, y
-los 7 movimientos aparecieron solos, en el orden correcto.</p>
+<p>Seis líneas resuelven un problema que a mano es un dolor de cabeza. Y fíjate en algo: <strong>en
+ninguna parte está escrito el orden de los movimientos</strong>. Solo dijimos <em>qué</em> significa mover n
+discos, y los 7 movimientos salieron solos, en el orden correcto.</p>
 <p>Eso es lo que compras con la recursividad: describes <strong>la estructura</strong> del problema, no la
 secuencia de pasos.</p>
 </div>
@@ -1288,6 +1363,7 @@ secuencia de pasos.</p>
 <p>Son <span class="math notranslate nohighlight">\(2^n - 1\)</span>: el mínimo posible. Con 64 discos —la leyenda original— serían más de 18 trillones
 de movimientos.</p>
 <hr class="docutils" />
+</section>
 </section>
 <section id="los-retos-tu-taller">
 <span id="esc-retos"></span><h2>9. Los retos: tu taller<a class="headerlink" href="#los-retos-tu-taller" title="Link to this heading">#</a></h2>
@@ -1795,7 +1871,12 @@ llamadas con la cabeza.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursionerror-cuando-la-pila-se-desborda">6. <code class="docutils literal notranslate"><span class="pre">RecursionError</span></code>: cuando la pila se desborda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-arbol-de-fibonacci">7. El árbol de Fibonacci</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#torres-de-hanoi">8. Torres de Hanoi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#torres-de-hanoi">8. Torres de Hanoi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-a-s-o-para-mover-3-discos-de-a-a-c">C.A.S.O. para mover 3 discos de A a C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-codigo">El código</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-a-b-y-c-se-intercambian-los-papeles">Por qué A, B y C se intercambian los papeles</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-retos-tu-taller">9. Los retos: tu taller</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-1-contar-digitos-n-nivel-1">Reto 1 — <code class="docutils literal notranslate"><span class="pre">contar_digitos(n)</span></code> · Nivel 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-2-suma-lista-lista-nivel-1">Reto 2 — <code class="docutils literal notranslate"><span class="pre">suma_lista(lista)</span></code> · Nivel 1</a></li>
