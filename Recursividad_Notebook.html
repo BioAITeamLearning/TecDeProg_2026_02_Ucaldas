@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Recursividad en Python — Pila, Cola y Cruzada &#8212; Técnicas de Programación 2026 - 02</title>
+    <title>Recursividad — la clase en movimiento &#8212; Técnicas de Programación 2026 - 02</title>
   
   
   
@@ -61,6 +61,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Recursividad_Notebook';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -294,7 +296,7 @@
 
 
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="Recursividad.html">Recursividad</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Recursividad en Python — Pila, Cola y Cruzada</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Recursividad — la clase en movimiento</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="Backtracking.html">Backtracking</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -529,7 +531,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Recursividad en Python — Pila, Cola y Cruzada</h1>
+    <h1>Recursividad — la clase en movimiento</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -539,39 +541,35 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-recursividad">1) ¿Qué es la recursividad?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursividad-vs-iteracion">2) Recursividad vs Iteración</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-una-funcion-recursiva-plantilla">3) Estructura de una función recursiva (plantilla)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-tres-tipos-de-recursion-pila-cola-y-cruzada">4) Los tres tipos de recursión: pila, cola y cruzada</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-basicos-recursion-de-pila-patron-indice">5) Ejemplos básicos (recursión de pila, patrón Índice)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patron-indice-suma-lista">Patrón ÍNDICE: <code class="docutils literal notranslate"><span class="pre">suma_lista</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-desempeno-en-fibonacci">Comparación de desempeño en Fibonacci</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-fila-en-que-posicion-estoy">1. La fila: ¿en qué posición estoy?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-problema-que-contiene-una-copia-de-si-mismo">2. Un problema que contiene una copia de sí mismo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-pila-de-llamadas-como-lo-ejecuta-python">3. La pila de llamadas: cómo lo ejecuta Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-metodo-c-a-s-o">4. El método C.A.S.O.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taller-aplicar-c-a-s-o-paso-a-paso">5. Taller: aplicar C.A.S.O. paso a paso</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-1-suma-digitos-4729-resuelto">Ejercicio 1 — <code class="docutils literal notranslate"><span class="pre">suma_digitos(4729)</span></code> ✅ resuelto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-2-invertir-roma-resuelto">Ejercicio 2 — <code class="docutils literal notranslate"><span class="pre">invertir("ROMA")</span></code> ✅ resuelto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-3-potencia-2-4-te-toca">Ejercicio 3 — <code class="docutils literal notranslate"><span class="pre">potencia(2,</span> <span class="pre">4)</span></code> ✏️ te toca</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-4-es-palindromo-radar-te-toca">Ejercicio 4 — <code class="docutils literal notranslate"><span class="pre">es_palindromo("RADAR")</span></code> ✏️ te toca</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-de-cola-en-profundidad-transformar-pila-cola">6) Recursión de cola en profundidad: transformar pila → cola</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-en-5-pasos-de-pila-a-cola">Transformación en 5 pasos (de pila a cola)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-cola-a-iterativo-el-paso-final">De cola a iterativo (el paso final)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursionerror-cuando-la-pila-se-desborda">6. <code class="docutils literal notranslate"><span class="pre">RecursionError</span></code>: cuando la pila se desborda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-arbol-de-fibonacci">7. El árbol de Fibonacci</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#torres-de-hanoi">8. Torres de Hanoi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-retos-tu-taller">9. Los retos: tu taller</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-1-contar-digitos-n-nivel-1">Reto 1 — <code class="docutils literal notranslate"><span class="pre">contar_digitos(n)</span></code> · Nivel 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-2-suma-lista-lista-nivel-1">Reto 2 — <code class="docutils literal notranslate"><span class="pre">suma_lista(lista)</span></code> · Nivel 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-3-contar-lista-x-nivel-2">Reto 3 — <code class="docutils literal notranslate"><span class="pre">contar(lista,</span> <span class="pre">x)</span></code> · Nivel 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-4-maximo-lista-nivel-2">Reto 4 — <code class="docutils literal notranslate"><span class="pre">maximo(lista)</span></code> · Nivel 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-5-mcd-a-b-nivel-2">Reto 5 — <code class="docutils literal notranslate"><span class="pre">mcd(a,</span> <span class="pre">b)</span></code> · Nivel 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-6-binario-n-nivel-3">Reto 6 — <code class="docutils literal notranslate"><span class="pre">binario(n)</span></code> · Nivel 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-7-aplanar-lista-reto">Reto 7 — <code class="docutils literal notranslate"><span class="pre">aplanar(lista)</span></code> · Reto</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-de-recursion-en-python">7) Límites de recursión en Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-cruzada-auto-invocacion-indirecta">8) Recursión cruzada (auto-invocación indirecta)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-y-venceras-potencia-rapida-exponentiacion-binaria">9) Divide y vencerás: potencia rápida (exponentiación binaria)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patron-divide-y-venceras">Patrón DIVIDE Y VENCERÁS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#antes-de-entregar-las-cuatro-trampas">10. Antes de entregar: las cuatro trampas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoevaluacion">Autoevaluación</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recorridos-de-arboles-binarios-pre-in-post-orden">10) Recorridos de árboles binarios (pre/in/post-orden)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programacion-dinamica-top-down-memoizacion-vs-bottom-up">11) Programación dinámica: Top-Down (memoización) vs Bottom-Up</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-visualiza-el-arbol-de-llamadas-con-un-decorador">12) Bonus: visualiza el árbol de llamadas con un decorador</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos-con-plantillas">13) Ejercicios propuestos (con plantillas)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-invertir-una-lista-recursivamente">A) Invertir una lista recursivamente</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-profundidad-maxima-de-un-arbol-binario">B) Profundidad máxima de un árbol binario</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-convierte-suma-lista-pila-a-una-version-de-cola-con-acumulador">C) Convierte <code class="docutils literal notranslate"><span class="pre">suma_lista_pila</span></code> a una versión de cola con acumulador</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-recursion-cruzada-es-multiplo-de-3-resto-de-3">D) Recursión cruzada: <code class="docutils literal notranslate"><span class="pre">es_multiplo_de_3</span></code> / <code class="docutils literal notranslate"><span class="pre">resto_de_3</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-divide-y-venceras-potencia-dyc-con-exponente-negativo">E) Divide y vencerás: <code class="docutils literal notranslate"><span class="pre">potencia_dyc</span></code> con exponente negativo</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-consejos-errores-frecuentes-y-material-de-apoyo">14) Apéndice: consejos, errores frecuentes y material de apoyo</a></li>
 </ul>
             </nav>
         </div>
@@ -583,125 +581,200 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="recursividad-en-python-pila-cola-y-cruzada">
-<h1>Recursividad en Python — Pila, Cola y Cruzada<a class="headerlink" href="#recursividad-en-python-pila-cola-y-cruzada" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="recursividad-la-clase-en-movimiento">
+<h1>Recursividad — la clase en movimiento<a class="headerlink" href="#recursividad-la-clase-en-movimiento" title="Link to this heading">#</a></h1>
 <p><strong>Curso:</strong> Técnicas de Programación · Unidad 2
-<strong>Tema:</strong> Recursividad</p>
+<strong>Tema:</strong> Recursividad y el método C.A.S.O.</p>
 <blockquote>
-<div><p>Este notebook explica <strong>qué es la recursividad</strong>, la compara con la <strong>iteración</strong>, y desarrolla en profundidad sus <strong>tres formas</strong>:
-<strong>recursión de pila</strong>, <strong>recursión de cola</strong> y <strong>recursión cruzada</strong>. También cubre los <strong>patrones de diseño</strong> más comunes
-(Índice y Divide y Vencerás), los <strong>límites de recursión</strong> en Python, y ejemplos clásicos (memoización, recorridos de
-árboles), más <strong>ejercicios guiados</strong>. Búsqueda y backtracking se ven a fondo en la próxima sección de la unidad.</p>
-<p>📎 <strong>Material de apoyo (teoría y plantillas):</strong> revisa primero la página <a class="reference internal" href="Recursividad.html"><span class="std std-doc">Recursividad</span></a> de esta unidad — tiene las
-diapositivas y el handout con más ejemplos y plantillas en blanco para practicar.</p>
+<div><p>Una función <strong>recursiva</strong> se llama a sí misma para resolver un problema que contiene una copia
+más pequeña de sí mismo. Este notebook sigue la clase escena por escena: cada concepto trae una
+<strong>animación interactiva</strong> que puedes <strong>pausar, avanzar paso a paso y reiniciar</strong>, y después el
+código que le corresponde.</p>
 </div></blockquote>
-<section id="contenidos">
-<h2>Contenidos<a class="headerlink" href="#contenidos" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><a class="reference internal" href="#que-es"><span class="xref myst">¿Qué es la recursividad?</span></a></p></li>
-<li><p><a class="reference internal" href="#rec-vs-it"><span class="xref myst">Recursividad vs Iteración</span></a></p></li>
-<li><p><a class="reference internal" href="#estructura"><span class="xref myst">Estructura de una función recursiva</span></a></p></li>
-<li><p><a class="reference internal" href="#tres-tipos"><span class="xref myst">Los tres tipos de recursión: pila, cola y cruzada</span></a></p></li>
-<li><p><a class="reference internal" href="#basicos"><span class="xref myst">Ejemplos básicos (patrón Índice)</span></a></p>
-<ul class="simple">
-<li><p>Factorial (iterativo vs recursivo de pila)</p></li>
-<li><p>Suma de lista (patrón Índice)</p></li>
-<li><p>Fibonacci (naive, con memoización y versión iterativa)</p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#cola-profundidad"><span class="xref myst">Recursión de cola en profundidad: transformar pila → cola</span></a></p></li>
-<li><p><a class="reference internal" href="#limites"><span class="xref myst">Límites de recursión en Python</span></a></p></li>
-<li><p><a class="reference internal" href="#cruzada"><span class="xref myst">Recursión cruzada: <code class="docutils literal notranslate"><span class="pre">es_par</span></code> / <code class="docutils literal notranslate"><span class="pre">es_impar</span></code></span></a></p></li>
-<li><p><a class="reference internal" href="#byc"><span class="xref myst">Divide y vencerás: potencia rápida (exponentiación binaria)</span></a></p></li>
-<li><p><a class="reference internal" href="#arboles"><span class="xref myst">Recorridos de árboles binarios</span></a></p></li>
-<li><p><a class="reference internal" href="#dp"><span class="xref myst">Programación dinámica (Top-Down vs Bottom-Up)</span></a></p></li>
-<li><p><a class="reference internal" href="#trace"><span class="xref myst">Bonus: visualiza el árbol de llamadas con un decorador</span></a></p></li>
-<li><p><a class="reference internal" href="#ejercicios"><span class="xref myst">Ejercicios propuestos con plantillas</span></a></p></li>
-<li><p><a class="reference internal" href="#apendice"><span class="xref myst">Apéndice: consejos, errores frecuentes y material de apoyo</span></a></p></li>
-</ol>
-<p><a id="que-es"></a></p>
-</section>
-<section id="que-es-la-recursividad">
-<h2>1) ¿Qué es la recursividad?<a class="headerlink" href="#que-es-la-recursividad" title="Link to this heading">#</a></h2>
-<p>La <strong>recursividad</strong> es una técnica en la que una <strong>función se llama a sí misma</strong> para resolver un problema descomponiéndolo en
-subproblemas más pequeños pero de la <strong>misma forma</strong>. En esencia, el diseño incluye siempre:</p>
-<ul class="simple">
-<li><p><strong>Caso base (condición de parada):</strong> la forma más simple del problema que <strong>no</strong> hace llamadas recursivas.</p></li>
-<li><p><strong>Caso recursivo (reducción):</strong> una llamada a la misma función (o a otra función, en la recursión cruzada) con el problema
-<strong>más pequeño</strong>, que <strong>progresa</strong> hacia el caso base.</p></li>
-</ul>
-<blockquote>
-<div><p>Piénsalo como muñecas rusas: vas abriendo versiones cada vez más pequeñas hasta llegar a la más simple.</p>
-</div></blockquote>
-<p><a id="rec-vs-it"></a></p>
-</section>
-<section id="recursividad-vs-iteracion">
-<h2>2) Recursividad vs Iteración<a class="headerlink" href="#recursividad-vs-iteracion" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Iteración</strong>: usa bucles (<code class="docutils literal notranslate"><span class="pre">for</span></code>, <code class="docutils literal notranslate"><span class="pre">while</span></code>) y variables de control explícitas.</p></li>
-<li><p><strong>Recursividad</strong>: delega el “bucle” al <strong>call stack</strong> del intérprete, expresando el algoritmo de forma muy cercana a su
-definición matemática o estructural (p. ej., árboles).</p></li>
-</ul>
-<p><strong>Regla práctica</strong>: casi todo lo recursivo puede escribirse de forma iterativa; elegir uno u otro depende de <strong>claridad</strong>, <strong>legibilidad</strong>
-y <strong>eficiencia</strong>.</p>
-<p><a id="estructura"></a></p>
-</section>
-<section id="estructura-de-una-funcion-recursiva-plantilla">
-<h2>3) Estructura de una función recursiva (plantilla)<a class="headerlink" href="#estructura-de-una-funcion-recursiva-plantilla" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Validación de entrada</strong> (opcional pero recomendable).</p></li>
-<li><p><strong>Caso base</strong>: retorna sin llamar de nuevo a la función.</p></li>
-<li><p><strong>Caso recursivo</strong>: llama a la función (o a otra, si es cruzada) con una versión más simple del problema y <strong>combina</strong> los resultados.</p></li>
-</ol>
-<blockquote>
-<div><p>Es <strong>crítico</strong> garantizar la <strong>terminación</strong>: cada llamada debe acercarse al caso base.</p>
-</div></blockquote>
-<p><a id="tres-tipos"></a></p>
-</section>
-<section id="los-tres-tipos-de-recursion-pila-cola-y-cruzada">
-<h2>4) Los tres tipos de recursión: pila, cola y cruzada<a class="headerlink" href="#los-tres-tipos-de-recursion-pila-cola-y-cruzada" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Cómo usar las animaciones</p>
+<p>Cada escena trae los botones <strong>Reproducir</strong>, <strong>Paso →</strong>, <strong>Reiniciar</strong> y un control de
+<strong>Velocidad</strong>. Úsalas con <em>Paso →</em>: antes de presionarlo, <strong>predice</strong> qué va a ocurrir, y solo
+después míralo. Si solo las reproduces de corrido, verás una película bonita y no aprenderás nada.</p>
+</div>
+<section id="contenido">
+<h2>Contenido<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Tipo</p></th>
-<th class="head"><p>Idea central</p></th>
-<th class="head"><p>¿Qué queda pendiente al volver?</p></th>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Escena</p></th>
+<th class="head"><p>Qué vas a entender</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong>De pila</strong></p></td>
-<td><p>Cada llamada espera el resultado de la siguiente para poder terminar su propia operación</p></td>
-<td><p>Una operación pendiente (multiplicar, sumar, concatenar…) — se van <strong>apilando</strong> marcos</p></td>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><a class="reference internal" href="#esc-fila">La fila</a></p></td>
+<td><p>De dónde sale la idea de preguntarle a alguien más</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>De cola</strong></p></td>
-<td><p>La llamada recursiva es <strong>lo último</strong> que hace la función, y su resultado <strong>es</strong> el resultado final</p></td>
-<td><p>Nada: el acumulador ya trae la respuesta lista</p></td>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><a class="reference internal" href="#esc-idea">Muñecas rusas</a></p></td>
+<td><p>Las dos piezas que toda recursión necesita</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Cruzada</strong></p></td>
-<td><p>Dos (o más) funciones distintas se llaman <strong>entre sí</strong> (auto-invocación indirecta) hasta llegar a un caso base</p></td>
-<td><p>Depende de cada función, pero el patrón es el mismo: caso base + progreso</p></td>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><a class="reference internal" href="#esc-pila">La pila de llamadas</a></p></td>
+<td><p>Qué hace Python por dentro</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><a class="reference internal" href="#esc-caso">El método C.A.S.O.</a></p></td>
+<td><p>Cuatro preguntas para escribir cualquier recursión</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><a class="reference internal" href="#esc-taller">Taller guiado</a></p></td>
+<td><p>Cuatro ejercicios con el método</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p><a class="reference internal" href="#esc-errores">Cuando se rompe</a></p></td>
+<td><p>Los tres errores típicos</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p><a class="reference internal" href="#esc-fibonacci">El árbol de Fibonacci</a></p></td>
+<td><p>Cuando una llamada se divide en dos</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p><a class="reference internal" href="#esc-hanoi">Torres de Hanoi</a></p></td>
+<td><p>Un problema imposible en cuatro líneas</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p><a class="reference internal" href="#esc-retos">Los retos</a></p></td>
+<td><p>Tu taller para entregar</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>En las siguientes secciones vemos cada una con código y traza. Empezamos con recursión <strong>de pila</strong>, la más común y la que ya
-conoces de la sección de Fuerza Bruta de esta unidad.</p>
-<p><a id="basicos"></a></p>
+<hr class="docutils" />
 </section>
-<section id="ejemplos-basicos-recursion-de-pila-patron-indice">
-<h2>5) Ejemplos básicos (recursión de pila, patrón Índice)<a class="headerlink" href="#ejemplos-basicos-recursion-de-pila-patron-indice" title="Link to this heading">#</a></h2>
-<p>Empezamos con <strong>factorial</strong>, el ejemplo clásico de recursión <strong>de pila</strong>: cada llamada debe esperar el resultado de <code class="docutils literal notranslate"><span class="pre">n-1</span></code> antes
-de poder multiplicar y retornar.</p>
+<section id="la-fila-en-que-posicion-estoy">
+<span id="esc-fila"></span><h2>1. La fila: ¿en qué posición estoy?<a class="headerlink" href="#la-fila-en-que-posicion-estoy" title="Link to this heading">#</a></h2>
+<p>Estás al final de una fila larga y <strong>no ves el frente</strong>. No puedes contar a todos. Solo puedes
+preguntarle a <strong>la persona de adelante</strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">Pregunta antes de mirar la animación</p>
+<p>Si cada persona solo puede hablar con la de adelante, <strong>¿quién es la primera en saber su
+respuesta?</strong> ¿Y en qué orden se enteran los demás?</p>
+</div>
+<iframe src="_static/unidad2/recursividad/anim_fila.html"
+        title="La fila: cada persona pregunta a la de adelante"
+        style="width:100%; height:700px; border:1px solid #dde3ea;
+               border-radius:8px; display:block; margin:1.2em 0;"
+        scrolling="no" loading="lazy"></iframe><p>Fíjate en lo que acabas de ver, porque es <strong>toda</strong> la recursividad:</p>
+<ul class="simple">
+<li><p><strong>Caso base</strong> — la primera persona responde <strong>sin preguntar</strong>. Ahí se detiene la cadena.</p></li>
+<li><p><strong>Caso recursivo</strong> — los demás hacen <strong>la misma pregunta</strong> a alguien más cerca del frente, y le
+<strong>suman 1</strong> a lo que escuchan.</p></li>
+</ul>
+<p>Nadie contó la fila entera. Cada quien resolvió un pedacito y confió en el de adelante.</p>
+<hr class="docutils" />
+</section>
+<section id="un-problema-que-contiene-una-copia-de-si-mismo">
+<span id="esc-idea"></span><h2>2. Un problema que contiene una copia de sí mismo<a class="headerlink" href="#un-problema-que-contiene-una-copia-de-si-mismo" title="Link to this heading">#</a></h2>
+<p>Como una muñeca rusa: dentro de <span class="math notranslate nohighlight">\(4!\)</span> está <span class="math notranslate nohighlight">\(3!\)</span>, dentro de <span class="math notranslate nohighlight">\(3!\)</span> está <span class="math notranslate nohighlight">\(2!\)</span>… hasta llegar a <span class="math notranslate nohighlight">\(0!\)</span>,
+que ya <strong>no se abre</strong>: vale 1. Ese es el caso base.</p>
+<iframe src="_static/unidad2/recursividad/anim_munecas.html"
+        title="Muñecas rusas: cada factorial contiene al siguiente"
+        style="width:100%; height:700px; border:1px solid #dde3ea;
+               border-radius:8px; display:block; margin:1.2em 0;"
+        scrolling="no" loading="lazy"></iframe><p>La definición matemática <strong>ya es recursiva</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+n! = \begin{cases}
+1 &amp; \text{si } n = 0 \\
+n \times (n-1)! &amp; \text{si } n &gt; 0
+\end{cases}
+\end{split}\]</div>
+<p>Toda función recursiva correcta tiene <strong>exactamente estas dos piezas</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pieza</p></th>
+<th class="head"><p>Qué es</p></th>
+<th class="head"><p>Qué pasa si falta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Caso base</strong></p></td>
+<td><p>Un problema tan pequeño que la respuesta se escribe directamente</p></td>
+<td><p>La función nunca termina</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Caso recursivo</strong></p></td>
+<td><p>Se llama a sí misma con un problema <strong>estrictamente más pequeño</strong>, que se acerca al caso base</p></td>
+<td><p>La función nunca termina</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Traducida a Python, esa definición se lee casi igual:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_iterativo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calcula n! de forma iterativa."""</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"n debe ser entero"</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"El factorial no está definido para n negativos"</span><span class="p">)</span>
-    <span class="n">resultado</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">resultado</span> <span class="o">*=</span> <span class="n">i</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>              <span class="c1"># caso base: no se abre más</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># caso recursivo: una muñeca más pequeña</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+24
+3628800
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Fíjate en lo que NO hicimos</p>
+<p>No escribimos ningún <code class="docutils literal notranslate"><span class="pre">for</span></code> ni ningún <code class="docutils literal notranslate"><span class="pre">while</span></code>. No llevamos un acumulador. Solo dijimos <strong>qué es</strong>
+un factorial, y Python se encargó del resto.</p>
+</div>
+<hr class="docutils" />
+</section>
+<section id="la-pila-de-llamadas-como-lo-ejecuta-python">
+<span id="esc-pila"></span><h2>3. La pila de llamadas: cómo lo ejecuta Python<a class="headerlink" href="#la-pila-de-llamadas-como-lo-ejecuta-python" title="Link to this heading">#</a></h2>
+<p>Ya conoces las pilas de la Unidad 1. Resulta que Python usa una <strong>todo el tiempo</strong>, sin que se la
+pidas: cada vez que una función se llama, Python crea un <strong>marco</strong> con sus propias variables y lo
+pone <strong>encima</strong> de la pila. Un marco solo puede terminar cuando el de arriba le devuelve su
+resultado.</p>
+<div class="note admonition">
+<p class="admonition-title">Predice, observa, explica</p>
+<p>Antes de cada <strong>Paso →</strong>, di en voz alta <strong>qué línea se ejecuta</strong> y <strong>qué aparece en la pila</strong>.
+Después de verlo, explica por qué.</p>
+</div>
+<iframe src="_static/unidad2/recursividad/anim_pila.html"
+        title="La pila de llamadas de factorial paso a paso"
+        style="width:100%; height:700px; border:1px solid #dde3ea;
+               border-radius:8px; display:block; margin:1.2em 0;"
+        scrolling="no" loading="lazy"></iframe><p>Tres cosas que esa animación deja claras y que casi todo el mundo entiende al revés:</p>
+<ol class="arabic simple">
+<li><p><strong>No hay una sola <code class="docutils literal notranslate"><span class="pre">n</span></code> que va cambiando.</strong> Cada marco tiene <strong>su propia <code class="docutils literal notranslate"><span class="pre">n</span></code></strong>. El marco de
+<code class="docutils literal notranslate"><span class="pre">factorial(2)</span></code> no puede ver ni tocar la <code class="docutils literal notranslate"><span class="pre">n</span></code> del marco de <code class="docutils literal notranslate"><span class="pre">factorial(4)</span></code>.</p></li>
+<li><p><strong>Llegar al caso base no es terminar.</strong> Ahí <strong>empieza la vuelta</strong>: los marcos que estaban en
+pausa todavía tienen una multiplicación pendiente.</p></li>
+<li><p><strong>La pila tiene un tamaño máximo.</strong> Por eso una recursión mal escrita no se cuelga para
+siempre: se rompe. Lo vemos en la escena 6.</p></li>
+</ol>
+<p>Puedes ver la ida y la vuelta tú mismo, imprimiendo con sangría según la profundidad:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_hablador</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">profundidad</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">sangria</span> <span class="o">=</span> <span class="s2">"│  "</span> <span class="o">*</span> <span class="n">profundidad</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sangria</span><span class="si">}</span><span class="s2">├─ entro a factorial(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sangria</span><span class="si">}</span><span class="s2">│  caso base: devuelvo 1"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial_hablador</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">profundidad</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sangria</span><span class="si">}</span><span class="s2">└─ salgo de factorial(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) devolviendo </span><span class="si">{</span><span class="n">resultado</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">resultado</span>
 </pre></div>
 </div>
@@ -709,314 +782,423 @@ de poder multiplicar y retornar.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_pila</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calcula n! de forma recursiva de PILA: la multiplicación por n queda pendiente</span>
-<span class="sd">    hasta que regresa la llamada de n-1."""</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"n debe ser entero"</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"El factorial no está definido para n negativos"</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>   <span class="c1"># Caso base</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># &lt;- multiplicar por n queda PENDIENTE hasta que vuelva la llamada</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas rápidas</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">factorial_iterativo</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: factorial iterativo y recursivo (de pila) producen el mismo resultado para k=0..5"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="patron-indice-suma-lista">
-<h3>Patrón ÍNDICE: <code class="docutils literal notranslate"><span class="pre">suma_lista</span></code><a class="headerlink" href="#patron-indice-suma-lista" title="Link to this heading">#</a></h3>
-<p>Este patrón recorre una estructura avanzando un índice (o “cortando” la lista con <code class="docutils literal notranslate"><span class="pre">xs[1:]</span></code>) hasta un caso base, y combina el
-resultado al volver. Aquí mostramos la versión <strong>de pila</strong> (<code class="docutils literal notranslate"><span class="pre">suma_lista_pila</span></code>, con una suma pendiente) junto a una primera
-aproximación <strong>de cola</strong> (<code class="docutils literal notranslate"><span class="pre">suma_lista_cola</span></code>, con un acumulador) — la profundizamos en la siguiente sección.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">suma_lista_pila</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Patrón ÍNDICE, recursión DE PILA: la suma con xs[0] queda pendiente."""</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">xs</span><span class="p">:</span>                <span class="c1"># Caso base: lista vacía</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">suma_lista_pila</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>  <span class="c1"># &lt;- suma pendiente hasta que vuelve la llamada</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">suma_lista_cola</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">acumulador</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Patrón ÍNDICE, recursión DE COLA: el acumulador ya lleva la respuesta parcial,</span>
-<span class="sd">    no queda ninguna operación pendiente al volver."""</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">xs</span><span class="p">:</span>                <span class="c1"># Caso base</span>
-        <span class="k">return</span> <span class="n">acumulador</span>
-    <span class="k">return</span> <span class="n">suma_lista_cola</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">acumulador</span> <span class="o">+</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># &lt;- la llamada recursiva ES el resultado final</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"suma_lista_pila:"</span><span class="p">,</span> <span class="n">suma_lista_pila</span><span class="p">(</span><span class="n">datos</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"suma_lista_cola:"</span><span class="p">,</span> <span class="n">suma_lista_cola</span><span class="p">(</span><span class="n">datos</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Versión recursiva ingenua (de pila): O(phi^n) tiempo aprox, por recomputación."""</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">n</span>
-    <span class="k">return</span> <span class="n">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_naive</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Recursión con memoización (Top-Down). Tiempo O(n), espacio O(n)."""</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">n</span>
-    <span class="k">return</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Versión iterativa (Bottom-Up). Tiempo O(n), espacio O(1)."""</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">n</span>
-    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-    <span class="k">return</span> <span class="n">b</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas equivalentes</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">fib_iter</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: fib_memo y fib_iter coinciden para n=0..19"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="comparacion-de-desempeno-en-fibonacci">
-<h3>Comparación de desempeño en Fibonacci<a class="headerlink" href="#comparacion-de-desempeno-en-fibonacci" title="Link to this heading">#</a></h3>
-<p>Medimos tiempo de ejecución de <code class="docutils literal notranslate"><span class="pre">fib_naive</span></code>, <code class="docutils literal notranslate"><span class="pre">fib_memo</span></code> y <code class="docutils literal notranslate"><span class="pre">fib_iter</span></code> para valores crecientes de <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
-<blockquote>
-<div><p><strong>Nota:</strong> No se especifican estilos ni colores para cumplir con la guía de gráficos.</p>
-</div></blockquote>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">medir_tiempo</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-    <span class="n">_</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
-
-<span class="n">ns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">tiempos_naive</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">tiempos_memo</span>  <span class="o">=</span> <span class="p">[]</span>
-<span class="n">tiempos_iter</span>  <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Evitamos que el cache sesgue las primeras mediciones</span>
-<span class="n">fib_memo</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
-
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
-    <span class="c1"># Medimos varias veces para estabilizar</span>
-    <span class="n">repeticiones</span> <span class="o">=</span> <span class="mi">3</span>
-    <span class="n">t_naive</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">medir_tiempo</span><span class="p">(</span><span class="n">fib_naive</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeticiones</span><span class="p">))</span> <span class="o">/</span> <span class="n">repeticiones</span> <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">35</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'nan'</span><span class="p">)</span>
-    <span class="n">t_memo</span>  <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">medir_tiempo</span><span class="p">(</span><span class="n">fib_memo</span><span class="p">,</span>  <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeticiones</span><span class="p">))</span> <span class="o">/</span> <span class="n">repeticiones</span>
-    <span class="n">t_iter</span>  <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">medir_tiempo</span><span class="p">(</span><span class="n">fib_iter</span><span class="p">,</span>  <span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeticiones</span><span class="p">))</span> <span class="o">/</span> <span class="n">repeticiones</span>
-    <span class="n">tiempos_naive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_naive</span><span class="p">)</span>
-    <span class="n">tiempos_memo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_memo</span><span class="p">)</span>
-    <span class="n">tiempos_iter</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_iter</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">tiempos_memo</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'fib_memo (O(n))'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">tiempos_iter</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'s'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'fib_iter (O(n))'</span><span class="p">)</span>
-<span class="c1"># Para naive, puede crecer rápido; mostramos si está disponible</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tiempos_naive</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">tiempos_naive</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'^'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'fib_naive (~exp)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"n"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"segundos"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Tiempos de ejecución Fibonacci"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">factorial_hablador</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/215e2af5a8669305200bf2c208b113456eb554a96ec8060c3a96fc3e0a88ff37.png" src="_images/215e2af5a8669305200bf2c208b113456eb554a96ec8060c3a96fc3e0a88ff37.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>├─ entro a factorial(4)
+│  ├─ entro a factorial(3)
+│  │  ├─ entro a factorial(2)
+│  │  │  ├─ entro a factorial(1)
+│  │  │  │  ├─ entro a factorial(0)
+│  │  │  │  │  caso base: devuelvo 1
+│  │  │  └─ salgo de factorial(1) devolviendo 1
+│  │  └─ salgo de factorial(2) devolviendo 2
+│  └─ salgo de factorial(3) devolviendo 6
+└─ salgo de factorial(4) devolviendo 24
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24
+</pre></div>
 </div>
 </div>
-<p><a id="cola-profundidad"></a></p>
+</div>
+<p>Lee esa salida de arriba abajo: primero <strong>bajan todas las entradas</strong> (la ida), y solo cuando
+aparece el caso base <strong>empiezan a subir las salidas</strong> (la vuelta).</p>
+<hr class="docutils" />
 </section>
-</section>
-<section id="recursion-de-cola-en-profundidad-transformar-pila-cola">
-<h2>6) Recursión de cola en profundidad: transformar pila → cola<a class="headerlink" href="#recursion-de-cola-en-profundidad-transformar-pila-cola" title="Link to this heading">#</a></h2>
-<img alt="Traza de recursion de cola de factorial_cola(4, acc=1), con el acumulador viajando ya resuelto" src="_images/recursion_cola.png" />
-<p>Una llamada es <strong>de cola</strong> cuando la llamada recursiva es <strong>lo último</strong> que hace la función — no hay ninguna operación
-pendiente después de ella. Eso la hace, en teoría, optimizable (el intérprete podría reusar el marco de pila). <strong>Python no
-hace esa optimización</strong> (no hay <em>tail-call optimization</em>), así que una recursión de cola sigue creando un marco por llamada
-y puede agotar el límite de recursión igual que una de pila — la ventaja real es de <strong>claridad</strong>, no de memoria, salvo que
-la conviertas en un bucle.</p>
-<section id="transformacion-en-5-pasos-de-pila-a-cola">
-<h3>Transformación en 5 pasos (de pila a cola)<a class="headerlink" href="#transformacion-en-5-pasos-de-pila-a-cola" title="Link to this heading">#</a></h3>
+<section id="el-metodo-c-a-s-o">
+<span id="esc-caso"></span><h2>4. El método C.A.S.O.<a class="headerlink" href="#el-metodo-c-a-s-o" title="Link to this heading">#</a></h2>
+<p>Aquí está el punto de toda la clase. <strong>No intentes imaginar toda la pila en tu cabeza</strong> — es
+justamente lo que no funciona. Responde estas <strong>cuatro preguntas en orden</strong> y el código se escribe
+solo.</p>
+<p>Toca cada letra en la animación para ver <strong>en qué línea del código vive</strong>:</p>
+<iframe src="_static/unidad2/recursividad/anim_caso.html"
+        title="El método C.A.S.O.: cuatro preguntas"
+        style="width:100%; height:700px; border:1px solid #dde3ea;
+               border-radius:8px; display:block; margin:1.2em 0;"
+        scrolling="no" loading="lazy"></iframe><div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Dónde vive en el código</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña del problema cuya respuesta sé <strong>sin pensar</strong>?</p></td>
+<td><p>El <code class="docutils literal notranslate"><span class="pre">if</span></code> del principio</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno <strong>igual pero más pequeño</strong>?</p></td>
+<td><p>El argumento de la llamada</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función <strong>ya resolviera</strong> el problema pequeño, ¿qué me devolvería?</p></td>
+<td><p>La llamada misma</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta pequeña para obtener <strong>la grande</strong>?</p></td>
+<td><p>El <code class="docutils literal notranslate"><span class="pre">return</span></code> final</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ejemplos de respuestas típicas:</p>
+<ul class="simple">
+<li><p><strong>C</strong> → <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, la lista vacía, un texto de una sola letra.</p></li>
+<li><p><strong>A</strong> → <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">-</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">//</span> <span class="pre">10</span></code>, <code class="docutils literal notranslate"><span class="pre">lista[1:]</span></code>, <code class="docutils literal notranslate"><span class="pre">texto[1:-1]</span></code>.</p></li>
+<li><p><strong>O</strong> → sumar, multiplicar, concatenar, comparar.</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title">El salto de fe — la S es la que cuesta</p>
+<p>Al escribir <code class="docutils literal notranslate"><span class="pre">resolver(pequeño)</span></code> <strong>no preguntes cómo lo hace</strong>. Asume que funciona, igual que
+confías en <code class="docutils literal notranslate"><span class="pre">len()</span></code> o en <code class="docutils literal notranslate"><span class="pre">print()</span></code> sin haber visto su código por dentro.</p>
+<p>Si <strong>C</strong>, <strong>A</strong> y <strong>O</strong> están bien, la <strong>S</strong> queda garantizada. Perseguir las llamadas hacia
+adentro con la cabeza es la forma más rápida de perderse.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Verifica antes de entregar</p>
 <ol class="arabic simple">
-<li><p><strong>Identifica la operación pendiente</strong> en la versión de pila (ej. <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">factorial_pila(n-1)</span></code>).</p></li>
-<li><p><strong>Agrega un parámetro acumulador</strong> con un valor inicial neutro para esa operación (<code class="docutils literal notranslate"><span class="pre">1</span></code> para producto, <code class="docutils literal notranslate"><span class="pre">0</span></code> para suma).</p></li>
-<li><p><strong>Actualiza el acumulador antes de la llamada recursiva</strong>, aplicando la operación pendiente sobre él (<code class="docutils literal notranslate"><span class="pre">acumulador</span> <span class="pre">*</span> <span class="pre">n</span></code>).</p></li>
-<li><p><strong>Haz que la llamada recursiva sea el <code class="docutils literal notranslate"><span class="pre">return</span></code></strong>, sin nada más alrededor.</p></li>
-<li><p><strong>El caso base retorna el acumulador</strong> directamente — ya es la respuesta.</p></li>
+<li><p>¿Funciona con el <strong>caso base</strong>?</p></li>
+<li><p>¿Funciona con el <strong>caso base + 1</strong>?</p></li>
+<li><p>¿<strong>Cada llamada</strong> se acerca al caso base?</p></li>
 </ol>
+<p>Si las tres dan que sí, la función está bien. No necesitas seguir ninguna llamada más.</p>
+</div>
+<hr class="docutils" />
 </section>
-<section id="de-cola-a-iterativo-el-paso-final">
-<h3>De cola a iterativo (el paso final)<a class="headerlink" href="#de-cola-a-iterativo-el-paso-final" title="Link to this heading">#</a></h3>
-<p>Como Python no optimiza la cola, el único beneficio real en memoria es convertir la recursión de cola en un <strong>bucle <code class="docutils literal notranslate"><span class="pre">while</span></code></strong>:
-el acumulador de la versión de cola se vuelve, casi literalmente, la variable que actualiza el bucle.</p>
+<section id="taller-aplicar-c-a-s-o-paso-a-paso">
+<span id="esc-taller"></span><h2>5. Taller: aplicar C.A.S.O. paso a paso<a class="headerlink" href="#taller-aplicar-c-a-s-o-paso-a-paso" title="Link to this heading">#</a></h2>
+<p>Cuatro ejercicios con el método. Los <strong>dos primeros están resueltos</strong> y los puedes estudiar con la
+animación; los <strong>dos últimos los escribes tú</strong> — tienes las cuatro respuestas C.A.S.O., que es
+justamente lo que necesitas para no quedarte en blanco.</p>
+<p>La animación trae la traza desenrollada de los dos resueltos. Mírala <strong>después</strong> de leer el
+enunciado y de intentar la respuesta por tu cuenta:</p>
+<iframe src="_static/unidad2/recursividad/anim_taller.html"
+        title="Traza paso a paso de los ejercicios resueltos"
+        style="width:100%; height:700px; border:1px solid #dde3ea;
+               border-radius:8px; display:block; margin:1.2em 0;"
+        scrolling="no" loading="lazy"></iframe><section id="ejercicio-1-suma-digitos-4729-resuelto">
+<h3>Ejercicio 1 — <code class="docutils literal notranslate"><span class="pre">suma_digitos(4729)</span></code> ✅ resuelto<a class="headerlink" href="#ejercicio-1-suma-digitos-4729-resuelto" title="Link to this heading">#</a></h3>
+<p>Sumar los dígitos de un número entero positivo. <span class="math notranslate nohighlight">\(4 + 7 + 2 + 9 = 22\)</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>Uno de un solo dígito (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&lt;</span> <span class="pre">10</span></code>): la suma es el mismo número.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p>Quitar el último dígito con <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">//</span> <span class="pre">10</span></code>. 4729 → 472.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">suma_digitos(472)</span></code> ya me da 13.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p>Sumarle el dígito que quité: <code class="docutils literal notranslate"><span class="pre">4729</span> <span class="pre">%</span> <span class="pre">10</span></code> = 9, y 9 + 13 = 22.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_pila</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>          <span class="c1"># operación pendiente: multiplicar por n</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">suma_digitos</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>                       <span class="c1"># C — un solo dígito: ya está</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="n">resto</span> <span class="o">=</span> <span class="n">suma_digitos</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>    <span class="c1"># A + S — achico y confío</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">resto</span>            <span class="c1"># O — le sumo el dígito que quité</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_cola</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">acumulador</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">acumulador</span>                      <span class="c1"># el acumulador YA es la respuesta</span>
-    <span class="k">return</span> <span class="n">factorial_cola</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">acumulador</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># último paso: nada pendiente después</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">suma_digitos</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">suma_digitos</span><span class="p">(</span><span class="mi">4729</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">suma_digitos</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+22
+1
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="ejercicio-2-invertir-roma-resuelto">
+<h3>Ejercicio 2 — <code class="docutils literal notranslate"><span class="pre">invertir(&quot;ROMA&quot;)</span></code> ✅ resuelto<a class="headerlink" href="#ejercicio-2-invertir-roma-resuelto" title="Link to this heading">#</a></h3>
+<p>Devolver el texto al revés. <code class="docutils literal notranslate"><span class="pre">&quot;ROMA&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;AMOR&quot;</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>El texto vacío o de una sola letra: ya está invertido.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p>Quitar la primera letra: <code class="docutils literal notranslate"><span class="pre">texto[1:]</span></code>. <code class="docutils literal notranslate"><span class="pre">&quot;ROMA&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;OMA&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">invertir(&quot;OMA&quot;)</span></code> ya me da <code class="docutils literal notranslate"><span class="pre">&quot;AMO&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p>Pegar al final la letra que quité: <code class="docutils literal notranslate"><span class="pre">&quot;AMO&quot;</span> <span class="pre">+</span> <span class="pre">&quot;R&quot;</span></code> = <code class="docutils literal notranslate"><span class="pre">&quot;AMOR&quot;</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">invertir</span><span class="p">(</span><span class="n">texto</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>              <span class="c1"># C — nada que invertir</span>
+        <span class="k">return</span> <span class="n">texto</span>
+    <span class="n">resto</span> <span class="o">=</span> <span class="n">invertir</span><span class="p">(</span><span class="n">texto</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>      <span class="c1"># A + S — achico y confío</span>
+    <span class="k">return</span> <span class="n">resto</span> <span class="o">+</span> <span class="n">texto</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>          <span class="c1"># O — la primera letra se va al final</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">factorial_iterativo_desde_cola</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""El acumulador de factorial_cola se vuelve la variable del bucle."""</span>
-    <span class="n">acumulador</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">acumulador</span> <span class="o">*=</span> <span class="n">n</span>
-        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">acumulador</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">invertir</span><span class="p">(</span><span class="s2">"ROMA"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">invertir</span><span class="p">(</span><span class="s2">"a"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">invertir</span><span class="p">(</span><span class="s2">"recursividad"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AMOR
+a
+dadivisrucer
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Compara los dos</p>
+<p>Son <strong>el mismo esqueleto</strong>. Cambia qué significa “pequeño” (<code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">//</span> <span class="pre">10</span></code> contra <code class="docutils literal notranslate"><span class="pre">texto[1:]</span></code>) y qué
+significa “operar” (<code class="docutils literal notranslate"><span class="pre">+</span></code> entre números contra <code class="docutils literal notranslate"><span class="pre">+</span></code> entre textos). Eso es lo que te da el método:
+siempre escribes la misma forma.</p>
+</div>
+</section>
+<section id="ejercicio-3-potencia-2-4-te-toca">
+<h3>Ejercicio 3 — <code class="docutils literal notranslate"><span class="pre">potencia(2,</span> <span class="pre">4)</span></code> ✏️ te toca<a class="headerlink" href="#ejercicio-3-potencia-2-4-te-toca" title="Link to this heading">#</a></h3>
+<p>Calcular <code class="docutils literal notranslate"><span class="pre">base</span></code> elevado a <code class="docutils literal notranslate"><span class="pre">exp</span></code> (con <code class="docutils literal notranslate"><span class="pre">exp</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>) <strong>sin usar <code class="docutils literal notranslate"><span class="pre">**</span></code></strong> y sin ningún ciclo.</p>
+<p><strong>La idea:</strong> <span class="math notranslate nohighlight">\(2^4\)</span> no es más que <span class="math notranslate nohighlight">\(2 \times 2^3\)</span>. Y <span class="math notranslate nohighlight">\(2^3\)</span> es <span class="math notranslate nohighlight">\(2 \times 2^2\)</span>. Bajando el exponente
+de uno en uno llegas a <span class="math notranslate nohighlight">\(2^0\)</span>, que todo el mundo sabe cuánto vale.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>Exponente 0: cualquier base da 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p>Bajar el exponente en 1: <span class="math notranslate nohighlight">\(2^4\)</span> → <span class="math notranslate nohighlight">\(2^3\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">potencia(2,</span> <span class="pre">3)</span></code> ya me da 8.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p>Multiplicar por la base: <span class="math notranslate nohighlight">\(2 \times 8 = 16\)</span>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">potencia</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">exp</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
+    <span class="o">...</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">factorial_pila</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_cola</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">factorial_iterativo_desde_cola</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: las tres versiones (pila, cola, iterativa) coinciden para k=0..7"</span><span class="p">)</span>
-
-<span class="c1"># Prueba de que Python NO optimiza la cola: ambas formas agotan la pila con el mismo N aprox.</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="n">limite</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">()</span>
-<span class="n">n_grande</span> <span class="o">=</span> <span class="n">limite</span> <span class="o">+</span> <span class="mi">50</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">factorial_cola</span><span class="p">(</span><span class="n">n_grande</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"No debería llegar aquí"</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">RecursionError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"RecursionError con n=</span><span class="si">{</span><span class="n">n_grande</span><span class="si">}</span><span class="s2">: la version de cola tambien crea un marco por llamada"</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(potencia(2, 4))     # debe dar 16</span>
+<span class="c1"># print(potencia(5, 0))     # debe dar 1</span>
+<span class="c1"># print(potencia(3, 3))     # debe dar 27</span>
+<span class="c1"># print(potencia(2, 10))    # debe dar 1024</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><a id="limites"></a></p>
+</section>
+<section id="ejercicio-4-es-palindromo-radar-te-toca">
+<h3>Ejercicio 4 — <code class="docutils literal notranslate"><span class="pre">es_palindromo(&quot;RADAR&quot;)</span></code> ✏️ te toca<a class="headerlink" href="#ejercicio-4-es-palindromo-radar-te-toca" title="Link to this heading">#</a></h3>
+<p>¿Se lee igual al derecho y al revés? Devuelve <code class="docutils literal notranslate"><span class="pre">True</span></code> o <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p><strong>La idea:</strong> este tiene <strong>dos casos base</strong>, y es lo que lo hace distinto a los anteriores. Si los
+extremos no coinciden, ya sabes la respuesta sin mirar el centro: es <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>Con 0 o 1 letra: <code class="docutils literal notranslate"><span class="pre">True</span></code>. Y si la primera y la última letra son <strong>distintas</strong>: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p>Quitar los dos extremos: <code class="docutils literal notranslate"><span class="pre">t[1:-1]</span></code>. <code class="docutils literal notranslate"><span class="pre">&quot;RADAR&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;ADA&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">es_palindromo(&quot;ADA&quot;)</span></code> ya me dice <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p><strong>Nada.</strong> Si los extremos coinciden, la respuesta <em>es</em> la del centro, tal cual.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Ojo con la O de este</p>
+<p>Es el primero donde la <strong>O no hace nada</strong>: devuelves directamente lo que te dio la llamada. Eso
+también es una respuesta válida de la O, y te va a volver a pasar en el <code class="docutils literal notranslate"><span class="pre">mcd</span></code> de los retos.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">es_palindromo</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(es_palindromo("RADAR"))        # True</span>
+<span class="c1"># print(es_palindromo("ANITALAVALATINA"))  # True</span>
+<span class="c1"># print(es_palindromo("PYTHON"))       # False</span>
+<span class="c1"># print(es_palindromo(""))             # True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
 </section>
-<section id="limites-de-recursion-en-python">
-<h2>7) Límites de recursión en Python<a class="headerlink" href="#limites-de-recursion-en-python" title="Link to this heading">#</a></h2>
-<p>Python protege contra desbordamientos de pila con un <strong>límite de recursión</strong>. Puedes consultarlo, y con cuidado, ajustarlo.</p>
+<section id="recursionerror-cuando-la-pila-se-desborda">
+<span id="esc-errores"></span><h2>6. <code class="docutils literal notranslate"><span class="pre">RecursionError</span></code>: cuando la pila se desborda<a class="headerlink" href="#recursionerror-cuando-la-pila-se-desborda" title="Link to this heading">#</a></h2>
+<p>Python permite unos <strong>1000 marcos</strong> en la pila. Si la recursión nunca llega al caso base, los
+marcos se apilan hasta romper ese límite.</p>
+<p>Lo interesante es que <strong>cada uno de los tres errores típicos viola una letra del método</strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">Busca el error antes de ejecutar</p>
+<p>En cada pestaña, lee el código y encuentra el problema <strong>en un minuto</strong>. Solo después presiona
+<strong>Ejecutar</strong>.</p>
+</div>
+<iframe src="_static/unidad2/recursividad/anim_errores.html"
+        title="Los tres errores típicos de recursión"
+        style="width:100%; height:700px; border:1px solid #dde3ea;
+               border-radius:8px; display:block; margin:1.2em 0;"
+        scrolling="no" loading="lazy"></iframe><div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Error</p></th>
+<th class="head"><p>Letra que falla</p></th>
+<th class="head"><p>Qué pasa</p></th>
+<th class="head"><p>Cómo se arregla</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Sin caso base</strong></p></td>
+<td><p><strong>C</strong></p></td>
+<td><p>Nada detiene la cadena: 3, 2, 1, 0, −1, −2…</p></td>
+<td><p>Agregar <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">n</span> <span class="pre">==</span> <span class="pre">0:</span> <span class="pre">return</span></code> al inicio</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>No achica</strong></p></td>
+<td><p><strong>A</strong></p></td>
+<td><p>Hay caso base, pero siempre llama con el mismo valor</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">factorial(n</span> <span class="pre">-</span> <span class="pre">1)</span></code>, no <code class="docutils literal notranslate"><span class="pre">factorial(n)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Salta el caso base</strong></p></td>
+<td><p><strong>C + A</strong></p></td>
+<td><p>Achica de 2 en 2: 5 → 3 → 1 → −1 nunca pasa por 0</p></td>
+<td><p>El caso base debe cubrir todo lo que puede llegar: <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">n</span> <span class="pre">&lt;=</span> <span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El tercero es el más traicionero, porque <em>parece</em> correcto. La lección: <strong>el caso base y la forma
+de achicar tienen que encajar</strong>. Si achicas de 2 en 2 desde un impar, nunca vas a aterrizar justo
+en 0.</p>
+<p>Así puedes consultar el límite de tu intérprete:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Límite actual:"</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">())</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rec_sin_fin</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">rec_sin_fin</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">rec_sin_fin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">RecursionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Atrapado un RecursionError real:"</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-
-<span class="c1"># ¡Usar con precaución! Subir el límite no arregla una recursión mal diseñada,</span>
-<span class="c1"># solo pospone el problema y puede colgar el intérprete en casos extremos.</span>
-<span class="c1"># sys.setrecursionlimit(3000)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Marcos permitidos en la pila:"</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">getrecursionlimit</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Límite actual: 1000
-Atrapado un RecursionError real: maximum recursion depth exceeded
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Marcos permitidos en la pila: 1000
 </pre></div>
 </div>
 </div>
 </div>
-<p><a id="cruzada"></a></p>
+<div class="warning admonition">
+<p class="admonition-title">Subir el límite no arregla nada</p>
+<p>Existe <code class="docutils literal notranslate"><span class="pre">sys.setrecursionlimit(...)</span></code>, pero <strong>no es la solución</strong>. Si tu recursión está mal escrita,
+subir el límite solo hace que tarde más en fallar. Si está bien escrita, no lo necesitas.</p>
+</div>
+<hr class="docutils" />
 </section>
-<section id="recursion-cruzada-auto-invocacion-indirecta">
-<h2>8) Recursión cruzada (auto-invocación indirecta)<a class="headerlink" href="#recursion-cruzada-auto-invocacion-indirecta" title="Link to this heading">#</a></h2>
-<img alt="es_par(4) y es_impar se llaman mutuamente hasta llegar al caso base es_par(0) = True" src="_images/recursion_cruzada.png" />
-<p>En la recursión <strong>cruzada</strong> (o <strong>mutua</strong>), una función <code class="docutils literal notranslate"><span class="pre">A</span></code> llama a una función <code class="docutils literal notranslate"><span class="pre">B</span></code>, y <code class="docutils literal notranslate"><span class="pre">B</span></code> vuelve a llamar a <code class="docutils literal notranslate"><span class="pre">A</span></code> — ninguna se
-llama directamente a sí misma, pero la cadena de llamadas sigue creciendo (y reduciéndose) igual que en una recursión normal.
-Es el mismo contrato de siempre: <strong>cada función necesita su propio caso base</strong>, y cada llamada debe <strong>progresar</strong> hacia él.</p>
-<p>Aparece de forma natural en <strong>parsers</strong> (una función que reconoce expresiones llama a otra que reconoce términos, que llama
-de vuelta a la de expresiones) y en <strong>máquinas de estados</strong> implementadas con funciones.</p>
+<section id="el-arbol-de-fibonacci">
+<span id="esc-fibonacci"></span><h2>7. El árbol de Fibonacci<a class="headerlink" href="#el-arbol-de-fibonacci" title="Link to this heading">#</a></h2>
+<p>Hasta ahora cada llamada hacía <strong>una</strong> llamada más. ¿Qué pasa cuando hace <strong>dos</strong>?</p>
+<div class="math notranslate nohighlight">
+\[fib(n) = fib(n-1) + fib(n-2)\]</div>
+<p>Cada llamada abre <strong>dos ramas</strong>, y muchas ramas repiten exactamente el mismo trabajo. Activa la
+casilla <strong>Con memoria</strong> en la animación y mira cómo se <strong>poda</strong> el árbol:</p>
+<iframe src="_static/unidad2/recursividad/anim_fibonacci.html"
+        title="El árbol de llamadas de Fibonacci, con y sin memoria"
+        style="width:100%; height:700px; border:1px solid #dde3ea;
+               border-radius:8px; display:block; margin:1.2em 0;"
+        scrolling="no" loading="lazy"></iframe><p>La versión directa es la traducción literal de la fórmula:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">es_par</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Caso base: 0 es par. Si no, pregunta si n-1 es impar (llamando a OTRA función)."""</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">return</span> <span class="n">es_impar</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">es_impar</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Caso base: 0 no es impar. Si no, pregunta si n-1 es par (llamando a OTRA función)."""</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">return</span> <span class="n">es_par</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>              <span class="c1"># C — fib(0) = 0 y fib(1) = 1</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># dos llamadas, dos ramas</span>
 </pre></div>
 </div>
 </div>
@@ -1024,310 +1206,635 @@ de vuelta a la de expresiones) y en <strong>máquinas de estados</strong> implem
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">es_par</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">es_impar</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: es_par/es_impar (recursion cruzada) coinciden con el operador % para n=0..9"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"es_par(4) -&gt;"</span><span class="p">,</span> <span class="n">es_par</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="s2">" | es_impar(7) -&gt;"</span><span class="p">,</span> <span class="n">es_impar</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><a id="byc"></a></p>
-</section>
-<section id="divide-y-venceras-potencia-rapida-exponentiacion-binaria">
-<h2>9) Divide y vencerás: potencia rápida (exponentiación binaria)<a class="headerlink" href="#divide-y-venceras-potencia-rapida-exponentiacion-binaria" title="Link to this heading">#</a></h2>
-<section id="patron-divide-y-venceras">
-<h3>Patrón DIVIDE Y VENCERÁS<a class="headerlink" href="#patron-divide-y-venceras" title="Link to this heading">#</a></h3>
-<p>Este patrón parte el problema en subproblemas independientes, resuelve el subproblema y combina el resultado. Para calcular
-<code class="docutils literal notranslate"><span class="pre">a**n</span></code> no hace falta multiplicar <code class="docutils literal notranslate"><span class="pre">a</span></code> por sí mismo <code class="docutils literal notranslate"><span class="pre">n</span></code> veces: si <code class="docutils literal notranslate"><span class="pre">n</span></code> es par, <code class="docutils literal notranslate"><span class="pre">a**n</span> <span class="pre">=</span> <span class="pre">(a**(n//2))**2</span></code>, y si es impar,
-<code class="docutils literal notranslate"><span class="pre">a**n</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">*</span> <span class="pre">a**(n-1)</span></code>. Cada llamada <strong>parte el exponente a la mitad</strong>, así que en vez de <code class="docutils literal notranslate"><span class="pre">n</span></code> llamadas necesitamos solo
-<code class="docutils literal notranslate"><span class="pre">O(log</span> <span class="pre">n)</span></code>.</p>
-<blockquote>
-<div><p><strong>Nota:</strong> la búsqueda binaria y el backtracking (Torres de Hanoi, generación de subconjuntos, N-Reinas) también son
-ejemplos naturales de estos patrones — los vas a ver a fondo en la próxima sección de la unidad, dedicada a
-<strong>búsqueda y backtracking</strong>.</p>
-</div></blockquote>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">potencia_dyc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Calcula a**n con exponenciacion rapida (divide y venceras). n entero &gt;= 0."""</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>              <span class="c1"># Caso base</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="n">mitad</span> <span class="o">=</span> <span class="n">potencia_dyc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>      <span class="c1"># subproblema: parte el exponente a la mitad</span>
-    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">mitad</span> <span class="o">*</span> <span class="n">mitad</span>             <span class="c1"># combinar: n par</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">mitad</span> <span class="o">*</span> <span class="n">mitad</span>         <span class="c1"># combinar: n impar</span>
-
-<span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">exp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">potencia_dyc</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span> <span class="o">==</span> <span class="n">base</span> <span class="o">**</span> <span class="n">exp</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"OK: potencia_dyc coincide con ** para bases 2,3,5 y exponentes 0..5"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"potencia_dyc(2, 10) -&gt;"</span><span class="p">,</span> <span class="n">potencia_dyc</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s2">"-&gt;"</span><span class="p">,</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OK: potencia_dyc coincide con ** para bases 2,3,5 y exponentes 0..5
-potencia_dyc(2, 10) -&gt; 1024
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 -&gt; 0
+1 -&gt; 1
+2 -&gt; 1
+3 -&gt; 2
+4 -&gt; 3
+5 -&gt; 5
+6 -&gt; 8
+7 -&gt; 13
+8 -&gt; 21
+9 -&gt; 34
 </pre></div>
 </div>
 </div>
 </div>
-<p><a id="arboles"></a></p>
-</section>
-</section>
-<section id="recorridos-de-arboles-binarios-pre-in-post-orden">
-<h2>10) Recorridos de árboles binarios (pre/in/post-orden)<a class="headerlink" href="#recorridos-de-arboles-binarios-pre-in-post-orden" title="Link to this heading">#</a></h2>
-<p>Las estructuras jerárquicas se describen naturalmente con recursividad <strong>de pila</strong>: cada llamada combina lo que retornan sus
-dos hijos.</p>
+<p>Funciona, pero es <strong>desastrosa</strong>. Contemos cuántas veces se llama a sí misma:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span><span class="p">,</span> <span class="n">izq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">der</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">izq</span> <span class="o">=</span> <span class="n">izq</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">der</span> <span class="o">=</span> <span class="n">der</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span> <span class="o">+</span> <span class="n">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="n">preorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
-    <span class="k">return</span> <span class="n">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span> <span class="o">+</span> <span class="n">inorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">nodo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="p">[]</span>
-    <span class="k">return</span> <span class="n">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">izq</span><span class="p">)</span> <span class="o">+</span> <span class="n">postorden</span><span class="p">(</span><span class="n">nodo</span><span class="o">.</span><span class="n">der</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">nodo</span><span class="o">.</span><span class="n">valor</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Árbol de ejemplo</span>
-<span class="c1">#         4</span>
-<span class="c1">#       /   \</span>
-<span class="c1">#      2     6</span>
-<span class="c1">#     / \   / \</span>
-<span class="c1">#    1   3 5   7</span>
-<span class="n">tree</span> <span class="o">=</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span>
-            <span class="n">Nodo</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">3</span><span class="p">)),</span>
-            <span class="n">Nodo</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">Nodo</span><span class="p">(</span><span class="mi">7</span><span class="p">)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llamadas</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Preorden:  "</span><span class="p">,</span> <span class="n">preorden</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Inorden:   "</span><span class="p">,</span> <span class="n">inorden</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Postorden: "</span><span class="p">,</span> <span class="n">postorden</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fib_contado</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">llamadas</span>
+    <span class="n">llamadas</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fib_contado</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_contado</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><a id="dp"></a></p>
-</section>
-<section id="programacion-dinamica-top-down-memoizacion-vs-bottom-up">
-<h2>11) Programación dinámica: Top-Down (memoización) vs Bottom-Up<a class="headerlink" href="#programacion-dinamica-top-down-memoizacion-vs-bottom-up" title="Link to this heading">#</a></h2>
-<p>La recursión combinada con <strong>memoización</strong> evita recomputaciones; la alternativa iterativa <strong>Bottom-Up</strong> construye la solución
-desde los casos base. Ya lo vimos con Fibonacci; otro ejemplo ilustrativo es el <strong>cambio de monedas</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">):</span>
+    <span class="n">llamadas</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="n">fib_contado</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"fib(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">resultado</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> se llamó </span><span class="si">{</span><span class="n">llamadas</span><span class="si">:</span><span class="s2">&gt;7</span><span class="si">}</span><span class="s2"> veces"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fib(5) = 5      se llamó      15 veces
+fib(10) = 55     se llamó     177 veces
+fib(20) = 6765   se llamó   21891 veces
+fib(25) = 75025  se llamó  242785 veces
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mira el salto: calcular <code class="docutils literal notranslate"><span class="pre">fib(25)</span></code> cuesta <strong>cientos de miles</strong> de llamadas para un resultado que
+cabe en una línea. En la animación se ve por qué: <code class="docutils literal notranslate"><span class="pre">fib(3)</span></code> se recalcula una y otra vez en ramas
+distintas, desde cero, cada vez.</p>
+<p>La solución es <strong>apuntar lo que ya calculaste</strong>. <code class="docutils literal notranslate"><span class="pre">functools.lru_cache</span></code> hace exactamente eso: si la
+función ya fue llamada con ese argumento, devuelve el resultado guardado sin volver a entrar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">cambio_minimo_bottom_up</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">monedas</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Número mínimo de monedas para alcanzar 'valor'. Bottom-Up (iterativo)."""</span>
-    <span class="n">INF</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
-    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">INF</span><span class="p">]</span><span class="o">*</span><span class="n">valor</span>
-    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">valor</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">monedas</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">:</span>
-                <span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="p">],</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">v</span><span class="o">-</span><span class="n">m</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">valor</span><span class="p">]</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">valor</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">INF</span> <span class="k">else</span> <span class="kc">None</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">cambio_minimo_top_down</span><span class="p">(</span><span class="n">valor</span><span class="p">,</span> <span class="n">monedas_tuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Top-Down (recursivo con memo). monedas_tuple para permitir cache."""</span>
-    <span class="k">if</span> <span class="n">valor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="n">INF</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span>
-    <span class="n">ans</span> <span class="o">=</span> <span class="n">INF</span>
-    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">monedas_tuple</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">m</span> <span class="o">&lt;=</span> <span class="n">valor</span><span class="p">:</span>
-            <span class="n">sub</span> <span class="o">=</span> <span class="n">cambio_minimo_top_down</span><span class="p">(</span><span class="n">valor</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span> <span class="n">monedas_tuple</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">sub</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">ans</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">sub</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ans</span> <span class="k">if</span> <span class="n">ans</span> <span class="o">&lt;</span> <span class="n">INF</span> <span class="k">else</span> <span class="kc">None</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monedas</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">v</span> <span class="o">=</span> <span class="mi">6</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Bottom-Up:"</span><span class="p">,</span> <span class="n">cambio_minimo_bottom_up</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">monedas</span><span class="p">)))</span>
-<span class="n">cambio_minimo_top_down</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Top-Down :"</span><span class="p">,</span> <span class="n">cambio_minimo_top_down</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">monedas</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><a id="trace"></a></p>
-</section>
-<section id="bonus-visualiza-el-arbol-de-llamadas-con-un-decorador">
-<h2>12) Bonus: visualiza el árbol de llamadas con un decorador<a class="headerlink" href="#bonus-visualiza-el-arbol-de-llamadas-con-un-decorador" title="Link to this heading">#</a></h2>
-<p>Este pequeño decorador imprime cada llamada con sangría según su profundidad, y su retorno al volver — útil para <strong>ver</strong> el
-árbol de llamadas de cualquier función recursiva sin dibujarlo a mano.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">trace</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">indent</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">'│ '</span> <span class="o">*</span> <span class="p">(</span><span class="n">depth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s1">'├─ '</span> <span class="k">if</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">''</span><span class="p">)</span>
 
-    <span class="nd">@wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">depth</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">indent</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span><span class="si">}{</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}{</span><span class="n">args</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span> <span class="o">-=</span> <span class="mi">1</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">indent</span><span class="p">(</span><span class="n">depth</span><span class="p">)</span><span class="si">}</span><span class="s2">-&gt; </span><span class="si">{</span><span class="n">res</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">res</span>
-
-    <span class="n">wrapper</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">wrapper</span>
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fib_memo</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib_memo</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@trace</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">suma_trazada</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">suma_trazada</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fib_memo</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fib_memo</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fib_memo</span><span class="p">(</span><span class="mi">300</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75025
+354224848179261915075
+222232244629420445529739893461909967206666939096499764990979600
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">suma_trazada</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</pre></div>
+<p><code class="docutils literal notranslate"><span class="pre">fib(300)</span></code> es inmediato. Sin la memoria no habrías terminado <strong>nunca</strong>, y esto no es una forma
+de hablar: ese árbol tiene unas <span class="math notranslate nohighlight">\(7 \times 10^{62}\)</span> llamadas. A mil millones de llamadas por
+segundo tardaría <span class="math notranslate nohighlight">\(2 \times 10^{46}\)</span> años — unas <span class="math notranslate nohighlight">\(10^{36}\)</span> veces la edad del universo.</p>
+<div class="important admonition">
+<p class="admonition-title">La recursión no es lenta — recalcular sí</p>
+<p>Es fácil concluir “la recursión es ineficiente”. No es eso. El problema no era llamarse a sí
+misma: era <strong>resolver el mismo subproblema miles de veces</strong>. Una línea (<code class="docutils literal notranslate"><span class="pre">&#64;lru_cache</span></code>) arregla el
+problema sin tocar ni una letra de la lógica.</p>
 </div>
-</div>
-</div>
-<p><a id="ejercicios"></a></p>
+<hr class="docutils" />
 </section>
-<section id="ejercicios-propuestos-con-plantillas">
-<h2>13) Ejercicios propuestos (con plantillas)<a class="headerlink" href="#ejercicios-propuestos-con-plantillas" title="Link to this heading">#</a></h2>
-<section id="a-invertir-una-lista-recursivamente">
-<h3>A) Invertir una lista recursivamente<a class="headerlink" href="#a-invertir-una-lista-recursivamente" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Implementa una función que retorne una <strong>nueva lista invertida</strong> usando recursión.</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">invertir</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
-    <span class="c1"># TODO</span>
+<section id="torres-de-hanoi">
+<span id="esc-hanoi"></span><h2>8. Torres de Hanoi<a class="headerlink" href="#torres-de-hanoi" title="Link to this heading">#</a></h2>
+<p>Mueve todos los discos de <strong>A</strong> a <strong>C</strong>. Solo un disco a la vez, y <strong>nunca</strong> uno grande sobre uno
+pequeño.</p>
+<p>Pensarlo movimiento a movimiento es agotador — con 5 discos son 31 movimientos y se te enreda la
+cabeza en el tercero. Pensarlo con el método es simple:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong></p></td>
+<td><p>Con <strong>1 disco</strong>: muévelo directo al destino.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong></p></td>
+<td><p>El problema pequeño: mover <strong>n − 1 discos</strong>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong></p></td>
+<td><p>Supón que <strong>ya sabes</strong> mover n − 1 discos de cualquier torre a cualquier otra.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong></p></td>
+<td><p>n − 1 a la auxiliar, el grande al destino, n − 1 encima.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<iframe src="_static/unidad2/recursividad/anim_hanoi.html"
+        title="Torres de Hanoi resueltas con el método C.A.S.O."
+        style="width:100%; height:700px; border:1px solid #dde3ea;
+               border-radius:8px; display:block; margin:1.2em 0;"
+        scrolling="no" loading="lazy"></iframe><p>Esas cuatro respuestas, traducidas, son el programa completo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">origen</span><span class="p">,</span> <span class="n">destino</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>                                   <span class="c1"># C</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mueve el disco 1: </span><span class="si">{</span><span class="n">origen</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">destino</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">origen</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">,</span> <span class="n">destino</span><span class="p">)</span>      <span class="c1"># O — los de arriba, a la auxiliar</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mueve el disco </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">origen</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">destino</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>   <span class="c1"># el grande, al destino</span>
+    <span class="n">hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">auxiliar</span><span class="p">,</span> <span class="n">destino</span><span class="p">,</span> <span class="n">origen</span><span class="p">)</span>      <span class="c1"># O — y encima otra vez</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hanoi</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mueve el disco 1: A -&gt; C
+mueve el disco 2: A -&gt; B
+mueve el disco 1: C -&gt; B
+mueve el disco 3: A -&gt; C
+mueve el disco 1: B -&gt; A
+mueve el disco 2: B -&gt; C
+mueve el disco 1: A -&gt; C
+</pre></div>
+</div>
+</div>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Este es el momento del “ahá”</p>
+<p>Cuatro líneas resuelven un problema que a mano es un dolor de cabeza. Y fíjate en algo: <strong>nadie
+escribió el orden de los movimientos</strong>. Nosotros solo dijimos <em>qué</em> significa mover n discos, y
+los 7 movimientos aparecieron solos, en el orden correcto.</p>
+<p>Eso es lo que compras con la recursividad: describes <strong>la estructura</strong> del problema, no la
+secuencia de pasos.</p>
+</div>
+<p>Cuenta cuántos movimientos hacen falta:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">movimientos_hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">movimientos_hanoi</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;2</span><span class="si">}</span><span class="s2"> discos -&gt; </span><span class="si">{</span><span class="n">movimientos_hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> movimientos"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1 discos -&gt;     1 movimientos
+ 2 discos -&gt;     3 movimientos
+ 3 discos -&gt;     7 movimientos
+ 4 discos -&gt;    15 movimientos
+ 5 discos -&gt;    31 movimientos
+ 6 discos -&gt;    63 movimientos
+ 7 discos -&gt;   127 movimientos
+ 8 discos -&gt;   255 movimientos
+ 9 discos -&gt;   511 movimientos
+10 discos -&gt;  1023 movimientos
+</pre></div>
+</div>
+</div>
+</div>
+<p>Son <span class="math notranslate nohighlight">\(2^n - 1\)</span>: el mínimo posible. Con 64 discos —la leyenda original— serían más de 18 trillones
+de movimientos.</p>
+<hr class="docutils" />
+</section>
+<section id="los-retos-tu-taller">
+<span id="esc-retos"></span><h2>9. Los retos: tu taller<a class="headerlink" href="#los-retos-tu-taller" title="Link to this heading">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title">Entregable</p>
+<p>Resuelve <strong>los siete retos</strong> y, junto a cada función, <strong>escribe las cuatro respuestas C.A.S.O.</strong>
+en un comentario o en una celda de texto. El código sin el C.A.S.O. escrito no cuenta como
+resuelto: el método es lo que estamos evaluando.</p>
+</div>
+<p><strong>Escribe C, A, S y O en papel antes de tocar el teclado.</strong> Cada reto trae las pistas por letra;
+úsalas solo si llevas dos minutos realmente atascado. En ninguno necesitas un ciclo.</p>
+<section id="reto-1-contar-digitos-n-nivel-1">
+<h3>Reto 1 — <code class="docutils literal notranslate"><span class="pre">contar_digitos(n)</span></code> · Nivel 1<a class="headerlink" href="#reto-1-contar-digitos-n-nivel-1" title="Link to this heading">#</a></h3>
+<p>¿Cuántos dígitos tiene un entero positivo? <code class="docutils literal notranslate"><span class="pre">contar_digitos(4729)</span></code> → <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
+<p><strong>La idea.</strong> Es primo hermano de <code class="docutils literal notranslate"><span class="pre">suma_digitos</span></code>, el ejercicio 1. Cambia una sola cosa: en vez de sumar el dígito que quitaste, sumas <strong>1</strong>, porque solo te importa <em>cuántos</em> hay.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>Un número menor que 10 tiene 1 dígito.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">//</span> <span class="pre">10</span></code> quita un dígito.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">contar_digitos(472)</span></code> ya me dice que tiene 3 dígitos.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span></code> lo que devuelve la llamada.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">contar_digitos</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
     <span class="o">...</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(contar_digitos(7))        # debe dar 1</span>
+<span class="c1"># print(contar_digitos(4729))     # debe dar 4</span>
+<span class="c1"># print(contar_digitos(1000000))  # debe dar 7</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="b-profundidad-maxima-de-un-arbol-binario">
-<h3>B) Profundidad máxima de un árbol binario<a class="headerlink" href="#b-profundidad-maxima-de-un-arbol-binario" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Dado un <code class="docutils literal notranslate"><span class="pre">Nodo</span></code> (como en la sección de árboles), calcula la <strong>altura</strong> del árbol.</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">altura</span><span class="p">(</span><span class="n">nodo</span><span class="p">):</span>
-    <span class="c1"># TODO</span>
+<section id="reto-2-suma-lista-lista-nivel-1">
+<h3>Reto 2 — <code class="docutils literal notranslate"><span class="pre">suma_lista(lista)</span></code> · Nivel 1<a class="headerlink" href="#reto-2-suma-lista-lista-nivel-1" title="Link to this heading">#</a></h3>
+<p>Sumar los números de una lista <strong>sin usar <code class="docutils literal notranslate"><span class="pre">sum()</span></code></strong>. <code class="docutils literal notranslate"><span class="pre">suma_lista([3,</span> <span class="pre">1,</span> <span class="pre">4])</span></code> → <code class="docutils literal notranslate"><span class="pre">8</span></code>.</p>
+<p><strong>La idea.</strong> El mismo molde de <code class="docutils literal notranslate"><span class="pre">invertir</span></code>, pero sobre una lista de números. Separa el primero del resto, confía en que el resto ya está sumado, y añade el primero.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>La lista vacía suma 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lista[1:]</span></code> es la lista sin el primero.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">suma_lista([1,</span> <span class="pre">4])</span></code> ya me da 5.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lista[0]</span> <span class="pre">+</span></code> la suma del resto.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">suma_lista</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
     <span class="o">...</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(suma_lista([]))           # debe dar 0</span>
+<span class="c1"># print(suma_lista([3, 1, 4]))    # debe dar 8</span>
+<span class="c1"># print(suma_lista([10, -2, 7]))  # debe dar 15</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="c-convierte-suma-lista-pila-a-una-version-de-cola-con-acumulador">
-<h3>C) Convierte <code class="docutils literal notranslate"><span class="pre">suma_lista_pila</span></code> a una versión de cola con acumulador<a class="headerlink" href="#c-convierte-suma-lista-pila-a-una-version-de-cola-con-acumulador" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Sigue la <strong>transformación en 5 pasos</strong> de la sección 6 y verifica que ambas versiones coinciden.</p></li>
-</ul>
+<section id="reto-3-contar-lista-x-nivel-2">
+<h3>Reto 3 — <code class="docutils literal notranslate"><span class="pre">contar(lista,</span> <span class="pre">x)</span></code> · Nivel 2<a class="headerlink" href="#reto-3-contar-lista-x-nivel-2" title="Link to this heading">#</a></h3>
+<p>¿Cuántas veces aparece <code class="docutils literal notranslate"><span class="pre">x</span></code> en la lista? <code class="docutils literal notranslate"><span class="pre">contar([2,</span> <span class="pre">5,</span> <span class="pre">2,</span> <span class="pre">2],</span> <span class="pre">2)</span></code> → <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
+<p><strong>La idea.</strong> Aquí la <strong>O cambia según lo que encuentres</strong>: si el primer elemento es el que buscas sumas 1, y si no, sumas 0. Es el primer reto donde la O tiene dos caminos.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>En la lista vacía aparece 0 veces.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lista[1:]</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">contar([5,</span> <span class="pre">2,</span> <span class="pre">2],</span> <span class="pre">2)</span></code> ya me dice que hay 2.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p>Suma 1 si <code class="docutils literal notranslate"><span class="pre">lista[0]</span> <span class="pre">==</span> <span class="pre">x</span></code>; si no, suma 0.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">contar</span><span class="p">(</span><span class="n">lista</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(contar([], 2))            # debe dar 0</span>
+<span class="c1"># print(contar([2, 5, 2, 2], 2))  # debe dar 3</span>
+<span class="c1"># print(contar([1, 3, 5], 2))     # debe dar 0</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="d-recursion-cruzada-es-multiplo-de-3-resto-de-3">
-<h3>D) Recursión cruzada: <code class="docutils literal notranslate"><span class="pre">es_multiplo_de_3</span></code> / <code class="docutils literal notranslate"><span class="pre">resto_de_3</span></code><a class="headerlink" href="#d-recursion-cruzada-es-multiplo-de-3-resto-de-3" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Escribe dos funciones que se llamen mutuamente para calcular <code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">%</span> <span class="pre">3</span></code> sin usar el operador <code class="docutils literal notranslate"><span class="pre">%</span></code> (usa restas de a uno).</p></li>
-</ul>
+<section id="reto-4-maximo-lista-nivel-2">
+<h3>Reto 4 — <code class="docutils literal notranslate"><span class="pre">maximo(lista)</span></code> · Nivel 2<a class="headerlink" href="#reto-4-maximo-lista-nivel-2" title="Link to this heading">#</a></h3>
+<p>El mayor elemento de una lista <strong>no vacía</strong>, sin usar <code class="docutils literal notranslate"><span class="pre">max(lista)</span></code>. <code class="docutils literal notranslate"><span class="pre">maximo([3,</span> <span class="pre">9,</span> <span class="pre">2])</span></code> → <code class="docutils literal notranslate"><span class="pre">9</span></code>.</p>
+<p><strong>La idea.</strong> Fíjate en el caso base: aquí <strong>no</strong> es la lista vacía, porque el máximo de una lista vacía no existe. El más pequeño que tiene respuesta es el de <strong>un</strong> elemento.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>Una lista de un elemento: ese es el máximo.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lista[1:]</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">maximo([9,</span> <span class="pre">2])</span></code> ya me da 9.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p>Compara <code class="docutils literal notranslate"><span class="pre">lista[0]</span></code> con el máximo del resto y devuelve el mayor.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">maximo</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(maximo([7]))              # debe dar 7</span>
+<span class="c1"># print(maximo([3, 9, 2]))        # debe dar 9</span>
+<span class="c1"># print(maximo([-5, -1, -9]))     # debe dar -1</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="e-divide-y-venceras-potencia-dyc-con-exponente-negativo">
-<h3>E) Divide y vencerás: <code class="docutils literal notranslate"><span class="pre">potencia_dyc</span></code> con exponente negativo<a class="headerlink" href="#e-divide-y-venceras-potencia-dyc-con-exponente-negativo" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Extiende <code class="docutils literal notranslate"><span class="pre">potencia_dyc(a,</span> <span class="pre">n)</span></code> para que acepte <code class="docutils literal notranslate"><span class="pre">n</span></code> negativo, devolviendo <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">a**abs(n)</span></code>.</p></li>
-</ul>
-<p><a id="apendice"></a></p>
+<section id="reto-5-mcd-a-b-nivel-2">
+<h3>Reto 5 — <code class="docutils literal notranslate"><span class="pre">mcd(a,</span> <span class="pre">b)</span></code> · Nivel 2<a class="headerlink" href="#reto-5-mcd-a-b-nivel-2" title="Link to this heading">#</a></h3>
+<p>Máximo común divisor con el <strong>algoritmo de Euclides</strong>. <code class="docutils literal notranslate"><span class="pre">mcd(48,</span> <span class="pre">18)</span></code> → <code class="docutils literal notranslate"><span class="pre">6</span></code>.</p>
+<p><strong>La idea.</strong> Euclides se escribe recursivo casi solo: el máximo común divisor de <code class="docutils literal notranslate"><span class="pre">a</span></code> y <code class="docutils literal notranslate"><span class="pre">b</span></code> es el mismo que el de <code class="docutils literal notranslate"><span class="pre">b</span></code> y <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">%</span> <span class="pre">b</span></code>. Es el segundo caso donde la <strong>O no hace nada</strong> —como en <code class="docutils literal notranslate"><span class="pre">es_palindromo</span></code>— y lo que achica no es el tamaño sino el <em>valor</em>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>Si <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">==</span> <span class="pre">0</span></code>, el mcd es <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p>Pasar a <code class="docutils literal notranslate"><span class="pre">(b,</span> <span class="pre">a</span> <span class="pre">%</span> <span class="pre">b)</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">mcd(18,</span> <span class="pre">12)</span></code> ya me da 6.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p>Nada que operar: devuelve directamente lo que trae la llamada.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(mcd(48, 18))              # debe dar 6</span>
+<span class="c1"># print(mcd(7, 13))               # debe dar 1</span>
+<span class="c1"># print(mcd(100, 25))             # debe dar 25</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reto-6-binario-n-nivel-3">
+<h3>Reto 6 — <code class="docutils literal notranslate"><span class="pre">binario(n)</span></code> · Nivel 3<a class="headerlink" href="#reto-6-binario-n-nivel-3" title="Link to this heading">#</a></h3>
+<p>Convertir un entero <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">0</span></code> a texto binario. <code class="docutils literal notranslate"><span class="pre">binario(13)</span></code> → <code class="docutils literal notranslate"><span class="pre">&quot;1101&quot;</span></code>.</p>
+<p><strong>La idea.</strong> Es el mismo achicamiento de <code class="docutils literal notranslate"><span class="pre">contar_digitos</span></code> pero dividiendo entre 2, y la O es una <strong>concatenación de textos</strong>. Cuidado con el orden: el bit que calculas de último es el que va más a la izquierda.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">&lt;</span> <span class="pre">2</span></code>: el binario es <code class="docutils literal notranslate"><span class="pre">str(n)</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">//</span> <span class="pre">2</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">binario(6)</span></code> ya me da <code class="docutils literal notranslate"><span class="pre">&quot;110&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">binario(n</span> <span class="pre">//</span> <span class="pre">2)</span> <span class="pre">+</span> <span class="pre">str(n</span> <span class="pre">%</span> <span class="pre">2)</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">binario</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(binario(0))               # debe dar "0"</span>
+<span class="c1"># print(binario(13))              # debe dar "1101"</span>
+<span class="c1"># print(binario(32))              # debe dar "100000"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="reto-7-aplanar-lista-reto">
+<h3>Reto 7 — <code class="docutils literal notranslate"><span class="pre">aplanar(lista)</span></code> · Reto<a class="headerlink" href="#reto-7-aplanar-lista-reto" title="Link to this heading">#</a></h3>
+<p>Convertir listas anidadas en una sola. <code class="docutils literal notranslate"><span class="pre">aplanar([1,</span> <span class="pre">[2,</span> <span class="pre">[3,</span> <span class="pre">4]],</span> <span class="pre">5])</span></code> → <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5]</span></code>.</p>
+<p><strong>La idea.</strong> El más difícil, y el más bonito. Aquí lo que achica <strong>no siempre es el resto</strong>: si el primer elemento es a su vez una lista, <em>él también</em> es un problema más pequeño del mismo tipo. Por eso este reto necesita <strong>dos llamadas recursivas</strong> en la misma línea —como Fibonacci—, y es el único donde la recursión baja por dos lados a la vez. Para saber si algo es una lista: <code class="docutils literal notranslate"><span class="pre">type(primero)</span> <span class="pre">==</span> <span class="pre">list</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Letra</p></th>
+<th class="head"><p>Pregunta</p></th>
+<th class="head"><p>Respuesta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>C</strong> · Caso base</p></td>
+<td><p>¿Cuál es la versión más pequeña cuya respuesta sé sin pensar?</p></td>
+<td><p>La lista vacía ya está aplanada.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>A</strong> · Achicar</p></td>
+<td><p>¿Cómo convierto el problema en uno igual pero más pequeño?</p></td>
+<td><p>Separar primero y resto. Si el primero es lista, <strong>él también</strong> se achica.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>S</strong> · Suponer</p></td>
+<td><p>Si la función ya resolviera el pequeño, ¿qué me devolvería?</p></td>
+<td><p>Supongo que <code class="docutils literal notranslate"><span class="pre">aplanar([[2,</span> <span class="pre">[3,</span> <span class="pre">4]],</span> <span class="pre">5])</span></code> ya me da <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5]</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>O</strong> · Operar</p></td>
+<td><p>¿Qué le hago a esa respuesta para obtener la grande?</p></td>
+<td><p>Si el primero es lista: <code class="docutils literal notranslate"><span class="pre">aplanar(primero)</span> <span class="pre">+</span> <span class="pre">aplanar(resto)</span></code>. Si no: <code class="docutils literal notranslate"><span class="pre">[primero]</span> <span class="pre">+</span> <span class="pre">aplanar(resto)</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">aplanar</span><span class="p">(</span><span class="n">lista</span><span class="p">):</span>
+    <span class="c1"># TU CÓDIGO VA ACÁ</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pruebas — descoméntalas cuando tengas tu versión</span>
+<span class="c1"># print(aplanar([]))              # debe dar []</span>
+<span class="c1"># print(aplanar([1, [2, [3, 4]], 5])) # debe dar [1, 2, 3, 4, 5]</span>
+<span class="c1"># print(aplanar([[[1]], 2]))      # debe dar [1, 2]</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
-<section id="apendice-consejos-errores-frecuentes-y-material-de-apoyo">
-<h2>14) Apéndice: consejos, errores frecuentes y material de apoyo<a class="headerlink" href="#apendice-consejos-errores-frecuentes-y-material-de-apoyo" title="Link to this heading">#</a></h2>
-<p><strong>Consejos</strong></p>
-<ul class="simple">
-<li><p><strong>Define primero el caso base</strong>, luego el caso recursivo (o los casos recursivos, si es cruzada).</p></li>
-<li><p><strong>Verifica progresión</strong> hacia el caso base (evita recursión infinita).</p></li>
-<li><p><strong>Entrada válida</strong>: valida tipos y rangos cuando sea pertinente.</p></li>
-<li><p><strong>Cuidado con Python y recursión de cola</strong>: Python <strong>no</strong> hace <em>tail-call optimization</em> — una recursión de cola sigue
-gastando un marco de pila por llamada.</p></li>
-<li><p><strong>Límites de recursión</strong>: consulta/ajusta con <code class="docutils literal notranslate"><span class="pre">sys.getrecursionlimit()</span></code> y <code class="docutils literal notranslate"><span class="pre">sys.setrecursionlimit()</span></code> con prudencia.</p></li>
-<li><p><strong>Perfílalo</strong>: si una recursión es lenta por recomputación, usa <strong>memoización</strong> o considera una versión iterativa.</p></li>
-</ul>
-<p><strong>Errores frecuentes</strong></p>
-<ul class="simple">
-<li><p>Olvidar el caso base, o tenerlo inalcanzable.</p></li>
-<li><p>No avanzar hacia el caso base (un parámetro que no cambia).</p></li>
-<li><p>Modificar listas en sitio sin control (usa copias, o deshaz un <code class="docutils literal notranslate"><span class="pre">append</span></code> con <code class="docutils literal notranslate"><span class="pre">pop()</span></code> si acumulas sobre una sola lista compartida).</p></li>
-<li><p>Mezclar retornos y efectos secundarios (decide si la función <em>devuelve</em> o <em>imprime/guarda</em>).</p></li>
-<li><p>No probar con casos vacío y de tamaño 1.</p></li>
-</ul>
-<p><strong>Material de apoyo (teoría completa y plantillas en blanco)</strong></p>
-<ul class="simple">
-<li><p><a class="reference download internal" download="" href="_downloads/01548dc9b8a7e810cfb020fec1861746/RecursividadenPython.pdf"><span class="xref download myst">Recursividad en Python — introducción (PDF)</span></a></p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/8d38111b95aeafb39497c6c78967b197/RecursividadPatronesEsenciales.pdf"><span class="xref download myst">Patrones esenciales: Índice, Divide y Vencerás, Incluir/Excluir (PDF)</span></a></p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/78239852b08f53a3013ceea740f076ee/RecursionDeCola.pdf"><span class="xref download myst">Recursión de cola: teoría, patrones y práctica (PDF)</span></a></p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/dea1d46a2d747bc9a0ca7c583968db69/PlantillasRecursividad_handout.pdf"><span class="xref download myst">Plantillas de aula para practicar los tres patrones (PDF)</span></a></p></li>
-<li><p><a class="reference download internal" download="" href="_downloads/3ebffc05381f1430670bcbf6be3a7329/DiagramasArbolTrazaRecursiva.pdf"><span class="xref download myst">Diagramas de árbol y trazas recursivas (PDF)</span></a></p></li>
-</ul>
-<blockquote>
-<div><p>Con práctica, podrás identificar problemas <strong>naturalmente recursivos</strong> (árboles, divide y vencerás) y elegir con criterio
-entre recursión de pila, de cola o cruzada — y saber cuándo conviene pasarlos a una versión iterativa. La próxima sección
-de la unidad retoma estos mismos patrones para <strong>búsqueda y backtracking</strong>.</p>
-</div></blockquote>
+<hr class="docutils" />
+<section id="antes-de-entregar-las-cuatro-trampas">
+<h2>10. Antes de entregar: las cuatro trampas<a class="headerlink" href="#antes-de-entregar-las-cuatro-trampas" title="Link to this heading">#</a></h2>
+<p>Estas son las ideas equivocadas que aparecen <strong>siempre</strong>. Si alguna te suena a verdad, vuelve a la
+escena que la desarma.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Lo que mucha gente cree</p></th>
+<th class="head"><p>Por qué es falso</p></th>
+<th class="head"><p>Vuelve a</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>“Hay una sola variable <code class="docutils literal notranslate"><span class="pre">n</span></code> que va cambiando.”</p></td>
+<td><p>Cada marco tiene <strong>su propia</strong> <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p></td>
+<td><p>Escena 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>“La función termina cuando llega al caso base.”</p></td>
+<td><p>Ahí <strong>empieza la vuelta</strong>: los marcos en pausa todavía deben operar.</p></td>
+<td><p>Escena 3</p></td>
+</tr>
+<tr class="row-even"><td><p>“Tengo que seguir todas las llamadas para entenderla.”</p></td>
+<td><p>Basta verificar el caso base y el caso base + 1. El resto es el salto de fe.</p></td>
+<td><p>Escena 4</p></td>
+</tr>
+<tr class="row-odd"><td><p>“<code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">f(n-1)</span></code> basta, Python sabe qué hacer.”</p></td>
+<td><p>Si falta la <strong>O</strong>, se pierde la información del nivel actual.</p></td>
+<td><p>Escena 4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="autoevaluacion">
+<h3>Autoevaluación<a class="headerlink" href="#autoevaluacion" title="Link to this heading">#</a></h3>
+<p><strong>1.</strong> ¿Qué imprime este programa?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="n">f</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>2.</strong> Si borras las líneas 2 y 3 de ese programa, ¿qué pasa y <strong>qué letra</strong> del método falla?</p>
+<p><strong>3.</strong> Escribe las cuatro respuestas C.A.S.O. para <code class="docutils literal notranslate"><span class="pre">contar_a(texto)</span></code>, que cuenta cuántas letras
+<code class="docutils literal notranslate"><span class="pre">&quot;a&quot;</span></code> tiene un texto. (No hace falta que la programes: solo las cuatro respuestas.)</p>
+<hr class="docutils" />
+<div class="important admonition">
+<p class="admonition-title">Resumen de la clase en una frase</p>
+<p><strong>No imagines la pila: responde las cuatro preguntas.</strong> El caso base dice dónde parar, achicar
+dice cómo avanzar, suponer es confiar en tu propia función, y operar es lo que haces con la
+respuesta que vuelve. Si las cuatro están bien, el código está bien — aunque no puedas seguir las
+llamadas con la cabeza.</p>
+</div>
+</section>
 </section>
 </section>
 
@@ -1397,39 +1904,35 @@ de la unidad retoma estos mismos patrones para <strong>búsqueda y backtracking<
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenidos">Contenidos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-recursividad">1) ¿Qué es la recursividad?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursividad-vs-iteracion">2) Recursividad vs Iteración</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-de-una-funcion-recursiva-plantilla">3) Estructura de una función recursiva (plantilla)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-tres-tipos-de-recursion-pila-cola-y-cruzada">4) Los tres tipos de recursión: pila, cola y cruzada</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplos-basicos-recursion-de-pila-patron-indice">5) Ejemplos básicos (recursión de pila, patrón Índice)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patron-indice-suma-lista">Patrón ÍNDICE: <code class="docutils literal notranslate"><span class="pre">suma_lista</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-desempeno-en-fibonacci">Comparación de desempeño en Fibonacci</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-fila-en-que-posicion-estoy">1. La fila: ¿en qué posición estoy?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-problema-que-contiene-una-copia-de-si-mismo">2. Un problema que contiene una copia de sí mismo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-pila-de-llamadas-como-lo-ejecuta-python">3. La pila de llamadas: cómo lo ejecuta Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-metodo-c-a-s-o">4. El método C.A.S.O.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taller-aplicar-c-a-s-o-paso-a-paso">5. Taller: aplicar C.A.S.O. paso a paso</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-1-suma-digitos-4729-resuelto">Ejercicio 1 — <code class="docutils literal notranslate"><span class="pre">suma_digitos(4729)</span></code> ✅ resuelto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-2-invertir-roma-resuelto">Ejercicio 2 — <code class="docutils literal notranslate"><span class="pre">invertir("ROMA")</span></code> ✅ resuelto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-3-potencia-2-4-te-toca">Ejercicio 3 — <code class="docutils literal notranslate"><span class="pre">potencia(2,</span> <span class="pre">4)</span></code> ✏️ te toca</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio-4-es-palindromo-radar-te-toca">Ejercicio 4 — <code class="docutils literal notranslate"><span class="pre">es_palindromo("RADAR")</span></code> ✏️ te toca</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-de-cola-en-profundidad-transformar-pila-cola">6) Recursión de cola en profundidad: transformar pila → cola</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-en-5-pasos-de-pila-a-cola">Transformación en 5 pasos (de pila a cola)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#de-cola-a-iterativo-el-paso-final">De cola a iterativo (el paso final)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursionerror-cuando-la-pila-se-desborda">6. <code class="docutils literal notranslate"><span class="pre">RecursionError</span></code>: cuando la pila se desborda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-arbol-de-fibonacci">7. El árbol de Fibonacci</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#torres-de-hanoi">8. Torres de Hanoi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#los-retos-tu-taller">9. Los retos: tu taller</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-1-contar-digitos-n-nivel-1">Reto 1 — <code class="docutils literal notranslate"><span class="pre">contar_digitos(n)</span></code> · Nivel 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-2-suma-lista-lista-nivel-1">Reto 2 — <code class="docutils literal notranslate"><span class="pre">suma_lista(lista)</span></code> · Nivel 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-3-contar-lista-x-nivel-2">Reto 3 — <code class="docutils literal notranslate"><span class="pre">contar(lista,</span> <span class="pre">x)</span></code> · Nivel 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-4-maximo-lista-nivel-2">Reto 4 — <code class="docutils literal notranslate"><span class="pre">maximo(lista)</span></code> · Nivel 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-5-mcd-a-b-nivel-2">Reto 5 — <code class="docutils literal notranslate"><span class="pre">mcd(a,</span> <span class="pre">b)</span></code> · Nivel 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-6-binario-n-nivel-3">Reto 6 — <code class="docutils literal notranslate"><span class="pre">binario(n)</span></code> · Nivel 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reto-7-aplanar-lista-reto">Reto 7 — <code class="docutils literal notranslate"><span class="pre">aplanar(lista)</span></code> · Reto</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limites-de-recursion-en-python">7) Límites de recursión en Python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion-cruzada-auto-invocacion-indirecta">8) Recursión cruzada (auto-invocación indirecta)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-y-venceras-potencia-rapida-exponentiacion-binaria">9) Divide y vencerás: potencia rápida (exponentiación binaria)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#patron-divide-y-venceras">Patrón DIVIDE Y VENCERÁS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#antes-de-entregar-las-cuatro-trampas">10. Antes de entregar: las cuatro trampas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoevaluacion">Autoevaluación</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recorridos-de-arboles-binarios-pre-in-post-orden">10) Recorridos de árboles binarios (pre/in/post-orden)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programacion-dinamica-top-down-memoizacion-vs-bottom-up">11) Programación dinámica: Top-Down (memoización) vs Bottom-Up</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-visualiza-el-arbol-de-llamadas-con-un-decorador">12) Bonus: visualiza el árbol de llamadas con un decorador</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicios-propuestos-con-plantillas">13) Ejercicios propuestos (con plantillas)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-invertir-una-lista-recursivamente">A) Invertir una lista recursivamente</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-profundidad-maxima-de-un-arbol-binario">B) Profundidad máxima de un árbol binario</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-convierte-suma-lista-pila-a-una-version-de-cola-con-acumulador">C) Convierte <code class="docutils literal notranslate"><span class="pre">suma_lista_pila</span></code> a una versión de cola con acumulador</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-recursion-cruzada-es-multiplo-de-3-resto-de-3">D) Recursión cruzada: <code class="docutils literal notranslate"><span class="pre">es_multiplo_de_3</span></code> / <code class="docutils literal notranslate"><span class="pre">resto_de_3</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-divide-y-venceras-potencia-dyc-con-exponente-negativo">E) Divide y vencerás: <code class="docutils literal notranslate"><span class="pre">potencia_dyc</span></code> con exponente negativo</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-consejos-errores-frecuentes-y-material-de-apoyo">14) Apéndice: consejos, errores frecuentes y material de apoyo</a></li>
 </ul>
   </nav></div>
 
