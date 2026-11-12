@@ -25,6 +25,7 @@ chapters:
         - file: "Recursividad_Notebook"
     - file: "Backtracking"
       sections:
+        - file: "ClaseBacktracking"
         - file: "Backtracking_Notebook"
     - file: "ResolucionProblemas2"
 - file: Unidad3

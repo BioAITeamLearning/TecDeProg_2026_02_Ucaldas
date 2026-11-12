@@ -77,4 +77,5 @@ Teoría completa con la plantilla, la visualización del árbol de decisiones y 
 
 ## Manos a la obra! 🐍♟️
 
-1. {doc}`Backtracking_Notebook` — la plantilla universal, ejemplos resueltos (cadenas, subconjuntos, permutaciones), poda con restricciones (N-Reinas), aplicaciones (mochila 0-1, caminos en un laberinto) y ejercicios propuestos.
+1. {doc}`ClaseBacktracking` — la clase en movimiento: el laberinto, el árbol de decisiones con un cuadro por cada llamada recursiva, el método de las 4 preguntas, la poda y las N reinas.
+2. {doc}`Backtracking_Notebook` — la plantilla universal, ejemplos resueltos (cadenas, subconjuntos, permutaciones), poda con restricciones (N-Reinas), aplicaciones (mochila 0-1, caminos en un laberinto) y ejercicios propuestos.
