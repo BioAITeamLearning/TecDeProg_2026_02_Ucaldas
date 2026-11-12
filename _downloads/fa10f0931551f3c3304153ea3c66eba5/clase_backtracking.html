@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clase de Backtracking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: cuaderno cuadriculado de ingeniería; una columna de "momentos" de clase, cada visualizador como mesa de trabajo (escenario + código + pila) */
+:root{
+  --paper:#f4f6fa; --panel:#ffffff; --grid:#e1e7f0; --ink:#18212f; --ink-2:#536074; --rule:#cfd8e4;
+  --go:#2356c4; --go-soft:#e1e9fb; --back:#cf3e33; --back-soft:#fbe2df; --ok:#1c8656; --ok-soft:#d9f1e5;
+  --prune:#b0711a; --prune-soft:#f7ead2; --hl:#fff1b8; --code-bg:#eef2f8; --kw:#7a3db5; --str:#1c8656;
+  --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --f-hand:"Caveat", "Comic Sans MS", cursive;
+  --dur:420ms;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#10151c; --panel:#171f29; --grid:#1a2430; --ink:#e6ecf4; --ink-2:#97a5b8; --rule:#2a3644;
+  --go:#79a4ff; --go-soft:#1b2a48; --back:#ff7c6e; --back-soft:#3d201d; --ok:#55d49d; --ok-soft:#14332a;
+  --prune:#f1b54e; --prune-soft:#3a2c13; --hl:#3b3416; --code-bg:#0d1218; --kw:#c9a0ff; --str:#7fe0b4; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#10151c; --panel:#171f29; --grid:#1a2430; --ink:#e6ecf4; --ink-2:#97a5b8; --rule:#2a3644;
+  --go:#79a4ff; --go-soft:#1b2a48; --back:#ff7c6e; --back-soft:#3d201d; --ok:#55d49d; --ok-soft:#14332a;
+  --prune:#f1b54e; --prune-soft:#3a2c13; --hl:#3b3416; --code-bg:#0d1218; --kw:#c9a0ff; --str:#7fe0b4; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 80px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.08}
+p{margin:0}
+code,.mono{font-family:var(--f-mono);font-size:.88em}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:62ch}
+.prose{max-width:68ch;display:grid;gap:12px}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.hand{font-family:var(--f-hand);font-size:1.6rem;line-height:1.2;color:var(--back)}
+:focus-visible{outline:3px solid var(--go);outline-offset:2px;border-radius:4px}
+
+/* ---------- Hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:24px 40px}
+.hero h1{font-size:clamp(3rem,8vw,6.2rem);font-weight:800;letter-spacing:-.03em}
+.hero h1 .bt{color:var(--back);position:relative;display:inline-block}
+.hero h1 .bt::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.09em;background:var(--back);transform-origin:right;animation:strike 3.2s ease-in-out infinite}
+@keyframes strike{0%,15%{transform:scaleX(0)}45%,70%{transform:scaleX(1)}100%{transform:scaleX(0);transform-origin:left}}
+.hero .lead{margin-top:18px}
+.verbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.verb{font-family:var(--f-mono);font-weight:600;font-size:.9rem;padding:8px 14px;border-radius:999px;border:2px solid currentColor;animation:vpulse 4.5s infinite}
+.verb.v1{color:var(--go)} .verb.v2{color:var(--go);animation-delay:1.5s} .verb.v3{color:var(--back);animation-delay:3s}
+@keyframes vpulse{0%,30%{background:transparent}8%,22%{background:var(--hl)}}
+.hero-art{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:12px}
+.hero-art svg{width:100%;height:auto;display:block}
+
+/* ---------- Plan de clase ---------- */
+.plan{margin-top:8px;background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:18px}
+.plan-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.plan-head h2{font-size:1.25rem}
+.tl{display:flex;height:46px;border-radius:8px;overflow:hidden;gap:2px}
+.tl a{display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--ink);font-family:var(--f-mono);font-size:.78rem;background:var(--go-soft);min-width:0;transition:filter .2s}
+.tl a:hover{filter:brightness(.93)}
+.tl a.k-back{background:var(--back-soft)} .tl a.k-ok{background:var(--ok-soft)} .tl a.k-prune{background:var(--prune-soft)}
+.tl-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 18px;margin:14px 0 0;padding:0;list-style:none;font-size:.92rem}
+.tl-list li{display:flex;gap:8px;min-width:0}
+.tl-list b{font-family:var(--f-mono);font-weight:600;color:var(--ink-2);flex:none}
+
+/* ---------- Momentos ---------- */
+.mom{margin-top:72px;scroll-margin-top:20px}
+.mom-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 20px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:24px}
+.mom-num{font-family:var(--f-display);font-weight:800;font-size:3.6rem;line-height:.8;color:var(--go)}
+.mom-head h2{font-size:clamp(1.6rem,3.4vw,2.4rem)}
+.mom-head .min{font-family:var(--f-mono);font-size:.85rem;background:var(--ink);color:var(--paper);padding:4px 10px;border-radius:6px;white-space:nowrap}
+.mom-head .obj{grid-column:2/4;color:var(--ink-2)}
+.guion{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px;margin-top:22px}
+.box{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:18px;min-width:0}
+.box h3{font-size:1.05rem;margin-bottom:8px}
+.box ul,.box ol{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.ask{border-left:4px solid var(--back);padding:4px 0 4px 14px}
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+
+/* ---------- Visualizadores ---------- */
+.viz{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:16px;display:grid;gap:14px;outline:none}
+.viz-main{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:14px}
+.stage{background:var(--paper);border:1px solid var(--rule);border-radius:12px;overflow-x:auto;min-width:0;position:relative}
+.stage svg.tree{display:block;width:100%;min-width:560px;height:auto}
+.side{display:grid;gap:12px;align-content:start;min-width:0}
+.panel-t{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;display:flex;justify-content:space-between;gap:8px}
+.narr{display:flex;gap:12px;align-items:center;min-height:56px;padding:10px 14px;border-radius:10px;background:var(--paper);border:1px solid var(--rule)}
+.narr .msg{font-size:1.02rem;min-width:0}
+.vchip{font-family:var(--f-mono);font-weight:600;font-size:.74rem;letter-spacing:.06em;padding:5px 9px;border-radius:6px;flex:none;color:var(--panel);background:var(--ink-2);transition:background var(--dur)}
+.vchip.go{background:var(--go)} .vchip.back{background:var(--back)} .vchip.ok{background:var(--ok)} .vchip.prune{background:var(--prune)} .vchip.call{background:var(--ink)}
+.narr.flash{animation:flash .5s}
+@keyframes flash{from{background:var(--hl)}to{background:var(--paper)}}
+
+/* código */
+.code-tg{font:600 .72rem var(--f-mono);letter-spacing:.04em;text-transform:none;border:1.5px solid var(--go);background:var(--panel);color:var(--go);border-radius:999px;padding:3px 11px;cursor:pointer;line-height:1.3}
+.code-tg[aria-expanded="true"]{background:var(--go);color:var(--panel)}
+.code-hid{display:none}
+.hide-code .code-wrap .code,.hide-code .cb-code{display:none}
+.hide-code .code-hid{display:block;background:var(--code-bg);border:1.5px dashed var(--rule);border-radius:10px;padding:14px 16px;color:var(--ink-2);font-size:.92rem}
+.code{background:var(--code-bg);border-radius:10px;overflow-x:auto;position:relative;font-family:var(--f-mono);font-size:12.5px}
+.code-in{position:relative;min-width:max-content;padding:8px 0}
+.code .ln{height:24px;line-height:24px;padding:0 10px 0 12px;white-space:pre;display:flex;justify-content:space-between;gap:16px;position:relative;z-index:1}
+.code .ln.off{opacity:.35;text-decoration:line-through}
+.code .bar{position:absolute;left:0;right:0;top:8px;height:24px;background:var(--hl);border-left:4px solid var(--go);transform:translateY(calc(var(--line,0) * 24px));transition:transform var(--dur) cubic-bezier(.3,.7,.2,1),opacity .2s}
+.code.idle .bar{opacity:0}
+.tag{font-size:10px;letter-spacing:.06em;padding:1px 6px;border-radius:4px;align-self:center;line-height:16px}
+.t-meta{background:var(--ok-soft);color:var(--ok)} .t-opc{background:var(--go-soft);color:var(--go)} .t-res{background:var(--prune-soft);color:var(--prune)}
+.t-go{background:var(--go);color:var(--panel)} .t-back{background:var(--back);color:var(--panel)} .t-prune{background:var(--prune);color:var(--panel)}
+.kw{color:var(--kw);font-weight:600} .st{color:var(--str)} .cm{color:var(--ink-2);font-style:italic}
+
+/* pila */
+.stack{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-family:var(--f-mono);font-size:12px;min-height:30px}
+.stack li{padding:5px 9px;border-radius:6px;background:var(--paper);border:1px solid var(--rule);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stack li.top{border-color:var(--go);background:var(--go-soft)}
+.stack li.enter{animation:push var(--dur) cubic-bezier(.2,.8,.2,1.2)}
+@keyframes push{from{transform:translateY(-14px) scale(.9);opacity:0}}
+.stack .empty{color:var(--ink-2);font-style:italic;border-style:dashed}
+.chips{display:flex;flex-wrap:wrap;gap:6px;min-height:30px;align-items:center}
+.chip{font-family:var(--f-mono);font-size:12.5px;padding:4px 9px;border-radius:6px;background:var(--paper);border:1px solid var(--rule)}
+.chip.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.chip.go{background:var(--go-soft);border-color:var(--go);color:var(--go)}
+.chip.cur{outline:2px solid var(--back);outline-offset:1px}
+.chip.in{background:var(--go);color:var(--panel);border-color:var(--go)}
+.chip.new{animation:push var(--dur)}
+.muted{color:var(--ink-2);font-size:.85rem;font-style:italic}
+
+/* controles */
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:40px;height:38px;padding:0 10px;border-radius:9px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);cursor:pointer;font:600 .9rem var(--f-body)}
+.btn:hover{border-color:var(--ink-2)}
+.btn svg{width:16px;height:16px;fill:currentColor}
+.btn.primary{background:var(--go);border-color:var(--go);color:var(--panel);min-width:84px}
+.controls input[type=range]{flex:1 1 160px;min-width:120px;accent-color:var(--go)}
+.fc{font-family:var(--f-mono);font-size:.8rem;color:var(--ink-2);min-width:76px;text-align:right;font-variant-numeric:tabular-nums}
+select,.seg button{font:600 .88rem var(--f-body);height:38px;border-radius:9px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);padding:0 8px}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.seg button{border:0;border-radius:0;cursor:pointer;padding:0 12px}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.opts{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.opts label{display:inline-flex;gap:6px;align-items:center;font-size:.92rem}
+
+/* árbol */
+.tn{transition:opacity var(--dur)}
+.tn.off{opacity:0}
+.tn .pop{transform-box:fill-box;transform-origin:center;transition:transform var(--dur) cubic-bezier(.2,.9,.3,1.4)}
+.tn.off .pop{transform:scale(.2)}
+.tn circle{fill:var(--panel);stroke:var(--rule);stroke-width:2;transition:fill var(--dur),stroke var(--dur)}
+.tn text{font-family:var(--f-mono);font-size:11px;fill:var(--ink);text-anchor:middle;dominant-baseline:central;font-weight:600}
+.tn.active circle{fill:var(--go-soft);stroke:var(--go);stroke-width:2.5}
+.tn.done{opacity:.55} .tn.done circle{stroke-dasharray:3 3}
+.tn.sol circle{fill:var(--ok-soft);stroke:var(--ok);stroke-width:2.5}
+.tn.pruned circle{fill:var(--prune-soft);stroke:var(--prune)}
+.tn.pruned text{fill:var(--prune)}
+.tn.dead circle{fill:var(--back-soft);stroke:var(--back)}
+.te{fill:none;stroke:var(--rule);stroke-width:2;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset var(--dur) ease-out,stroke var(--dur),opacity var(--dur)}
+.te.on{stroke-dashoffset:0}
+.te.active{stroke:var(--go);stroke-width:3}
+.te.done{opacity:.5}
+.te.sol{stroke:var(--ok);stroke-width:2.5}
+.te.pruned{stroke:var(--prune)}
+.te.dead{stroke:var(--back)}
+.el{font-family:var(--f-mono);font-size:10.5px;fill:var(--ink-2);transition:opacity var(--dur)}
+.el.off{opacity:0}
+.cursor{transition:transform var(--dur) cubic-bezier(.3,.7,.2,1)}
+.cursor circle{fill:none;stroke:var(--back);stroke-width:2.5;animation:ring 1.2s ease-in-out infinite}
+@keyframes ring{50%{stroke-width:5;opacity:.5}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.84rem;color:var(--ink-2)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend i{width:14px;height:14px;border-radius:50%;border:2px solid;display:inline-block}
+
+/* laberinto */
+.maze-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:14px;align-items:start}
+.maze{position:relative;display:grid;width:100%;max-width:520px;aspect-ratio:1/1;margin:0 auto;background:var(--paper);border-radius:10px;overflow:hidden}
+.maze .cell{transition:background var(--dur)}
+.maze .w{background:var(--ink)}
+.maze .p{background:var(--go-soft)}
+.maze .d{background:var(--back-soft)}
+.maze .s,.maze .e{display:flex;align-items:center;justify-content:center;font:700 13px var(--f-mono)}
+.maze .e{background:var(--ok-soft);color:var(--ok)}
+.maze .s{color:var(--go)}
+.maze .trail{position:absolute;inset:0;pointer-events:none}
+.mouse{position:absolute;left:0;top:0;transition:transform var(--dur) cubic-bezier(.3,.7,.2,1);display:flex;align-items:center;justify-content:center}
+.mouse span{width:62%;height:62%;border-radius:50%;background:var(--go);box-shadow:0 0 0 4px var(--go-soft)}
+.mouse.back span{background:var(--back);box-shadow:0 0 0 4px var(--back-soft)}
+.mouse.win span{background:var(--ok);box-shadow:0 0 0 6px var(--ok-soft)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:10px 12px}
+.stat b{display:block;font-family:var(--f-display);font-size:1.9rem;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.82rem;color:var(--ink-2)}
+.stat.go b{color:var(--go)} .stat.back b{color:var(--back)} .stat.ok b{color:var(--ok)} .stat.prune b{color:var(--prune)}
+
+/* reinas */
+.board-wrap{display:flex;justify-content:center;padding:16px}
+.board{position:relative;width:100%;max-width:440px;aspect-ratio:1/1;display:grid;border:2px solid var(--ink);border-radius:6px;overflow:hidden}
+.sq{transition:background var(--dur);position:relative}
+.sq.l{background:var(--panel)} .sq.k{background:var(--grid)}
+.sq.th::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 6px,var(--back-soft) 6px 9px)}
+.qn{position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:center;transition:transform var(--dur) cubic-bezier(.3,.7,.2,1),opacity var(--dur);pointer-events:none}
+.qn svg{width:66%;height:66%;fill:var(--ink)}
+.qn.off{opacity:0}
+.qn.ghost svg{fill:var(--go);opacity:.75}
+.qn.ghost.bad svg{fill:var(--back);opacity:1}
+.qn.win svg{fill:var(--ok)}
+.qn.ghost.bad{animation:shake .35s}
+@keyframes shake{25%{translate:-4px 0}75%{translate:4px 0}}
+.board svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.board svg.lines line{stroke:var(--back);stroke-width:.07;stroke-linecap:round;stroke-dasharray:3;stroke-dashoffset:3;animation:draw var(--dur) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* metodología */
+.q4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.qcard{background:var(--panel);border:1px solid var(--rule);border-top:5px solid var(--c);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start}
+.qcard .qn-t{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;color:var(--c);font-weight:600}
+.qcard h3{font-size:1.25rem}
+.qcard .q{font-family:var(--f-hand);font-size:1.45rem;line-height:1.1;color:var(--c)}
+.qcard p{font-size:.95rem;color:var(--ink-2)}
+pre.py{margin:0;background:var(--code-bg);border-radius:10px;padding:14px 16px;overflow-x:auto;font-family:var(--f-mono);font-size:13px;line-height:1.65}
+.tpl{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px;align-items:start}
+.tbl-wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--rule);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:600}
+td:first-child{font-weight:700;font-family:var(--f-display)}
+tr:last-child td{border-bottom:0}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px 16px 16px;display:grid;gap:4px;align-content:start}
+.steps li::before{content:"Paso " counter(s);font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--go);font-weight:600}
+.steps b{font-family:var(--f-display);font-size:1.08rem}
+.steps span{font-size:.93rem;color:var(--ink-2)}
+.sheet{background:var(--panel);border:2px dashed var(--ink-2);border-radius:12px;padding:18px;display:grid;gap:10px}
+.sheet .row{display:grid;grid-template-columns:160px minmax(0,1fr);gap:12px;align-items:end}
+.sheet .row b{font-family:var(--f-display)}
+.sheet .line{border-bottom:1.5px solid var(--rule);height:28px}
+.compare{display:grid;gap:12px}
+.cbar{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:center}
+.cbar .track{height:30px;background:var(--paper);border-radius:6px;position:relative;overflow:hidden;border:1px solid var(--rule)}
+.cbar .fill{position:absolute;inset:0 auto 0 0;border-radius:5px;transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.cbar .val{font-family:var(--f-mono);font-size:.85rem;font-variant-numeric:tabular-nums}
+.cbar.bf .fill{background:var(--back)} .cbar.bt .fill{background:var(--go);min-width:3px}
+
+/* ejercicios y cierre */
+.ex{display:grid;gap:12px}
+details{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:0 16px}
+summary{cursor:pointer;padding:14px 0;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";font-family:var(--f-mono);font-weight:700;color:var(--go);width:14px}
+details[open] summary::before{content:"–"}
+summary b{font-family:var(--f-display);font-size:1.1rem}
+.lvl{font-family:var(--f-mono);font-size:.72rem;padding:2px 8px;border-radius:5px;background:var(--go-soft);color:var(--go)}
+.lvl.l3{background:var(--back-soft);color:var(--back)} .lvl.l2{background:var(--prune-soft);color:var(--prune)}
+.ex-text{display:grid;gap:8px;padding-bottom:16px;max-width:75ch}
+.ex-text .ex-io{color:var(--ink-2)}
+.ex-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:16px;padding-bottom:16px}
+.ex-body dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:.93rem}
+.ex-body dt{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding-top:3px;font-weight:600}
+.ex-body dd{margin:0}
+.bug{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bug pre{font-size:12px;padding:10px 12px}
+.bug .bad{border-left:4px solid var(--back)} .bug .good{border-left:4px solid var(--ok)}
+.foot{margin-top:72px;padding-top:20px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--ink-2);font-size:.9rem}
+.big-quote{font-family:var(--f-display);font-weight:700;font-size:clamp(1.4rem,3vw,2rem);line-height:1.2;max-width:28ch}
+
+/* marcos de la recursión: un cuadro por llamada */
+.dock{position:sticky;bottom:0;z-index:4;display:grid;gap:10px;background:var(--panel);margin:0 -16px -16px;padding-inline:16px;padding-block:10px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--rule);border-radius:0 0 16px 16px}
+.mem{display:grid;gap:12px}
+.calls-head{display:grid;gap:4px;margin-top:6px}
+.calls-head h3{font-size:1.2rem}
+.calls-stage{padding:18px 14px;scroll-behavior:smooth}
+.calls{display:flex;align-items:flex-start;min-height:340px;width:max-content}
+.calls-empty{position:absolute;left:24px;top:24px;color:var(--ink-2);font-style:italic}
+.callbox{position:relative;width:var(--cbw,290px);flex:none;background:var(--panel);border:1.5px solid var(--rule);border-radius:12px;margin-left:50px;transition:border-color var(--dur),box-shadow var(--dur),opacity var(--dur)}
+.callbox.root{margin-left:0}
+.callbox.top{border-color:var(--go);box-shadow:0 10px 24px -14px var(--go)}
+.callbox.wait{opacity:.8}
+.callbox.sol{border-color:var(--ok);box-shadow:0 10px 24px -14px var(--ok)}
+.callbox.ret{border-color:var(--back)}
+.callbox.enter{animation:boxin var(--dur) cubic-bezier(.2,.8,.2,1.1)}
+@keyframes boxin{from{opacity:0;transform:translateX(-36px) scale(.92)}}
+.callbox.leave{animation:boxout var(--dur) forwards}
+@keyframes boxout{to{opacity:0;transform:translateX(-30px) scale(.9)}}
+.cb-arr{position:absolute;left:-50px;top:12px;width:50px;display:grid;justify-items:center;gap:1px;font:600 9.5px var(--f-mono);color:var(--go);transition:color var(--dur)}
+.cb-arr svg{width:42px;height:14px}
+.cb-arr path{stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.callbox.root .cb-arr{display:none}
+.callbox.ret .cb-arr{color:var(--back)}
+.cb-h{padding:10px 12px;border-bottom:1px solid var(--rule);display:grid;gap:3px}
+.cb-h small{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);display:flex;justify-content:space-between}
+.cb-h b{font-family:var(--f-mono);font-size:12.5px}
+.cb-code{font-size:10.5px;border-radius:0}
+.cb-code .ln{height:20px;line-height:20px;padding-left:10px}
+.cb-code .bar{height:20px;transform:translateY(calc(var(--line,0) * 20px))}
+.callbox.wait .bar{background:var(--grid);border-left-color:var(--ink-2)}
+.callbox.ret .bar,.callbox.sol .bar{border-left-color:var(--ok)}
+.cb-loop{padding:10px 12px;display:grid;gap:6px;border-top:1px solid var(--rule)}
+.cb-loop .lbl{font:600 10px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.opts3{display:flex;gap:6px}
+.opts3 .op{min-width:0}
+.opts3.many{gap:4px} .opts3.many .op span{display:none} .opts3.many .op b{font-size:13px}
+.op{flex:1;display:grid;justify-items:center;gap:1px;padding:5px 2px;border-radius:7px;border:1.5px solid var(--rule);background:var(--paper);transition:background var(--dur),border-color var(--dur),opacity var(--dur)}
+.op b{font:700 15px var(--f-mono)}
+.op span{font-size:10px;color:var(--ink-2)}
+.op.cur{border-color:var(--back);background:var(--hl)}
+.op.skip{border-color:var(--prune);background:var(--prune-soft)} .op.skip b{text-decoration:line-through;color:var(--prune)} .op.skip span{color:var(--prune)}
+.op.going{border-color:var(--go);background:var(--go)} .op.going b,.op.going span{color:var(--panel)}
+.op.done{opacity:.55}
+.op.done b::after{content:" ✓";font-size:11px}
+.cb-base{font-size:.85rem;color:var(--ok);font-weight:600}
+.cb-f{padding:8px 12px 10px;font-family:var(--f-mono);font-size:11px;color:var(--ink-2);border-top:1px solid var(--rule);min-height:36px;line-height:1.45}
+.cb-f b{color:var(--ink)}
+.callbox.sol .cb-f b{color:var(--ok)}
+.flyer{position:fixed;left:0;top:0;z-index:50;pointer-events:none;transition:transform .75s cubic-bezier(.3,.7,.2,1);box-shadow:0 8px 20px -8px var(--ok)}
+
+@media (max-width:900px){
+  .hero,.viz-main,.guion,.tpl,.maze-wrap,.ex-body{grid-template-columns:minmax(0,1fr)}
+  .q4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tl-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps,.cols3{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .q4,.cols2,.bug,.tl-list{grid-template-columns:minmax(0,1fr)}
+  .tl a span{display:none}
+  .mom-head{grid-template-columns:auto minmax(0,1fr)}
+  .mom-head .min{grid-column:2;justify-self:start}
+  .mom-head .obj{grid-column:1/3}
+  .sheet .row,.cbar{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important}
+  :root{--dur:1ms}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div>
+    <p class="eyebrow">Programación · Algoritmos recursivos · Clase de 90 min</p>
+    <h1>Back<span class="bt">tracking</span></h1>
+    <p class="lead">Construir una solución paso a paso. Cuando un paso ya no puede llevar a nada bueno, se deshace y se prueba otro. Hoy lo vemos moverse, lo entendemos de punta a punta y salimos con un método para resolver cualquier problema de este tipo.</p>
+    <div class="verbs" aria-label="Los tres verbos del backtracking">
+      <span class="verb v1">1 · ELEGIR</span><span class="verb v2">2 · EXPLORAR</span><span class="verb v3">3 · DESHACER</span>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 400 250" id="heroTree"></svg>
+  </div>
+</header>
+
+<section class="plan" aria-labelledby="planT">
+  <div class="plan-head"><h2 id="planT">Ruta de la clase</h2><span class="eyebrow">8 momentos · 90 minutos</span></div>
+  <nav class="tl" id="timeline" aria-label="Momentos de la clase"></nav>
+  <ol class="tl-list" id="tlList"></ol>
+</section>
+
+<!-- ================= 1. LABERINTO ================= -->
+<section class="mom" id="m1">
+  <div class="mom-head">
+    <span class="mom-num">1</span><h2>El ratón en el laberinto</h2><span class="min">10 min</span>
+    <p class="obj">Mira cómo el ratón avanza, choca con una pared y se devuelve. Antes de ver código, intenta descubrir qué regla sigue.</p>
+  </div>
+  <div class="viz" id="vMaze" tabindex="-1">
+    <div class="maze-wrap">
+      <div class="stage" style="padding:14px"><div class="maze" id="maze"></div></div>
+      <div class="side">
+        <div class="stats">
+          <div class="stat go"><b id="mzSteps">0</b><span>pasos hacia adelante</span></div>
+          <div class="stat back"><b id="mzBacks">0</b><span>retrocesos</span></div>
+        </div>
+        <div><div class="panel-t"><span>Camino actual (la pila)</span><span id="mzLen"></span></div><div class="chips" id="mzPath"></div></div>
+        <div class="legend">
+          <span><i style="border-color:var(--go);background:var(--go-soft)"></i>camino vivo</span>
+          <span><i style="border-color:var(--back);background:var(--back-soft)"></i>callejón descartado</span>
+          <span><i style="border-color:var(--ok);background:var(--ok-soft)"></i>salida</span>
+        </div>
+        <p class="muted">Orden de prueba en cada casilla: abajo, izquierda, derecha, arriba.</p>
+      </div>
+    </div>
+    <div class="narr"><span class="vchip">—</span><span class="msg"></span></div>
+    <div class="controls"></div>
+  </div>
+  <div class="guion">
+    <div class="box">
+      <h3>Actividad</h3>
+      <p class="ask hand">“Si el ratón no ve el mapa, ¿qué regla le darías para salir siempre?”</p>
+      <ol style="margin-top:12px">
+        <li>Mira el laberinto <b>quieto</b> y escribe en 2 minutos una regla para que el ratón salga siempre.</li>
+        <li>Dale play a velocidad 1× y pausa en el primer retroceso rojo. <i>¿Por qué se devolvió? ¿Hasta dónde?</i></li>
+        <li>Pausa otra vez cuando el camino azul se encoja. <i>¿Qué le pasó al camino? ¿Qué elemento salió primero?</i></li>
+      </ol>
+    </div>
+    <div class="box">
+      <h3>Fíjate en esto</h3>
+      <ul>
+        <li>El ratón nunca vuelve a empezar desde cero: solo deshace <b>el último</b> paso.</li>
+        <li>Las casillas rojas no se vuelven a probar. Ahí ya sabemos que no hay salida.</li>
+        <li>Al final, el camino azul es la respuesta. No lo calculamos aparte: <b>es la pila</b>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. LA IDEA ================= -->
+<section class="mom" id="m2">
+  <div class="mom-head">
+    <span class="mom-num">2</span><h2>La idea: elegir, explorar, deshacer</h2><span class="min">10 min</span>
+    <p class="obj">Ponle nombre a lo que viste en el laberinto y descubre en qué se diferencia el backtracking de la fuerza bruta.</p>
+  </div>
+  <div class="cols2">
+    <div class="prose">
+      <p class="big-quote">Backtracking es una búsqueda en profundidad sobre soluciones a medio construir, que abandona una rama apenas sabe que no sirve.</p>
+      <p>Toda solución se arma con <b>decisiones en secuencia</b>: qué casilla piso, qué letra pongo, en qué columna va la reina. Cada decisión abre opciones nuevas, así que las decisiones forman un <b>árbol</b>. Backtracking recorre ese árbol y repite tres verbos:</p>
+      <div class="cols3" style="gap:10px">
+        <div class="box"><span class="tag t-go">ELEGIR</span><p style="margin-top:6px">Tomo una opción y la agrego a mi solución parcial.</p><code>camino.append(x)</code></div>
+        <div class="box"><span class="tag t-go">EXPLORAR</span><p style="margin-top:6px">Llamo a la recursión para decidir lo que falta.</p><code>backtrack(camino)</code></div>
+        <div class="box"><span class="tag t-back">DESHACER</span><p style="margin-top:6px">Quito esa opción para dejar todo como estaba.</p><code>camino.pop()</code></div>
+      </div>
+    </div>
+    <div class="box">
+      <h3>Fuerza bruta contra backtracking: 8 reinas</h3>
+      <p style="color:var(--ink-2);font-size:.95rem;margin-bottom:14px">Fuerza bruta arma tableros completos (una reina por fila) y después revisa. Backtracking revisa mientras construye y corta en cuanto hay un choque. Cifras calculadas en esta página.</p>
+      <div class="compare" id="compare">
+        <div class="cbar bf"><span>Fuerza bruta<br><small class="muted">tableros completos</small></span><div><div class="track"><div class="fill" style="width:100%"></div></div><span class="val" id="bfVal"></span></div></div>
+        <div class="cbar bt"><span>Backtracking<br><small class="muted">casillas probadas</small></span><div><div class="track"><div class="fill" id="btFill" style="width:0"></div></div><span class="val" id="btVal"></span></div></div>
+      </div>
+      <p class="hand" style="margin-top:14px" id="ratio"></p>
+    </div>
+  </div>
+  <div class="guion">
+    <div class="box">
+      <h3>Actividad</h3>
+      <p class="ask hand">“¿Qué tienen en común un sudoku, armar un horario y el laberinto?”</p>
+      <ul style="margin-top:12px">
+        <li>Ten presentes los tres verbos durante toda la clase. Cada vez que algo pase en una animación, pregúntate: <i>¿cuál de los tres verbos fue ese?</i></li>
+        <li>Piensa en el candado de una maleta: si al girar el primer disco ya sabes que no es, ¿vale la pena probar los otros 999 números?</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Concepto clave: la poda</h3>
+      <p>Descartar una opción <b>antes</b> de explorarla. Cada poda elimina un subárbol completo. Es la diferencia entre millones de casos y unos miles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. ÁRBOL ================= -->
+<section class="mom" id="m3">
+  <div class="mom-head">
+    <span class="mom-num">3</span><h2>El árbol de decisiones, paso a paso</h2><span class="min">20 min</span>
+    <p class="obj">Vas a ver al mismo tiempo el árbol, el código que se ejecuta y la pila de llamadas. Problema: todas las permutaciones de A, B, C.</p>
+  </div>
+  <div class="viz hide-code" id="vPerm" tabindex="-1">
+    <div class="viz-main">
+      <div class="stage"><svg class="tree" id="permSvg"></svg></div>
+      <div class="side">
+        <div class="code-wrap"><div class="panel-t"><span>Código que se ejecuta</span><button type="button" class="code-tg" aria-expanded="false" aria-controls="permCode">Mostrar código</button></div><p class="code-hid">El código está oculto. Pulsa <b>Mostrar código</b> para verlo aquí y dentro de los cuadros de llamada.</p><div class="code" id="permCode"></div></div>
+        <div class="mem">
+          <div><div class="panel-t"><span>camino · una sola lista para todas las llamadas</span></div><div class="chips" id="permPath"></div></div>
+          <div><div class="panel-t"><span>soluciones</span></div><div class="chips" id="permOut"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i style="border-color:var(--go);background:var(--go-soft)"></i>en el camino actual</span>
+      <span><i style="border-color:var(--ink-2);border-style:dashed"></i>explorado y deshecho</span>
+      <span><i style="border-color:var(--prune);background:var(--prune-soft)"></i>descartado (ya está en el camino)</span>
+      <span><i style="border-color:var(--ok);background:var(--ok-soft)"></i>solución</span>
+      <span><i style="border-color:var(--back)"></i>dónde está la ejecución</span>
+    </div>
+    <div class="calls-head">
+      <h3>La pila por dentro: un cuadro por cada llamada</h3>
+      <p class="muted" style="font-style:normal">Cada vez que se llama a <code>permutar</code> aparece un cuadro nuevo a la derecha con su propio código y su propio <code>for</code>. Los cuadros de la izquierda quedan en pausa en la línea de la llamada. Cuando un cuadro hace <code>return</code>, desaparece y su padre sigue con la siguiente letra.</p>
+      <div class="legend" style="margin-top:4px">
+        <span><i style="border-color:var(--back);background:var(--hl);border-radius:4px"></i>letra que se está probando</span>
+        <span><i style="border-color:var(--prune);background:var(--prune-soft);border-radius:4px"></i>descartada: ya está en el camino</span>
+        <span><i style="border-color:var(--go);background:var(--go);border-radius:4px"></i>elegida: se está explorando</span>
+        <span><i style="border-color:var(--rule);border-radius:4px"></i>pendiente o ya probada ✓</span>
+      </div>
+    </div>
+    <div class="stage calls-stage"><p class="calls-empty" id="permCallsEmpty">La pila está vacía. Pulsa Play o el paso siguiente para hacer la primera llamada.</p><div class="calls" id="permCalls"></div></div>
+    <div class="dock">
+      <div class="narr"><span class="vchip">—</span><span class="msg"></span></div>
+      <div class="controls"></div>
+    </div>
+  </div>
+  <div class="guion">
+    <div class="box">
+      <h3>Actividad</h3>
+      <p class="ask hand">“Antes de dar play: ¿cuántas hojas verdes va a tener el árbol?”</p>
+      <ol style="margin-top:12px">
+        <li>Avanza con el botón de <b>paso siguiente</b> hasta la primera solución, ABC. Di en voz alta el verbo que aparece en cada paso.</li>
+        <li>Detente justo después de la primera solución y responde: <i>¿qué hay en la pila ahora? ¿Qué línea se ejecuta al volver?</i></li>
+        <li>Baja a la fila de cuadros: hay 4 llamadas vivas, cada una con su propio <code>x</code>. Avanza un paso y observa qué pasa con el cuadro #4 y en qué punto sigue el #3. <i>¿Por qué en el cuadro #3 la A sale tachada?</i></li>
+        <li>Pon velocidad 2× y deja correr el resto. Cuenta los nodos naranjas: <i>¿qué representan?</i></li>
+        <li>Mueve el deslizador hacia atrás y adelante. <i>¿Qué relación hay entre el tamaño de la pila y la profundidad del árbol?</i></li>
+      </ol>
+    </div>
+    <div class="box">
+      <h3>Actividad en grupo: la pila humana</h3>
+      <p>Tres de ustedes, de pie, son las tres llamadas recursivas. Cada uno tiene una hoja con <b>A, B, C</b>. El primero elige una letra, la escribe en el tablero y “llama” al siguiente. El último, al completar 3 letras, dice la permutación en voz alta. Para regresar, cada uno <b>borra su letra</b> del tablero antes de probar la siguiente.</p>
+      <p style="margin-top:8px" class="muted">Al terminar, respondan: ¿qué verbo es borrar la letra? ¿Qué representa la fila de personas de pie?</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. METODOLOGÍA ================= -->
+<section class="mom" id="m4">
+  <div class="mom-head">
+    <span class="mom-num">4</span><h2>El método: 4 preguntas y una plantilla</h2><span class="min">10 min</span>
+    <p class="obj">Una receta que sirve para cualquier problema de backtracking. Si respondes las 4 preguntas, el código casi se escribe solo.</p>
+  </div>
+
+  <div class="q4">
+    <div class="qcard" style="--c:var(--go)"><span class="qn-t">PREGUNTA 1 · ESTADO</span><h3>¿Qué llevo construido?</h3><p class="q">la solución parcial</p><p>La lista, cadena o tablero que voy llenando. Casi siempre es una lista <code>camino</code> más datos auxiliares cuando hacen falta (<code>suma</code>, <code>inicio</code>).</p></div>
+    <div class="qcard" style="--c:var(--kw)"><span class="qn-t">PREGUNTA 2 · OPCIONES</span><h3>¿Qué puedo elegir ahora?</h3><p class="q">el for</p><p>Los candidatos del siguiente paso. Se vuelven el <code>for</code> de la función. Pocas opciones por paso significa un árbol angosto.</p></div>
+    <div class="qcard" style="--c:var(--prune)"><span class="qn-t">PREGUNTA 3 · RESTRICCIONES</span><h3>¿Cuándo una opción no sirve?</h3><p class="q">la poda</p><p>La regla que descarta una opción antes de explorarla. <b>Siempre</b> va dentro del <code>for</code>, antes de elegir: <code>if ... continue</code>. Miro antes de saltar.</p></div>
+    <div class="qcard" style="--c:var(--ok)"><span class="qn-t">PREGUNTA 4 · META</span><h3>¿Cuándo terminé?</h3><p class="q">el caso base</p><p>La condición de solución completa. Ahí guardo una <b>copia</b> y retorno.</p></div>
+  </div>
+
+  <div class="tpl" style="margin-top:22px">
+    <div class="box" style="padding:0;overflow:hidden">
+      <div style="padding:14px 16px 0"><div class="panel-t"><span>Plantilla universal (Python)</span></div></div>
+      <pre class="py" style="border-radius:0">def backtrack(estado):
+    if es_solucion(estado):              # 4. META
+        soluciones.append(copia(estado))
+        return
+    for opcion in opciones(estado):      # 2. OPCIONES
+        if not es_valida(opcion, estado): # 3. RESTRICCIONES
+            continue                     #    poda
+        hacer(opcion, estado)            # ELEGIR
+        backtrack(estado)                # EXPLORAR
+        deshacer(opcion, estado)         # DESHACER
+
+backtrack(estado_inicial)                # 1. ESTADO</pre>
+    </div>
+    <div class="box">
+      <h3>Tres reglas de oro</h3>
+      <ol>
+        <li><b>Simetría.</b> Todo lo que hace <code>hacer()</code> lo revierte <code>deshacer()</code>, en orden inverso. Si agregas a dos estructuras, quitas de las dos.</li>
+        <li><b>Copia al guardar.</b> <code>soluciones.append(camino[:])</code>. Si guardas <code>camino</code> sin copiar, todas tus soluciones terminan vacías.</li>
+        <li><b>Mira antes de saltar.</b> La poda va en el <code>for</code>, antes de elegir. Nunca al inicio de la función ni al llegar a la hoja.</li>
+      </ol>
+      <p class="hand" style="margin-top:12px">ESTADO · OPCIONES · RESTRICCIONES · META</p>
+    </div>
+  </div>
+
+  <h3 style="margin:30px 0 12px;font-size:1.3rem">La misma plantilla, cuatro problemas</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Problema</th><th>1 · Estado</th><th>2 · Opciones</th><th>3 · Restricciones</th><th>4 · Meta</th></tr></thead>
+      <tbody>
+        <tr><td>Laberinto</td><td>camino de casillas, visitadas</td><td>4 vecinas: abajo, izq., der., arriba</td><td>no es pared, no está visitada</td><td>casilla actual = salida</td></tr>
+        <tr><td>Permutaciones</td><td><code>camino</code></td><td>cada elemento</td><td>el elemento no está en <code>camino</code></td><td><code>len(camino) == n</code></td></tr>
+        <tr><td>Subconjuntos con suma</td><td><code>inicio</code>, <code>elegidos</code>, <code>suma</code></td><td>cada número desde <code>inicio</code></td><td><code>suma + nums[j]</code> no se pasa del objetivo</td><td><code>suma == objetivo</code></td></tr>
+        <tr><td>N reinas</td><td>columna de la reina en cada fila</td><td>cada columna de la fila actual</td><td>no comparte columna ni diagonal</td><td><code>fila == N</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin:30px 0 12px;font-size:1.3rem">Receta para resolver un problema nuevo</h3>
+  <ol class="steps">
+    <li><b>Dibuja dos niveles del árbol a mano</b><span>Con un ejemplo diminuto (n = 3). Si no puedes dibujarlo, todavía no entiendes las decisiones.</span></li>
+    <li><b>Responde las 4 preguntas por escrito</b><span>Usa la hoja de diseño de abajo. Sin código todavía.</span></li>
+    <li><b>Llena la plantilla</b><span>Cada respuesta va a una línea: meta al <code>if</code>, opciones al <code>for</code>, restricciones al <code>continue</code>.</span></li>
+    <li><b>Revisa la simetría</b><span>Lee juntas las líneas de ELEGIR y DESHACER. ¿Se anulan exactamente?</span></li>
+    <li><b>Traza a mano o con print</b><span>Imprime <code>camino</code> al entrar a la función, con sangría según la profundidad. Compáralo con tu dibujo.</span></li>
+    <li><b>Adelanta la poda</b><span>Pregúntate qué condición te permitiría cortar una rama antes. Mide cuántas llamadas ahorras.</span></li>
+  </ol>
+
+  <div class="sheet" style="margin-top:22px">
+    <div class="panel-t"><span>Hoja de diseño · copiar en el cuaderno</span><span>Nombre: ______________</span></div>
+    <div class="row"><b>Problema</b><div class="line"></div></div>
+    <div class="row"><b>1 · Estado</b><div class="line"></div></div>
+    <div class="row"><b>2 · Opciones</b><div class="line"></div></div>
+    <div class="row"><b>3 · Restricciones</b><div class="line"></div></div>
+    <div class="row"><b>4 · Meta</b><div class="line"></div></div>
+    <div class="row"><b>Deshacer = </b><div class="line"></div></div>
+  </div>
+</section>
+
+<!-- ================= 5. PODA ================= -->
+<section class="mom" id="m5">
+  <div class="mom-head">
+    <span class="mom-num">5</span><h2>El poder de la poda: subconjuntos que suman 10</h2><span class="min">10 min</span>
+    <p class="obj">Compara el mismo árbol con y sin poda. Números: 2, 3, 5, 7, 8. Objetivo: 10. El código sigue la plantilla exacta: la poda es un <code>continue</code> dentro del <code>for</code>.</p>
+  </div>
+  <div class="viz hide-code" id="vSub" tabindex="-1">
+    <div class="opts">
+      <div class="seg" role="group" aria-label="Modo de poda">
+        <button type="button" id="podaOff" aria-pressed="false">Sin poda</button>
+        <button type="button" id="podaOn" aria-pressed="true">Con poda</button>
+      </div>
+      <span class="muted" id="subCmp"></span>
+    </div>
+    <div class="viz-main">
+      <div class="stage">
+        <div class="chips" id="subNums" style="padding:12px 14px 0"></div>
+        <svg class="tree" id="subSvg"></svg>
+      </div>
+      <div class="side">
+        <div class="code-wrap"><div class="panel-t"><span>Código que se ejecuta</span><button type="button" class="code-tg" aria-expanded="false" aria-controls="subCode">Mostrar código</button></div><p class="code-hid">El código está oculto. Pulsa <b>Mostrar código</b> para verlo aquí y dentro de los cuadros de llamada.</p><div class="code" id="subCode"></div></div>
+        <div class="stats">
+          <div class="stat go"><b id="subNCalls">0</b><span>llamadas</span></div>
+          <div class="stat ok"><b id="subSols">0</b><span>soluciones</span></div>
+        </div>
+        <div><div class="panel-t"><span>soluciones</span></div><div class="chips" id="subOut"></div></div>
+      </div>
+    </div>
+    <div class="legend">
+      <span>El número en cada nodo es la suma acumulada · <b>+x</b> agrego x · <b>×</b> opción podada: nunca se llamó</span>
+      <span><i style="border-color:var(--prune);background:var(--prune-soft)"></i>podado</span>
+      <span><i style="border-color:var(--back);background:var(--back-soft)"></i>sin salida: ninguna opción sirvió</span>
+      <span><i style="border-color:var(--ok);background:var(--ok-soft)"></i>solución</span>
+    </div>
+    <div class="calls-head">
+      <h3>La pila por dentro: un cuadro por cada llamada</h3>
+      <p class="muted" style="font-style:normal">Cada llamada a <code>buscar</code> abre un cuadro con su propio <code>inicio</code>, <code>elegidos</code> y <code>suma</code>. Su <code>for</code> solo recorre los números desde <code>inicio</code>: por eso los cuadros de más a la derecha tienen menos opciones. Una opción que se pasa del objetivo sale tachada y no abre cuadro.</p>
+      <div class="legend" style="margin-top:4px">
+        <span><i style="border-color:var(--back);background:var(--hl);border-radius:4px"></i>número que se está probando</span>
+        <span><i style="border-color:var(--prune);background:var(--prune-soft);border-radius:4px"></i>podado: me paso del objetivo</span>
+        <span><i style="border-color:var(--go);background:var(--go);border-radius:4px"></i>elegido: se está explorando</span>
+        <span><i style="border-color:var(--rule);border-radius:4px"></i>pendiente o ya probado ✓</span>
+      </div>
+    </div>
+    <div class="stage calls-stage"><p class="calls-empty" id="subCallsEmpty">La pila está vacía. Pulsa Play o el paso siguiente para hacer la primera llamada.</p><div class="calls" id="subCalls"></div></div>
+    <div class="dock">
+      <div class="narr"><span class="vchip">—</span><span class="msg"></span></div>
+      <div class="controls"></div>
+    </div>
+  </div>
+  <div class="guion">
+    <div class="box">
+      <h3>Actividad</h3>
+      <p class="ask hand">“Si ya llevo 12 y busco 10, ¿vale la pena seguir sumando?”</p>
+      <ol style="margin-top:12px">
+        <li>Corre primero <b>sin poda</b> a 4× y anota el número de llamadas.</li>
+        <li>Cambia a <b>con poda</b>. Antes de dar play, adivina el nuevo número.</li>
+        <li>Antes de mirar el código, responde las 4 preguntas para este problema: estado, opciones, restricciones y meta.</li>
+        <li>La animación abre en la primera solución, {2, 3, 5}. Baja a los cuadros: hay 4 llamadas vivas, cada una con su propia suma. <i>¿Por qué el cuadro #2 no tiene el 2 en su <code>for</code>?</i></li>
+        <li>Avanza hasta ver un número tachado dentro de un cuadro. Luego cambia al modo sin poda y busca ese mismo número. <i>¿Qué cambió?</i></li>
+        <li><i>¿Por qué el <code>for</code> empieza en <code>inicio</code> y no en 0? ¿Qué pasaría con {3, 7} y {7, 3}?</i></li>
+      </ol>
+    </div>
+    <div class="box">
+      <h3>Fíjate en esto</h3>
+      <ul>
+        <li>Es la misma plantilla de las permutaciones y las reinas. Solo cambia lo que va en cada línea: la poda sigue siendo un <code>if ... continue</code> antes de elegir.</li>
+        <li>Una opción podada (×) no cuesta llamada: miras antes de saltar. Sin poda, la llamada se hace y se descubre tarde que no servía.</li>
+        <li>Si buscas en internet, vas a ver la revisión al inicio de la función (<code>if suma &gt; objetivo: return</code>). También funciona, pero gasta una llamada por cada opción mala. En esta clase siempre miramos antes de saltar.</li>
+        <li>Un nodo naranja corta todo su subárbol. Con 30 números, sin poda serían más de mil millones de llamadas.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. N REINAS ================= -->
+<section class="mom" id="m6">
+  <div class="mom-head">
+    <span class="mom-num">6</span><h2>Práctica guiada: N reinas</h2><span class="min">15 min</span>
+    <p class="obj">Aplica el método completo a un problema clásico: primero las 4 preguntas en el cuaderno, después la animación para verificar.</p>
+  </div>
+  <div class="q4" style="margin-bottom:18px">
+    <div class="qcard" style="--c:var(--go)"><span class="qn-t">ESTADO</span><p><code>reinas[f]</code> = columna de la reina en la fila <code>f</code>. Una reina por fila, así que nunca chocan en fila.</p></div>
+    <div class="qcard" style="--c:var(--kw)"><span class="qn-t">OPCIONES</span><p>Las N columnas de la fila que toca llenar.</p></div>
+    <div class="qcard" style="--c:var(--prune)"><span class="qn-t">RESTRICCIONES</span><p>Misma columna: <code>reinas[k] == col</code>. Misma diagonal: <code>|reinas[k] − col| == fila − k</code>.</p></div>
+    <div class="qcard" style="--c:var(--ok)"><span class="qn-t">META</span><p><code>fila == N</code>: todas las filas tienen reina.</p></div>
+  </div>
+  <div class="viz hide-code" id="vQ" tabindex="-1">
+    <div class="opts">
+      <label for="qN">Tamaño del tablero
+        <select id="qN"><option value="4" selected>4 × 4</option><option value="5">5 × 5</option><option value="6">6 × 6</option><option value="8">8 × 8</option></select></label>
+      <label><input type="checkbox" id="qFirst"> Detener en la primera solución</label>
+    </div>
+    <div class="viz-main">
+      <div class="stage"><div class="board-wrap"><div class="board" id="board"></div></div></div>
+      <div class="side">
+        <div class="code-wrap"><div class="panel-t"><span>Código que se ejecuta</span><button type="button" class="code-tg" aria-expanded="false" aria-controls="qCode">Mostrar código</button></div><p class="code-hid">El código está oculto. Pulsa <b>Mostrar código</b> para verlo aquí y dentro de los cuadros de llamada.</p><div class="code" id="qCode"></div></div>
+        <div class="stats">
+          <div class="stat go"><b id="qTries">0</b><span>casillas probadas</span></div>
+          <div class="stat ok"><b id="qSols">0</b><span>soluciones</span></div>
+        </div>
+        <div><div class="panel-t"><span>soluciones (columna por fila, contando desde 1)</span></div><div class="chips" id="qOut"></div></div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i style="border-color:var(--go);background:var(--go-soft)"></i>casilla que se está probando</span>
+      <span><i style="border-color:var(--back);background:var(--back-soft)"></i>casilla amenazada o en conflicto</span>
+    </div>
+    <div class="calls-head">
+      <h3>La pila por dentro: un cuadro por cada llamada</h3>
+      <p class="muted" style="font-style:normal">Cada llamada a <code>colocar(fila)</code> abre un cuadro y se encarga de una sola fila. Su <code>for</code> prueba las columnas de esa fila. Cuando una fila se queda sin columnas, su cuadro hace <code>return</code> y el de arriba mueve su reina. En Python filas y columnas empiezan en 0; en el tablero y en la narración se cuentan desde 1.</p>
+      <div class="legend" style="margin-top:4px">
+        <span><i style="border-color:var(--back);background:var(--hl);border-radius:4px"></i>columna que se está probando</span>
+        <span><i style="border-color:var(--prune);background:var(--prune-soft);border-radius:4px"></i>atacada: <code>continue</code></span>
+        <span><i style="border-color:var(--go);background:var(--go);border-radius:4px"></i>reina puesta: se está explorando</span>
+        <span><i style="border-color:var(--rule);border-radius:4px"></i>pendiente o ya probada ✓</span>
+      </div>
+    </div>
+    <div class="stage calls-stage"><p class="calls-empty" id="qCallsEmpty">La pila está vacía. Pulsa Play o el paso siguiente para hacer la primera llamada.</p><div class="calls" id="qCalls"></div></div>
+    <div class="dock">
+      <div class="narr"><span class="vchip">—</span><span class="msg"></span></div>
+      <div class="controls"></div>
+    </div>
+  </div>
+  <div class="guion">
+    <div class="box">
+      <h3>Actividad</h3>
+      <p class="ask hand">“¿Por qué basta con revisar las filas de arriba?”</p>
+      <ol style="margin-top:12px">
+        <li>En parejas, tomen 5 minutos para llenar la hoja de diseño de N reinas sin mirar las tarjetas de arriba.</li>
+        <li>Comparen su hoja con las tarjetas. Luego corran el 4 × 4 paso a paso desde el inicio (deslizador a la izquierda) y pausen en el primer retroceso de dos filas: <i>¿por qué la reina de la fila 2 también se movió?</i></li>
+        <li>Miren los cuadros en ese momento: <i>¿qué le pasa al cuadro de la fila 3 cuando todas sus columnas quedan tachadas? ¿Con qué sigue el cuadro de la fila 2? ¿Cuántos cuadros vivos hay comparado con las reinas puestas?</i></li>
+        <li>Cambien a 8 × 8 y comparen las casillas probadas con 8⁸ = 16 777 216.</li>
+      </ol>
+    </div>
+    <div class="box">
+      <h3>Función para saber si una casilla está atacada</h3>
+<pre class="py">def ataca(fila, col):
+    for k in range(fila):
+        if reinas[k] == col or abs(reinas[k] - col) == fila - k:
+            return True
+    return False</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. RETO ================= -->
+<section class="mom" id="m7">
+  <div class="mom-head">
+    <span class="mom-num">7</span><h2>Reto en equipos</h2><span class="min">10 min + tarea</span>
+    <p class="obj">En equipos de 3, cada equipo toma un problema, llena la hoja de diseño y explica su árbol en 1 minuto. El código se termina en casa.</p>
+  </div>
+  <div class="ex">
+    <details><summary><b>Cadenas binarias sin dos 1 seguidos</b><span class="lvl">Nivel 1</span><span class="muted">n = 3 → 000, 001, 010, 100, 101</span></summary>
+      <div class="ex-text"><p>Dado un número <code>n</code>, encuentra todas las cadenas de largo <code>n</code> formadas por <code>0</code> y <code>1</code> en las que nunca aparecen dos <code>1</code> uno al lado del otro. La cadena se arma de izquierda a derecha, un carácter a la vez.</p><p class="ex-io"><b>Ejemplo:</b> con <code>n = 3</code> salen 5 cadenas: <code>000 001 010 100 101</code>. No valen <code>011</code>, <code>110</code> ni <code>111</code>.</p></div></details>
+    <details><summary><b>Combinaciones: elegir k de n</b><span class="lvl l2">Nivel 2</span><span class="muted">n = 4, k = 2 → 12, 13, 14, 23, 24, 34</span></summary>
+      <div class="ex-text"><p>De los números del <code>1</code> al <code>n</code>, encuentra todas las formas de escoger exactamente <code>k</code>. El orden no importa: <code>{1, 2}</code> y <code>{2, 1}</code> son el mismo grupo y debe aparecer una sola vez.</p><p class="ex-io"><b>Ejemplo:</b> con <code>n = 4, k = 2</code> salen 6 grupos: <code>[1, 2] [1, 3] [1, 4] [2, 3] [2, 4] [3, 4]</code>.</p></div></details>
+    <details><summary><b>Paréntesis balanceados</b><span class="lvl l2">Nivel 2</span><span class="muted">n = 2 → (()), ()()</span></summary>
+      <div class="ex-text"><p>Dado <code>n</code>, genera todas las cadenas con <code>n</code> paréntesis que abren y <code>n</code> que cierran que estén bien balanceadas: al leer de izquierda a derecha nunca puede haber más cierres que aperturas, y al final las dos cuentas son iguales.</p><p class="ex-io"><b>Ejemplo:</b> con <code>n = 2</code> salen <code>(())</code> y <code>()()</code>. La cadena <code>())(</code> no vale.</p></div></details>
+    <details><summary><b>Sudoku 4 × 4</b><span class="lvl l3">Nivel 3</span><span class="muted">completar el tablero y parar en la primera solución</span></summary>
+      <div class="ex-text"><p>Un tablero de 4 × 4 dividido en cuatro bloques de 2 × 2 trae algunas casillas llenas. Complétalo para que cada fila, cada columna y cada bloque tenga los números 1, 2, 3 y 4 exactamente una vez. Si no tiene solución, el programa debe decirlo.</p><p class="ex-io"><b>Ejemplo:</b> la fila <code>1 2 _ 4</code> solo se puede completar con un <code>3</code>, siempre que la columna y el bloque lo permitan.</p></div></details>
+    <details><summary><b>Buscar una palabra en una sopa de letras</b><span class="lvl l3">Nivel 3</span><span class="muted">moviéndose a casillas vecinas, sin repetir</span></summary>
+      <div class="ex-text"><p>Dada una cuadrícula de letras y una palabra, decide si la palabra se puede formar empezando en cualquier casilla y pasando a una vecina de arriba, abajo, izquierda o derecha. Una casilla no se puede usar dos veces en la misma palabra.</p><p class="ex-io"><b>Ejemplo:</b> en una cuadrícula con las filas <code>PERO</code> y <code>ATOL</code>, la palabra <code>PATO</code> sí está: P, baja a A, luego T y O hacia la derecha.</p></div></details>
+  </div>
+</section>
+
+<!-- ================= 8. CIERRE ================= -->
+<section class="mom" id="m8">
+  <div class="mom-head">
+    <span class="mom-num">8</span><h2>Cierre: errores típicos y ticket de salida</h2><span class="min">5 min</span>
+    <p class="obj">Repasa los cuatro errores más comunes al programar backtracking y comprueba qué te quedó de la clase.</p>
+  </div>
+  <div class="cols2">
+    <div class="box">
+      <h3>Olvidar deshacer</h3>
+      <div class="bug"><pre class="py bad">camino.append(x)
+backtrack(camino)
+# falta camino.pop()</pre><pre class="py good">camino.append(x)
+backtrack(camino)
+camino.pop()</pre></div>
+      <p class="muted" style="margin-top:8px">Síntoma: la segunda solución trae letras de la primera.</p>
+    </div>
+    <div class="box">
+      <h3>Guardar la referencia, no la copia</h3>
+      <div class="bug"><pre class="py bad">res.append(camino)</pre><pre class="py good">res.append(camino[:])</pre></div>
+      <p class="muted" style="margin-top:8px">Síntoma: al final todas las soluciones son <code>[]</code>, porque todas apuntan a la misma lista ya vaciada.</p>
+    </div>
+    <div class="box">
+      <h3>Revisar la restricción en la hoja</h3>
+      <div class="bug"><pre class="py bad">if len(camino) == n:
+    if es_valida(camino): ...</pre><pre class="py good">for x in opciones:
+    if not valida(x): continue</pre></div>
+      <p class="muted" style="margin-top:8px">Funciona, pero es fuerza bruta disfrazada. Poda al elegir.</p>
+    </div>
+    <div class="box">
+      <h3>Caso base sin return</h3>
+      <div class="bug"><pre class="py bad">if len(camino) == n:
+    res.append(camino[:])
+for x in ...</pre><pre class="py good">if len(camino) == n:
+    res.append(camino[:])
+    return</pre></div>
+      <p class="muted" style="margin-top:8px">Síntoma: sigue agregando elementos más allá de n o entra en recursión infinita.</p>
+    </div>
+  </div>
+  <div class="guion">
+    <div class="box">
+      <h3>Ticket de salida (en una hoja, sin nombre)</h3>
+      <ol>
+        <li>Escribe los tres verbos del backtracking y la línea de código que corresponde a cada uno en las permutaciones.</li>
+        <li>En el problema de subconjuntos, ¿qué pasaría con el número de llamadas si quitamos la poda? ¿Por qué?</li>
+        <li>Para generar todas las palabras de 4 letras con A, B, C sin dos letras iguales seguidas, responde las 4 preguntas.</li>
+      </ol>
+    </div>
+    <div class="box" style="display:grid;align-content:center">
+      <p class="big-quote">Elegir, explorar, deshacer. Y podar todo lo que se pueda, lo antes posible.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot"><span>Backtracking · material de clase interactivo</span><span>Atajos: espacio reproduce o pausa · flechas avanzan o retroceden el visualizador activo</span></footer>
+</div>
+
+<script>
+(() => {
+const $ = (s, r = document) => r.querySelector(s);
+const SVGNS = 'http://www.w3.org/2000/svg';
+const sv = (tag, attrs = {}) => { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- resaltado de Python ---------- */
+const KW = /\b(def|if|for|in|return|continue|or|and|not|is|None|True|False|abs|len|range|any)\b/g;
+function hl(src) {
+  return src.split('\n').map(line => {
+    let out = '', rest = line;
+    const re = /("[^"]*"|'[^']*')|(#.*$)/g; let last = 0, m;
+    while ((m = re.exec(line))) {
+      out += esc(line.slice(last, m.index)).replace(KW, '<span class="kw">$1</span>');
+      out += m[1] ? `<span class="st">${esc(m[1])}</span>` : `<span class="cm">${esc(m[2])}</span>`;
+      last = re.lastIndex;
+    }
+    return out + esc(line.slice(last)).replace(KW, '<span class="kw">$1</span>');
+  }).join('\n');
+}
+document.querySelectorAll('pre.py').forEach(p => { p.innerHTML = hl(p.textContent); });
+
+/* ---------- verbos ---------- */
+const VERB = {
+  inicio: ['INICIO', 'call'], entrar: ['LLAMADA', 'call'], meta: ['META', 'ok'], opc: ['OPCIÓN', ''],
+  poda: ['PODA', 'prune'], elegir: ['ELEGIR', 'go'], explorar: ['EXPLORAR', 'go'],
+  deshacer: ['DESHACER', 'back'], back: ['REGRESAR', 'back'], sol: ['SOLUCIÓN', 'ok'], fin: ['FIN', 'ok']
+};
+function narrate(box, f) {
+  const n = box.querySelector('.narr'), c = n.querySelector('.vchip'), [t, k] = VERB[f.verb] || ['—', ''];
+  if (c.textContent !== t) { n.classList.remove('flash'); void n.offsetWidth; n.classList.add('flash'); }
+  c.textContent = t; c.className = 'vchip ' + k;
+  n.querySelector('.msg').textContent = f.msg;
+}
+
+/* ---------- mostrar / ocultar código ---------- */
+document.querySelectorAll('.code-tg').forEach(b => b.addEventListener('click', () => {
+  const v = b.closest('.viz'), hid = v.classList.toggle('hide-code');
+  b.setAttribute('aria-expanded', String(!hid)); b.textContent = hid ? 'Mostrar código' : 'Ocultar código';
+}));
+
+/* ---------- reproductor ---------- */
+const IC = {
+  first: '<path d="M6 5h2v14H6zM19 5l-10 7 10 7z"/>', prev: '<path d="M16 5l-10 7 10 7z"/>',
+  play: '<path d="M7 4l13 8-13 8z"/>', pause: '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>',
+  next: '<path d="M8 5l10 7-10 7z"/>', last: '<path d="M16 5h2v14h-2zM5 5l10 7-10 7z"/>'
+};
+const icon = n => `<svg viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
+let activePlayer = null;
+class Player {
+  constructor(box, id, render) {
+    this.box = box; this.render = render; this.frames = []; this.i = 0; this.timer = null; this.speed = 1;
+    const c = box.querySelector('.controls');
+    c.innerHTML = `
+      <button class="btn" data-a="first" aria-label="Ir al inicio">${icon('first')}</button>
+      <button class="btn" data-a="prev" aria-label="Paso anterior">${icon('prev')}</button>
+      <button class="btn primary" data-a="play" aria-label="Reproducir">${icon('play')}<span>Play</span></button>
+      <button class="btn" data-a="next" aria-label="Paso siguiente">${icon('next')}</button>
+      <button class="btn" data-a="last" aria-label="Ir al final">${icon('last')}</button>
+      <input type="range" id="${id}-r" min="0" max="0" value="0" aria-label="Paso de la animación">
+      <span class="fc"></span>
+      <label for="${id}-s" class="muted" style="font-style:normal">Velocidad</label>
+      <select id="${id}-s"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option><option value="10">10×</option></select>`;
+    this.r = c.querySelector('input'); this.fc = c.querySelector('.fc'); this.pb = c.querySelector('[data-a=play]');
+    c.addEventListener('click', e => {
+      const b = e.target.closest('[data-a]'); if (!b) return; activePlayer = this;
+      ({ first: () => this.go(0), prev: () => this.go(this.i - 1), next: () => this.go(this.i + 1),
+         last: () => this.go(this.frames.length - 1), play: () => this.toggle() })[b.dataset.a]();
+    });
+    this.r.addEventListener('input', () => { activePlayer = this; this.stop(); this.go(+this.r.value); });
+    c.querySelector('select').addEventListener('change', e => { this.speed = +e.target.value; this.setDur(); });
+    box.addEventListener('pointerdown', () => activePlayer = this);
+    this.setDur();
+  }
+  setDur() { this.box.style.setProperty('--dur', Math.round(Math.max(90, Math.min(520, 620 / this.speed))) + 'ms'); }
+  load(frames, at = 0) { this.stop(); this.frames = frames; this.r.max = frames.length - 1; this.prev = null; this.go(at); }
+  go(i) {
+    if (this.timer && (i < 0 || i >= this.frames.length)) { this.stop(); return; }
+    this.i = Math.max(0, Math.min(this.frames.length - 1, i));
+    this.r.value = this.i; this.fc.textContent = `${this.i + 1} / ${this.frames.length}`;
+    this.render(this.frames[this.i], this.prev); this.prev = this.frames[this.i];
+  }
+  toggle() { this.timer ? this.stop() : this.play(); }
+  play() {
+    if (this.i >= this.frames.length - 1) this.go(0);
+    this.pb.innerHTML = icon('pause') + '<span>Pausa</span>'; this.pb.setAttribute('aria-label', 'Pausar');
+    const tick = () => {
+      if (this.i >= this.frames.length - 1) { this.stop(); return; }
+      this.go(this.i + 1);
+      const f = this.frames[this.i], hold = (f.verb === 'sol' || f.verb === 'fin') ? 2.2 : 1;
+      this.timer = setTimeout(tick, 820 * hold / this.speed);
+    };
+    this.timer = setTimeout(tick, 120);
+  }
+  stop() {
+    clearTimeout(this.timer); this.timer = null;
+    this.pb.innerHTML = icon('play') + '<span>Play</span>'; this.pb.setAttribute('aria-label', 'Reproducir');
+  }
+}
+document.addEventListener('keydown', e => {
+  if (!activePlayer || /INPUT|SELECT|TEXTAREA/.test(e.target.tagName) && e.target.type !== 'range') return;
+  if (e.key === ' ' && e.target.tagName !== 'BUTTON') { e.preventDefault(); activePlayer.toggle(); }
+  else if (e.key === 'ArrowRight' && e.target.type !== 'range') { activePlayer.stop(); activePlayer.go(activePlayer.i + 1); }
+  else if (e.key === 'ArrowLeft' && e.target.type !== 'range') { activePlayer.stop(); activePlayer.go(activePlayer.i - 1); }
+});
+
+/* ---------- panel de código ---------- */
+const TAGS = { meta: ['META', 't-meta'], opc: ['OPCIONES', 't-opc'], res: ['RESTRICCIÓN', 't-res'], go1: ['ELEGIR', 't-go'],
+  go2: ['EXPLORAR', 't-go'], back: ['DESHACER', 't-back'], prune: ['PODA', 't-prune'] };
+class Code {
+  constructor(box, lines) { this.box = box; this.setLines(lines); }
+  setLines(lines) {
+    this.box.innerHTML = `<div class="code-in"><div class="bar"></div>${lines.map(([t, g, off]) =>
+      `<div class="ln${off ? ' off' : ''}"><span>${hl(t)}</span>${g ? `<span class="tag ${TAGS[g][1]}">${TAGS[g][0]}</span>` : ''}</div>`).join('')}</div>`;
+    this.bar = this.box.querySelector('.bar');
+  }
+  set(line) { this.box.classList.toggle('idle', line == null); if (line != null) this.bar.style.setProperty('--line', line); }
+}
+function renderStack(ul, stack, prev) {
+  if (!stack.length) { ul.innerHTML = '<li class="empty">(vacía)</li>'; return; }
+  const grew = !prev || stack.length > prev.length;
+  ul.innerHTML = stack.slice().reverse().map((s, i) => `<li class="${i === 0 ? 'top' + (grew ? ' enter' : '') : ''}">${esc(s)}</li>`).join('');
+}
+function renderChips(box, items, cls, prev, empty) {
+  if (!items.length) { box.innerHTML = `<span class="muted">${empty}</span>`; return; }
+  box.innerHTML = items.map((s, i) => `<span class="chip ${cls}${prev && i >= prev.length ? ' new' : ''}">${esc(s)}</span>`).join('');
+}
+
+/* ---------- árbol ---------- */
+function recorder() {
+  const R = { nodes: [], st: {}, stack: [], out: [], path: [], frames: [], calls: 0 };
+  R.node = (parent, label, edge, kind) => { const id = R.nodes.length; R.nodes.push({ id, parent, label, edge, kind }); return id; };
+  R.snap = (cur, line, verb, msg, x = {}) => R.frames.push({ cur, line, verb, msg, st: { ...R.st }, stack: [...R.stack],
+    out: [...R.out], path: [...R.path], calls: R.calls, ...x });
+  return R;
+}
+class Tree {
+  constructor(svg) { this.svg = svg; }
+  build(nodes, dx, dy) {
+    const kids = {}; nodes.forEach(n => { if (n.parent != null) (kids[n.parent] ??= []).push(n.id); });
+    let leaf = 0, depth = 0; const P = {};
+    const lay = (id, d) => { depth = Math.max(depth, d); const k = kids[id] || [];
+      if (!k.length) P[id] = { x: leaf++ * dx, y: d * dy };
+      else { k.forEach(c => lay(c, d + 1)); P[id] = { x: (P[k[0]].x + P[k[k.length - 1]].x) / 2, y: d * dy }; } };
+    lay(0, 0);
+    const pad = 30, W = (leaf - 1) * dx + pad * 2, H = depth * dy + pad * 2;
+    const s = this.svg; s.innerHTML = ''; s.setAttribute('viewBox', `${-pad} ${-pad} ${W} ${H}`);
+    s.style.minWidth = Math.min(760, Math.max(420, W * 0.8)) + 'px';
+    const gE = sv('g'), gL = sv('g'), gN = sv('g'); s.append(gE, gL, gN);
+    this.P = P; this.N = {}; this.E = {}; this.L = {};
+    nodes.forEach(n => {
+      const p = P[n.id], r = n.kind === 'pruned' ? 10 : 16;
+      if (n.parent != null) {
+        const q = P[n.parent], dxy = Math.hypot(p.x - q.x, p.y - q.y);
+        const sx = q.x + (p.x - q.x) * 16 / dxy, sy = q.y + (p.y - q.y) * 16 / dxy, ex = p.x - (p.x - q.x) * r / dxy, ey = p.y - (p.y - q.y) * r / dxy;
+        const e = sv('path', { d: `M${sx} ${sy}L${ex} ${ey}`, pathLength: 1, class: 'te' }); gE.append(e); this.E[n.id] = e;
+        const lx = q.x + (p.x - q.x) * .55, ly = q.y + (p.y - q.y) * .55;
+        const t = sv('text', { x: lx + (p.x >= q.x ? 6 : -6), y: ly - 2, class: 'el off', 'text-anchor': p.x >= q.x ? 'start' : 'end' });
+        t.textContent = n.edge; gL.append(t); this.L[n.id] = t;
+      }
+      const g = sv('g', { transform: `translate(${p.x} ${p.y})` }), inner = sv('g', { class: 'pop' });
+      inner.append(sv('circle', { r })); const tx = sv('text'); tx.textContent = n.label; inner.append(tx);
+      g.append(inner); gN.append(g); this.N[n.id] = g;
+    });
+    this.cur = sv('g', { class: 'cursor' }); this.cur.append(sv('circle', { r: 23 })); s.append(this.cur);
+  }
+  render(f) {
+    for (const id in this.N) {
+      const st = f.st[id] || 'off';
+      this.N[id].setAttribute('class', 'tn ' + st);
+      if (this.E[id]) { this.E[id].setAttribute('class', 'te ' + (st === 'off' ? '' : 'on ' + st)); this.L[id].setAttribute('class', 'el' + (st === 'off' ? ' off' : '')); }
+    }
+    const p = this.P[f.cur];
+    this.cur.style.opacity = p ? 1 : 0;
+    if (p) this.cur.style.transform = `translate(${p.x}px, ${p.y}px)`;
+  }
+}
+
+/* ======= Cuadros de llamada: uno por cada llamada viva en la pila ======= */
+const OPCLS = { p: 'pend', c: 'cur', s: 'skip', g: 'going', d: 'done' };
+const setOp = (c, i, ch) => { c.os = c.os.slice(0, i) + ch + c.os.slice(i + 1); };
+const ARR_CALL = 'M3 7h34M31 2l6 5-6 5', ARR_RET = 'M39 7H5M11 2L5 7l6 5';
+const pyStr = a => '[' + a.map(x => `'${x}'`).join(', ') + ']';
+function fly(fromEl, text, outEl) {
+  const target = outEl.lastElementChild;
+  if (reduced || !fromEl || !target) return;
+  const a = fromEl.getBoundingClientRect(), b = target.getBoundingClientRect();
+  const d = document.createElement('span'); d.className = 'chip ok flyer'; d.textContent = text;
+  d.style.transform = `translate(${a.left + a.width / 2 - 24}px, ${a.bottom - 60}px)`; document.body.append(d);
+  requestAnimationFrame(() => requestAnimationFrame(() => { d.style.transform = `translate(${b.left}px, ${b.top}px)`; }));
+  setTimeout(() => d.remove(), 800);
+}
+class Calls {
+  constructor({ box, el, empty, lines, pause, out, skip, width }) {
+    Object.assign(this, { box, el, empty, pause, out }); this.stage = el.parentElement; this.boxes = new Map();
+    this.lbl = { p: 'pendiente', c: 'probando', s: skip, g: 'explorando', d: 'probada' };
+    el.style.setProperty('--cbw', width + 'px'); this.setLines(lines);
+  }
+  setLines(lines) { this.code = lines.map(([t, , off]) => `<div class="ln${off ? ' off' : ''}"><span>${hl(t)}</span></div>`).join(''); this.reset(); }
+  reset() { for (const e of this.boxes.values()) e.remove(); this.boxes.clear(); }
+  html(c) {
+    return `<div class="cb-arr"><span class="al">llama</span><svg viewBox="0 0 42 14" aria-hidden="true"><path d="${ARR_CALL}"/></svg></div>
+    <div class="cb-h"><small><span>llamada #${c.n}</span><span>nivel ${c.depth}</span></small><b>${esc(c.head)}</b></div>
+    <div class="code cb-code"><div class="code-in"><div class="bar"></div>${this.code}</div></div>
+    <div class="cb-loop"></div><div class="cb-f"></div>`;
+  }
+  update(el, c, isTop, f, next) {
+    el.classList.toggle('root', c.depth === 0); el.classList.toggle('top', isTop); el.classList.toggle('wait', !isTop);
+    el.classList.toggle('ret', c.ret); el.classList.toggle('sol', c.sol);
+    el.querySelector('.bar').style.setProperty('--line', isTop ? (f.line ?? 0) : this.pause);
+    el.querySelector('.al').textContent = c.ret ? 'return' : 'llama';
+    el.querySelector('.cb-arr path').setAttribute('d', c.ret ? ARR_RET : ARR_CALL);
+    const lbl = `<span class="lbl">${esc(c.lbl)}${c.xs ? ' · ' + esc(c.xs) : ''}</span>`;
+    el.querySelector('.cb-loop').innerHTML = c.base ? lbl + `<span class="cb-base">${c.base}</span>`
+      : !c.ol.length ? lbl + `<span class="cb-base" style="color:var(--ink-2)">${c.none}</span>`
+      : lbl + `<div class="opts3${c.ol.length > 5 ? ' many' : ''}">${c.ol.map((x, i) =>
+          `<div class="op ${OPCLS[c.os[i]]}" title="${x}: ${this.lbl[c.os[i]]}"><b>${x}</b><span>${this.lbl[c.os[i]]}</span></div>`).join('')}</div>`;
+    let foot;
+    if (c.ret) foot = c.parent ? `return: vuelve al cuadro <b>#${c.parent}</b>` : 'return';
+    else if (c.sol) foot = `soluciones.append(<b>${c.solTxt}</b>)`;
+    else if (!isTop && next) foot = `En pausa en la línea de la llamada.<br>Espera a que termine el cuadro <b>#${next.n}</b>.`;
+    else foot = c.foot;
+    el.querySelector('.cb-f').innerHTML = foot;
+  }
+  render(f, p) {
+    const fr = f.fr || [], live = new Set(fr.map(c => c.n)), dur = parseInt(getComputedStyle(this.box).getPropertyValue('--dur')) || 400;
+    for (const [n, el] of this.boxes) if (!live.has(n)) {
+      this.boxes.delete(n); el.classList.remove('enter'); el.classList.add('leave'); setTimeout(() => el.remove(), dur);
+    }
+    fr.forEach((c, i) => {
+      let el = this.boxes.get(c.n);
+      if (!el) {
+        el = document.createElement('div'); el.className = 'callbox enter'; el.innerHTML = this.html(c);
+        el.addEventListener('animationend', e => { if (e.animationName === 'boxin') el.classList.remove('enter'); });
+        this.boxes.set(c.n, el); this.el.append(el);
+      }
+      this.update(el, c, i === fr.length - 1, f, fr[i + 1]);
+    });
+    const order = fr.map(c => this.boxes.get(c.n)), dom = [...this.el.children].filter(e => !e.classList.contains('leave'));
+    if (order.some((e, i) => dom[i] !== e)) order.forEach(e => this.el.append(e));
+    this.empty.hidden = fr.length > 0;
+    const top = order[order.length - 1];
+    if (top) this.stage.scrollLeft = Math.max(0, top.offsetLeft + top.offsetWidth + 24 - this.stage.clientWidth);
+    if (p && f.out.length > p.out.length && fr.length) fly(this.boxes.get(fr[fr.length - 1].n), f.out[f.out.length - 1], this.out);
+  }
+}
+const frameOf = cs => cs.map(c => ({ ...c }));
+
+/* ======= Permutaciones ======= */
+function buildPerm() {
+  const R = recorder(), EL = ['A', 'B', 'C'], N = 3, cs = []; let nc = 0;
+  const snap = (cur, line, verb, msg) => {
+    const t = cs[cs.length - 1];
+    if (t) t.foot = t.x ? `x = <b>'${t.x}'</b> · camino = <b>${pyStr(R.path)}</b>` : `¿len(camino) == ${N}?`;
+    R.snap(cur, line, verb, msg, { fr: frameOf(cs) });
+  };
+  const root = R.node(null, '[ ]', '');
+  const go = (id, cam, parentN) => {
+    const me = { n: ++nc, depth: cs.length, head: `permutar([${cam.join(', ')}])`, lbl: 'for x in elementos',
+      ol: EL, os: 'p'.repeat(EL.length), x: null, xs: '', ret: false, sol: false, parent: parentN,
+      base: cam.length === N ? 'Caso base: esta llamada no llega al for.' : '', none: '', foot: '', solTxt: '' };
+    cs.push(me);
+    R.calls++; R.st[id] = 'active'; R.path = [...cam];
+    snap(id, 0, 'entrar', `Nueva llamada #${me.n}: permutar con camino = [${cam.join(', ')}]. Aparece un cuadro nuevo en la pila.`);
+    if (cam.length === N) {
+      snap(id, 1, 'meta', `¿len(camino) == ${N}? Sí: la permutación está completa.`);
+      R.st[id] = 'sol'; R.out.push(cam.join('')); me.sol = true; me.solTxt = pyStr(cam);
+      snap(id, 2, 'sol', `¡Solución! Guardo una copia: ${cam.join('')}.`);
+      me.ret = true;
+      snap(id, 3, 'back', `return: el cuadro #${me.n} termina y la ejecución vuelve al cuadro #${parentN}.`);
+      cs.pop(); return;
+    }
+    snap(id, 1, 'meta', `¿len(camino) == ${N}? No, llevo ${cam.length}. Sigo construyendo.`);
+    for (let i = 0; i < EL.length; i++) {
+      const x = EL[i];
+      me.x = x; me.xs = `x = '${x}'`; setOp(me, i, 'c');
+      snap(id, 4, 'opc', `Cuadro #${me.n}, for: x = ${x}. ¿La puedo usar?`);
+      if (cam.includes(x)) {
+        const p = R.node(id, '×', x, 'pruned'); R.st[p] = 'pruned'; setOp(me, i, 's');
+        snap(id, 5, 'poda', `${x} ya está en camino. continue: la descarto sin hacer ninguna llamada.`); continue;
+      }
+      cam.push(x); setOp(me, i, 'g');
+      const c = R.node(id, cam.join(''), x); R.st[c] = 'active'; R.path = [...cam];
+      snap(id, 6, 'elegir', `ELIJO ${x}: camino = [${cam.join(', ')}].`);
+      snap(id, 7, 'explorar', `EXPLORO: el cuadro #${me.n} se queda en pausa en esta línea y llama a permutar.`);
+      go(c, cam, me.n);
+      cam.pop(); R.path = [...cam]; if (R.st[c] !== 'sol') R.st[c] = 'done'; setOp(me, i, 'd');
+      snap(id, 8, 'deshacer', `De vuelta en el cuadro #${me.n}. DESHAGO ${x}: camino vuelve a [${cam.join(', ')}] para probar la siguiente letra.`);
+    }
+    me.x = null; me.xs = '';
+    if (id !== 0) { me.ret = true; snap(id, 4, 'back', `El for del cuadro #${me.n} terminó: return al cuadro #${parentN}. Esto es el backtrack.`); }
+    cs.pop();
+  };
+  snap(null, null, 'inicio', 'Llamada inicial: permutar([]). Pulsa Play o avanza paso a paso.');
+  go(root, [], null);
+  R.st[root] = 'done';
+  snap(0, null, 'fin', `Terminé: ${R.out.length} permutaciones. Cada hoja verde es una; cada nodo naranja, una opción descartada.`);
+  return R;
+}
+const permBox = $('#vPerm'), permTree = new Tree($('#permSvg'));
+const PERM_LINES = [
+  ['def permutar(camino):'], ['    if len(camino) == n:', 'meta'], ['        soluciones.append(camino[:])'],
+  ['        return'], ['    for x in elementos:', 'opc'], ['        if x in camino: continue', 'res'],
+  ['        camino.append(x)', 'go1'], ['        permutar(camino)', 'go2'],
+  ['        camino.pop()', 'back']];
+const permCode = new Code($('#permCode'), PERM_LINES);
+const P1 = buildPerm(); permTree.build(P1.nodes, 36, 82);
+const permCalls = new Calls({ box: permBox, el: $('#permCalls'), empty: $('#permCallsEmpty'), lines: PERM_LINES, pause: 7,
+  out: $('#permOut'), skip: 'en camino', width: 290 });
+const permPlayer = new Player(permBox, 'perm', (f, p) => {
+  permTree.render(f); permCode.set(f.line); narrate(permBox, f);
+  renderChips($('#permPath'), f.path, 'go', p && p.path, '[ ] vacío');
+  renderChips($('#permOut'), f.out, 'ok', p && p.out, 'ninguna aún');
+  permCalls.render(f, p);
+});
+permPlayer.load(P1.frames, P1.frames.findIndex(f => f.verb === 'sol'));
+
+/* ======= Subconjuntos con suma ======= */
+const NUMS = [2, 3, 5, 7, 8], OBJ = 10;
+function buildSub(poda) {
+  const R = recorder(), cs = []; let nc = 0; const root = R.node(null, '0', '');
+  const snap = (cur, line, verb, msg, x = {}) => {
+    const t = cs[cs.length - 1], el = `[${R.path.join(', ')}]`;
+    if (t) t.foot = t.x != null && verb !== 'elegir' && verb !== 'explorar' && verb !== 'deshacer'
+      ? `${t.s} + ${t.x} = <b>${t.s + t.x}</b> · elegidos = <b>${el}</b>` : `suma = <b>${t.s}</b>${t.x != null ? ' + ' + t.x : ''} · elegidos = <b>${el}</b>`;
+    R.snap(cur, line, verb, msg, { ...x, fr: frameOf(cs) });
+  };
+  const go = (id, ini, el, s, parentN) => {
+    const me = { n: ++nc, depth: cs.length, head: `buscar(${ini}, [${el.join(', ')}], ${s})`, lbl: `for j in range(${ini}, ${NUMS.length})`,
+      ol: NUMS.slice(ini), os: 'p'.repeat(NUMS.length - ini), x: null, xs: '', s, ret: false, sol: false, parent: parentN,
+      base: s === OBJ ? 'Caso base: suma == objetivo. Esta llamada no llega al for.' : '',
+      none: 'range vacío: no quedan números a la derecha.', foot: '', solTxt: '' };
+    cs.push(me);
+    R.calls++; R.st[id] = 'active'; R.path = el.map(String);
+    snap(id, 0, 'entrar', `Nueva llamada #${me.n}: buscar(inicio = ${ini}, elegidos = [${el.join(', ')}], suma = ${s}). Aparece un cuadro nuevo.`, { i: -1, ini });
+    if (s === OBJ) {
+      R.st[id] = 'sol'; R.out.push(`{${el.join(', ')}}`); me.sol = true; me.solTxt = `[${el.join(', ')}]`;
+      snap(id, 2, 'sol', `META: suma == objetivo (${s}). Guardo una copia: {${el.join(', ')}}.`, { i: -1, ini });
+      me.ret = true;
+      snap(id, 3, 'back', `return: el cuadro #${me.n} termina y vuelve al cuadro #${parentN}.`, { i: -1, ini });
+      cs.pop(); return;
+    }
+    snap(id, 1, 'meta', `META: ¿suma == ${OBJ}? No, llevo ${s}. Paso al for.`, { i: -1, ini });
+    let kids = 0;
+    for (let j = ini; j < NUMS.length; j++) {
+      const x = NUMS[j], k = j - ini;
+      me.x = x; me.xs = `nums[${j}] = ${x}`; setOp(me, k, 'c');
+      snap(id, 4, 'opc', `Cuadro #${me.n}, opción j = ${j}: ¿agrego el ${x}? La suma quedaría ${s} + ${x} = ${s + x}.`, { i: j, ini });
+      if (poda && s + x > OBJ) {
+        const pr = R.node(id, '×', '+' + x, 'pruned'); R.st[pr] = 'pruned'; setOp(me, k, 's');
+        snap(id, 5, 'poda', `PODA: ${s} + ${x} = ${s + x} se pasa de ${OBJ}. continue: ni siquiera hago la llamada.`, { i: j, ini });
+        continue;
+      }
+      el.push(x); const a = R.node(id, String(s + x), '+' + x); R.st[a] = 'active'; R.path = el.map(String); kids++; setOp(me, k, 'g');
+      snap(id, 6, 'elegir', `ELIJO el ${x}: elegidos = [${el.join(', ')}].`, { i: j, ini });
+      snap(id, 7, 'explorar', `EXPLORO: el cuadro #${me.n} queda en pausa y llama a buscar(${j + 1}, [${el.join(', ')}], ${s + x}). Solo podrá usar números a la derecha del ${x}.`, { i: j, ini });
+      go(a, j + 1, el, s + x, me.n);
+      el.pop(); R.path = el.map(String); if (R.st[a] === 'active') R.st[a] = 'done'; setOp(me, k, 'd');
+      snap(id, 8, 'deshacer', `De vuelta en el cuadro #${me.n}. DESHAGO: saco el ${x}. elegidos = [${el.join(', ')}]. Sigo con la siguiente opción.`, { i: j, ini });
+    }
+    me.x = null; me.xs = '';
+    if (!kids && id !== root) R.st[id] = 'dead';
+    if (id !== root) me.ret = true;
+    snap(id, 4, 'back', id === root ? 'El for del cuadro #1 terminó: la búsqueda acabó.'
+      : `${ini >= NUMS.length ? 'No quedan números a la derecha' : `El for del cuadro #${me.n} terminó`}: return al cuadro #${parentN}.`, { i: -1, ini });
+    cs.pop();
+  };
+  R.snap(null, null, 'inicio', `buscar(0, [], 0). Números ${NUMS.join(', ')}; objetivo ${OBJ}.`, { i: -1, ini: 0, fr: [] });
+  go(root, 0, [], 0, null);
+  R.st[root] = R.st[root] === 'active' ? 'done' : R.st[root];
+  R.snap(0, null, 'fin', `Terminé con ${R.calls} llamadas y ${R.out.length} soluciones.`, { i: -1, ini: 0, fr: [] });
+  return R;
+}
+const SUB = { on: buildSub(true), off: buildSub(false) };
+const subBox = $('#vSub'), subTree = new Tree($('#subSvg'));
+const subLines = poda => [
+  ['def buscar(inicio, elegidos, suma):'],
+  ['    if suma == objetivo:', 'meta'], ['        soluciones.append(elegidos[:])'], ['        return'],
+  ['    for j in range(inicio, len(nums)):', 'opc'],
+  ['        if suma + nums[j] > objetivo: continue', 'prune', !poda],
+  ['        elegidos.append(nums[j])', 'go1'], ['        buscar(j + 1, elegidos, suma + nums[j])', 'go2'],
+  ['        elegidos.pop()', 'back']];
+const subCode = new Code($('#subCode'), subLines(true));
+const subCalls = new Calls({ box: subBox, el: $('#subCalls'), empty: $('#subCallsEmpty'), lines: subLines(true), pause: 7,
+  out: $('#subOut'), skip: 'me paso', width: 340 });
+$('#subCmp').textContent = `Sin poda: ${SUB.off.calls} llamadas · Con poda: ${SUB.on.calls} llamadas`;
+const subPlayer = new Player(subBox, 'sub', (f, p) => {
+  subTree.render(f); subCode.set(f.line); narrate(subBox, f);
+  renderChips($('#subOut'), f.out, 'ok', p && p.out, 'ninguna aún');
+  $('#subNCalls').textContent = f.calls; $('#subSols').textContent = f.out.length;
+  const chosen = f.path.length ? f.path.map(Number) : [];
+  $('#subNums').innerHTML = '<span class="muted" style="font-style:normal">nums:</span>' + NUMS.map((n, k) =>
+    `<span class="chip${k === f.i ? ' cur' : ''}${chosen.includes(n) ? ' in' : ''}"${k < f.ini && !chosen.includes(n) ? ' style="opacity:.35"' : ''}>${n}</span>`).join('') +
+    `<span class="muted" style="font-style:normal">objetivo: <b>${OBJ}</b></span>`;
+  subCalls.render(f, p);
+});
+function setPoda(on) {
+  $('#podaOn').setAttribute('aria-pressed', on); $('#podaOff').setAttribute('aria-pressed', !on);
+  const R = on ? SUB.on : SUB.off; subTree.build(R.nodes, 42, 74); subCode.setLines(subLines(on)); subCalls.setLines(subLines(on));
+  subPlayer.load(R.frames, R.frames.findIndex(f => f.verb === 'sol'));
+}
+$('#podaOn').onclick = () => setPoda(true); $('#podaOff').onclick = () => setPoda(false);
+setPoda(true);
+
+/* ======= Laberinto ======= */
+const MAZE = ['###########', '#S..#.....#', '#.#.#.###.#', '#.#...#...#', '#.#####.###', '#...#...#.#',
+  '###.#.###.#', '#...#.....#', '#.###.#.#.#', '#...#.#.#E#', '###########'];
+const MR = MAZE.length, MC = MAZE[0].length; let S, E;
+MAZE.forEach((row, r) => [...row].forEach((ch, c) => { if (ch === 'S') S = [r, c]; if (ch === 'E') E = [r, c]; }));
+function buildMaze() {
+  const F = [], vis = new Set(), path = [], dead = new Set(); let steps = 0, backs = 0;
+  const DIRS = [[1, 0], [0, -1], [0, 1], [-1, 0]], k = (r, c) => r + ',' + c;
+  const snap = (verb, msg, cur, x = {}) => F.push({ verb, msg, cur, path: [...path], dead: [...dead], steps, backs, ...x });
+  snap('inicio', 'El ratón está en la entrada S. No ve el mapa: solo sus 4 casillas vecinas.', S);
+  const go = (r, c) => {
+    vis.add(k(r, c)); path.push(k(r, c)); if (path.length > 1) steps++;
+    if (r === E[0] && c === E[1]) { snap('sol', `¡Salida encontrada en ${steps} pasos! El camino azul que quedó en la pila es la respuesta.`, [r, c], { win: true }); return true; }
+    if (path.length > 1) snap('elegir', `Avanzo a la casilla (${r}, ${c}). El camino mide ${path.length}.`, [r, c]);
+    for (const [dr, dc] of DIRS) {
+      const nr = r + dr, nc = c + dc;
+      if (MAZE[nr][nc] === '#' || vis.has(k(nr, nc))) continue;
+      if (go(nr, nc)) return true;
+    }
+    path.pop(); dead.add(k(r, c)); backs++;
+    const prev = path[path.length - 1].split(',').map(Number);
+    snap('deshacer', `Callejón sin salida en (${r}, ${c}). Lo marco en rojo y retrocedo a (${prev[0]}, ${prev[1]}).`, prev, { back: true });
+    return false;
+  };
+  go(S[0], S[1]);
+  return F;
+}
+const mazeEl = $('#maze'); mazeEl.style.gridTemplateColumns = `repeat(${MC},1fr)`; mazeEl.style.gridTemplateRows = `repeat(${MR},1fr)`;
+const cells = {};
+MAZE.forEach((row, r) => [...row].forEach((ch, c) => {
+  const d = document.createElement('div'); d.className = 'cell ' + (ch === '#' ? 'w' : ch === 'S' ? 's' : ch === 'E' ? 'e' : '');
+  if (ch === 'S' || ch === 'E') d.textContent = ch; mazeEl.append(d); cells[r + ',' + c] = d;
+}));
+const mouse = document.createElement('div'); mouse.className = 'mouse'; mouse.innerHTML = '<span></span>';
+mouse.style.width = 100 / MC + '%'; mouse.style.height = 100 / MR + '%'; mazeEl.append(mouse);
+const mazeBox = $('#vMaze');
+const mazePlayer = new Player(mazeBox, 'maze', f => {
+  const P = new Set(f.path), D = new Set(f.dead);
+  for (const key in cells) { const d = cells[key]; if (d.classList.contains('w')) continue;
+    d.classList.toggle('p', P.has(key) && !d.classList.contains('e')); d.classList.toggle('d', D.has(key)); }
+  mouse.style.transform = `translate(${f.cur[1] * 100}%, ${f.cur[0] * 100}%)`;
+  mouse.className = 'mouse' + (f.back ? ' back' : '') + (f.win ? ' win' : '');
+  $('#mzSteps').textContent = f.steps; $('#mzBacks').textContent = f.backs; $('#mzLen').textContent = `longitud ${f.path.length}`;
+  const pts = f.path.map(s => `(${s})`);
+  $('#mzPath').innerHTML = (pts.length > 8 ? '<span class="muted">… </span>' : '') +
+    pts.slice(-8).map((s, i, a) => `<span class="chip ${i === a.length - 1 ? 'go' : ''}">${s}</span>`).join('');
+  narrate(mazeBox, f);
+});
+const MZ = buildMaze(); mazePlayer.load(MZ);
+if (!reduced && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { mazePlayer.play(); io.disconnect(); } }, { threshold: .5 });
+  io.observe(mazeEl);
+}
+
+/* ======= N reinas ======= */
+const CROWN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 4l4.5 8L21 8l-2 11H5z"/><rect x="5" y="20" width="14" height="2" rx="1"/></svg>';
+function buildQueens(N, first) {
+  const F = [], q = [], out = [], cs = [], COLS = Array.from({ length: N }, (_, i) => i);
+  let tries = 0, sols = 0, stop = false, nc = 0;
+  const snap = (line, verb, msg, x = {}) => {
+    const t = cs[cs.length - 1];
+    if (t) t.foot = t.x != null ? `col = <b>${t.x}</b> · reinas = <b>[${q.join(', ')}]</b>` : `reinas = <b>[${q.join(', ')}]</b>`;
+    F.push({ q: [...q], line, verb, msg, tries, sols, out: [...out], tryc: null, conf: [], fr: frameOf(cs), ...x });
+  };
+  snap(null, 'inicio', `Tablero vacío de ${N} × ${N}. Pongo una reina por fila, de arriba hacia abajo.`);
+  const go = (r, parentN) => {
+    const me = { n: ++nc, depth: cs.length, head: `colocar(${r})`, lbl: 'for col in range(N)', ol: COLS, os: 'p'.repeat(N),
+      x: null, xs: '', ret: false, sol: false, parent: parentN,
+      base: r === N ? 'Caso base: fila == N. Esta llamada no llega al for.' : '', none: '', foot: '', solTxt: '' };
+    cs.push(me);
+    snap(0, 'entrar', `Nueva llamada #${me.n}: colocar(${r}) se encarga de la fila ${r + 1} del tablero. Aparece un cuadro nuevo.`);
+    if (r === N) {
+      sols++; out.push(q.map(c => c + 1).join('-')); me.sol = true; me.solTxt = `[${q.join(', ')}]`;
+      snap(2, 'sol', `fila == N: ¡las ${N} reinas están puestas! Solución #${sols}.`, { win: true });
+      me.ret = true;
+      snap(2, 'back', `return: el cuadro #${me.n} termina y vuelve al cuadro #${parentN}.`, { win: true });
+      cs.pop(); if (first) stop = true; return;
+    }
+    snap(1, 'meta', `Fila ${r + 1}: ¿ya puse las ${N}? No, sigo.`);
+    for (let c = 0; c < N && !stop; c++) {
+      tries++; me.x = c; me.xs = `col = ${c}`; setOp(me, c, 'c');
+      const conf = []; for (let k = 0; k < r; k++) if (q[k] === c || Math.abs(q[k] - c) === r - k) conf.push(k);
+      snap(3, 'opc', `Cuadro #${me.n}: pruebo la fila ${r + 1}, columna ${c + 1} (col = ${c}).`, { tryc: [r, c] });
+      if (conf.length) {
+        setOp(me, c, 's');
+        snap(4, 'poda', `Choca con ${conf.length > 1 ? 'las reinas de las filas' : 'la reina de la fila'} ${conf.map(k => k + 1).join(' y ')}. continue: descarto esta casilla sin llamar.`, { tryc: [r, c], conf, bad: true });
+        continue;
+      }
+      q.push(c); setOp(me, c, 'g');
+      snap(5, 'elegir', `Casilla libre: ELIJO poner la reina en (${r + 1}, ${c + 1}).`);
+      snap(6, 'explorar', `EXPLORO: el cuadro #${me.n} queda en pausa y llama a colocar(${r + 1}).`);
+      go(r + 1, me.n);
+      if (stop) break;
+      q.pop(); setOp(me, c, 'd');
+      snap(7, 'deshacer', `De vuelta en el cuadro #${me.n}. DESHAGO: quito la reina de (${r + 1}, ${c + 1}) y pruebo la siguiente columna.`);
+    }
+    me.x = null; me.xs = '';
+    if (!stop) {
+      if (r > 0) me.ret = true;
+      snap(3, 'back', r > 0 ? `La fila ${r + 1} se quedó sin columnas: return al cuadro #${parentN} (fila ${r}).` : 'La fila 1 probó todas sus columnas. La búsqueda terminó.');
+    }
+    cs.pop();
+  };
+  go(0, null);
+  snap(null, 'fin', `Fin: ${sols} solución${sols === 1 ? '' : 'es'} con ${tries} casillas probadas. Fuerza bruta revisaría ${(N ** N).toLocaleString('es')} tableros.`, { q: stop ? q : [] , win: stop });
+  return F;
+}
+const qBox = $('#vQ'), board = $('#board');
+const Q_LINES = [
+  ['def colocar(fila):'], ['    if fila == N:', 'meta'], ['        soluciones.append(reinas[:]); return'],
+  ['    for col in range(N):', 'opc'], ['        if ataca(fila, col): continue', 'res'], ['        reinas.append(col)', 'go1'],
+  ['        colocar(fila + 1)', 'go2'], ['        reinas.pop()', 'back']];
+const qCode = new Code($('#qCode'), Q_LINES);
+const qCalls = new Calls({ box: qBox, el: $('#qCalls'), empty: $('#qCallsEmpty'), lines: Q_LINES, pause: 6,
+  out: $('#qOut'), skip: 'atacada', width: 320 });
+let QN = 4, sqs = [], qEls = [], ghost, lines;
+function setupBoard(N) {
+  board.innerHTML = ''; board.style.gridTemplateColumns = `repeat(${N},1fr)`; sqs = [];
+  for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) { const d = document.createElement('div'); d.className = 'sq ' + ((r + c) % 2 ? 'k' : 'l'); board.append(d); sqs.push(d); }
+  lines = sv('svg', { class: 'lines', viewBox: `0 0 ${N} ${N}`, preserveAspectRatio: 'none' }); board.append(lines);
+  const mk = cls => { const e = document.createElement('div'); e.className = 'qn ' + cls; e.innerHTML = CROWN; e.style.width = e.style.height = 100 / N + '%'; board.append(e); return e; };
+  qEls = Array.from({ length: N }, () => mk('off')); ghost = mk('ghost off');
+}
+const place = (el, r, c) => { el.style.transform = `translate(${c * 100}%, ${r * 100}%)`; };
+const qPlayer = new Player(qBox, 'q', (f, p) => {
+  const N = QN, threat = new Set();
+  f.q.forEach((c, r) => { for (let rr = 0; rr < N; rr++) for (let cc = 0; cc < N; cc++)
+    if (rr !== r && (cc === c || Math.abs(cc - c) === Math.abs(rr - r))) threat.add(rr * N + cc); });
+  sqs.forEach((d, i) => d.classList.toggle('th', threat.has(i)));
+  qEls.forEach((el, r) => {
+    if (r < f.q.length) { place(el, r, f.q[r]); el.className = 'qn' + (f.win ? ' win' : ''); }
+    else el.className = 'qn off';
+  });
+  if (f.tryc) { place(ghost, f.tryc[0], f.tryc[1]); ghost.className = 'qn ghost' + (f.bad ? ' bad' : ''); }
+  else ghost.className = 'qn ghost off';
+  lines.innerHTML = '';
+  if (f.conf.length) f.conf.forEach(k => lines.append(sv('line', { x1: f.tryc[1] + .5, y1: f.tryc[0] + .5, x2: f.q[k] + .5, y2: k + .5, pathLength: 3 })));
+  qCode.set(f.line); narrate(qBox, f);
+  $('#qTries').textContent = f.tries.toLocaleString('es'); $('#qSols').textContent = f.sols;
+  renderChips($('#qOut'), f.out.slice(-6), 'ok', p && p.out.slice(-6), 'ninguna aún');
+  qCalls.render(f, p);
+});
+function loadQueens() {
+  QN = +$('#qN').value; setupBoard(QN); qCalls.reset();
+  const F = buildQueens(QN, $('#qFirst').checked); qPlayer.load(F, F.findIndex(f => f.verb === 'sol'));
+}
+$('#qN').onchange = loadQueens; $('#qFirst').onchange = loadQueens; loadQueens();
+
+/* ======= Comparación 8 reinas ======= */
+(() => {
+  let tries = 0; const q = [];
+  const go = r => { if (r === 8) return; for (let c = 0; c < 8; c++) { tries++;
+    let ok = true; for (let k = 0; k < r; k++) if (q[k] === c || Math.abs(q[k] - c) === r - k) { ok = false; break; }
+    if (ok) { q.push(c); go(r + 1); q.pop(); } } };
+  go(0);
+  const bf = 8 ** 8;
+  $('#bfVal').textContent = bf.toLocaleString('es') + ' tableros';
+  $('#btVal').textContent = tries.toLocaleString('es') + ' casillas probadas (las 92 soluciones)';
+  $('#ratio').textContent = `≈ ${Math.round(bf / tries).toLocaleString('es')} veces menos trabajo`;
+  const fill = $('#btFill'), w = (tries / bf * 100).toFixed(3) + '%';
+  if (reduced || !('IntersectionObserver' in window)) fill.style.width = w;
+  else { const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { fill.style.width = w; io.disconnect(); } }); io.observe(fill); }
+})();
+
+/* ======= Hero: árbol que crece y retrocede ======= */
+(() => {
+  const s = $('#heroTree'), P = {}, nodes = [];
+  const kids = { r: ['a', 'b', 'c'], a: ['a1', 'a2'], b: ['b1', 'b2'], c: ['c1', 'c2'], a1: ['a1x', 'a1y'], b2: ['b2x', 'b2y'], c1: ['c1x', 'c1y'] };
+  let leaf = 0; const lay = (id, d) => { const k = kids[id];
+    if (!k) P[id] = { x: 30 + leaf++ * 34, y: 28 + d * 62 }; else { k.forEach(c => lay(c, d + 1)); P[id] = { x: (P[k[0]].x + P[k[k.length - 1]].x) / 2, y: 28 + d * 62 }; } };
+  lay('r', 0);
+  const scale = 340 / (leaf * 34); Object.values(P).forEach(p => p.x = 30 + (p.x - 30) * scale + 10);
+  const gE = sv('g'), gN = sv('g'); s.append(gE, gN); const el = {};
+  for (const id in P) {
+    const par = Object.keys(kids).find(k => kids[k].includes(id));
+    if (par) { const e = sv('path', { d: `M${P[par].x} ${P[par].y}L${P[id].x} ${P[id].y}`, pathLength: 1, class: 'te' }); gE.append(e); el['e' + id] = e; }
+    const g = sv('g', { transform: `translate(${P[id].x} ${P[id].y})` }), inner = sv('g', { class: 'pop' }); inner.append(sv('circle', { r: 10 }));
+    g.append(inner); gN.append(g); el[id] = g;
+  }
+  const cur = sv('g', { class: 'cursor' }); cur.append(sv('circle', { r: 15 })); s.append(cur);
+  const seq = []; const st = {};
+  const dfs = id => { st[id] = 'active'; seq.push([{ ...st }, id]);
+    const k = kids[id]; if (!k) { st[id] = (id === 'b2y' ? 'sol' : 'dead'); seq.push([{ ...st }, id]); if (id === 'b2y') return true; return false; }
+    for (const c of k) { if (dfs(c)) return true; st[c] = st[c] === 'dead' ? 'dead' : 'done'; seq.push([{ ...st }, id]); }
+    return false; };
+  dfs('r');
+  const show = ([state, c]) => {
+    for (const id in P) { const v = state[id] || 'off'; el[id].setAttribute('class', 'tn ' + v); if (el['e' + id]) el['e' + id].setAttribute('class', 'te ' + (v === 'off' ? '' : 'on ' + v)); }
+    cur.style.transform = `translate(${P[c].x}px, ${P[c].y}px)`;
+  };
+  s.style.setProperty('--dur', '380ms');
+  if (reduced) { show(seq[seq.length - 1]); return; }
+  let i = 0; show(seq[0]);
+  setInterval(() => { i = (i + 1) % (seq.length + 3); show(seq[Math.min(i, seq.length - 1)]); }, 650);
+})();
+
+/* ======= Ruta de la clase ======= */
+const PLAN = [['m1', 'El laberinto', 10, ''], ['m2', 'La idea', 10, ''], ['m3', 'Árbol paso a paso', 20, ''],
+  ['m4', 'Método: 4 preguntas', 10, 'k-ok'], ['m5', 'Poda', 10, 'k-prune'], ['m6', 'N reinas', 15, ''], ['m7', 'Reto en equipos', 10, 'k-back'], ['m8', 'Cierre', 5, 'k-ok']];
+$('#timeline').innerHTML = PLAN.map(([id, t, m, k], i) => `<a href="#${id}" class="${k}" style="flex:${m}" title="${t}">${i + 1}<span>&nbsp;· ${m}′</span></a>`).join('');
+$('#tlList').innerHTML = PLAN.map(([id, t, m], i) => `<li><b>${i + 1}</b><span>${t} <span class="muted" style="font-style:normal">${m} min</span></span></li>`).join('');
+})();
+</script>
+
+<script>
+/* Embebida en el libro: el marco crece con el contenido y sigue el tema claro/oscuro del libro. */
+(function ajustarAlto(){
+  const marco = window.frameElement;
+  if(!marco) return;
+  const medir = () => {
+    const h = Math.ceil(document.body.getBoundingClientRect().height);
+    if (Math.abs(parseInt(marco.style.height || 0, 10) - h) > 2) marco.style.height = h + "px";
+  };
+  addEventListener("load", medir);
+  addEventListener("resize", medir);
+  new ResizeObserver(medir).observe(document.body);
+  new MutationObserver(medir).observe(document.body, {subtree:true, childList:true, attributes:true});
+  [0, 250, 800, 2000].forEach(ms => setTimeout(medir, ms));
+  new IntersectionObserver(es => es.forEach(e => e.isIntersecting && medir())).observe(document.body);
+})();
+(function sincronizarTema(){
+  try{
+    const raiz = window.parent.document.documentElement;
+    if (raiz === document.documentElement) return;
+    const aplicar = () => {
+      const t = raiz.dataset.theme || raiz.dataset.mode;
+      if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+      else document.documentElement.removeAttribute("data-theme");
+    };
+    aplicar();
+    new MutationObserver(aplicar).observe(raiz, {attributes:true, attributeFilter:["data-theme","data-mode"]});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
